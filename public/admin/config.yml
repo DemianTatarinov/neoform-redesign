@@ -1,0 +1,60 @@
+backend:
+  name: test-repo
+local_backend: true
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "content"
+    label: "Treść Strony"
+    files:
+      - file: "src/data/content.json"
+        label: "Landing Page Content"
+        name: "landing"
+        fields:
+          - name: "brand"
+            label: "Marka"
+            widget: "string"
+          - name: "prologue"
+            label: "Sekcja 1: Prologue"
+            widget: "object"
+            fields:
+              - { name: "headline", label: "Nagłówek", widget: "string" }
+              - { name: "subline", label: "Podtytuł", widget: "text" }
+          - name: "manifesto"
+            label: "Sekcja 2: Manifesto"
+            widget: "object"
+            fields:
+              - { name: "headline", label: "Nagłówek", widget: "string" }
+              - { name: "subline", label: "Podtytuł", widget: "text" }
+          - name: "disciplines"
+            label: "Sekcja 3: Disciplines"
+            widget: "object"
+            fields:
+              - { name: "headline", label: "Nagłówek", widget: "string" }
+              - { name: "subline", label: "Podtytuł", widget: "text" }
+              - name: "items"
+                label: "Elementy Spektrum"
+                widget: "list"
+                field: { name: "name", label: "Nazwa", widget: "string" }
+          - name: "exhibition"
+            label: "Sekcja 4: Exhibition"
+            widget: "object"
+            fields:
+              - { name: "headline", label: "Nagłówek", widget: "string" }
+              - { name: "subline", label: "Podtytuł", widget: "text" }
+              - { name: "tag", label: "Etykieta", widget: "string" }
+          - name: "methodology"
+            label: "Sekcja 5: Methodology"
+            widget: "object"
+            fields:
+              - { name: "headline", label: "Nagłówek", widget: "string" }
+              - { name: "subline", label: "Podtytuł", widget: "text" }
+          - name: "initiation"
+            label: "Sekcja 6: Initiation"
+            widget: "object"
+            fields:
+              - { name: "headline", label: "Nagłówek", widget: "string" }
+              - { name: "subline", label: "Podtytuł", widget: "text" }
+              - { name: "cta", label: "Przycisk CTA", widget: "string" }
