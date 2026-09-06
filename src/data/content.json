@@ -1,66 +1,37 @@
 {
-  "brand": "NEOFORM",
-  "meta": {
-    "subtitle": "STUDIO STRUKTUR ŚWIETLNYCH",
-    "year": "2025"
-  },
-  "nav": [
-    { "label": "01 PROLOGUE", "target": "#prologue" },
-    { "label": "02 MANIFESTO", "target": "#manifesto" },
-    { "label": "03 SPEKTRUM", "target": "#disciplines" },
-    { "label": "04 STUDIUM", "target": "#exhibition" },
-    { "label": "05 INŻYNIERIA", "target": "#methodology" },
-    { "label": "06 INICJACJA", "target": "#initiation" }
-  ],
+  "brand": "NEOFORM STRUCTURAL",
+  "footerStamp": "WARSZAWA / 52.2297° N",
+  "scrollHint": "PRZESUŃ ABY ODKRYĆ",
   "prologue": {
+    "eyebrow": "01 / PROLOGUE",
     "headline": "FORMA ABSOLUTNA",
-    "subline": "Architektoniczny branding i struktury świetlne, które redefiniują przestrzeń.",
-    "tag": "01 / PROLOGUE"
+    "subline": "Architektoniczny branding i struktury świetlne, które redefiniują przestrzeń."
   },
   "manifesto": {
+    "eyebrow": "02 / MANIFESTO",
     "headline": "KONIEC PŁASZCZYZN",
-    "subline": "Przekuwamy tożsamość marki w monumentalne litery przestrzenne i kinetyczne neony.",
-    "tag": "02 / MANIFESTO",
-    "lines": [
-      "PRZEKUWAMY TOŻSAMOŚĆ MARKI",
-      "W MONUMENTALNE LITERY PRZESTRZENNE",
-      "I KINETYCZNE NEONY."
-    ]
+    "body": "Przekuwamy tożsamość marki w monumentalne litery przestrzenne i kinetyczne neony."
   },
   "disciplines": {
-    "headline": "SPEKTRUM MATERII",
-    "subline": "Kompleksowe wdrażanie kasetonów LED, obiektów 3D oraz bezkompromisowego oznakowania elewacji.",
-    "tag": "03 / DISCIPLINES",
-    "items": [
-      "KASETONY LED",
-      "LITERY 3D",
-      "NEONY KINETYCZNE",
-      "ELEWACJE STRUKTURALNE",
-      "MONUMENTY ŚWIETLNE"
-    ]
+    "eyebrow": "03 / DISCIPLINES",
+    "subEyebrow": "SPEKTRUM MATERII",
+    "body": "Kompleksowe wdrażanie kasetonów LED, obiektów 3D oraz bezkompromisowego oznakowania elewacji."
   },
   "exhibition": {
+    "eyebrow": "04 / EXHIBITION",
+    "subEyebrow": "REALIZACJA #084 WARSZAWA / PLAC EUROPEJSKI",
     "headline": "STUDIUM PRZESTRZENI",
-    "subline": "Wyselekcjonowane realizacje strukturalne, które zdominowały nowoczesną architekturę.",
-    "tag": "04 / EXHIBITION",
-    "projectIndex": "REALIZACJA #084",
-    "location": "WARSZAWA / PLAC EUROPEJSKI"
+    "body": "Wyselekcjonowane realizacje strukturalne, które zdominowały nowoczesną architekturę."
   },
   "methodology": {
+    "eyebrow": "05 / METHODOLOGY",
     "headline": "INŻYNIERIA ŚWIATŁA",
-    "subline": "Pełna kontrola nad formą, od rygorystycznej wizualizacji po ostateczny montaż.",
-    "tag": "05 / METHODOLOGY",
-    "steps": [
-      "01 / RIGOROUS VISUALIZATION",
-      "02 / KINETIC ENGINEERING",
-      "03 / ARCHITECTURAL MOUNT"
-    ]
+    "body": "Pełna kontrola nad formą, od rygorystycznej wizualizacji po ostateczny montaż."
   },
   "initiation": {
-    "headline": "ZAINICJUJ FORMĘ",
-    "subline": "Wyjdź poza płaski ekran i zdefiniuj swój trójwymiar.",
-    "tag": "06 / INITIATION",
-    "cta": "KONTAKT@NEOFORM.COM.PL",
-    "coordinates": "52.2297° N, 21.0122° E"
+    "eyebrow": "06 / INITIATION",
+    "headline": "ZAINICJUJ",
+    "body": "Wyjdź poza płaski ekran i zdefiniuj swój trójwymiar.",
+    "cta": "KONTAKT@NEOFORM.COM.PL →"
   }
 }

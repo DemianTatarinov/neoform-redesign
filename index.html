@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEOFORM — Studio Form i Struktur Świetlnych</title>
+  <title>NEOFORM STRUCTURAL — Studio Form i Struktur Świetlnych</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body class="bg-black text-white antialiased">
@@ -14,142 +14,131 @@
   <div id="custom-cursor" class="custom-cursor">
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
-    <span class="cursor-text">EXPLORE</span>
   </div>
 
-  <!-- Background Canvas / Video Simulation -->
+  <!-- Background Ambience Grid -->
   <div class="bg-ambience">
     <div class="grid-overlay"></div>
-    <canvas id="ambient-canvas"></canvas>
   </div>
 
-  <!-- UI Header & Navigation -->
+  <!-- UI Header -->
   <header class="fixed-header">
-    <div class="brand-logo" id="brand-logo">NEOFORM</div>
-    <div class="header-center desk-only" id="brand-sub">STUDIO STRUKTUR ŚWIETLNYCH</div>
-    <nav class="nav-links">
-      <a href="#prologue" class="nav-item active">01</a>
-      <a href="#manifesto" class="nav-item">02</a>
-      <a href="#disciplines" class="nav-item">03</a>
-      <a href="#exhibition" class="nav-item">04</a>
-      <a href="#methodology" class="nav-item">05</a>
-      <a href="#initiation" class="nav-item">06</a>
-    </nav>
+    <div class="brand-logo" id="brand-logo">NEOFORM <span class="accent-glow">·</span> STRUCTURAL</div>
   </header>
 
-  <!-- Sound / Controls Indicator -->
-  <div class="fixed-footer">
+  <!-- Persistent Index Nav (Bottom Right) -->
+  <nav class="fixed-index-nav" id="index-nav">
+    <a href="#prologue" class="index-item active" data-index="0"><span class="nav-num">01</span></a>
+    <a href="#manifesto" class="index-item" data-index="1"><span class="nav-num">02</span></a>
+    <a href="#disciplines" class="index-item" data-index="2"><span class="nav-num">03</span></a>
+    <a href="#exhibition" class="index-item" data-index="3"><span class="nav-num">04</span></a>
+    <a href="#methodology" class="index-item" data-index="4"><span class="nav-num">05</span></a>
+    <a href="#initiation" class="index-item" data-index="5"><span class="nav-num">06</span></a>
+  </nav>
+
+  <!-- Persistent Footer Stamp (Bottom Left) -->
+  <div class="fixed-footer-stamp">
     <div class="status-indicator">
       <span class="pulse-dot"></span>
-      <span class="status-text">WARSZAWA / 52.2297° N</span>
-    </div>
-    <div class="scroll-hint">
-      <span class="scroll-text">PRZESUŃ ABY ODKRYĆ</span>
-      <div class="scroll-bar"><div class="scroll-progress"></div></div>
+      <span class="status-text" id="footer-stamp">WARSZAWA / 52.2297° N</span>
     </div>
   </div>
 
-  <!-- Main Viewport Container -->
+  <!-- Scroll Hint (Center Bottom, fades after first scroll) -->
+  <div class="fixed-scroll-hint" id="scroll-hint">
+    <span class="scroll-text" id="scroll-text">PRZESUŃ ABY ODKRYĆ</span>
+    <span class="scroll-arrow">↓</span>
+  </div>
+
+  <!-- Scroll Snap Main Viewport Container -->
   <main id="app-container" class="snap-container">
 
-    <!-- Section 1: Prologue -->
+    <!-- Section 01: Prologue -->
     <section id="prologue" class="section section-prologue" data-section="0">
-      <div class="prologue-bg-wrapper">
-        <div class="prologue-bg-image"></div>
-      </div>
-      <div class="section-content prologue-content">
-        <div class="tag-label" id="prologue-tag">01 / PROLOGUE</div>
-        <div class="headline-wrapper">
-          <h1 class="hero-headline" id="prologue-headline">FORMA ABSOLUTNA</h1>
+      <div class="section-bg prologue-bg"></div>
+      <div class="section-overlay"></div>
+      <div class="section-inner">
+        <div class="eyebrow" id="prologue-eyebrow">01 / PROLOGUE</div>
+        <div class="title-card-wrapper">
+          <h1 class="film-headline" id="prologue-headline">FORMA ABSOLUTNA</h1>
         </div>
-        <div class="subline-bottom-left">
-          <p class="hero-subline" id="prologue-subline">Architektoniczny branding i struktury świetlne, które redefiniują przestrzeń.</p>
+        <div class="content-bottom-left">
+          <p class="body-copy" id="prologue-subline">Architektoniczny branding i struktury świetlne, które redefiniują przestrzeń.</p>
         </div>
       </div>
     </section>
 
-    <!-- Section 2: Manifesto -->
+    <!-- Section 02: Manifesto -->
     <section id="manifesto" class="section section-manifesto" data-section="1">
-      <div class="section-content manifesto-grid">
-        <div class="manifesto-left">
-          <div class="tag-label" id="manifesto-tag">02 / MANIFESTO</div>
-          <h2 class="editorial-headline" id="manifesto-headline">KONIEC PŁASZCZYZN</h2>
-          <div class="manifesto-lines" id="manifesto-lines-container">
-            <!-- Dynamically injected line elements -->
-          </div>
-          <p class="editorial-subline" id="manifesto-subline">Przekuwamy tożsamość marki w monumentalne litery przestrzenne i kinetyczne neony.</p>
+      <div class="section-bg manifesto-bg"></div>
+      <div class="section-overlay"></div>
+      <div class="section-inner">
+        <div class="eyebrow" id="manifesto-eyebrow">02 / MANIFESTO</div>
+        <div class="title-card-wrapper">
+          <h2 class="film-headline" id="manifesto-headline">KONIEC PŁASZCZYZN</h2>
         </div>
-        <div class="manifesto-right">
-          <div class="manifesto-abstract-shape"></div>
+        <div class="content-bottom-left">
+          <p class="body-copy" id="manifesto-body">Przekuwamy tożsamość marki w monumentalne litery przestrzenne i kinetyczne neony.</p>
         </div>
       </div>
     </section>
 
-    <!-- Section 3: Disciplines -->
+    <!-- Section 03: Disciplines -->
     <section id="disciplines" class="section section-disciplines" data-section="2">
-      <div class="disciplines-header">
-        <div class="tag-label" id="disciplines-tag">03 / DISCIPLINES</div>
-        <h2 class="section-headline-top" id="disciplines-headline">SPEKTRUM MATERII</h2>
-      </div>
-
-      <div class="marquee-wrapper">
-        <div class="marquee-track" id="disciplines-marquee">
-          <!-- Dynamically populated horizontal elements -->
+      <div class="section-bg disciplines-bg"></div>
+      <div class="section-overlay"></div>
+      <div class="section-inner">
+        <div class="eyebrow" id="disciplines-eyebrow">03 / DISCIPLINES</div>
+        <div class="sub-eyebrow" id="disciplines-sub-eyebrow">SPEKTRUM MATERII</div>
+        <div class="content-bottom-left">
+          <p class="body-copy" id="disciplines-body">Kompleksowe wdrażanie kasetonów LED, obiektów 3D oraz bezkompromisowego oznakowania elewacji.</p>
         </div>
-      </div>
-
-      <div class="disciplines-footer">
-        <p class="disciplines-subline" id="disciplines-subline">Kompleksowe wdrażanie kasetonów LED, obiektów 3D oraz bezkompromisowego oznakowania elewacji.</p>
       </div>
     </section>
 
-    <!-- Section 4: Exhibition -->
+    <!-- Section 04: Exhibition -->
     <section id="exhibition" class="section section-exhibition" data-section="3">
-      <div class="section-content exhibition-split">
-        <div class="exhibition-left">
-          <div class="tag-label" id="exhibition-tag">04 / EXHIBITION</div>
-          <div class="exhibition-meta">
-            <span class="meta-number" id="exhibition-index">REALIZACJA #084</span>
-            <span class="meta-location" id="exhibition-location">WARSZAWA / PLAC EUROPEJSKI</span>
-          </div>
-          <h2 class="exhibition-headline" id="exhibition-headline">STUDIUM PRZESTRZENI</h2>
-          <p class="exhibition-subline" id="exhibition-subline">Wyselekcjonowane realizacje strukturalne, które zdominowały nowoczesną architekturę.</p>
+      <div class="section-bg exhibition-bg"></div>
+      <div class="section-overlay"></div>
+      <div class="section-inner">
+        <div class="eyebrow" id="exhibition-eyebrow">04 / EXHIBITION</div>
+        <div class="sub-eyebrow accent-cyan" id="exhibition-sub-eyebrow">REALIZACJA #084 WARSZAWA / PLAC EUROPEJSKI</div>
+        <div class="title-card-wrapper">
+          <h2 class="film-headline" id="exhibition-headline">STUDIUM PRZESTRZENI</h2>
         </div>
-        <div class="exhibition-right">
-          <div class="mask-container" id="exhibition-mask">
-            <div class="exhibition-photo"></div>
-            <div class="photo-overlay"></div>
-          </div>
+        <div class="content-bottom-left">
+          <p class="body-copy" id="exhibition-body">Wyselekcjonowane realizacje strukturalne, które zdominowały nowoczesną architekturę.</p>
         </div>
       </div>
     </section>
 
-    <!-- Section 5: Methodology -->
+    <!-- Section 05: Methodology -->
     <section id="methodology" class="section section-methodology" data-section="4">
-      <div class="hairline-divider" id="methodology-divider"></div>
-      <div class="section-content methodology-center">
-        <div class="tag-label" id="methodology-tag">05 / METHODOLOGY</div>
-        <h2 class="center-headline" id="methodology-headline">INŻYNIERIA ŚWIATŁA</h2>
-        <p class="center-subline" id="methodology-subline">Pełna kontrola nad formą, od rygorystycznej wizualizacji po ostateczny montaż.</p>
-        <div class="methodology-steps" id="methodology-steps-container">
-          <!-- Steps injected dynamically -->
+      <div class="section-bg methodology-bg"></div>
+      <div class="section-overlay"></div>
+      <div class="section-inner">
+        <div class="eyebrow" id="methodology-eyebrow">05 / METHODOLOGY</div>
+        <div class="title-card-wrapper">
+          <h2 class="film-headline" id="methodology-headline">INŻYNIERIA ŚWIATŁA</h2>
+        </div>
+        <div class="content-bottom-left">
+          <p class="body-copy" id="methodology-body">Pełna kontrola nad formą, od rygorystycznej wizualizacji po ostateczny montaż.</p>
         </div>
       </div>
     </section>
 
-    <!-- Section 6: Initiation -->
+    <!-- Section 06: Initiation -->
     <section id="initiation" class="section section-initiation" data-section="5">
-      <div class="section-content initiation-wrapper">
-        <div class="tag-label" id="initiation-tag">06 / INITIATION</div>
-        <div class="bleeding-headline-container">
-          <h2 class="bleeding-headline" id="initiation-headline">ZAINICJUJ FORMĘ</h2>
+      <div class="section-bg initiation-bg"></div>
+      <div class="section-overlay"></div>
+      <div class="section-inner">
+        <div class="eyebrow" id="initiation-eyebrow">06 / INITIATION</div>
+        <div class="title-card-wrapper">
+          <h2 class="film-headline" id="initiation-headline">ZAINICJUJ</h2>
         </div>
-        <div class="center-trigger" id="initiation-trigger">
-          <p class="trigger-subline" id="initiation-subline">Wyjdź poza płaski ekran i zdefiniuj swój trójwymiar.</p>
-          <a href="mailto:kontakt@neoform.com.pl" class="cta-button" id="initiation-cta">
-            <span class="cta-text">KONTAKT@NEOFORM.COM.PL</span>
-            <span class="cta-arrow">→</span>
-          </a>
+        <div class="content-bottom-left">
+          <p class="body-copy" id="initiation-body">Wyjdź poza płaski ekran i zdefiniuj swój trójwymiar.</p>
+          <a href="mailto:kontakt@neoform.com.pl" class="cta-link" id="initiation-cta">KONTAKT@NEOFORM.COM.PL →</a>
         </div>
       </div>
     </section>
