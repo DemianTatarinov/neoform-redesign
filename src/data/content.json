@@ -1,0 +1,66 @@
+{
+  "brand": "NEOFORM",
+  "meta": {
+    "subtitle": "STUDIO STRUKTUR ŚWIETLNYCH",
+    "year": "2025"
+  },
+  "nav": [
+    { "label": "01 PROLOGUE", "target": "#prologue" },
+    { "label": "02 MANIFESTO", "target": "#manifesto" },
+    { "label": "03 SPEKTRUM", "target": "#disciplines" },
+    { "label": "04 STUDIUM", "target": "#exhibition" },
+    { "label": "05 INŻYNIERIA", "target": "#methodology" },
+    { "label": "06 INICJACJA", "target": "#initiation" }
+  ],
+  "prologue": {
+    "headline": "FORMA ABSOLUTNA",
+    "subline": "Architektoniczny branding i struktury świetlne, które redefiniują przestrzeń.",
+    "tag": "01 / PROLOGUE"
+  },
+  "manifesto": {
+    "headline": "KONIEC PŁASZCZYZN",
+    "subline": "Przekuwamy tożsamość marki w monumentalne litery przestrzenne i kinetyczne neony.",
+    "tag": "02 / MANIFESTO",
+    "lines": [
+      "PRZEKUWAMY TOŻSAMOŚĆ MARKI",
+      "W MONUMENTALNE LITERY PRZESTRZENNE",
+      "I KINETYCZNE NEONY."
+    ]
+  },
+  "disciplines": {
+    "headline": "SPEKTRUM MATERII",
+    "subline": "Kompleksowe wdrażanie kasetonów LED, obiektów 3D oraz bezkompromisowego oznakowania elewacji.",
+    "tag": "03 / DISCIPLINES",
+    "items": [
+      "KASETONY LED",
+      "LITERY 3D",
+      "NEONY KINETYCZNE",
+      "ELEWACJE STRUKTURALNE",
+      "MONUMENTY ŚWIETLNE"
+    ]
+  },
+  "exhibition": {
+    "headline": "STUDIUM PRZESTRZENI",
+    "subline": "Wyselekcjonowane realizacje strukturalne, które zdominowały nowoczesną architekturę.",
+    "tag": "04 / EXHIBITION",
+    "projectIndex": "REALIZACJA #084",
+    "location": "WARSZAWA / PLAC EUROPEJSKI"
+  },
+  "methodology": {
+    "headline": "INŻYNIERIA ŚWIATŁA",
+    "subline": "Pełna kontrola nad formą, od rygorystycznej wizualizacji po ostateczny montaż.",
+    "tag": "05 / METHODOLOGY",
+    "steps": [
+      "01 / RIGOROUS VISUALIZATION",
+      "02 / KINETIC ENGINEERING",
+      "03 / ARCHITECTURAL MOUNT"
+    ]
+  },
+  "initiation": {
+    "headline": "ZAINICJUJ FORMĘ",
+    "subline": "Wyjdź poza płaski ekran i zdefiniuj swój trójwymiar.",
+    "tag": "06 / INITIATION",
+    "cta": "KONTAKT@NEOFORM.COM.PL",
+    "coordinates": "52.2297° N, 21.0122° E"
+  }
+}
