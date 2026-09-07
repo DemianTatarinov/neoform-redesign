@@ -1,6 +1,16 @@
 import { gsap } from 'gsap';
 import contentData from './data/content.json';
 
+// Route map corresponding to sections
+const ROUTES = {
+  '/': 'hero',
+  '/dlaczego-my': 'about',
+  '/oferta': 'oferta',
+  '/portfolio': 'portfolio',
+  '/faq': 'faq',
+  '/kontakt': 'contact'
+};
+
 function initApp() {
   try {
     renderContent(contentData);
@@ -10,8 +20,112 @@ function initApp() {
     initOfertaAccordion();
     initFAQAccordion();
     initContactForm();
+    initLightbox();
+    initRouter();
   } catch (err) {
     console.error('Initialization error:', err);
+  }
+}
+
+function initRouter() {
+  // Handle navigation clicks
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[data-route], a[href^="/"]');
+    if (!link) return;
+
+    const href = link.getAttribute('data-route') || link.getAttribute('href');
+    if (href && ROUTES[href]) {
+      e.preventDefault();
+      navigateToRoute(href, true);
+    }
+  });
+
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', () => {
+    navigateToRoute(window.location.pathname, false);
+  });
+
+  // Initial route handling
+  if (ROUTES[window.location.pathname]) {
+    navigateToRoute(window.location.pathname, false);
+  }
+}
+
+function navigateToRoute(pathname, pushState = true) {
+  const sectionId = ROUTES[pathname] || 'hero';
+  const section = document.getElementById(sectionId);
+
+  if (section) {
+    if (pushState && window.location.pathname !== pathname) {
+      window.history.pushState({}, '', pathname);
+    }
+
+    // Scroll to section smoothly
+    section.scrollIntoView({ behavior: 'smooth' });
+
+    // Update active nav link
+    document.querySelectorAll('.nav-link').forEach(nav => {
+      if (nav.getAttribute('data-route') === pathname) {
+        nav.classList.add('text-amber-500');
+        nav.classList.remove('text-neutral-400');
+      } else {
+        nav.classList.remove('text-amber-500');
+        nav.classList.add('text-neutral-400');
+      }
+    });
+  }
+}
+
+function initLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeBtn = document.getElementById('lightbox-close');
+
+  if (!lightbox || !lightboxImg) return;
+
+  window.openLightbox = (src) => {
+    lightboxImg.src = src;
+    lightbox.classList.remove('hidden');
+    setTimeout(() => {
+      lightboxImg.classList.remove('scale-95');
+      lightboxImg.classList.add('scale-100');
+    }, 10);
+  };
+
+  const closeLightbox = () => {
+    lightboxImg.classList.remove('scale-100');
+    lightboxImg.classList.add('scale-95');
+    setTimeout(() => {
+      lightbox.classList.add('hidden');
+      lightboxImg.src = '';
+    }, 200);
+  };
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeLightbox);
+  }
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === closeBtn) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+      closeLightbox();
+    }
+  });
+
+  // Lightbox on oferta preview image
+  const ofertaPreview = document.getElementById('oferta-preview-wrapper');
+  if (ofertaPreview) {
+    ofertaPreview.addEventListener('click', () => {
+      const img = document.getElementById('oferta-preview-img');
+      if (img && img.src) {
+        window.openLightbox(img.src);
+      }
+    });
   }
 }
 
@@ -62,7 +176,7 @@ function renderContent(data) {
   if (data.oferta && data.oferta.items) {
     const ofertaAccordion = document.getElementById('oferta-accordion');
     if (ofertaAccordion) {
-      ofertaAccordion.innerHTML = data.oferta.items.map((item, idx) => `
+      ofertaAccordion.innerHTML = data.oferta.items.map((item) => `
         <div class="oferta-item group cursor-pointer border-b border-neutral-800 py-6" data-img="${item.image}">
           <div class="flex justify-between items-center mb-3">
             <span class="font-mono text-xs text-amber-500">${item.id}</span>
@@ -75,18 +189,21 @@ function renderContent(data) {
     }
   }
 
-  // Portfolio Section
+  // Portfolio Section with mobile swipe item sizing & lightbox click
   if (data.portfolio && data.portfolio.projects) {
     const portfolioGrid = document.getElementById('portfolio-grid');
     if (portfolioGrid) {
       portfolioGrid.innerHTML = data.portfolio.projects.map(p => `
-        <div class="group cursor-pointer overflow-hidden rounded-2xl border border-neutral-900 bg-neutral-950">
+        <div class="group cursor-pointer overflow-hidden rounded-2xl border border-neutral-900 bg-neutral-950 min-w-[85vw] md:min-w-0 snap-center shrink-0 md:shrink" onclick="window.openLightbox('${p.image}')">
           <div class="aspect-[4/3] overflow-hidden">
             <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
           </div>
-          <div class="p-6">
-            <span class="text-xs font-mono uppercase tracking-widest text-amber-500 block mb-1">${p.category}</span>
-            <h3 class="text-xl font-serif font-bold text-neutral-100">${p.title}</h3>
+          <div class="p-6 flex justify-between items-end">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-widest text-amber-500 block mb-1">${p.category}</span>
+              <h3 class="text-xl font-serif font-bold text-neutral-100">${p.title}</h3>
+            </div>
+            <span class="text-xs font-mono text-neutral-500 group-hover:text-white transition-colors">Powiększ ↗</span>
           </div>
         </div>
       `).join('');

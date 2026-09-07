@@ -31,21 +31,36 @@
     <div class="cursor-ring"></div>
   </div>
 
+  <!-- Fullscreen Lightbox Modal -->
+  <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl hidden flex items-center justify-center p-4 transition-all duration-300">
+    <button id="lightbox-close" aria-label="Zamknij" class="absolute top-6 right-6 text-neutral-400 hover:text-white text-4xl font-mono p-2 transition-colors">&times;</button>
+    <img id="lightbox-img" src="" alt="Podgląd pełnoekranowy" class="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl scale-95 transition-transform duration-300" />
+  </div>
+
   <!-- Header / Navigation -->
-  <header class="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 md:py-8 flex justify-between items-center bg-black/60 backdrop-blur-md border-b border-neutral-900/50">
-    <a href="#hero" class="logo-glow-container" id="brand-logo" aria-label="Neoform Home">
+  <header class="fixed top-0 left-0 w-full z-50 px-6 py-5 md:px-12 md:py-6 flex justify-between items-center bg-black/70 backdrop-blur-md border-b border-neutral-900/50">
+    <a href="/" class="logo-glow-container" id="brand-logo" aria-label="Neoform Strona Główna">
       <img src="/logo.png" alt="Neoform Studio Logo" class="h-7 md:h-8 w-auto object-contain" />
     </a>
-    <nav class="hidden md:flex space-x-10 text-xs tracking-widest uppercase text-neutral-400 font-mono">
-      <a href="#about" class="hover:text-white transition-colors duration-300">O nas</a>
-      <a href="#oferta" class="hover:text-white transition-colors duration-300">Oferta</a>
-      <a href="#portfolio" class="hover:text-white transition-colors duration-300">Realizacje</a>
-      <a href="#faq" class="hover:text-white transition-colors duration-300">FAQ</a>
-      <a href="#contact" class="hover:text-white transition-colors duration-300">Kontakt</a>
+
+    <nav class="hidden md:flex items-center space-x-8 text-xs tracking-widest uppercase text-neutral-400 font-mono">
+      <a href="/dlaczego-my" data-route="/dlaczego-my" class="nav-link hover:text-white transition-colors duration-300">O nas</a>
+      <a href="/oferta" data-route="/oferta" class="nav-link hover:text-white transition-colors duration-300">Oferta</a>
+      <a href="/portfolio" data-route="/portfolio" class="nav-link hover:text-white transition-colors duration-300">Realizacje</a>
+      <a href="/faq" data-route="/faq" class="nav-link hover:text-white transition-colors duration-300">FAQ</a>
+      <a href="/kontakt" data-route="/kontakt" class="nav-link hover:text-white transition-colors duration-300">Kontakt</a>
     </nav>
-    <a href="#contact" class="text-xs uppercase tracking-widest border border-neutral-700 px-5 py-2.5 rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300">
-      Wycena w 24-48h
-    </a>
+
+    <div class="flex items-center space-x-5">
+      <a href="https://www.instagram.com/neokuchnie?stkn=NXB3OTFpOWlmbWh2" target="_blank" rel="noopener noreferrer" aria-label="Instagram Neoform" class="text-neutral-400 hover:text-amber-500 transition-colors">
+        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 2.156 4.919 5.419.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 5.236-4.918 5.383-1.266.059-1.646.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-2.199-4.919-5.42-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-5.236 4.919-5.383 1.266-.059 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+      <a href="/kontakt" data-route="/kontakt" class="text-xs uppercase tracking-widest border border-neutral-700 px-5 py-2.5 rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300">
+        Wycena w 24-48h
+      </a>
+    </div>
   </header>
 
   <!-- Main Content Wrapper -->
@@ -161,8 +176,8 @@
 
           <!-- Preview image container -->
           <div class="lg:col-span-5 sticky top-32 hidden lg:block">
-            <div class="relative aspect-[4/5] overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900">
-              <img id="oferta-preview-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="Preview Oferta" class="w-full h-full object-cover transition-all duration-700 ease-out" />
+            <div class="relative aspect-[4/5] overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900 cursor-pointer" id="oferta-preview-wrapper">
+              <img id="oferta-preview-img" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="Preview Oferta" class="w-full h-full object-cover transition-all duration-700 ease-out hover:scale-105" />
             </div>
           </div>
         </div>
@@ -181,7 +196,8 @@
           </div>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8" id="portfolio-grid">
+        <!-- Portfolio swipe carousel on mobile / grid on desktop -->
+        <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 md:grid md:grid-cols-3 md:overflow-visible md:pb-0 scrollbar-none" id="portfolio-grid">
           <!-- Filled by JS -->
         </div>
       </div>
@@ -255,6 +271,10 @@
               <input type="tel" id="phone" required class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-3 text-neutral-100 focus:outline-none focus:border-neutral-500 transition-colors" placeholder="Twój numer telefonu">
             </div>
             <div>
+              <label for="file" class="block text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">Dołącz plik (np. rzut, zdjęcia, inspiracje)</label>
+              <input type="file" id="file" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-3 text-neutral-400 text-xs focus:outline-none focus:border-neutral-500 transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-mono file:bg-neutral-800 file:text-neutral-200 hover:file:bg-neutral-700">
+            </div>
+            <div>
               <label for="message" class="block text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">Wiadomość / Opis kuchni</label>
               <textarea id="message" rows="4" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-3 text-neutral-100 focus:outline-none focus:border-neutral-500 transition-colors" placeholder="Krótki opis oczekiwań..."></textarea>
             </div>
@@ -269,12 +289,20 @@
       <!-- Bottom Copyright Bar -->
       <div class="max-w-7xl mx-auto border-t border-neutral-900 mt-24 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-neutral-600">
         <div class="flex items-center space-x-4 mb-4 md:mb-0">
-          <a href="#hero" class="logo-glow-container inline-block py-1 px-3">
+          <a href="/" class="logo-glow-container inline-block py-1 px-3">
             <img src="/logo.png" alt="Neoform Studio Footer Logo" class="h-5 w-auto object-contain" />
           </a>
           <p id="copyright-text">Copyright © 2023 Neoform</p>
         </div>
-        <p class="mt-4 md:mt-0">Design Inspired by Largo Studio Aesthetic</p>
+        <div class="flex items-center space-x-6">
+          <a href="https://www.instagram.com/neokuchnie?stkn=NXB3OTFpOWlmbWh2" target="_blank" rel="noopener noreferrer" class="hover:text-amber-500 transition-colors flex items-center space-x-2">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 2.156 4.919 5.419.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 5.236-4.918 5.383-1.266.059-1.646.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-2.199-4.919-5.42-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-5.236 4.919-5.383 1.266-.059 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            <span>Instagram</span>
+          </a>
+          <p>Design Inspired by Largo Studio Aesthetic</p>
+        </div>
       </div>
     </section>
 
