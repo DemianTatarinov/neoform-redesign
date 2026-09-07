@@ -1,10 +1,7 @@
 import { gsap } from 'gsap';
 
-// Global State
 let contentData = null;
-let hasScrolled = false;
 
-// Initialize Application
 async function initApp() {
   try {
     const res = await fetch('/src/data/content.json');
@@ -13,73 +10,124 @@ async function initApp() {
 
     renderContent(contentData);
     initCustomCursor();
-    initScrollAndNavHandlers();
-    initEntranceAnimations();
+    initScrollAnimations();
+    initStatsCounter();
+    initOfertaAccordion();
+    initFAQAccordion();
+    initContactForm();
   } catch (err) {
-    console.error('Error initializing application:', err);
+    console.error('Initialization error:', err);
   }
 }
 
-// Render Exact Copy Deck
 function renderContent(data) {
   if (!data) return;
 
-  if (data.footerStamp) {
-    const stampEl = document.getElementById('footer-stamp');
-    if (stampEl) stampEl.textContent = data.footerStamp;
+  // Hero Section
+  if (data.hero) {
+    document.getElementById('hero-badge').textContent = data.hero.badge || 'BIG SALE';
+    document.getElementById('hero-quote').textContent = data.hero.quoteCta || '';
+    document.getElementById('hero-subtitle').textContent = data.hero.subtitle || '';
+
+    const featContainer = document.getElementById('hero-features');
+    if (featContainer && data.hero.features) {
+      featContainer.innerHTML = data.hero.features.map(f => `
+        <span class="text-xs font-mono tracking-widest uppercase px-3 py-1 bg-neutral-900 border border-neutral-800 rounded-full text-neutral-300">
+          ${f}
+        </span>
+      `).join('');
+    }
   }
 
-  if (data.scrollHint) {
-    const scrollEl = document.getElementById('scroll-text');
-    if (scrollEl) scrollEl.textContent = data.scrollHint;
+  // About Section
+  if (data.about) {
+    document.getElementById('about-p1').textContent = data.about.paragraph1 || '';
+    document.getElementById('about-p2').textContent = data.about.paragraph2 || '';
+    document.getElementById('about-p3').textContent = data.about.paragraph3 || '';
+
+    const hlContainer = document.getElementById('about-highlights');
+    if (hlContainer && data.about.highlights) {
+      hlContainer.innerHTML = data.about.highlights.map(h => `
+        <div class="p-8 rounded-2xl bg-neutral-950 border border-neutral-900 hover:border-neutral-700 transition-colors duration-300">
+          <h3 class="text-xl font-serif font-bold text-neutral-100 mb-3">${h.title}</h3>
+          <p class="text-neutral-400 font-light text-sm leading-relaxed">${h.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    const partnersContainer = document.getElementById('partners-list');
+    if (partnersContainer && data.about.partners) {
+      partnersContainer.innerHTML = data.about.partners.map(p => `
+        <span class="px-4 py-2 border border-neutral-900 bg-neutral-950 rounded-lg hover:border-neutral-700 transition-colors">${p}</span>
+      `).join('');
+    }
   }
 
-  // 01 / PROLOGUE
-  if (data.prologue) {
-    document.getElementById('prologue-eyebrow').textContent = data.prologue.eyebrow;
-    document.getElementById('prologue-headline').textContent = data.prologue.headline;
-    document.getElementById('prologue-subline').textContent = data.prologue.subline;
+  // Oferta Section
+  if (data.oferta && data.oferta.items) {
+    const ofertaAccordion = document.getElementById('oferta-accordion');
+    if (ofertaAccordion) {
+      ofertaAccordion.innerHTML = data.oferta.items.map((item, idx) => `
+        <div class="oferta-item group cursor-pointer border-b border-neutral-800 py-6" data-img="${item.image}">
+          <div class="flex justify-between items-center mb-3">
+            <span class="font-mono text-xs text-amber-500">${item.id}</span>
+            <h3 class="text-2xl md:text-3xl font-serif font-bold text-neutral-200 group-hover:text-white transition-colors">${item.title}</h3>
+            <span class="text-xl text-neutral-500 group-hover:text-white transition-transform transform group-hover:translate-x-2">→</span>
+          </div>
+          <p class="text-neutral-400 font-light text-sm max-w-xl hidden group-hover:block transition-all duration-300">${item.description}</p>
+        </div>
+      `).join('');
+    }
   }
 
-  // 02 / MANIFESTO
-  if (data.manifesto) {
-    document.getElementById('manifesto-eyebrow').textContent = data.manifesto.eyebrow;
-    document.getElementById('manifesto-headline').textContent = data.manifesto.headline;
-    document.getElementById('manifesto-body').textContent = data.manifesto.body;
+  // Portfolio Section
+  if (data.portfolio && data.portfolio.projects) {
+    const portfolioGrid = document.getElementById('portfolio-grid');
+    if (portfolioGrid) {
+      portfolioGrid.innerHTML = data.portfolio.projects.map(p => `
+        <div class="group cursor-pointer overflow-hidden rounded-2xl border border-neutral-900 bg-neutral-950">
+          <div class="aspect-[4/3] overflow-hidden">
+            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+          </div>
+          <div class="p-6">
+            <span class="text-xs font-mono uppercase tracking-widest text-amber-500 block mb-1">${p.category}</span>
+            <h3 class="text-xl font-serif font-bold text-neutral-100">${p.title}</h3>
+          </div>
+        </div>
+      `).join('');
+    }
   }
 
-  // 03 / DISCIPLINES
-  if (data.disciplines) {
-    document.getElementById('disciplines-eyebrow').textContent = data.disciplines.eyebrow;
-    document.getElementById('disciplines-sub-eyebrow').textContent = data.disciplines.subEyebrow;
-    document.getElementById('disciplines-body').textContent = data.disciplines.body;
+  // FAQ Section
+  if (data.faq && data.faq.items) {
+    const faqContainer = document.getElementById('faq-container');
+    if (faqContainer) {
+      faqContainer.innerHTML = data.faq.items.map(item => `
+        <div class="accordion-item py-6 cursor-pointer">
+          <div class="flex justify-between items-center select-none">
+            <h3 class="text-lg md:text-xl font-serif font-semibold text-neutral-200">${item.question}</h3>
+            <span class="accordion-icon text-2xl font-mono text-neutral-500 transition-transform duration-300">+</span>
+          </div>
+          <div class="accordion-content">
+            <p class="pt-4 text-neutral-400 font-light text-sm leading-relaxed">${item.answer}</p>
+          </div>
+        </div>
+      `).join('');
+    }
   }
 
-  // 04 / EXHIBITION
-  if (data.exhibition) {
-    document.getElementById('exhibition-eyebrow').textContent = data.exhibition.eyebrow;
-    document.getElementById('exhibition-sub-eyebrow').textContent = data.exhibition.subEyebrow;
-    document.getElementById('exhibition-headline').textContent = data.exhibition.headline;
-    document.getElementById('exhibition-body').textContent = data.exhibition.body;
-  }
-
-  // 05 / METHODOLOGY
-  if (data.methodology) {
-    document.getElementById('methodology-eyebrow').textContent = data.methodology.eyebrow;
-    document.getElementById('methodology-headline').textContent = data.methodology.headline;
-    document.getElementById('methodology-body').textContent = data.methodology.body;
-  }
-
-  // 06 / INITIATION
-  if (data.initiation) {
-    document.getElementById('initiation-eyebrow').textContent = data.initiation.eyebrow;
-    document.getElementById('initiation-headline').textContent = data.initiation.headline;
-    document.getElementById('initiation-body').textContent = data.initiation.body;
-    document.getElementById('initiation-cta').textContent = data.initiation.cta;
+  // Contact / Footer Section
+  if (data.contact) {
+    document.getElementById('contact-address').textContent = data.contact.address || '';
+    document.getElementById('contact-phone').textContent = data.contact.phone || '';
+    document.getElementById('contact-phone').setAttribute('href', `tel:${(data.contact.phone || '').replace(/\s+/g, '')}`);
+    document.getElementById('contact-email').textContent = data.contact.email || '';
+    document.getElementById('contact-email').setAttribute('href', `mailto:${data.contact.email || ''}`);
+    document.getElementById('contact-hours').textContent = data.contact.hours || '';
+    document.getElementById('copyright-text').textContent = data.contact.copyright || 'Copyright © 2023 Neoform';
   }
 }
 
-// Custom Magnetic Cursor
 function initCustomCursor() {
   const cursor = document.getElementById('custom-cursor');
   if (!cursor) return;
@@ -95,129 +143,98 @@ function initCustomCursor() {
   });
 
   gsap.ticker.add(() => {
-    cursorX += (mouseX - cursorX) * 0.25;
-    cursorY += (mouseY - cursorY) * 0.25;
+    cursorX += (mouseX - cursorX) * 0.2;
+    cursorY += (mouseY - cursorY) * 0.2;
     gsap.set(cursor, { x: cursorX, y: cursorY });
   });
 
-  const interactiveElements = document.querySelectorAll('a, button, .index-item');
-  interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest('a, button, input, textarea, .cursor-pointer')) {
+      document.body.classList.add('cursor-active');
+    } else {
+      document.body.classList.remove('cursor-active');
+    }
   });
 }
 
-// Entrance Choreography using IntersectionObserver + GSAP
-function initEntranceAnimations() {
-  const sections = document.querySelectorAll('.section');
-  const navItems = document.querySelectorAll('.index-item');
+function initScrollAnimations() {
+  const heroTitle = document.getElementById('hero-title');
+  if (heroTitle) {
+    gsap.from(heroTitle, { opacity: 0, y: 40, duration: 1.2, ease: 'power3.out', delay: 0.2 });
+  }
 
-  const observerOptions = {
-    root: null,
-    threshold: 0.5
-  };
+  const heroSubtitle = document.getElementById('hero-subtitle');
+  if (heroSubtitle) {
+    gsap.from(heroSubtitle, { opacity: 0, y: 30, duration: 1.2, ease: 'power3.out', delay: 0.4 });
+  }
+}
 
+function initStatsCounter() {
+  const statItems = document.querySelectorAll('.stat-item');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const secIndex = parseInt(entry.target.getAttribute('data-section'), 10);
-
-        // Highlight corresponding Nav Index
-        navItems.forEach((nav, idx) => {
-          if (idx === secIndex) {
-            nav.classList.add('active');
-          } else {
-            nav.classList.remove('active');
-          }
-        });
-
-        // Background Parallax Scale Down
-        const bg = entry.target.querySelector('.section-bg');
-        if (bg) {
-          gsap.fromTo(bg,
-            { scale: 1.08 },
-            { scale: 1.0, duration: 1.4, ease: 'power2.out' }
-          );
+        const container = entry.target.querySelector('[data-target]');
+        const counter = entry.target.querySelector('.counter');
+        if (container && counter) {
+          const target = parseInt(container.getAttribute('data-target'), 10);
+          gsap.to(counter, {
+            innerText: target,
+            duration: 2,
+            snap: { innerText: 1 },
+            ease: 'power2.out'
+          });
         }
-
-        // Eyebrow & Sub-eyebrow fade + slide
-        const eyebrows = entry.target.querySelectorAll('.eyebrow, .sub-eyebrow');
-        if (eyebrows.length) {
-          gsap.fromTo(eyebrows,
-            { y: -15, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power2.out' }
-          );
-        }
-
-        // Headline Mask Reveal
-        const headline = entry.target.querySelector('.film-headline');
-        if (headline) {
-          gsap.fromTo(headline,
-            { y: 50, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1.0, ease: 'power3.out', delay: 0.15 }
-          );
-        }
-
-        // Body copy slide
-        const body = entry.target.querySelector('.content-bottom-left');
-        if (body) {
-          gsap.fromTo(body,
-            { y: 30, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1.0, ease: 'power3.out', delay: 0.3 }
-          );
-        }
-
-        // Apply Kinetic Accent Flicker to active section headline
-        if (headline) {
-          headline.classList.add('kinetic-flicker');
-        }
-      } else {
-        const headline = entry.target.querySelector('.film-headline');
-        if (headline) {
-          headline.classList.remove('kinetic-flicker');
-        }
+        observer.unobserve(entry.target);
       }
     });
-  }, observerOptions);
+  }, { threshold: 0.5 });
 
-  sections.forEach(sec => observer.observe(sec));
+  statItems.forEach(item => observer.observe(item));
 }
 
-// Scroll & Navigation Handlers
-function initScrollAndNavHandlers() {
-  const scrollHint = document.getElementById('scroll-hint');
+function initOfertaAccordion() {
+  const items = document.querySelectorAll('.oferta-item');
+  const imgEl = document.getElementById('oferta-preview-img');
 
-  // Fade out scroll-hint permanently after first scroll / swipe
-  function handleFirstScroll() {
-    if (!hasScrolled) {
-      hasScrolled = true;
-      if (scrollHint) {
-        scrollHint.style.opacity = '0';
-        setTimeout(() => scrollHint.remove(), 600);
-      }
-      window.removeEventListener('scroll', handleFirstScroll);
-      window.removeEventListener('wheel', handleFirstScroll);
-      window.removeEventListener('touchmove', handleFirstScroll);
-    }
-  }
-
-  window.addEventListener('scroll', handleFirstScroll, { passive: true });
-  window.addEventListener('wheel', handleFirstScroll, { passive: true });
-  window.addEventListener('touchmove', handleFirstScroll, { passive: true });
-
-  // Index Nav Click Smooth Scroll
-  const navItems = document.querySelectorAll('.index-item');
-  navItems.forEach(item => {
-    item.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetId = item.getAttribute('href');
-      const targetEl = document.querySelector(targetId);
-      if (targetEl) {
-        targetEl.scrollIntoView({ behavior: 'smooth' });
+  items.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const newSrc = item.getAttribute('data-img');
+      if (imgEl && newSrc) {
+        imgEl.src = newSrc;
       }
     });
   });
 }
 
-// Run application on DOM ready
+function initFAQAccordion() {
+  document.addEventListener('click', (e) => {
+    const item = e.target.closest('.accordion-item');
+    if (!item) return;
+
+    const isActive = item.classList.contains('active');
+    document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('active'));
+
+    if (!isActive) {
+      item.classList.add('active');
+    }
+  });
+}
+
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (status) {
+        status.classList.remove('hidden');
+        form.reset();
+        setTimeout(() => status.classList.add('hidden'), 5000);
+      }
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', initApp);
