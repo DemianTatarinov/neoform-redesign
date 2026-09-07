@@ -1,171 +1,245 @@
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import contentData from './data/content.json';
 
-gsap.registerPlugin(ScrollTrigger);
+// Route map corresponding to sections
+const ROUTES = {
+  '/': 'hero',
+  '/dlaczego-my': 'about',
+  '/oferta': 'oferta',
+  '/portfolio': 'portfolio',
+  '/faq': 'faq',
+  '/kontakt': 'contact'
+};
 
-// Global State
-let contentData = null;
-
-// Initialize App
-async function initApp() {
+function initApp() {
   try {
-    const res = await fetch('/src/data/content.json');
-    if (!res.ok) throw new Error('Failed to load content.json');
-    contentData = await res.json();
-
     renderContent(contentData);
-    initAmbientCanvas();
     initCustomCursor();
-    initAnimations();
-    initNavHandlers();
+    initScrollAnimations();
+    initStatsCounter();
+    initOfertaAccordion();
+    initFAQAccordion();
+    initContactForm();
+    initLightbox();
+    initRouter();
   } catch (err) {
-    console.error('Error initializing application:', err);
+    console.error('Initialization error:', err);
   }
 }
 
-// Dynamic Content Injection
+function initRouter() {
+  // Handle navigation clicks
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[data-route], a[href^="/"]');
+    if (!link) return;
+
+    const href = link.getAttribute('data-route') || link.getAttribute('href');
+    if (href && ROUTES[href]) {
+      e.preventDefault();
+      navigateToRoute(href, true);
+    }
+  });
+
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', () => {
+    navigateToRoute(window.location.pathname, false);
+  });
+
+  // Initial route handling
+  if (ROUTES[window.location.pathname]) {
+    navigateToRoute(window.location.pathname, false);
+  }
+}
+
+function navigateToRoute(pathname, pushState = true) {
+  const sectionId = ROUTES[pathname] || 'hero';
+  const section = document.getElementById(sectionId);
+
+  if (section) {
+    if (pushState && window.location.pathname !== pathname) {
+      window.history.pushState({}, '', pathname);
+    }
+
+    // Scroll to section smoothly
+    section.scrollIntoView({ behavior: 'smooth' });
+
+    // Update active nav link
+    document.querySelectorAll('.nav-link').forEach(nav => {
+      if (nav.getAttribute('data-route') === pathname) {
+        nav.classList.add('text-amber-500');
+        nav.classList.remove('text-neutral-400');
+      } else {
+        nav.classList.remove('text-amber-500');
+        nav.classList.add('text-neutral-400');
+      }
+    });
+  }
+}
+
+function initLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeBtn = document.getElementById('lightbox-close');
+
+  if (!lightbox || !lightboxImg) return;
+
+  window.openLightbox = (src) => {
+    lightboxImg.src = src;
+    lightbox.classList.remove('hidden');
+    setTimeout(() => {
+      lightboxImg.classList.remove('scale-95');
+      lightboxImg.classList.add('scale-100');
+    }, 10);
+  };
+
+  const closeLightbox = () => {
+    lightboxImg.classList.remove('scale-100');
+    lightboxImg.classList.add('scale-95');
+    setTimeout(() => {
+      lightbox.classList.add('hidden');
+      lightboxImg.src = '';
+    }, 200);
+  };
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeLightbox);
+  }
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === closeBtn) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+      closeLightbox();
+    }
+  });
+
+  // Lightbox on oferta preview image
+  const ofertaPreview = document.getElementById('oferta-preview-wrapper');
+  if (ofertaPreview) {
+    ofertaPreview.addEventListener('click', () => {
+      const img = document.getElementById('oferta-preview-img');
+      if (img && img.src) {
+        window.openLightbox(img.src);
+      }
+    });
+  }
+}
+
 function renderContent(data) {
   if (!data) return;
 
-  // Prologue
-  if (data.prologue) {
-    document.getElementById('prologue-tag').textContent = data.prologue.tag || '01 / PROLOGUE';
-    document.getElementById('prologue-headline').textContent = data.prologue.headline;
-    document.getElementById('prologue-subline').textContent = data.prologue.subline;
-  }
+  // Hero Section
+  if (data.hero) {
+    document.getElementById('hero-badge').textContent = data.hero.badge || 'BIG SALE';
+    document.getElementById('hero-quote').textContent = data.hero.quoteCta || '';
+    document.getElementById('hero-subtitle').textContent = data.hero.subtitle || '';
 
-  // Manifesto
-  if (data.manifesto) {
-    document.getElementById('manifesto-tag').textContent = data.manifesto.tag || '02 / MANIFESTO';
-    document.getElementById('manifesto-headline').textContent = data.manifesto.headline;
-    document.getElementById('manifesto-subline').textContent = data.manifesto.subline;
-
-    const linesContainer = document.getElementById('manifesto-lines-container');
-    linesContainer.innerHTML = '';
-    const lines = data.manifesto.lines || [
-      'PRZEKUWAMY TOŻSAMOŚĆ MARKI',
-      'W MONUMENTALNE LITERY PRZESTRZENNE',
-      'I KINETYCZNE NEONY.'
-    ];
-
-    lines.forEach(lineText => {
-      const lineEl = document.createElement('div');
-      lineEl.className = 'line-item';
-      lineEl.textContent = lineText;
-      linesContainer.appendChild(lineEl);
-    });
-  }
-
-  // Disciplines
-  if (data.disciplines) {
-    document.getElementById('disciplines-tag').textContent = data.disciplines.tag || '03 / DISCIPLINES';
-    document.getElementById('disciplines-headline').textContent = data.disciplines.headline;
-    document.getElementById('disciplines-subline').textContent = data.disciplines.subline;
-
-    const marquee = document.getElementById('disciplines-marquee');
-    marquee.innerHTML = '';
-    const items = data.disciplines.items || ['KASETONY LED', 'LITERY 3D', 'NEONY KINETYCZNE'];
-
-    // Duplicate list to create continuous flow
-    const renderList = [...items, ...items, ...items];
-    renderList.forEach((itemText) => {
-      const itemEl = document.createElement('span');
-      itemEl.className = 'marquee-item';
-      itemEl.textContent = `${itemText} — `;
-      marquee.appendChild(itemEl);
-    });
-  }
-
-  // Exhibition
-  if (data.exhibition) {
-    document.getElementById('exhibition-tag').textContent = data.exhibition.tag || '04 / EXHIBITION';
-    document.getElementById('exhibition-headline').textContent = data.exhibition.headline;
-    document.getElementById('exhibition-subline').textContent = data.exhibition.subline;
-    if (data.exhibition.projectIndex) {
-      document.getElementById('exhibition-index').textContent = data.exhibition.projectIndex;
-    }
-    if (data.exhibition.location) {
-      document.getElementById('exhibition-location').textContent = data.exhibition.location;
+    const featContainer = document.getElementById('hero-features');
+    if (featContainer && data.hero.features) {
+      featContainer.innerHTML = data.hero.features.map(f => `
+        <span class="text-xs font-mono tracking-widest uppercase px-3 py-1 bg-neutral-900 border border-neutral-800 rounded-full text-neutral-300">
+          ${f}
+        </span>
+      `).join('');
     }
   }
 
-  // Methodology
-  if (data.methodology) {
-    document.getElementById('methodology-tag').textContent = data.methodology.tag || '05 / METHODOLOGY';
-    document.getElementById('methodology-headline').textContent = data.methodology.headline;
-    document.getElementById('methodology-subline').textContent = data.methodology.subline;
+  // About Section
+  if (data.about) {
+    document.getElementById('about-p1').textContent = data.about.paragraph1 || '';
+    document.getElementById('about-p2').textContent = data.about.paragraph2 || '';
+    document.getElementById('about-p3').textContent = data.about.paragraph3 || '';
 
-    const stepsContainer = document.getElementById('methodology-steps-container');
-    stepsContainer.innerHTML = '';
-    const steps = data.methodology.steps || [
-      '01 / RIGOROUS VISUALIZATION',
-      '02 / KINETIC ENGINEERING',
-      '03 / ARCHITECTURAL MOUNT'
-    ];
+    const hlContainer = document.getElementById('about-highlights');
+    if (hlContainer && data.about.highlights) {
+      hlContainer.innerHTML = data.about.highlights.map(h => `
+        <div class="p-8 rounded-2xl bg-neutral-950 border border-neutral-900 hover:border-neutral-700 transition-colors duration-300">
+          <h3 class="text-xl font-serif font-bold text-neutral-100 mb-3">${h.title}</h3>
+          <p class="text-neutral-400 font-light text-sm leading-relaxed">${h.desc}</p>
+        </div>
+      `).join('');
+    }
 
-    steps.forEach(stepText => {
-      const stepCard = document.createElement('div');
-      stepCard.className = 'step-card';
-      stepCard.textContent = stepText;
-      stepsContainer.appendChild(stepCard);
-    });
+    const partnersContainer = document.getElementById('partners-list');
+    if (partnersContainer && data.about.partners) {
+      partnersContainer.innerHTML = data.about.partners.map(p => `
+        <span class="px-4 py-2 border border-neutral-900 bg-neutral-950 rounded-lg hover:border-neutral-700 transition-colors">${p}</span>
+      `).join('');
+    }
   }
 
-  // Initiation
-  if (data.initiation) {
-    document.getElementById('initiation-tag').textContent = data.initiation.tag || '06 / INITIATION';
-    document.getElementById('initiation-headline').textContent = data.initiation.headline;
-    document.getElementById('initiation-subline').textContent = data.initiation.subline;
-    if (data.initiation.cta) {
-      document.querySelector('#initiation-cta .cta-text').textContent = data.initiation.cta;
+  // Oferta Section
+  if (data.oferta && data.oferta.items) {
+    const ofertaAccordion = document.getElementById('oferta-accordion');
+    if (ofertaAccordion) {
+      ofertaAccordion.innerHTML = data.oferta.items.map((item) => `
+        <div class="oferta-item group cursor-pointer border-b border-neutral-800 py-6" data-img="${item.image}">
+          <div class="flex justify-between items-center mb-3">
+            <span class="font-mono text-xs text-amber-500">${item.id}</span>
+            <h3 class="text-2xl md:text-3xl font-serif font-bold text-neutral-200 group-hover:text-white transition-colors">${item.title}</h3>
+            <span class="text-xl text-neutral-500 group-hover:text-white transition-transform transform group-hover:translate-x-2">→</span>
+          </div>
+          <p class="text-neutral-400 font-light text-sm max-w-xl hidden group-hover:block transition-all duration-300">${item.description}</p>
+        </div>
+      `).join('');
     }
+  }
+
+  // Portfolio Section with mobile swipe item sizing & lightbox click
+  if (data.portfolio && data.portfolio.projects) {
+    const portfolioGrid = document.getElementById('portfolio-grid');
+    if (portfolioGrid) {
+      portfolioGrid.innerHTML = data.portfolio.projects.map(p => `
+        <div class="group cursor-pointer overflow-hidden rounded-2xl border border-neutral-900 bg-neutral-950 min-w-[85vw] md:min-w-0 snap-center shrink-0 md:shrink" onclick="window.openLightbox('${p.image}')">
+          <div class="aspect-[4/3] overflow-hidden">
+            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+          </div>
+          <div class="p-6 flex justify-between items-end">
+            <div>
+              <span class="text-xs font-mono uppercase tracking-widest text-amber-500 block mb-1">${p.category}</span>
+              <h3 class="text-xl font-serif font-bold text-neutral-100">${p.title}</h3>
+            </div>
+            <span class="text-xs font-mono text-neutral-500 group-hover:text-white transition-colors">Powiększ ↗</span>
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+
+  // FAQ Section
+  if (data.faq && data.faq.items) {
+    const faqContainer = document.getElementById('faq-container');
+    if (faqContainer) {
+      faqContainer.innerHTML = data.faq.items.map(item => `
+        <div class="accordion-item py-6 cursor-pointer">
+          <div class="flex justify-between items-center select-none">
+            <h3 class="text-lg md:text-xl font-serif font-semibold text-neutral-200">${item.question}</h3>
+            <span class="accordion-icon text-2xl font-mono text-neutral-500 transition-transform duration-300">+</span>
+          </div>
+          <div class="accordion-content">
+            <p class="pt-4 text-neutral-400 font-light text-sm leading-relaxed">${item.answer}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+
+  // Contact / Footer Section
+  if (data.contact) {
+    document.getElementById('contact-address').textContent = data.contact.address || '';
+    document.getElementById('contact-phone').textContent = data.contact.phone || '';
+    document.getElementById('contact-phone').setAttribute('href', `tel:${(data.contact.phone || '').replace(/\s+/g, '')}`);
+    document.getElementById('contact-email').textContent = data.contact.email || '';
+    document.getElementById('contact-email').setAttribute('href', `mailto:${data.contact.email || ''}`);
+    document.getElementById('contact-hours').textContent = data.contact.hours || '';
+    document.getElementById('copyright-text').textContent = data.contact.copyright || 'Copyright © 2023 Neoform';
   }
 }
 
-// Background Canvas Effect (Subtle Moving Noise/Particles)
-function initAmbientCanvas() {
-  const canvas = document.getElementById('ambient-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  const particles = Array.from({ length: 60 }, () => ({
-    x: Math.random() * window.innerWidth,
-    y: Math.random() * window.innerHeight,
-    size: Math.random() * 2 + 0.5,
-    speedX: (Math.random() - 0.5) * 0.4,
-    speedY: (Math.random() - 0.5) * 0.4,
-    opacity: Math.random() * 0.5 + 0.1
-  }));
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
-      p.x += p.speedX;
-      p.y += p.speedY;
-
-      if (p.x < 0) p.x = canvas.width;
-      if (p.x > canvas.width) p.x = 0;
-      if (p.y < 0) p.y = canvas.height;
-      if (p.y > canvas.height) p.y = 0;
-
-      ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
-    });
-    requestAnimationFrame(animate);
-  }
-  animate();
-}
-
-// Custom Magnetic Cursor Effect
 function initCustomCursor() {
   const cursor = document.getElementById('custom-cursor');
   if (!cursor) return;
@@ -186,288 +260,93 @@ function initCustomCursor() {
     gsap.set(cursor, { x: cursorX, y: cursorY });
   });
 
-  // Hover states for magnetic effect
-  const interactiveElements = document.querySelectorAll('a, button, .cta-button, .marquee-item, .step-card');
-  interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest('a, button, input, textarea, .cursor-pointer')) {
+      document.body.classList.add('cursor-active');
+    } else {
+      document.body.classList.remove('cursor-active');
+    }
   });
 }
 
-// GSAP Animations & ScrollTrigger Integrations
-function initAnimations() {
-
-  // SECTION 1: Prologue
-  // Animation Intent: power4.out slow reveal from bottom; elements smoothly track upwards while background scales down from 1.05 to 1.0 & desaturates.
-  const prologueBg = document.querySelector('.prologue-bg-image');
-  const prologueHeadline = document.getElementById('prologue-headline');
-  const prologueSubline = document.getElementById('prologue-subline');
-
-  gsap.from(prologueHeadline, {
-    y: 120,
-    opacity: 0,
-    duration: 2.2,
-    ease: 'power4.out',
-    delay: 0.2
-  });
-
-  gsap.from(prologueSubline, {
-    y: 60,
-    opacity: 0,
-    duration: 1.8,
-    ease: 'power4.out',
-    delay: 0.6
-  });
-
-  gsap.to(prologueBg, {
-    scale: 1.0,
-    filter: 'grayscale(60%)',
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#prologue',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true
-    }
-  });
-
-  // Track elements upward smoothly on scroll
-  gsap.to(['#prologue-headline', '#prologue-subline', '#prologue-tag'], {
-    y: -80,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#prologue',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true
-    }
-  });
-
-  // SECTION 2: Manifesto
-  // Animation Intent: Staggered line-by-line scrub via ScrollTrigger; text opacities shift from 0.1 to 1.0 as they intersect the center of the viewport.
-  const manifestoLines = document.querySelectorAll('.manifesto-lines .line-item');
-  manifestoLines.forEach((line) => {
-    gsap.to(line, {
-      opacity: 1.0,
-      ease: 'power1.out',
-      scrollTrigger: {
-        trigger: line,
-        start: 'top 75%',
-        end: 'bottom 45%',
-        scrub: true
-      }
-    });
-  });
-
-  gsap.from('#manifesto-headline', {
-    x: -50,
-    opacity: 0,
-    duration: 1.5,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '#manifesto',
-      start: 'top 60%',
-      toggleActions: 'play none none reverse'
-    }
-  });
-
-  // SECTION 3: Disciplines
-  // Animation Intent: Pinned vertical scroll triggering a horizontal x-axis timeline; words wipe in using clip-path polygon reveals (ease: expo.inOut).
-  const marqueeTrack = document.getElementById('disciplines-marquee');
-  const marqueeItems = document.querySelectorAll('.marquee-item');
-
-  // Clip-path polygon reveal
-  gsap.from(marqueeItems, {
-    clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)',
-    stagger: 0.1,
-    duration: 1.2,
-    ease: 'expo.inOut',
-    scrollTrigger: {
-      trigger: '#disciplines',
-      start: 'top 60%',
-      toggleActions: 'play none none reverse'
-    }
-  });
-
-  // Horizontal scrub timeline for marquee
-  gsap.to(marqueeTrack, {
-    x: () => -(marqueeTrack.scrollWidth - window.innerWidth),
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#disciplines',
-      start: 'top top',
-      end: '+=1500',
-      pin: true,
-      scrub: 1,
-      invalidateOnRefresh: true
-    }
-  });
-
-  // SECTION 4: Exhibition
-  // Animation Intent: Parallax mask-image scale effect; photography grows from a thin vertical slit to full width while text floats upwards (y: 30, stagger: 0.2).
-  const maskContainer = document.getElementById('exhibition-mask');
-
-  gsap.to(maskContainer, {
-    clipPath: 'inset(0 0% 0 0%)',
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#exhibition',
-      start: 'top 80%',
-      end: 'bottom 20%',
-      scrub: true
-    }
-  });
-
-  gsap.from(['#exhibition-headline', '#exhibition-subline', '.exhibition-meta'], {
-    y: 30,
-    opacity: 0,
-    stagger: 0.2,
-    duration: 1.2,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '#exhibition',
-      start: 'top 50%',
-      toggleActions: 'play none none reverse'
-    }
-  });
-
-  // SECTION 5: Methodology
-  // Animation Intent: Text characters stagger in randomly with a rough ease; a hairline vertical line grows from top to bottom (duration: 1.5, ease: power2.out).
-  const divider = document.getElementById('methodology-divider');
-  gsap.to(divider, {
-    height: '100%',
-    duration: 1.5,
-    ease: 'power2.out',
-    scrollTrigger: {
-      trigger: '#methodology',
-      start: 'top 70%',
-      toggleActions: 'play none none reverse'
-    }
-  });
-
-  // Random character stagger effect on headline
-  const methodologyHeadline = document.getElementById('methodology-headline');
-  if (methodologyHeadline) {
-    const rawText = methodologyHeadline.textContent;
-    methodologyHeadline.innerHTML = rawText.split('').map(char => `<span class="char">${char === ' ' ? '&nbsp;' : char}</span>`).join('');
-
-    gsap.from('#methodology-headline .char', {
-      opacity: 0,
-      y: 20,
-      rotateX: 90,
-      stagger: {
-        amount: 0.8,
-        from: 'random'
-      },
-      duration: 1.0,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '#methodology',
-        start: 'top 60%',
-        toggleActions: 'play none none reverse'
-      }
-    });
+function initScrollAnimations() {
+  const heroTitle = document.getElementById('hero-title');
+  if (heroTitle) {
+    gsap.from(heroTitle, { opacity: 0, y: 40, duration: 1.2, ease: 'power3.out', delay: 0.2 });
   }
 
-  gsap.from('.step-card', {
-    y: 40,
-    opacity: 0,
-    stagger: 0.2,
-    duration: 1.0,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '#methodology-steps-container',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse'
-    }
-  });
-
-  // SECTION 6: Initiation
-  // Animation Intent: Entire section fades from pure black to dark charcoal; hovering the typography triggers a magnetic GSAP cursor effect and dramatic scale distortion.
-  gsap.fromTo('#initiation',
-    { backgroundColor: '#000000' },
-    {
-      backgroundColor: '#0f1115',
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#initiation',
-        start: 'top 80%',
-        end: 'top 20%',
-        scrub: true
-      }
-    }
-  );
-
-  const bleedingHeadline = document.getElementById('initiation-headline');
-  if (bleedingHeadline) {
-    bleedingHeadline.addEventListener('mousemove', (e) => {
-      const { left, top, width, height } = bleedingHeadline.getBoundingClientRect();
-      const x = (e.clientX - left - width / 2) * 0.15;
-      const y = (e.clientY - top - height / 2) * 0.15;
-
-      gsap.to(bleedingHeadline, {
-        x: x,
-        y: y,
-        scale: 1.05,
-        duration: 0.5,
-        ease: 'power2.out'
-      });
-    });
-
-    bleedingHeadline.addEventListener('mouseleave', () => {
-      gsap.to(bleedingHeadline, {
-        x: 0,
-        y: 0,
-        scale: 1.0,
-        duration: 0.8,
-        ease: 'elastic.out(1, 0.3)'
-      });
-    });
-  }
-
-  // Update active nav indicators based on section in view
-  const sections = document.querySelectorAll('.section');
-  const navItems = document.querySelectorAll('.nav-item');
-
-  sections.forEach((sec, i) => {
-    ScrollTrigger.create({
-      trigger: sec,
-      start: 'top 50%',
-      end: 'bottom 50%',
-      onEnter: () => setActiveNav(i),
-      onEnterBack: () => setActiveNav(i)
-    });
-  });
-
-  function setActiveNav(index) {
-    navItems.forEach((nav, idx) => {
-      if (idx === index) {
-        nav.classList.add('active');
-      } else {
-        nav.classList.remove('active');
-      }
-    });
-
-    // Update bottom scroll progress indicator
-    const progress = ((index + 1) / sections.length) * 100;
-    gsap.to('.scroll-progress', { width: `${progress}%`, duration: 0.4 });
+  const heroSubtitle = document.getElementById('hero-subtitle');
+  if (heroSubtitle) {
+    gsap.from(heroSubtitle, { opacity: 0, y: 30, duration: 1.2, ease: 'power3.out', delay: 0.4 });
   }
 }
 
-// Smooth navigation scroll handlers
-function initNavHandlers() {
-  const navLinks = document.querySelectorAll('.nav-links a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
+function initStatsCounter() {
+  const statItems = document.querySelectorAll('.stat-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const container = entry.target.querySelector('[data-target]');
+        const counter = entry.target.querySelector('.counter');
+        if (container && counter) {
+          const target = parseInt(container.getAttribute('data-target'), 10);
+          gsap.to(counter, {
+            innerText: target,
+            duration: 2,
+            snap: { innerText: 1 },
+            ease: 'power2.out'
+          });
+        }
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  statItems.forEach(item => observer.observe(item));
+}
+
+function initOfertaAccordion() {
+  const items = document.querySelectorAll('.oferta-item');
+  const imgEl = document.getElementById('oferta-preview-img');
+
+  items.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const newSrc = item.getAttribute('data-img');
+      if (imgEl && newSrc) {
+        imgEl.src = newSrc;
+      }
+    });
+  });
+}
+
+function initFAQAccordion() {
+  document.addEventListener('click', (e) => {
+    const item = e.target.closest('.accordion-item');
+    if (!item) return;
+
+    const isActive = item.classList.contains('active');
+    document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('active'));
+
+    if (!isActive) {
+      item.classList.add('active');
+    }
+  });
+}
+
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const targetId = link.getAttribute('href');
-      const targetSec = document.querySelector(targetId);
-      if (targetSec) {
-        targetSec.scrollIntoView({ behavior: 'smooth' });
+      if (status) {
+        status.classList.remove('hidden');
+        form.reset();
+        setTimeout(() => status.classList.add('hidden'), 5000);
       }
     });
-  });
+  }
 }
 
-// Start application when DOM is ready
 document.addEventListener('DOMContentLoaded', initApp);
