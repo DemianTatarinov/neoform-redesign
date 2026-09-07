@@ -1,144 +1,307 @@
 <!DOCTYPE html>
-<html lang="pl" class="no-js">
+<html lang="pl" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEOFORM STRUCTURAL — Studio Form i Struktur Świetlnych</title>
+  <title>Neoform — Kuchnie i Meble na Wymiar Premium</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            serif: ['Syne', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="./style.css">
 </head>
-<body class="bg-black text-white antialiased">
+<body class="bg-black text-neutral-100 antialiased selection:bg-neutral-800 selection:text-white">
+
   <!-- Custom Magnetic Cursor -->
   <div id="custom-cursor" class="custom-cursor">
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
   </div>
 
-  <!-- Background Ambience Grid -->
-  <div class="bg-ambience">
-    <div class="grid-overlay"></div>
+  <!-- Fullscreen Lightbox Modal -->
+  <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl hidden flex items-center justify-center p-4 transition-all duration-300">
+    <button id="lightbox-close" aria-label="Zamknij" class="absolute top-6 right-6 text-neutral-400 hover:text-white text-4xl font-mono p-2 transition-colors">&times;</button>
+    <img id="lightbox-img" src="" alt="Podgląd pełnoekranowy" class="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl scale-95 transition-transform duration-300" />
   </div>
 
-  <!-- UI Header -->
-  <header class="fixed-header">
-    <div class="brand-logo" id="brand-logo">NEOFORM <span class="accent-glow">·</span> STRUCTURAL</div>
+  <!-- Header / Navigation -->
+  <header class="fixed top-0 left-0 w-full z-50 px-6 py-5 md:px-12 md:py-6 flex justify-between items-center bg-black/70 backdrop-blur-md border-b border-neutral-900/50">
+    <a href="/" class="logo-glow-container" id="brand-logo" aria-label="Neoform Strona Główna">
+      <img src="/logo.png" alt="Neoform Studio Logo" class="h-7 md:h-8 w-auto object-contain" />
+    </a>
+
+    <nav class="hidden md:flex items-center space-x-8 text-xs tracking-widest uppercase text-neutral-400 font-mono">
+      <a href="/dlaczego-my" data-route="/dlaczego-my" class="nav-link hover:text-white transition-colors duration-300">O nas</a>
+      <a href="/oferta" data-route="/oferta" class="nav-link hover:text-white transition-colors duration-300">Oferta</a>
+      <a href="/portfolio" data-route="/portfolio" class="nav-link hover:text-white transition-colors duration-300">Realizacje</a>
+      <a href="/faq" data-route="/faq" class="nav-link hover:text-white transition-colors duration-300">FAQ</a>
+      <a href="/kontakt" data-route="/kontakt" class="nav-link hover:text-white transition-colors duration-300">Kontakt</a>
+    </nav>
+
+    <div class="flex items-center space-x-5">
+      <a href="https://www.instagram.com/neokuchnie?stkn=NXB3OTFpOWlmbWh2" target="_blank" rel="noopener noreferrer" aria-label="Instagram Neoform" class="text-neutral-400 hover:text-amber-500 transition-colors">
+        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 2.156 4.919 5.419.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 5.236-4.918 5.383-1.266.059-1.646.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-2.199-4.919-5.42-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-5.236 4.919-5.383 1.266-.059 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+      <a href="/kontakt" data-route="/kontakt" class="text-xs uppercase tracking-widest border border-neutral-700 px-5 py-2.5 rounded-full hover:bg-white hover:text-black hover:border-white transition-all duration-300">
+        Wycena w 24-48h
+      </a>
+    </div>
   </header>
 
-  <!-- Persistent Index Nav (Bottom Right) -->
-  <nav class="fixed-index-nav" id="index-nav">
-    <a href="#prologue" class="index-item active" data-index="0"><span class="nav-num">01</span></a>
-    <a href="#manifesto" class="index-item" data-index="1"><span class="nav-num">02</span></a>
-    <a href="#disciplines" class="index-item" data-index="2"><span class="nav-num">03</span></a>
-    <a href="#exhibition" class="index-item" data-index="3"><span class="nav-num">04</span></a>
-    <a href="#methodology" class="index-item" data-index="4"><span class="nav-num">05</span></a>
-    <a href="#initiation" class="index-item" data-index="5"><span class="nav-num">06</span></a>
-  </nav>
+  <!-- Main Content Wrapper -->
+  <main class="w-full">
 
-  <!-- Persistent Footer Stamp (Bottom Left) -->
-  <div class="fixed-footer-stamp">
-    <div class="status-indicator">
-      <span class="pulse-dot"></span>
-      <span class="status-text" id="footer-stamp">WARSZAWA / 52.2297° N</span>
-    </div>
-  </div>
+    <!-- HERO SECTION -->
+    <section id="hero" class="min-h-screen relative flex flex-col justify-between pt-32 pb-16 px-6 md:px-12 lg:px-20 border-b border-neutral-900 overflow-hidden">
+      <!-- Background Image Overlay with luxury kitchen image -->
+      <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=2070&auto=format&fit=crop" alt="Neoform Luxury Kitchen" class="w-full h-full object-cover hero-bg-img" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+      </div>
 
-  <!-- Scroll Hint (Center Bottom, fades after first scroll) -->
-  <div class="fixed-scroll-hint" id="scroll-hint">
-    <span class="scroll-text" id="scroll-text">PRZESUŃ ABY ODKRYĆ</span>
-    <span class="scroll-arrow">↓</span>
-  </div>
-
-  <!-- Scroll Snap Main Viewport Container -->
-  <main id="app-container" class="snap-container">
-
-    <!-- Section 01: Prologue -->
-    <section id="prologue" class="section section-prologue" data-section="0">
-      <div class="section-bg prologue-bg"></div>
-      <div class="section-overlay"></div>
-      <div class="section-inner">
-        <div class="eyebrow" id="prologue-eyebrow">01 / PROLOGUE</div>
-        <div class="title-card-wrapper">
-          <h1 class="film-headline" id="prologue-headline">FORMA ABSOLUTNA</h1>
+      <div class="relative z-10 max-w-7xl">
+        <div class="inline-flex items-center space-x-3 mb-8 px-4 py-1.5 border border-neutral-800 rounded-full bg-neutral-950/80 backdrop-blur-md">
+          <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+          <span class="text-xs font-mono uppercase tracking-widest text-neutral-300" id="hero-badge">BIG SALE</span>
         </div>
-        <div class="content-bottom-left">
-          <p class="body-copy" id="prologue-subline">Architektoniczny branding i struktury świetlne, które redefiniują przestrzeń.</p>
+
+        <h1 class="text-5xl sm:text-7xl lg:text-9xl font-extrabold uppercase tracking-tight leading-none mb-8 text-neutral-100 font-serif" id="hero-title">
+          KUCHNIE I MEBLE <br /><span class="text-neutral-500 font-light italic">NA WYMIAR</span>
+        </h1>
+
+        <p class="text-lg md:text-2xl text-neutral-400 font-light max-w-2xl mb-12 leading-relaxed" id="hero-subtitle">
+          Witaj. Jeśli szukasz firmy, która spełni Twoje “kuchenne życzenia” i zaprojektuje kuchnię Twoich marzeń — jesteś we właściwym miejscu.
+        </p>
+      </div>
+
+      <div class="relative z-10 grid md:grid-cols-2 gap-8 items-end border-t border-neutral-900 pt-8">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-neutral-500 block mb-2">Gwarancja Szybkiej Wyceny</span>
+          <p class="text-xl md:text-2xl font-serif text-neutral-200" id="hero-quote">
+            Otrzymaj wycenę swojej wymarzonej kuchni zawsze w 24-48h.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-3 md:justify-end" id="hero-features">
+          <!-- Features tags populated by JS -->
         </div>
       </div>
     </section>
 
-    <!-- Section 02: Manifesto -->
-    <section id="manifesto" class="section section-manifesto" data-section="1">
-      <div class="section-bg manifesto-bg"></div>
-      <div class="section-overlay"></div>
-      <div class="section-inner">
-        <div class="eyebrow" id="manifesto-eyebrow">02 / MANIFESTO</div>
-        <div class="title-card-wrapper">
-          <h2 class="film-headline" id="manifesto-headline">KONIEC PŁASZCZYZN</h2>
+    <!-- STATS SECTION -->
+    <section id="stats" class="py-24 px-6 md:px-12 lg:px-20 border-b border-neutral-900 bg-neutral-950">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+        <div class="stat-item border-l-0 md:border-l border-neutral-800 md:pl-8">
+          <div class="text-6xl lg:text-8xl font-serif font-bold text-neutral-100 mb-2 font-mono" data-target="15">
+            <span class="counter">15</span><span class="text-amber-500 font-sans"> lat</span>
+          </div>
+          <p class="text-xs uppercase tracking-widest text-neutral-500 font-mono">Doświadczenia w branży</p>
         </div>
-        <div class="content-bottom-left">
-          <p class="body-copy" id="manifesto-body">Przekuwamy tożsamość marki w monumentalne litery przestrzenne i kinetyczne neony.</p>
+        <div class="stat-item border-l-0 md:border-l border-neutral-800 md:pl-8">
+          <div class="text-6xl lg:text-8xl font-serif font-bold text-neutral-100 mb-2 font-mono" data-target="700">
+            <span class="counter">700</span><span class="text-amber-500 font-sans">+</span>
+          </div>
+          <p class="text-xs uppercase tracking-widest text-neutral-500 font-mono">Zrealizowanych zamówień</p>
         </div>
-      </div>
-    </section>
-
-    <!-- Section 03: Disciplines -->
-    <section id="disciplines" class="section section-disciplines" data-section="2">
-      <div class="section-bg disciplines-bg"></div>
-      <div class="section-overlay"></div>
-      <div class="section-inner">
-        <div class="eyebrow" id="disciplines-eyebrow">03 / DISCIPLINES</div>
-        <div class="sub-eyebrow" id="disciplines-sub-eyebrow">SPEKTRUM MATERII</div>
-        <div class="content-bottom-left">
-          <p class="body-copy" id="disciplines-body">Kompleksowe wdrażanie kasetonów LED, obiektów 3D oraz bezkompromisowego oznakowania elewacji.</p>
+        <div class="stat-item border-l-0 md:border-l border-neutral-800 md:pl-8">
+          <div class="text-6xl lg:text-8xl font-serif font-bold text-neutral-100 mb-2 font-mono" data-target="550">
+            <span class="counter">550</span><span class="text-amber-500 font-sans">+</span>
+          </div>
+          <p class="text-xs uppercase tracking-widest text-neutral-500 font-mono">Zadowolonych klientów</p>
         </div>
       </div>
     </section>
 
-    <!-- Section 04: Exhibition -->
-    <section id="exhibition" class="section section-exhibition" data-section="3">
-      <div class="section-bg exhibition-bg"></div>
-      <div class="section-overlay"></div>
-      <div class="section-inner">
-        <div class="eyebrow" id="exhibition-eyebrow">04 / EXHIBITION</div>
-        <div class="sub-eyebrow accent-cyan" id="exhibition-sub-eyebrow">REALIZACJA #084 WARSZAWA / PLAC EUROPEJSKI</div>
-        <div class="title-card-wrapper">
-          <h2 class="film-headline" id="exhibition-headline">STUDIUM PRZESTRZENI</h2>
+    <!-- ABOUT SECTION (DLACZEGO MY) -->
+    <section id="about" class="py-32 px-6 md:px-12 lg:px-20 border-b border-neutral-900">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start mb-20 gap-8">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-widest text-amber-500 mb-4 block">02 / DLACZEGO MY</span>
+            <h2 class="text-4xl md:text-6xl font-serif font-bold tracking-tight text-neutral-100">
+              Jakość, pasja i kunszt <br /><span class="text-neutral-500 font-light italic">w każdym detalu.</span>
+            </h2>
+          </div>
+          <div class="max-w-xl text-neutral-400 font-light space-y-6 text-lg leading-relaxed">
+            <p id="about-p1">Bo tworzymy kuchnie premium, dopracowane w każdym detalu...</p>
+            <p id="about-p2"></p>
+            <p id="about-p3"></p>
+          </div>
         </div>
-        <div class="content-bottom-left">
-          <p class="body-copy" id="exhibition-body">Wyselekcjonowane realizacje strukturalne, które zdominowały nowoczesną architekturę.</p>
+
+        <!-- Highlights Grid -->
+        <div class="grid md:grid-cols-3 gap-8 mb-24" id="about-highlights">
+          <!-- Dynamically filled -->
+        </div>
+
+        <!-- Partners Marquee -->
+        <div class="border-t border-neutral-900 pt-12">
+          <span class="text-xs font-mono uppercase tracking-widest text-neutral-600 block mb-6">Nasi partnerzy materiałowi</span>
+          <div class="flex flex-wrap gap-x-8 gap-y-4 text-neutral-400 font-mono text-sm uppercase tracking-wider" id="partners-list">
+            <!-- Dynamically filled -->
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 05: Methodology -->
-    <section id="methodology" class="section section-methodology" data-section="4">
-      <div class="section-bg methodology-bg"></div>
-      <div class="section-overlay"></div>
-      <div class="section-inner">
-        <div class="eyebrow" id="methodology-eyebrow">05 / METHODOLOGY</div>
-        <div class="title-card-wrapper">
-          <h2 class="film-headline" id="methodology-headline">INŻYNIERIA ŚWIATŁA</h2>
+    <!-- OFERTA (WHAT YOU GET) SECTION -->
+    <section id="oferta" class="py-32 px-6 md:px-12 lg:px-20 border-b border-neutral-900 bg-neutral-950">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-16">
+          <span class="text-xs font-mono uppercase tracking-widest text-amber-500 mb-4 block">03 / OFERTA</span>
+          <h2 class="text-4xl md:text-6xl font-serif font-bold tracking-tight text-neutral-100">
+            Co otrzymasz współpracując z nami
+          </h2>
         </div>
-        <div class="content-bottom-left">
-          <p class="body-copy" id="methodology-body">Pełna kontrola nad formą, od rygorystycznej wizualizacji po ostateczny montaż.</p>
+
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
+          <!-- Accordion list -->
+          <div class="lg:col-span-7 space-y-4" id="oferta-accordion">
+            <!-- Filled by JS -->
+          </div>
+
+          <!-- Preview image container -->
+          <div class="lg:col-span-5 sticky top-32 hidden lg:block">
+            <div class="relative aspect-[4/5] overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900 cursor-pointer" id="oferta-preview-wrapper">
+              <img id="oferta-preview-img" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=2070&auto=format&fit=crop" alt="Preview Oferta" class="w-full h-full object-cover transition-all duration-700 ease-out hover:scale-105" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Section 06: Initiation -->
-    <section id="initiation" class="section section-initiation" data-section="5">
-      <div class="section-bg initiation-bg"></div>
-      <div class="section-overlay"></div>
-      <div class="section-inner">
-        <div class="eyebrow" id="initiation-eyebrow">06 / INITIATION</div>
-        <div class="title-card-wrapper">
-          <h2 class="film-headline" id="initiation-headline">ZAINICJUJ</h2>
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="py-32 px-6 md:px-12 lg:px-20 border-b border-neutral-900">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-end mb-16">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-widest text-amber-500 mb-4 block">04 / REALIZACJE</span>
+            <h2 class="text-4xl md:text-6xl font-serif font-bold tracking-tight text-neutral-100">
+              Ostatnie realizacje
+            </h2>
+          </div>
         </div>
-        <div class="content-bottom-left">
-          <p class="body-copy" id="initiation-body">Wyjdź poza płaski ekran i zdefiniuj swój trójwymiar.</p>
-          <a href="mailto:kontakt@neoform.com.pl" class="cta-link" id="initiation-cta">KONTAKT@NEOFORM.COM.PL →</a>
+
+        <!-- Portfolio swipe carousel on mobile / grid on desktop -->
+        <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 md:grid md:grid-cols-3 md:overflow-visible md:pb-0 scrollbar-none" id="portfolio-grid">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-32 px-6 md:px-12 lg:px-20 border-b border-neutral-900 bg-neutral-950">
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-16 text-center">
+          <span class="text-xs font-mono uppercase tracking-widest text-amber-500 mb-4 block">05 / FAQ</span>
+          <h2 class="text-4xl md:text-5xl font-serif font-bold tracking-tight text-neutral-100 mb-4">
+            Często zadawane pytania
+          </h2>
+          <p class="text-neutral-400 font-light text-sm">
+            Masz dodatkowe pytania? Napisz do nas: <a href="mailto:info@neoform.com.pl" class="text-amber-500 hover:underline">info@neoform.com.pl</a>
+          </p>
+        </div>
+
+        <div class="divide-y divide-neutral-800 border-t border-b border-neutral-800" id="faq-container">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER / CONTACT SECTION -->
+    <section id="contact" class="py-32 px-6 md:px-12 lg:px-20 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16">
+        <div class="lg:col-span-6 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-widest text-amber-500 mb-4 block">06 / KONTAKT</span>
+            <h2 class="text-5xl md:text-7xl font-serif font-extrabold tracking-tight text-neutral-100 mb-8 uppercase">
+              Stwórzmy razem <br /><span class="text-neutral-500 italic font-light">Twoją kuchnię</span>
+            </h2>
+            <p class="text-neutral-400 font-light text-lg mb-12 max-w-md leading-relaxed">
+              Skontaktuj się z nami, aby otrzymać wycenę w 24-48h lub umówić się na bezpłatny pomiar.
+            </p>
+          </div>
+
+          <div class="space-y-6 font-mono text-sm text-neutral-400 border-t border-neutral-900 pt-8">
+            <div>
+              <span class="text-xs text-neutral-600 block uppercase mb-1">Adres Studio</span>
+              <p class="text-neutral-200" id="contact-address">02-972 Warszawa, ul. Adama Branickiego 11 / lok 197D</p>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:space-x-12 space-y-4 sm:space-y-0">
+              <div>
+                <span class="text-xs text-neutral-600 block uppercase mb-1">Telefon</span>
+                <a href="tel:662755566" class="text-neutral-200 hover:text-amber-500 transition-colors" id="contact-phone">662 755 566</a>
+              </div>
+              <div>
+                <span class="text-xs text-neutral-600 block uppercase mb-1">E-mail</span>
+                <a href="mailto:info@neoform.com.pl" class="text-neutral-200 hover:text-amber-500 transition-colors" id="contact-email">info@neoform.com.pl</a>
+              </div>
+            </div>
+            <div>
+              <span class="text-xs text-neutral-600 block uppercase mb-1">Godziny otwarcia</span>
+              <p class="text-neutral-400 text-xs" id="contact-hours">pon.-pt. 10:00 – 18:00 | sob. po umówieniu się</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="lg:col-span-6 bg-neutral-950 p-8 md:p-12 rounded-3xl border border-neutral-900">
+          <h3 class="text-2xl font-serif font-bold text-neutral-100 mb-8">Napisz do nas</h3>
+          <form id="contact-form" class="space-y-6">
+            <div>
+              <label for="name" class="block text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">Imię i Nazwisko</label>
+              <input type="text" id="name" required class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-3 text-neutral-100 focus:outline-none focus:border-neutral-500 transition-colors" placeholder="Twoje imię">
+            </div>
+            <div>
+              <label for="phone" class="block text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">Numer Telefonu</label>
+              <input type="tel" id="phone" required class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-3 text-neutral-100 focus:outline-none focus:border-neutral-500 transition-colors" placeholder="Twój numer telefonu">
+            </div>
+            <div>
+              <label for="file" class="block text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">Dołącz plik (np. rzut, zdjęcia, inspiracje)</label>
+              <input type="file" id="file" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-3 text-neutral-400 text-xs focus:outline-none focus:border-neutral-500 transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-mono file:bg-neutral-800 file:text-neutral-200 hover:file:bg-neutral-700">
+            </div>
+            <div>
+              <label for="message" class="block text-xs font-mono uppercase tracking-widest text-neutral-500 mb-2">Wiadomość / Opis kuchni</label>
+              <textarea id="message" rows="4" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-3 text-neutral-100 focus:outline-none focus:border-neutral-500 transition-colors" placeholder="Krótki opis oczekiwań..."></textarea>
+            </div>
+            <button type="submit" class="w-full bg-white text-black font-semibold py-4 rounded-xl hover:bg-neutral-200 transition-colors tracking-widest uppercase text-xs font-mono">
+              Wyślij Wiadomość
+            </button>
+            <p id="form-status" class="text-xs text-emerald-400 font-mono text-center hidden">Wiadomość została wysłana! Skontaktujemy się wkrótce.</p>
+          </form>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright Bar -->
+      <div class="max-w-7xl mx-auto border-t border-neutral-900 mt-24 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-neutral-600">
+        <div class="flex items-center space-x-4 mb-4 md:mb-0">
+          <a href="/" class="logo-glow-container inline-block py-1 px-3">
+            <img src="/logo.png" alt="Neoform Studio Footer Logo" class="h-5 w-auto object-contain" />
+          </a>
+          <p id="copyright-text">Copyright © 2023 Neoform</p>
+        </div>
+        <div class="flex items-center space-x-6">
+          <a href="https://www.instagram.com/neokuchnie?stkn=NXB3OTFpOWlmbWh2" target="_blank" rel="noopener noreferrer" class="hover:text-amber-500 transition-colors flex items-center space-x-2">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 2.156 4.919 5.419.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 5.236-4.918 5.383-1.266.059-1.646.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-2.199-4.919-5.42-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-5.236 4.919-5.383 1.266-.059 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            <span>Instagram</span>
+          </a>
+          <p>Design Inspired by Largo Studio Aesthetic</p>
         </div>
       </div>
     </section>
