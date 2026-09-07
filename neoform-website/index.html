@@ -4,20 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Neoform — Kuchnie i Meble na Wymiar Premium</title>
-
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
-          colors: {
-            charcoal: '#0a0a0a',
+          colors: { 
+            charcoal: '#0a0a0a', 
             accent: '#ffffff',
+            neo: '#E58A1F', /* Фирменный оранжевый цвет логотипа Neoform */
             muted: '#a3a3a3'
           },
           fontFamily: {
@@ -30,234 +31,200 @@
   </script>
 
   <style>
-    body { background-color: #050505; color: #f5f5f5; }
+    body { background-color: #050505; color: #f5f5f5; overflow-x: hidden; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    .lightbox-trigger { cursor: zoom-in; }
-    .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    
+    /* Анимация свечения при наведении */
+    .glow-hover { transition: all 0.4s ease; }
+    .glow-hover:hover { box-shadow: 0 0 30px rgba(229, 138, 31, 0.2); border-color: rgba(229, 138, 31, 0.5); }
+    
+    /* Затемнение фона главного экрана */
+    .hero-bg {
+      background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
   </style>
 </head>
-<body class="antialiased selection:bg-white selection:text-black flex flex-col min-h-screen">
+<body class="antialiased selection:bg-neo selection:text-black flex flex-col min-h-screen">
 
-  <div id="page-transition" class="fixed inset-0 bg-black z-[9999] flex items-center justify-center pointer-events-none origin-top">
-    <span class="text-white font-serif text-3xl tracking-[0.3em] uppercase">Neoform</span>
-  </div>
-
-  <header class="fixed w-full top-0 z-50 bg-gradient-to-b from-black/80 to-transparent backdrop-blur-sm py-6 transition-all duration-300">
+  <!-- Header -->
+  <header class="fixed w-full top-0 z-50 bg-gradient-to-b from-black/95 via-black/80 to-transparent backdrop-blur-md py-6 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
-
-      <a href="index.html" class="nav-link relative inline-block group">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-white blur-2xl opacity-10 rounded-full group-hover:opacity-20 transition-opacity duration-500"></div>
+      
+      <a href="index.html" class="relative inline-block group haptic-btn">
+        <!-- Легкое оранжевое свечение за логотипом -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-neo blur-2xl opacity-10 group-hover:opacity-30 transition-opacity duration-500"></div>
         <img src="logo.png" alt="Neoform" class="h-8 md:h-10 relative z-10">
       </a>
 
+      <!-- Desktop Navigation -->
       <nav class="hidden md:flex items-center space-x-10 text-sm tracking-widest uppercase font-medium">
-        <a href="index.html" class="nav-link hover:text-white text-muted transition-colors">Główna</a>
-        <a href="dlaczego-my.html" class="nav-link hover:text-white text-muted transition-colors">Dlaczego My</a>
-        <a href="oferta.html" class="nav-link hover:text-white text-muted transition-colors">Oferta</a>
-        <a href="faq.html" class="nav-link hover:text-white text-muted transition-colors">FAQ</a>
-        <a href="kontakt.html" class="nav-link hover:text-white text-muted transition-colors">Kontakt</a>
-        <a href="https://www.instagram.com/neokuchnie?stkn=NXB3OTFpOWlmbWh2" target="_blank" class="hover:text-white text-muted transition-colors">
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 2.156 4.919 5.419.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 5.236-4.918 5.383-1.266.059-1.646.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-2.199-4.919-5.42-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-5.236 4.919-5.383 1.265-.058 1.645-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </a>
+        <a href="index.html" class="text-neo transition-colors haptic-btn">Główna</a>
+        <a href="dlaczego-my.html" class="hover:text-neo text-muted transition-colors haptic-btn">Dlaczego My</a>
+        <a href="oferta.html" class="hover:text-neo text-muted transition-colors haptic-btn">Oferta</a>
+        <a href="faq.html" class="hover:text-neo text-muted transition-colors haptic-btn">FAQ</a>
+        <a href="kontakt.html" class="hover:text-neo text-muted transition-colors haptic-btn">Kontakt</a>
       </nav>
 
-      <button id="mobile-menu-btn" class="md:hidden flex flex-col space-y-1.5 z-[60]">
+      <!-- Mobile Hamburger -->
+      <button id="mobile-menu-btn" class="md:hidden flex flex-col space-y-1.5 z-[60] haptic-btn">
         <span class="w-8 h-[2px] bg-white block transition-all duration-300"></span>
         <span class="w-8 h-[2px] bg-white block transition-all duration-300"></span>
       </button>
     </div>
   </header>
 
+  <!-- Mobile Fullscreen Menu -->
   <div id="mobile-menu" class="fixed inset-0 bg-charcoal z-40 flex flex-col justify-center px-12 opacity-0 pointer-events-none transition-opacity duration-300">
     <nav class="flex flex-col space-y-8 font-serif text-3xl">
-      <a href="index.html" class="nav-link text-white">Główna</a>
-      <a href="dlaczego-my.html" class="nav-link text-muted">Dlaczego My</a>
-      <a href="oferta.html" class="nav-link text-muted">Oferta</a>
-      <a href="faq.html" class="nav-link text-muted">FAQ</a>
-      <a href="kontakt.html" class="nav-link text-muted">Kontakt</a>
+      <a href="index.html" class="text-neo haptic-btn">Główna</a>
+      <a href="dlaczego-my.html" class="text-muted hover:text-white haptic-btn">Dlaczego My</a>
+      <a href="oferta.html" class="text-muted hover:text-white haptic-btn">Oferta</a>
+      <a href="faq.html" class="text-muted hover:text-white haptic-btn">FAQ</a>
+      <a href="kontakt.html" class="text-muted hover:text-white haptic-btn">Kontakt</a>
     </nav>
   </div>
 
   <main class="flex-grow flex flex-col">
-    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
-      <div class="absolute inset-0 bg-black/40 z-10"></div>
-      <img src="https://images.unsplash.com/photo-1556910103-1c02745a872f?auto=format&fit=crop&w=1920&q=80" alt="Luksusowa kuchnia" class="absolute inset-0 w-full h-full object-cover scale-105 hero-bg">
-
+    <!-- Hero Section -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden hero-bg">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black z-10"></div>
+      
       <div class="relative z-20 text-center px-6 mt-16 max-w-5xl mx-auto">
+        <!-- Badges -->
         <div class="flex flex-wrap justify-center gap-3 mb-8 gs-reveal">
-          <span class="text-xs uppercase tracking-widest px-3 py-1 border border-white/30 rounded-full">BIG SALE</span>
-          <span class="text-xs uppercase tracking-widest px-3 py-1 border border-white/30 rounded-full">Unikalny projekt</span>
-          <span class="text-xs uppercase tracking-widest px-3 py-1 border border-white/30 rounded-full">Przystępne ceny</span>
-          <span class="text-xs uppercase tracking-widest px-3 py-1 border border-white/30 rounded-full">2 lata gwarancji</span>
-          <span class="text-xs uppercase tracking-widest px-3 py-1 border border-white/30 rounded-full">dogodne terminy realizacji</span>
-          <span class="text-xs uppercase tracking-widest px-3 py-1 border border-white/30 rounded-full">Wysoka jakość</span>
+          <span class="text-[10px] md:text-xs uppercase tracking-widest px-4 py-1.5 border border-neo/30 text-neo rounded-full bg-black/50 backdrop-blur-sm">BIG SALE</span>
+          <span class="text-[10px] md:text-xs uppercase tracking-widest px-4 py-1.5 border border-white/20 rounded-full bg-black/50 backdrop-blur-sm">Unikalny projekt</span>
+          <span class="text-[10px] md:text-xs uppercase tracking-widest px-4 py-1.5 border border-white/20 rounded-full bg-black/50 backdrop-blur-sm">2 lata gwarancji</span>
+          <span class="text-[10px] md:text-xs uppercase tracking-widest px-4 py-1.5 border border-white/20 rounded-full bg-black/50 backdrop-blur-sm hidden md:inline-block">Wysoka jakość</span>
         </div>
-
-        <h1 class="text-5xl md:text-8xl font-serif font-bold uppercase tracking-tight mb-8 hero-title overflow-hidden">
-          Kuchnie i meble<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-500">na wymiar</span>
+        
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold uppercase tracking-tight mb-8 gs-reveal">
+          Kuchnie i meble<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-neo to-yellow-600">na wymiar</span>
         </h1>
-
+        
         <p class="text-lg md:text-xl text-neutral-300 max-w-2xl mx-auto font-light leading-relaxed mb-12 gs-reveal">
           Witaj. Jeśli szukasz firmy, która spełni twoje “kuchenne życzenia” i zaprojektuje kuchnię Twoich marzeń. Jesteś we właściwym miejscu.
         </p>
 
-        <a href="kontakt.html" class="nav-link inline-block bg-white text-black px-8 py-4 rounded-full font-semibold uppercase tracking-widest hover:bg-neutral-300 transition-colors gs-reveal">
-          Otrzymaj wycenę swojej wymarzonej kuchni zawsze w 24-48h
+        <a href="kontakt.html" class="inline-block bg-neo text-black px-8 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-white transition-colors duration-300 haptic-btn gs-reveal">
+          Otrzymaj wycenę w 24-48h
         </a>
       </div>
     </section>
 
-    <section class="py-24 bg-charcoal border-b border-white/5">
+    <!-- Stats Section -->
+    <section class="py-24 bg-charcoal border-b border-white/5 relative z-20">
       <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
         <div class="gs-reveal">
-          <span class="block text-6xl md:text-8xl font-serif font-bold mb-4"><span class="counter" data-target="15">0</span></span>
+          <span class="block text-6xl md:text-8xl font-serif font-bold mb-4 text-neo"><span class="counter" data-target="15">0</span></span>
           <span class="uppercase tracking-widest text-sm text-muted">lat doświadczenia</span>
         </div>
         <div class="gs-reveal">
-          <span class="block text-6xl md:text-8xl font-serif font-bold mb-4"><span class="counter" data-target="700">0</span></span>
+          <span class="block text-6xl md:text-8xl font-serif font-bold mb-4 text-neo"><span class="counter" data-target="700">0</span></span>
           <span class="uppercase tracking-widest text-sm text-muted">zrealizowanych zamówień</span>
         </div>
         <div class="gs-reveal">
-          <span class="block text-6xl md:text-8xl font-serif font-bold mb-4"><span class="counter" data-target="550">0</span></span>
+          <span class="block text-6xl md:text-8xl font-serif font-bold mb-4 text-neo"><span class="counter" data-target="550">0</span></span>
           <span class="uppercase tracking-widest text-sm text-muted">zadowolonych klientów</span>
         </div>
       </div>
     </section>
 
-    <section class="py-32 bg-[#050505]">
+    <!-- Co otrzymasz Section (Interactive Cards with Backgrounds) -->
+    <section class="py-32 bg-[#050505] relative z-20">
       <div class="max-w-7xl mx-auto px-6 lg:px-12">
-        <h2 class="text-4xl md:text-6xl font-serif font-bold mb-20 gs-reveal">Co otrzymasz</h2>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
-          <div class="border-t border-white/10 pt-8 gs-reveal">
-            <span class="text-3xl font-serif text-muted mb-6 block">01</span>
-            <h3 class="text-xl font-bold uppercase tracking-wider mb-4">Ekologia a produkcja</h3>
-            <p class="text-muted leading-relaxed font-light">Dbamy o środowisko — dlatego korzystamy z materiałów od producentów, którzy stawiają na ekologię i wykorzystują surowce pochodzące w dużej mierze z recyklingu.</p>
+        <div class="mb-20 text-center md:text-left gs-reveal">
+          <span class="text-neo uppercase tracking-widest text-sm font-bold mb-2 block">Dlaczego My</span>
+          <h2 class="text-4xl md:text-6xl font-serif font-bold">Co otrzymasz</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          <!-- Card 1 -->
+          <div class="group relative overflow-hidden rounded-2xl bg-neutral-900 aspect-[4/5] border border-white/10 glow-hover haptic-btn gs-reveal cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" alt="Ekologia" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-70 group-hover:scale-110 transition-all duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+            <div class="absolute bottom-0 p-8 w-full">
+              <span class="text-neo font-serif text-4xl mb-4 block opacity-50 group-hover:opacity-100 transition-opacity">01</span>
+              <h3 class="text-2xl font-serif font-bold uppercase tracking-wider mb-4 text-white">Ekologia a produkcja</h3>
+              <p class="text-neutral-300 font-light leading-relaxed text-sm transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Dbamy o środowisko — korzystamy z materiałów od producentów, którzy stawiają na ekologię i surowce z recyklingu.</p>
+            </div>
+          </div>
+          
+          <!-- Card 2 -->
+          <div class="group relative overflow-hidden rounded-2xl bg-neutral-900 aspect-[4/5] border border-white/10 glow-hover haptic-btn gs-reveal cursor-pointer" style="transition-delay: 100ms;">
+            <img src="https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=800&q=80" alt="Asortyment" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-70 group-hover:scale-110 transition-all duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+            <div class="absolute bottom-0 p-8 w-full">
+              <span class="text-neo font-serif text-4xl mb-4 block opacity-50 group-hover:opacity-100 transition-opacity">02</span>
+              <h3 class="text-2xl font-serif font-bold uppercase tracking-wider mb-4 text-white">Asortyment</h3>
+              <p class="text-neutral-300 font-light leading-relaxed text-sm transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Ponad 300 wyselekcjonowanych wzorników płyt, blatów i frontów. Mamy wszystko, by stworzyć wymarzoną kuchnię.</p>
+            </div>
           </div>
 
-          <div class="border-t border-white/10 pt-8 gs-reveal" style="transition-delay: 100ms;">
-            <span class="text-3xl font-serif text-muted mb-6 block">02</span>
-            <h3 class="text-xl font-bold uppercase tracking-wider mb-4">Asortyment</h3>
-            <p class="text-muted leading-relaxed font-light">Ponad 300 starannie wyselekcjonowanych wzorników płyt, blatów i frontów — mamy wszystko, czego potrzebujesz, by stworzyć swoją wymarzoną kuchnię.</p>
+          <!-- Card 3 -->
+          <div class="group relative overflow-hidden rounded-2xl bg-neutral-900 aspect-[4/5] border border-white/10 glow-hover haptic-btn gs-reveal cursor-pointer" style="transition-delay: 200ms;">
+            <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=800&q=80" alt="Design" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-70 group-hover:scale-110 transition-all duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+            <div class="absolute bottom-0 p-8 w-full">
+              <span class="text-neo font-serif text-4xl mb-4 block opacity-50 group-hover:opacity-100 transition-opacity">03</span>
+              <h3 class="text-2xl font-serif font-bold uppercase tracking-wider mb-4 text-white">Indywidualny design</h3>
+              <p class="text-neutral-300 font-light leading-relaxed text-sm transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">Meble zaprojektowane od zera pod Twoje wnętrze, potrzeby i styl — bez schematów, w pełni dopasowane do Ciebie.</p>
+            </div>
           </div>
 
-          <div class="border-t border-white/10 pt-8 gs-reveal" style="transition-delay: 200ms;">
-            <span class="text-3xl font-serif text-muted mb-6 block">03</span>
-            <h3 class="text-xl font-bold uppercase tracking-wider mb-4">Indywidualny design</h3>
-            <p class="text-muted leading-relaxed font-light">To meble zaprojektowane od zera pod Twoje wnętrze, potrzeby i styl — bez schematów, w pełni dopasowana do Ciebie.</p>
-          </div>
         </div>
       </div>
     </section>
   </main>
-  <footer class="bg-charcoal pt-32 pb-12 border-t border-white/10 mt-auto">
-    <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-20">
 
+  <!-- Footer -->
+  <footer class="bg-charcoal pt-32 pb-12 border-t border-white/10 mt-auto relative z-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-20">
       <div>
         <div class="relative inline-block mb-12">
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-white blur-xl opacity-10 rounded-full"></div>
-          <img src="Gemini_Generated_Image_uqnw3ouqnw3ouqnw.png" alt="Neoform" class="h-10 relative z-10">
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-neo blur-2xl opacity-10 rounded-full"></div>
+          <img src="logo.png" alt="Neoform" class="h-10 relative z-10">
         </div>
-
         <div class="space-y-8 font-light text-muted">
-          <div>
-            <h4 class="text-white uppercase tracking-widest text-xs font-bold mb-2">Adres</h4>
-            <p>ul. Adama Branickiego 11 / lok 197D<br>02-972 Warszawa</p>
-          </div>
-          <div>
-            <h4 class="text-white uppercase tracking-widest text-xs font-bold mb-2">Pracujemy</h4>
-            <p>Pn-Pt: 10:00 - 18:00<br>Sob: Po umówieniu się<br>Niedz: Zamknięte</p>
-          </div>
-          <div>
-            <h4 class="text-white uppercase tracking-widest text-xs font-bold mb-2">Kontakt</h4>
-            <p class="text-xl font-serif text-white mb-1">662 755 566</p>
-            <a href="mailto:info@neoform.com.pl" class="hover:text-white transition-colors">info@neoform.com.pl</a>
-          </div>
+          <div><h4 class="text-white uppercase tracking-widest text-xs font-bold mb-2">Adres</h4><p>ul. Adama Branickiego 11 / lok 197D<br>02-972 Warszawa</p></div>
+          <div><h4 class="text-white uppercase tracking-widest text-xs font-bold mb-2">Pracujemy</h4><p>Pn-Pt: 10:00 - 18:00<br>Sob: Po umówieniu się<br>Niedz: Zamknięte</p></div>
+          <div><h4 class="text-white uppercase tracking-widest text-xs font-bold mb-2">Kontakt</h4><p class="text-xl font-serif text-neo mb-1 haptic-btn">662 755 566</p><a href="mailto:info@neoform.com.pl" class="hover:text-white transition-colors haptic-btn">info@neoform.com.pl</a></div>
         </div>
       </div>
-
       <div>
-        <h3 class="text-3xl font-serif font-bold mb-8">Napisz do nas</h3>
+        <h3 class="text-3xl font-serif font-bold mb-8 text-white">Napisz do nas</h3>
         <form class="space-y-6">
-          <div>
-            <input type="text" placeholder="Imię" class="w-full bg-transparent border-b border-white/20 pb-4 text-white placeholder-muted focus:outline-none focus:border-white transition-colors">
-          </div>
-          <div>
-            <input type="tel" placeholder="Telefon" class="w-full bg-transparent border-b border-white/20 pb-4 text-white placeholder-muted focus:outline-none focus:border-white transition-colors">
-          </div>
-          <div class="pt-4">
-            <label class="flex items-center space-x-3 cursor-pointer text-muted hover:text-white transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
-              <span class="text-sm uppercase tracking-widest">Dołącz plik</span>
-              <input type="file" class="hidden">
-            </label>
-          </div>
-          <button type="submit" class="w-full bg-white text-black py-4 rounded-full font-bold uppercase tracking-widest hover:bg-neutral-300 transition-colors mt-4">WYŚLIJ</button>
+          <div><input type="text" placeholder="Imię" class="w-full bg-transparent border-b border-white/20 pb-4 text-white placeholder-muted focus:outline-none focus:border-neo transition-colors"></div>
+          <div><input type="tel" placeholder="Telefon" class="w-full bg-transparent border-b border-white/20 pb-4 text-white placeholder-muted focus:outline-none focus:border-neo transition-colors"></div>
+          <button type="submit" class="w-full bg-neo text-black py-4 rounded-full font-bold uppercase tracking-widest hover:bg-white transition-colors mt-4 haptic-btn">WYŚLIJ</button>
         </form>
       </div>
     </div>
-
-    <div class="max-w-7xl mx-auto px-6 lg:px-12 mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs text-muted tracking-widest uppercase">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 mt-24 pt-8 border-t border-white/10 text-xs text-muted tracking-widest uppercase text-center flex flex-col items-center gap-4">
       <p>Copyright © 2023 Neoform.</p>
-      <a href="https://www.instagram.com/neokuchnie?stkn=NXB3OTFpOWlmbWh2" target="_blank" class="hover:text-white transition-colors mt-4 md:mt-0 flex items-center space-x-2">
-        <span>Instagram</span>
-        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 2.156 4.919 5.419.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 5.236-4.918 5.383-1.266.059-1.646.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-2.199-4.919-5.42-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-5.236 4.919-5.383 1.265-.058 1.645-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      </a>
     </div>
   </footer>
 
-  <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
-    <button id="lightbox-close" class="absolute top-10 right-10 text-white hover:text-muted"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
-    <img id="lightbox-img" src="" alt="Zoom" class="max-w-[90%] max-h-[90vh] object-contain">
-  </div>
-
+  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    // 1. Initial Page Load Animation
-    window.addEventListener('load', () => {
-      const overlay = document.getElementById('page-transition');
-      gsap.to(overlay, { yPercent: -100, duration: 0.8, ease: "power4.inOut", delay: 0.2 });
-
-      // Hero Text Stagger
-      if(document.querySelector('.hero-title')) {
-        gsap.fromTo('.hero-title', { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power4.out", delay: 0.8 });
-      }
-    });
-
-    // 2. Smooth Multi-Page Navigation (No Single Page)
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (href.startsWith('#') || link.target === '_blank') return;
-        e.preventDefault();
-
-        // Close mobile menu if open
-        document.getElementById('mobile-menu').classList.remove('opacity-100', 'pointer-events-auto');
-
-        // Transition Out
-        gsap.set('#page-transition', { yPercent: 100 });
-        gsap.to('#page-transition', {
-          yPercent: 0,
-          duration: 0.6,
-          ease: "power4.inOut",
-          onComplete: () => { window.location.href = href; }
-        });
-      });
-    });
-
-    // 3. Global Scroll Animations (Stagger Reveal)
+    // GSAP Scroll Reveal Animation
     document.querySelectorAll('.gs-reveal').forEach(el => {
-      gsap.fromTo(el,
-        { y: 40, opacity: 0 },
-        { scrollTrigger: { trigger: el, start: "top 85%" }, y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+      gsap.fromTo(el, 
+        { y: 50, opacity: 0 },
+        { scrollTrigger: { trigger: el, start: "top 85%" }, y: 0, opacity: 1, duration: 1, ease: "power3.out" }
       );
     });
 
-    // 4. Counter Up Logic
+    // Counter Logic
     document.querySelectorAll('.counter').forEach(counter => {
       ScrollTrigger.create({
         trigger: counter,
@@ -266,30 +233,14 @@
         onEnter: () => {
           const target = parseInt(counter.getAttribute('data-target'));
           gsap.to({ val: 0 }, {
-            val: target, duration: 2, ease: "power2.out",
+            val: target, duration: 2.5, ease: "power2.out",
             onUpdate: function() { counter.innerText = Math.floor(this.targets()[0].val); }
           });
         }
       });
     });
 
-    // 5. Lightbox Logic
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    document.querySelectorAll('.lightbox-trigger').forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightbox.classList.remove('opacity-0', 'pointer-events-none');
-      });
-    });
-    document.getElementById('lightbox-close').addEventListener('click', () => {
-      lightbox.classList.add('opacity-0', 'pointer-events-none');
-    });
-    lightbox.addEventListener('click', (e) => {
-      if(e.target === lightbox) lightbox.classList.add('opacity-0', 'pointer-events-none');
-    });
-
-    // 6. Mobile Menu Toggle
+    // Mobile Menu Toggle
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     mobileBtn.addEventListener('click', () => {
@@ -307,22 +258,13 @@
       }
     });
 
-    // 7. FAQ Accordion Logic
-    document.querySelectorAll('.faq-button').forEach(button => {
-      button.addEventListener('click', () => {
-        const content = button.nextElementSibling;
-        const icon = button.querySelector('.faq-icon');
-        const isOpen = content.style.maxHeight;
-
-        // Close all others
-        document.querySelectorAll('.faq-content').forEach(c => c.style.maxHeight = null);
-        document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = 'rotate(0deg)');
-
-        if (!isOpen) {
-          content.style.maxHeight = content.scrollHeight + 'px';
-          icon.style.transform = 'rotate(45deg)';
+    // Haptic Feedback Logic (Вибро-отклик для мобильных)
+    document.querySelectorAll('.haptic-btn').forEach(btn => {
+      btn.addEventListener('touchstart', () => {
+        if (navigator.vibrate) {
+          navigator.vibrate(40); // Легкая вибрация 40мс
         }
-      });
+      }, { passive: true });
     });
   </script>
 </body>
