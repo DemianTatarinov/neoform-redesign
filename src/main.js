@@ -1,13 +1,8 @@
 import { gsap } from 'gsap';
+import contentData from './data/content.json';
 
-let contentData = null;
-
-async function initApp() {
+function initApp() {
   try {
-    const res = await fetch('/src/data/content.json');
-    if (!res.ok) throw new Error('Failed to load content.json');
-    contentData = await res.json();
-
     renderContent(contentData);
     initCustomCursor();
     initScrollAnimations();

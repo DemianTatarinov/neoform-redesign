@@ -51,6 +51,23 @@ body.cursor-active .cursor-ring {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
+/* Logo glow container for dark mode contrast */
+.logo-glow-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.5rem;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 60%, rgba(255, 255, 255, 0) 100%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-glow-container:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+}
+
 /* Accordion Custom Styling */
 .accordion-content {
   max-height: 0;

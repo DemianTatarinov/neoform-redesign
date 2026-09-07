@@ -32,8 +32,10 @@
   </div>
 
   <!-- Header / Navigation -->
-  <header class="fixed top-0 left-0 w-full z-50 mix-blend-difference px-6 py-6 md:px-12 md:py-8 flex justify-between items-center">
-    <a href="#hero" class="text-2xl font-bold tracking-widest uppercase font-serif" id="brand-logo">NEOFORM</a>
+  <header class="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 md:py-8 flex justify-between items-center bg-black/60 backdrop-blur-md border-b border-neutral-900/50">
+    <a href="#hero" class="logo-glow-container" id="brand-logo" aria-label="Neoform Home">
+      <img src="/logo.png" alt="Neoform Studio Logo" class="h-7 md:h-8 w-auto object-contain" />
+    </a>
     <nav class="hidden md:flex space-x-10 text-xs tracking-widest uppercase text-neutral-400 font-mono">
       <a href="#about" class="hover:text-white transition-colors duration-300">O nas</a>
       <a href="#oferta" class="hover:text-white transition-colors duration-300">Oferta</a>
@@ -266,7 +268,12 @@
 
       <!-- Bottom Copyright Bar -->
       <div class="max-w-7xl mx-auto border-t border-neutral-900 mt-24 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-neutral-600">
-        <p id="copyright-text">Copyright © 2023 Neoform</p>
+        <div class="flex items-center space-x-4 mb-4 md:mb-0">
+          <a href="#hero" class="logo-glow-container inline-block py-1 px-3">
+            <img src="/logo.png" alt="Neoform Studio Footer Logo" class="h-5 w-auto object-contain" />
+          </a>
+          <p id="copyright-text">Copyright © 2023 Neoform</p>
+        </div>
         <p class="mt-4 md:mt-0">Design Inspired by Largo Studio Aesthetic</p>
       </div>
     </section>
