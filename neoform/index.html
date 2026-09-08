@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neoform — Kuchnie i Meble na Wymiar</title>
+<meta name="description" content="Kuchnie i meble na wymiar. Unikalny projekt, przystępne ceny, 2 lata gwarancji. Otrzymaj wycenę swojej wymarzonej kuchni w 24-48h.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <button class="lightbox-close" aria-label="Zamknij">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="/" class="logo-glow" aria-label="Neoform — Strona główna">
+      <img src="images/logo.png" alt="Neoform — Meble na Wymiar" width="180" height="42">
+    </a>
+
+    <nav class="main-nav">
+      <a href="dlaczego-my.html" data-route="/dlaczego-my">O nas</a>
+      <a href="oferta.html" data-route="/oferta">Oferta</a>
+      <a href="faq.html" data-route="/faq">FAQ</a>
+      <a href="kontakt.html" data-route="/kontakt">Kontakt</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="icon-link" href="https://www.instagram.com/neokuchnie?stkn=NXB3OTFpOWlmbWh2" target="_blank" rel="noopener noreferrer" aria-label="Neoform na Instagramie">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 2.156 4.919 5.419.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 5.236-4.918 5.383-1.266.059-1.646.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-2.199-4.919-5.42-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-5.236 4.919-5.383 1.266-.059 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <button class="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Fullscreen nav overlay -->
+  <nav class="nav-overlay" aria-label="Menu główne">
+    <a href="/" data-route="/">Strona główna</a>
+    <a href="dlaczego-my.html" data-route="/dlaczego-my">O nas</a>
+    <a href="oferta.html" data-route="/oferta">Oferta</a>
+    <a href="faq.html" data-route="/faq">FAQ</a>
+    <a href="kontakt.html" data-route="/kontakt">Kontakt</a>
+    <div class="nav-overlay-footer">
+      <a class="icon-link" href="https://www.instagram.com/neokuchnie?stkn=NXB3OTFpOWlmbWh2" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 2.156 4.919 5.419.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 5.236-4.918 5.383-1.266.059-1.646.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-2.199-4.919-5.42-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-5.236 4.919-5.383 1.266-.059 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <span style="color:var(--text-faint);font-size:13px;">@neokuchnie</span>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-media">
+        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&amp;w=2070&amp;auto=format&amp;fit=crop" alt="Luksusowa nowoczesna kuchnia Neoform">
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          <span class="label">Big Sale</span>
+        </div>
+        <h1>
+          <span class="line" data-split-chars>KUCHNIE I MEBLE</span>
+          <span class="line sub-line" data-split-chars>na wymiar</span>
+        </h1>
+        <p class="hero-sub">Witaj. Jeśli szukasz firmy, która spełni twoje &bdquo;kuchenne życzenia&rdquo; i zaprojektuje kuchnię Twoich marzeń — jesteś we właściwym miejscu.</p>
+      </div>
+
+      <div class="hero-badges">
+        <span class="pill">Unikalny projekt</span>
+        <span class="pill">Przystępne ceny</span>
+        <span class="pill">2 lata gwarancji</span>
+        <span class="pill">Dogodne terminy realizacji</span>
+        <span class="pill">Wysoka jakość</span>
+      </div>
+
+      <div class="hero-foot">
+        <div>
+          <span class="cap">Gwarancja szybkiej wyceny</span>
+          <p class="quote">Otrzymaj wycenę swojej wymarzonej kuchni zawsze w 24&ndash;48h.<br>
+          <a href="kontakt.html" class="btn btn-primary" data-route="/kontakt">Zamów bezpłatną wycenę</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="stats-grid reveal-group">
+        <div class="stat reveal">
+          <div class="num"><span data-count-to="15">0</span><span class="suffix"> lat</span></div>
+          <p class="stat-label">Doświadczenia w branży</p>
+        </div>
+        <div class="stat reveal">
+          <div class="num"><span data-count-to="700">0</span><span class="suffix">+</span></div>
+          <p class="stat-label">Zrealizowanych zamówień</p>
+        </div>
+        <div class="stat reveal">
+          <div class="num"><span data-count-to="550">0</span><span class="suffix">+</span></div>
+          <p class="stat-label">Zadowolonych klientów</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CO OTRZYMASZ -->
+    <section class="section">
+      <div class="section-head reveal">
+        <span class="eyebrow">Nasze podejście</span>
+        <h2>Co otrzymasz</h2>
+      </div>
+
+      <div class="feature-list reveal-group">
+        <div class="feature-item reveal">
+          <span class="index">01</span>
+          <h3>Ekologia a produkcja</h3>
+          <p>Dbamy o środowisko — dlatego korzystamy z materiałów od producentów, którzy stawiają na ekologię i wykorzystują surowce pochodzące w dużej mierze z recyklingu.</p>
+        </div>
+        <div class="feature-item reveal">
+          <span class="index">02</span>
+          <h3>Asortyment</h3>
+          <p>Ponad 300 starannie wyselekcjonowanych wzorników płyt, blatów i frontów — mamy wszystko, czego potrzebujesz, by stworzyć swoją wymarzoną kuchnię.</p>
+        </div>
+        <div class="feature-item reveal">
+          <span class="index">03</span>
+          <h3>Indywidualny design</h3>
+          <p>To meble zaprojektowane od zera pod Twoje wnętrze, potrzeby i styl — bez schematów, w pełni dopasowane do Ciebie.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA strip -->
+    <section class="section" style="border-bottom:none;">
+      <div class="reveal" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px;max-width:var(--container);margin:0 auto;">
+        <h2 style="font-size:clamp(26px,4vw,42px);text-transform:none;max-width:22ch;">Gotowy na kuchnię Twoich marzeń?</h2>
+        <a href="kontakt.html" class="btn btn-primary" data-route="/kontakt">Napisz do nas</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="logo-glow" style="padding-left:0;margin-bottom:16px;display:inline-flex;">
+          <img src="images/logo.png" alt="Neoform" width="140" height="32">
+        </a>
+        <p>Kuchnie i meble na wymiar. Projekt, produkcja i montaż — kompleksowo, z dbałością o detal.</p>
+      </div>
+      <div class="footer-col">
+        <span class="cap">Kontakt</span>
+        <p>ul. Adama Branickiego 11 / lok 197D<br>02-972 Warszawa</p>
+        <p><a href="tel:662755566">662 755 566</a><br><a href="mailto:info@neoform.com.pl">info@neoform.com.pl</a></p>
+      </div>
+      <div class="footer-col">
+        <span class="cap">Godziny pracy</span>
+        <p>Pn&ndash;Pt: 10:00&ndash;18:00<br>Sob: Po umówieniu się<br>Niedz: Zamknięte</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p id="copyright-text">Copyright © 2023 Neoform</p>
+      </div>
+      <div class="footer-bottom-right">
+        <a class="icon-link" href="https://www.instagram.com/neokuchnie?stkn=NXB3OTFpOWlmbWh2" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 2.156 4.919 5.419.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 5.236-4.918 5.383-1.266.059-1.646.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-2.199-4.919-5.42-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-5.236 4.919-5.383 1.266-.059 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>Instagram</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
