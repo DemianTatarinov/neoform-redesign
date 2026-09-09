@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaq();
   initLightbox();
   initContactForm();
+  initServiceQueryPrefill();
 });
 
 /* ---------- Fullscreen nav overlay ---------- */
@@ -77,7 +78,7 @@ function initHeroLetters() {
 
 /* ---------- Reveal on scroll ---------- */
 function initReveal() {
-  const items = document.querySelectorAll('.reveal');
+  const items = document.querySelectorAll('.reveal, .end-line');
   if (!items.length) return;
   if (!('IntersectionObserver' in window)) {
     items.forEach(el => el.classList.add('is-visible'));
@@ -167,6 +168,16 @@ function initLightbox() {
   closeBtn && closeBtn.addEventListener('click', close);
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
   window.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+}
+
+/* ---------- Prefill message field from ?usluga= query param (Zamów buttons) ---------- */
+function initServiceQueryPrefill() {
+  const params = new URLSearchParams(window.location.search);
+  const usluga = params.get('usluga');
+  const textarea = document.getElementById('message');
+  if (usluga && textarea && !textarea.value) {
+    textarea.value = 'Interesuje mnie: ' + usluga.replace(/\+/g, ' ') + '. ';
+  }
 }
 
 /* ---------- Contact form (Web3Forms — no backend required) ---------- */
