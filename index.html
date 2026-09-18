@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NeoKuchnie - ekskluzywne studio architektury wnętrz kuchennych. Projektujemy i realizujemy luksusowe kuchnie na wymiar z najwyższej klasy materiałów.">
+    <title>NeoKuchnie | Ekskluzywne Studio Architektury Wnętrz Kuchennych</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- SECTION 1: STICKY HEADER -->
+    <header class="header" id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <span class="logo-main">NEO</span><span class="logo-accent">KUCHNIE</span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Nawigacja główna">
+                <ul class="nav-list">
+                    <li><a href="#hero" class="nav-link">Strona główna</a></li>
+                    <li><a href="#about" class="nav-link">O nas</a></li>
+                    <li><a href="#categories" class="nav-link">Kuchnie</a></li>
+                    <li><a href="#projects" class="nav-link">Realizacje</a></li>
+                    <li><a href="#contact" class="nav-link">Kontakt</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="tel:+48221234567" class="header-phone">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    <span>+48 22 123 45 67</span>
+                </a>
+                <button class="burger-menu" id="burgerMenu" aria-label="Otwórz menu">
+                    <span class="burger-bar"></span>
+                    <span class="burger-bar"></span>
+                    <span class="burger-bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-nav-overlay" id="mobileNav">
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Zamknij menu">&times;</button>
+            <ul class="mobile-nav-list">
+                <li><a href="#hero" class="mobile-nav-link">Strona główna</a></li>
+                <li><a href="#about" class="mobile-nav-link">O nas</a></li>
+                <li><a href="#categories" class="mobile-nav-link">Kuchnie</a></li>
+                <li><a href="#projects" class="mobile-nav-link">Realizacje</a></li>
+                <li><a href="#process" class="mobile-nav-link">Jak pracujemy</a></li>
+                <li><a href="#contact" class="mobile-nav-link">Kontakt</a></li>
+            </ul>
+            <div class="mobile-nav-footer">
+                <p>NeoKuchnie Studio</p>
+                <a href="tel:+48221234567" class="btn btn-outline">+48 22 123 45 67</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 2: HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+            <span class="hero-badge">STUDIO ARCHITEKTURY WNĘTRZ KUCHENNYCH</span>
+            <h1 class="hero-title">Tworzymy kuchnie, które stają się sercem nowoczesnej architektury.</h1>
+            <p class="hero-subtitle">Połączenie szlachetnych surowców, monolitycznych form i indywidualnego rzemiosła. Architektura przestrzeni kuchennej uszyta na miarę wymagających rezydencji.</p>
+            <div class="hero-cta-group">
+                <button class="btn btn-primary open-popup-btn">Umów konsultację</button>
+                <a href="#projects" class="btn btn-secondary">Zobacz realizacje</a>
+            </div>
+        </div>
+
+        <a href="#intro" class="scroll-indicator" aria-label="Przewiń niżej">
+            <span class="scroll-text">Odkryj więcej</span>
+            <div class="scroll-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M7 13l5 5 5-5M12 6v12"/>
+                </svg>
+            </div>
+        </a>
+    </section>
+
+    <!-- SECTION 3: INTRO BLOCK -->
+    <section class="intro section-padding" id="intro">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="intro-label">
+                    <span class="section-tag">FILOZOFIJA DESIGNU</span>
+                </div>
+                <div class="intro-text">
+                    <blockquote class="intro-quote">
+                        „Nie projektujemy mebli. Kształtujemy architekturę codziennego życia, w której minimalizm spotyka się z perfekcją rzemiosła, a każdy detal ma swoje głębokie uzasadnienie.”
+                    </blockquote>
+                    <p class="intro-paragraph">
+                        W NeoKuchnie traktujemy przestrzeń kuchenną jako centralny punkt nowoczesnego domu. Łączymy naturalny kamień, szczotkowany metal i szlachetne drewno z zaawansowaną inżynierią meblową. Każdy nasz projekt to unikatowe dzieło architektoniczne stworzone we współpracy z najbardziej wymagającymi inwestorami i architektami.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: ANIMATED COUNTER -->
+    <section class="counter-section section-padding" id="counter">
+        <div class="container">
+            <div class="counter-grid">
+                <div class="counter-card">
+                    <div class="counter-number" data-target="15">0</div>
+                    <span class="counter-plus">+</span>
+                    <h3 class="counter-label">Lat doświadczenia</h3>
+                    <p class="counter-desc">Tradycja rzemiosła połączona z innowacjami</p>
+                </div>
+
+                <div class="counter-card">
+                    <div class="counter-number" data-target="300">0</div>
+                    <span class="counter-plus">+</span>
+                    <h3 class="counter-label">Zrealizowanych projektów</h3>
+                    <p class="counter-desc">Nietuzinkowe kuchnie w całej Europie</p>
+                </div>
+
+                <div class="counter-card">
+                    <div class="counter-number" data-target="100">0</div>
+                    <span class="counter-plus">%</span>
+                    <h3 class="counter-label">Indywidualnych projektów</h3>
+                    <p class="counter-desc">Brak powtarzalnych schematów produkcyjnych</p>
+                </div>
+
+                <div class="counter-card">
+                    <div class="counter-number" data-target="10">0</div>
+                    <span class="counter-plus"></span>
+                    <h3 class="counter-label">Lat gwarancji</h3>
+                    <p class="counter-desc">Pewność i certyfikowane materiały premium</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: ABOUT BLOCK -->
+    <section class="about section-padding" id="about">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">KIMS JESTEŚMY</span>
+                <h2 class="section-title">Architektoniczne podejście do przestrzeni</h2>
+            </div>
+
+            <!-- Row 1: Text Left, Image Right -->
+            <div class="about-row">
+                <div class="about-col about-text">
+                    <span class="about-step-num">01</span>
+                    <h3 class="about-heading">Synergia architektury i bezkompromisowej jakości</h3>
+                    <p class="about-desc">
+                        Nasze studio wyrosło z pasji do nowoczesnej architektury oraz fascynacji surową elegancją naturalnych surowców. Specjalizujemy się w kreowaniu przestrzeni monolitycznych, w których linia zabudowy idealnie współgra z proporcjami całego wnętrza.
+                    </p>
+                    <ul class="about-features">
+                        <li>Autorskie systemy ukrytych okuć i cichego domyku</li>
+                        <li>Naturalne spieki kwarcowe, marmury oraz drewno egzotyczne</li>
+                        <li>Integracja ze sprzętem AGD najwyższej klasy architektonicznej</li>
+                    </ul>
+                </div>
+                <div class="about-col about-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80" alt="Nowoczesna kuchnia z monolityczną wyspą" class="about-image" loading="lazy">
+                </div>
+            </div>
+
+            <!-- Row 2: Image Left, Text Right -->
+            <div class="about-row about-row-reverse">
+                <div class="about-col about-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80" alt="Detale wykonania mebli kuchennych" class="about-image" loading="lazy">
+                </div>
+                <div class="about-col about-text">
+                    <span class="about-step-num">02</span>
+                    <h3 class="about-heading">Rzemiosło wsparte technologią 3D</h3>
+                    <p class="about-desc">
+                        Każda koncepcja powstaje jako trójwymiarowa wizualizacja architektoniczna, pozwalająca poczuć strukturę materiałów i opływ światła. Nasz własny park maszynowy gwarantuje dokładność obróbki do ułamków milimetra.
+                    </p>
+                    <ul class="about-features">
+                        <li>Dedykowany doradca i architekt prowadzący projekt</li>
+                        <li>Precyzyjne frezowania, forniry łączone w ułożenie słojów</li>
+                        <li>Kompleksowy nadzór montażowy w obiekcie</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: CATEGORIES GRID -->
+    <section class="categories section-padding" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">PORTFOLIO STYLÓW</span>
+                <h2 class="section-title">Kategorie architektoniczne</h2>
+                <p class="section-subtitle">Odkryj nasze wiodące kierunki projektowe dla prestiżowych przestrzeni.</p>
+            </div>
+
+            <div class="categories-grid">
+                <!-- Card 1 -->
+                <div class="category-card">
+                    <div class="category-image-box">
+                        <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" alt="Kuchnie Monolityczne" class="category-img" loading="lazy">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <div class="category-content">
+                        <span class="category-num">01</span>
+                        <h3 class="category-title">Kuchnie Monolityczne</h3>
+                        <p class="category-text">Ciężkie bryły z naturalnego kamienia i spieku, tworzące rzeźbiarską formę w sercu domu.</p>
+                        <button class="category-btn open-popup-btn">Zapytaj o projekt &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="category-card">
+                    <div class="category-image-box">
+                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80" alt="Minimalistyczne Zabudowy Wysokie" class="category-img" loading="lazy">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <div class="category-content">
+                        <span class="category-num">02</span>
+                        <h3 class="category-title">Zabudowy Wysokie</h3>
+                        <p class="category-text">Gładkie płaszczyzny z ukrytymi drzwiami pocket doors i zintegrowanym zapleczem AGD.</p>
+                        <button class="category-btn open-popup-btn">Zapytaj o projekt &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="category-card">
+                    <div class="category-image-box">
+                        <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80" alt="Kuchnie Wyspowe Premium" class="category-img" loading="lazy">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <div class="category-content">
+                        <span class="category-num">03</span>
+                        <h3 class="category-title">Kuchnie Wyspowe</h3>
+                        <p class="category-text">Centrum integracji i gotowania. Ergonomia połączona z efektownym podświetleniem LED.</p>
+                        <button class="category-btn open-popup-btn">Zapytaj o projekt &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="category-card">
+                    <div class="category-image-box">
+                        <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=800&q=80" alt="Naturalne Drewno & Kamień" class="category-img" loading="lazy">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <div class="category-content">
+                        <span class="category-num">04</span>
+                        <h3 class="category-title">Drewno & Kamień</h3>
+                        <p class="category-text">Harmonijne zestawienie szczotkowanego dębu i ciemnego marmuru o bogatym uziarnieniu.</p>
+                        <button class="category-btn open-popup-btn">Zapytaj o projekt &rarr;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: PROJECTS SECTION (SCROLL SNAP CAROUSEL ALTERNATIVE) -->
+    <section class="projects section-padding" id="projects">
+        <div class="container">
+            <div class="section-header flex-between">
+                <div>
+                    <span class="section-tag">WYBRANE REALIZACJE</span>
+                    <h2 class="section-title">Kolekcja flagowa</h2>
+                </div>
+                <div class="scroll-hint desktop-only">
+                    <span>Przesuń poziomo &rarr;</span>
+                </div>
+            </div>
+
+            <div class="projects-snap-container">
+                <!-- Project 1 -->
+                <article class="project-card">
+                    <div class="project-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1000&q=80" alt="Rezydencja Wilanów" class="project-img" loading="lazy">
+                        <span class="project-badge">Warszawa</span>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Kuchnia Monolityczna</span>
+                        <h3 class="project-title">Rezydencja Wilanów</h3>
+                        <p class="project-desc">Wyspa z ciemnego granitu połączona z frontami w dębie wędzonym. System drzwi skrywa pełną strefę roboczą.</p>
+                        <div class="project-meta">
+                            <span>Powierzchnia: 48 m²</span>
+                            <span>Materiały: Granit, Dąb, Stal</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project-card">
+                    <div class="project-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1000&q=80" alt="Penthouse Mokotów" class="project-img" loading="lazy">
+                        <span class="project-badge">Warszawa</span>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Minimalizm Architektoniczny</span>
+                        <h3 class="project-title">Penthouse Mokotów</h3>
+                        <p class="project-desc">Ultra-matowa zabudowa lakierowana w odcieniu grafity z mosiężnymi akcentami oraz blatem ze spieku.</p>
+                        <div class="project-meta">
+                            <span>Powierzchnia: 35 m²</span>
+                            <span>Materiały: Spiek kwarcowy, Mosiądz</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project-card">
+                    <div class="project-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1000&q=80" alt="Dom w Konstancinie" class="project-img" loading="lazy">
+                        <span class="project-badge">Konstancin-Jeziorna</span>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Fornir & Marmur</span>
+                        <h3 class="project-title">Willa Konstancin</h3>
+                        <p class="project-desc">Przestronna kuchnia z dwoma wyspami, dedykowaną winiarnią oraz zintegrowanym oświetleniem liniowym.</p>
+                        <div class="project-meta">
+                            <span>Powierzchnia: 62 m²</span>
+                            <span>Materiały: Marmur Nero Marquina, Orzech</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: MASONRY / ASYMMETRIC GALLERY -->
+    <section class="gallery section-padding" id="gallery">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">DETALE ARCHITEKTONICZNE</span>
+                <h2 class="section-title">Galeria detali i tekstur</h2>
+                <p class="section-subtitle">Odkryj precyzję wykonania, frezowania, faktury materiałowe i niewidoczne łączenia.</p>
+            </div>
+
+            <div class="masonry-grid">
+                <div class="gallery-item item-large">
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1000&q=80" alt="Struktura ciemnego marmuru" class="gallery-img" loading="lazy">
+                    <div class="gallery-caption">
+                        <span>Faktura kamienia</span>
+                        <h4>Ciemny marmur żyłkowany</h4>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80" alt="Frezowane uchwyty i drewno" class="gallery-img" loading="lazy">
+                    <div class="gallery-caption">
+                        <span>Stolarka premium</span>
+                        <h4>Frezowane krawędzie</h4>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Architektoniczne oświetlenie" class="gallery-img" loading="lazy">
+                    <div class="gallery-caption">
+                        <span>Iluminacja</span>
+                        <h4>Zintegrowany LED 2700K</h4>
+                    </div>
+                </div>
+
+                <div class="gallery-item item-wide">
+                    <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80" alt="Wyspa z blatem wiszącym" class="gallery-img" loading="lazy">
+                    <div class="gallery-caption">
+                        <span>Konstrukcja</span>
+                        <h4>Wyspa ze spieku kwarcowego</h4>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Bateria kuchenna w czarnym matowym wykończeniu" class="gallery-img" loading="lazy">
+                    <div class="gallery-caption">
+                        <span>Armatura</span>
+                        <h4>Matowa stal szlachetna</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9: PROCESS ("JAK PRACUJEMY") -->
+    <section class="process section-padding" id="process">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">ETAPY PROJEKTU</span>
+                <h2 class="section-title">Jak pracujemy</h2>
+                <p class="section-subtitle">Przemyślany proces od pierwszej kreski architekta do finalnego montażu.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">01</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Konsultacja & Analiza Potrzeb</h3>
+                        <p class="timeline-text">Analizujemy układy funkcjonalne, styl życia domowników oraz oczekiwania materiałowe podczas spotkania w studio lub na budowie.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-number">02</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Koncepcja Architektoniczna & 3D</h3>
+                        <p class="timeline-text">Tworzymy rzuty 2D oraz fotorealistyczne wizualizacje 3D ukazujące strukturę materiałów, oświetlenie i pełną ergonomię przestrzeni.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-number">03</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Dobór Surowców & Próbniki</h3>
+                        <p class="timeline-text">Spotykamy się w naszej wzorcowni, gdzie osobiście dobierasz kamienie, forniry, próbki lakieru oraz systemy wyposażenia wewnętrznego.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-number">04</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Precyzyjna Produkcja</h3>
+                        <p class="timeline-text">Meble powstają w naszym zakładzie przy użyciu numerycznych maszyn CNC i ręcznego wykończenia rzemieślniczego.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-number">05</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Autoryzowany Montaż</h3>
+                        <p class="timeline-text">Nasz własny ekipa doświadczonych montażystów realizuje instalację, podłączenia urządzeń oraz odbiór końcowy z gwarancją.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10: CTA SECTION -->
+    <section class="cta-section" id="cta">
+        <div class="cta-bg" style="background-image: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="cta-overlay"></div>
+        <div class="container cta-content text-center">
+            <span class="section-tag text-gold">ROZPOCZNIJ PROJEKT</span>
+            <h2 class="cta-title">Stwórzmy kuchnię dopasowaną do Ciebie</h2>
+            <p class="cta-desc">Umów się na bezpłatną konsultację z naszym głównym architektem i zobacz, jak przekształcimy Twoją przestrzeń w dzieło sztuki.</p>
+            <button class="btn btn-primary btn-large open-popup-btn">Umów bezpłatną konsultację</button>
+        </div>
+    </section>
+
+    <!-- SECTION 11: CONTACT SECTION -->
+    <section class="contact section-padding" id="contact">
+        <div class="container">
+            <div class="contact-split">
+                <!-- Form Column -->
+                <div class="contact-form-col">
+                    <span class="section-tag">FORMULARZ KONTAKTOWY</span>
+                    <h2 class="section-title">Napisz do nas</h2>
+                    <p class="contact-subtitle">Wypełnij formularz – skontaktujemy się w ciągu 24 godzin.</p>
+
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Imię i nazwisko *</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Jan Kowalski" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Telefon *</label>
+                                <input type="tel" id="phone" name="phone" class="form-input" placeholder="+48 600 000 000" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Adres e-mail *</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="jan@example.pl" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Wiadomość / Krótki opis projektu</label>
+                            <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Opisz swój dom, preferowany styl lub metraż..."></textarea>
+                        </div>
+
+                        <div class="form-checkbox-group">
+                            <input type="checkbox" id="consent" name="consent" class="form-checkbox" required>
+                            <label for="consent" class="checkbox-label">Wyrażam zgodę na przetwarzanie danych osobowych w celu kontaktu zgodnie z Polityką Prywatności.</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">Wyślij wiadomość</button>
+                    </form>
+                </div>
+
+                <!-- Contact Info Column -->
+                <div class="contact-info-col">
+                    <span class="section-tag">DANE DOKUMENTOWE & STUDIO</span>
+                    <h2 class="section-title">Odwiedź nasze Studio</h2>
+
+                    <div class="info-block">
+                        <h4 class="info-label">Adres Studio</h4>
+                        <p class="info-value">ul. Architektów 12<br>00-001 Warszawa, Polska</p>
+                    </div>
+
+                    <div class="info-block">
+                        <h4 class="info-label">Telefon</h4>
+                        <p class="info-value"><a href="tel:+48221234567">+48 22 123 45 67</a></p>
+                    </div>
+
+                    <div class="info-block">
+                        <h4 class="info-label">E-mail</h4>
+                        <p class="info-value"><a href="mailto:kontakt@neokuchnie.pl">kontakt@neokuchnie.pl</a></p>
+                    </div>
+
+                    <div class="info-block">
+                        <h4 class="info-label">Godziny otwarcia</h4>
+                        <p class="info-value">Poniedziałek – Piątek: 09:00 – 18:00<br>Sobota: 10:00 – 14:00 (po wcześniejszym umówieniu)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 12: GOOGLE MAPS -->
+    <section class="map-section" id="map">
+        <div class="map-container">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d156388.35438510805!2d20.921112449999997!3d52.2330653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471bcc318da930cb%3A0x400674288820c60!2sWarsaw%2C%20Poland!5e0!2m3!1szh-CN!2spl!4v1710000000000!5m2!1szh-CN!2spl"
+                width="100%"
+                height="450"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Lokalizacja NeoKuchnie Warszawa">
+            </iframe>
+        </div>
+    </section>
+
+    <!-- SECTION 13: POPUP FORM MODAL -->
+    <div class="popup-modal" id="popupModal" aria-hidden="true" role="dialog">
+        <div class="popup-backdrop" id="popupBackdrop"></div>
+        <div class="popup-content">
+            <button class="popup-close" id="popupClose" aria-label="Zamknij okno">&times;</button>
+            <span class="section-tag text-gold">KONSULTACJA ARCHITEKTONICZNA</span>
+            <h3 class="popup-title">Umów bezpłatne spotkanie</h3>
+            <p class="popup-subtitle">Wybierz dogodną formę rozmowy lub spotkania w naszym studio.</p>
+
+            <form class="popup-form" id="popupForm">
+                <div class="form-group">
+                    <label for="popupName" class="form-label">Imię i nazwisko *</label>
+                    <input type="text" id="popupName" class="form-input" placeholder="Jan Kowalski" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="popupPhone" class="form-label">Numer telefonu *</label>
+                    <input type="tel" id="popupPhone" class="form-input" placeholder="+48 600 000 000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="popupDate" class="form-label">Preferowana data spotkania</label>
+                    <input type="date" id="popupDate" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="popupNotes" class="form-label">Lokalizacja / Uwagi do projektu</label>
+                    <textarea id="popupNotes" class="form-textarea" rows="3" placeholder="np. Dom w Konstancinie, powierzchnia kuchni ok. 40m2..."></textarea>
+                </div>
+
+                <div class="form-checkbox-group">
+                    <input type="checkbox" id="popupConsent" class="form-checkbox" required>
+                    <label for="popupConsent" class="checkbox-label">Akceptuję Politykę Prywatności i kontakt ze strony NeoKuchnie.</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">Rezerwuj konsultację</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SECTION 14: COOKIE BANNER -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="container cookie-container">
+            <div class="cookie-text">
+                <p>Używamy plików cookie, aby poprawić jakość przeglądania naszej witryny, wyświetlać spersonalizowane treści oraz analizować ruch na stronie. Klikając „Akceptuj”, wyrażasz zgodę na używanie przez nas plików cookie.</p>
+            </div>
+            <div class="cookie-actions">
+                <button class="btn btn-small btn-primary" id="cookieAccept">Akceptuj</button>
+                <button class="btn btn-small btn-outline" id="cookieReject">Odrzuć</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 15: FOOTER -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-col brand-col">
+                    <a href="#" class="logo footer-logo">
+                        <span class="logo-main">NEO</span><span class="logo-accent">KUCHNIE</span>
+                    </a>
+                    <p class="footer-desc">
+                        Studio architektury wnętrz kuchennych. Tworzymy monolityczne, luksusowe meble na wymiar dla inwestorów ceniących ponadczasowy design.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="Pinterest" class="social-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2a10 10 0 0 0-3.61 19.33c-.07-.84-.13-2.14.03-3.06.14-.83.92-5.46.92-5.46s-.23-.47-.23-1.16c0-1.09.63-1.9 1.42-1.9.67 0 .99.5 0.99 1.1 0 .67-.43 1.68-.65 2.62-.18.78.39 1.42 1.16 1.42 1.39 0 2.46-1.47 2.46-3.59 0-1.87-1.35-3.18-3.27-3.18-2.23 0-3.54 1.67-3.54 3.4 0 .67.26 1.39.58 1.78.06.07.07.14.05.21l-.22.91c-.04.14-.13.17-.3.1-1.07-.5-1.74-2.07-1.74-3.33 0-2.71 1.97-5.21 5.69-5.21 2.99 0 5.31 2.13 5.31 4.97 0 2.97-1.87 5.36-4.47 5.36-.87 0-1.69-.45-1.97-.98l-.54 2.05c-.2.75-.72 1.69-1.07 2.26A9.97 9.97 0 0 0 12 22a10 10 0 0 0 0-20z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Nawigacja</h4>
+                    <ul class="footer-links">
+                        <li><a href="#hero">Strona główna</a></li>
+                        <li><a href="#about">O nas & Filozofia</a></li>
+                        <li><a href="#categories">Kolekcje kuchenne</a></li>
+                        <li><a href="#projects">Wybrane realizacje</a></li>
+                        <li><a href="#process">Proces współpracy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Offer -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Oferta</h4>
+                    <ul class="footer-links">
+                        <li><a href="#categories">Kuchnie monolityczne</a></li>
+                        <li><a href="#categories">Zabudowy wysokie</a></li>
+                        <li><a href="#categories">Wyspy z kamienia naturalnego</a></li>
+                        <li><a href="#categories">Frezowane fronty fornirowane</a></li>
+                        <li><a href="#contact">Konsultacja z architektem</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Kontakt</h4>
+                    <p class="footer-contact-item">ul. Architektów 12, Warszawa</p>
+                    <p class="footer-contact-item"><a href="tel:+48221234567">+48 22 123 45 67</a></p>
+                    <p class="footer-contact-item"><a href="mailto:kontakt@neokuchnie.pl">kontakt@neokuchnie.pl</a></p>
+                </div>
+            </div>
+
+            <div class="footer-bottom flex-between">
+                <p>&copy; 2025 NeoKuchnie. Wszystkie prawa zastrzeżone.</p>
+                <div class="footer-legal">
+                    <a href="#">Polityka Prywatności</a>
+                    <a href="#">Regulamin</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
