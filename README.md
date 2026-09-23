@@ -1,2 +1,0 @@
-# DemianTatarinov/neoform-redesign
-обновление 
