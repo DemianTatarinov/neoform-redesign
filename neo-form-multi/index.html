@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neo Form — Architektura formy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="/src/js/main.js"></script>
+  </head>
+  <body>
+    <div
+      class="neo-root relative mx-auto min-h-screen max-w-[480px] overflow-hidden bg-black text-white"
+    >
+      <div class="pointer-events-none fixed inset-0 z-40 flex justify-center">
+        <div class="relative h-full w-full max-w-[480px]">
+          <div
+            data-menu-overlay
+            class="absolute inset-0 bg-black/70 opacity-0"
+            aria-hidden="true"
+          ></div>
+          <nav
+            data-menu-panel
+            class="absolute right-0 top-0 flex h-full w-[min(100%,320px)] flex-col justify-between border-l border-neo-line bg-black px-8 py-10"
+            aria-label="Menu główne"
+          >
+        <p class="section-label">Menu</p>
+        <ul class="flex flex-col gap-6">
+          <li><a href="index.html" class="nav-link">Główna</a></li>
+          <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+          <li><a href="about.html" class="nav-link">Produkcja</a></li>
+          <li><a href="lab.html" class="nav-link">Neo Lab</a></li>
+          <li><a href="contact.html" class="nav-link">Kontakt</a></li>
+        </ul>
+        <p class="body-copy text-xs">Mobile experience · Neo Form</p>
+          </nav>
+        </div>
+      </div>
+
+      <header
+        data-header
+        class="fixed left-1/2 top-0 z-30 flex w-full max-w-[480px] -translate-x-1/2 items-center justify-between border-b border-transparent px-6 py-5"
+      >
+        <a href="index.html" class="font-display text-base tracking-[0.28em] uppercase"
+          >Neo Form</a
+        >
+        <button
+          type="button"
+          data-menu-toggle
+          aria-expanded="false"
+          aria-label="Otwórz menu"
+          class="group flex h-10 w-10 flex-col items-center justify-center gap-1.5"
+        >
+          <span class="block h-px w-6 bg-white transition group-hover:opacity-70"></span>
+          <span class="block h-px w-4 bg-white transition group-hover:opacity-70"></span>
+        </button>
+      </header>
+
+      <main>
+        <section class="relative min-h-[92vh] pt-24">
+          <div class="px-6" data-animate="hero">
+            <p class="section-label mb-6">Studio mebli architektonicznych</p>
+            <h1 class="section-title mb-8 max-w-[14ch]">
+              Forma,<br />która zostaje w architekturze.
+            </h1>
+            <p class="body-copy max-w-[32ch]">
+              Neo Form projektuje i produkuje kuchnie oraz meble na miarę — z precyzją
+              rzemiosła i spokojem minimalizmu.
+            </p>
+          </div>
+
+          <div
+            class="relative mx-6 mt-14 aspect-[9/16] overflow-hidden border border-neo-line bg-zinc-950"
+            data-animate="hero"
+          >
+            <div
+              class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-gradient-to-b from-zinc-900 to-black"
+            >
+              <div
+                class="flex h-16 w-16 items-center justify-center rounded-full border border-white/20"
+              >
+                <span class="ml-1 text-xs tracking-widest">▶</span>
+              </div>
+              <p class="section-label">Vimeo · film manifestu</p>
+              <p class="body-copy px-8 text-center text-xs">
+                Placeholder wideo — podmień na embed player.vimeo.com
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-24" data-animate="reveal">
+          <p class="section-label mb-8">Credo</p>
+          <h2 class="section-title mb-10">Mniej dekoracji.<br />Więcej intencji.</h2>
+          <p class="body-copy mb-6">
+            Wierzymy, że luksus to cisza materiału, proporcja linii i szacunek do
+            przestrzeni, w której żyjesz. Każdy projekt zaczynamy od słuchania —
+            architektury wnętrza, światła i Twojego rytmu dnia.
+          </p>
+          <p class="body-copy">
+            Neo Form to most między wizją projektanta a perfekcyjną realizacją w
+            warszawskim zakładzie produkcyjnym.
+          </p>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-24" data-animate="reveal">
+          <p class="section-label mb-8">Neo Standard</p>
+          <h2 class="section-title mb-12">Pięć filarów jakości</h2>
+          <ul class="space-y-10">
+            <li class="border-t border-neo-line pt-8">
+              <span class="font-display text-5xl font-light text-white/15">01</span>
+              <h3 class="mt-2 font-display text-2xl font-light">Materiał</h3>
+              <p class="body-copy mt-3">
+                Fronty, blaty i okucia od sprawdzonych europejskich dostawców.
+              </p>
+            </li>
+            <li class="border-t border-neo-line pt-8">
+              <span class="font-display text-5xl font-light text-white/15">02</span>
+              <h3 class="mt-2 font-display text-2xl font-light">Precyzja</h3>
+              <p class="body-copy mt-3">
+                CNC, kontrola tolerancji i ręczne dopracowanie detalu.
+              </p>
+            </li>
+            <li class="border-t border-neo-line pt-8">
+              <span class="font-display text-5xl font-light text-white/15">03</span>
+              <h3 class="mt-2 font-display text-2xl font-light">Montaż</h3>
+              <p class="body-copy mt-3">
+                Własne ekipy — spójność od produkcji po ostatnią szczelinę.
+              </p>
+            </li>
+            <li class="border-t border-neo-line pt-8">
+              <span class="font-display text-5xl font-light text-white/15">04</span>
+              <h3 class="mt-2 font-display text-2xl font-light">Serwis</h3>
+              <p class="body-copy mt-3">
+                Opieka posprzedażowa i możliwość rozbudowy systemu w czasie.
+              </p>
+            </li>
+            <li class="border-t border-neo-line pt-8">
+              <span class="font-display text-5xl font-light text-white/15">05</span>
+              <h3 class="mt-2 font-display text-2xl font-light">Czas</h3>
+              <p class="body-copy mt-3">
+                Transparentny harmonogram — bez kompromisów w jakości wykonania.
+              </p>
+            </li>
+          </ul>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+          <a
+            href="portfolio.html"
+            class="flex items-center justify-between border border-neo-line px-6 py-5 font-sans text-xs uppercase tracking-ultra transition hover:border-white/30"
+          >
+            Zobacz realizacje
+            <span aria-hidden="true">→</span>
+          </a>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

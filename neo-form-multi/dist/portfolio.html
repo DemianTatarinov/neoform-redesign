@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio — Neo Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/assets/main-sGRH4vXH.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-Dvbz_DQ_.css">
+  </head>
+  <body>
+    <div
+      class="neo-root relative mx-auto min-h-screen max-w-[480px] overflow-hidden bg-black text-white"
+    >
+      <div class="pointer-events-none fixed inset-0 z-40 flex justify-center">
+        <div class="relative h-full w-full max-w-[480px]">
+          <div
+            data-menu-overlay
+            class="absolute inset-0 bg-black/70 opacity-0"
+            aria-hidden="true"
+          ></div>
+          <nav
+            data-menu-panel
+            class="absolute right-0 top-0 flex h-full w-[min(100%,320px)] flex-col justify-between border-l border-neo-line bg-black px-8 py-10"
+            aria-label="Menu główne"
+          >
+        <p class="section-label">Menu</p>
+        <ul class="flex flex-col gap-6">
+          <li><a href="index.html" class="nav-link">Główna</a></li>
+          <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+          <li><a href="about.html" class="nav-link">Produkcja</a></li>
+          <li><a href="lab.html" class="nav-link">Neo Lab</a></li>
+          <li><a href="contact.html" class="nav-link">Kontakt</a></li>
+        </ul>
+        <p class="body-copy text-xs">Mobile experience · Neo Form</p>
+          </nav>
+        </div>
+      </div>
+
+      <header
+        data-header
+        class="fixed left-1/2 top-0 z-30 flex w-full max-w-[480px] -translate-x-1/2 items-center justify-between border-b border-transparent px-6 py-5"
+      >
+        <a href="index.html" class="font-display text-base tracking-[0.28em] uppercase"
+          >Neo Form</a
+        >
+        <button
+          type="button"
+          data-menu-toggle
+          aria-expanded="false"
+          aria-label="Otwórz menu"
+          class="group flex h-10 w-10 flex-col items-center justify-center gap-1.5"
+        >
+          <span class="block h-px w-6 bg-white transition group-hover:opacity-70"></span>
+          <span class="block h-px w-4 bg-white transition group-hover:opacity-70"></span>
+        </button>
+      </header>
+
+      <main class="pt-24">
+        <section class="px-6 pb-16" data-animate="hero">
+          <p class="section-label mb-6">Portfolio</p>
+          <h1 class="section-title mb-8">Bespoke</h1>
+          <p class="body-copy max-w-[34ch]">
+            Każda realizacja to unikalna odpowiedź na architekturę wnętrza. Poniżej
+            wybrane projekty kuchni i stref dziennych — od kameralnych apartamentów po
+            domy jednorodzinne.
+          </p>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-16" data-animate="reveal">
+          <p class="section-label mb-4">Filozofia</p>
+          <h2 class="font-display text-3xl font-light leading-tight">
+            Projekt szyty na miarę — nie z katalogu.
+          </h2>
+          <ul class="body-copy mt-10 space-y-4">
+            <li class="flex justify-between border-b border-neo-line pb-3">
+              <span>Współpraca z architektami</span><span class="text-white/40">↗</span>
+            </li>
+            <li class="flex justify-between border-b border-neo-line pb-3">
+              <span>Modele 3D przed produkcją</span><span class="text-white/40">↗</span>
+            </li>
+            <li class="flex justify-between border-b border-neo-line pb-3">
+              <span>Indywidualna paleta materiałów</span><span class="text-white/40">↗</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-20">
+          <div class="mb-14" data-animate="reveal">
+            <p class="section-label mb-4">Realizacje</p>
+            <h2 class="section-title">Realizacje</h2>
+          </div>
+
+          <div class="flex flex-col gap-16">
+            <article data-animate="reveal">
+              <div
+                class="aspect-[4/5] bg-gradient-to-br from-zinc-800 via-zinc-900 to-black"
+              >
+                <div class="flex h-full items-end p-6">
+                  <p class="section-label text-white/50">Placeholder · foto</p>
+                </div>
+              </div>
+              <div class="mt-6">
+                <h3 class="font-display text-2xl font-light">Willowa Residence</h3>
+                <p class="body-copy mt-2">Warszawa · fronty mat · kamień</p>
+              </div>
+            </article>
+
+            <article data-animate="reveal">
+              <div
+                class="aspect-[3/4] bg-gradient-to-br from-neutral-800 via-zinc-950 to-black"
+              >
+                <div class="flex h-full items-end p-6">
+                  <p class="section-label text-white/50">Placeholder · foto</p>
+                </div>
+              </div>
+              <div class="mt-6">
+                <h3 class="font-display text-2xl font-light">Loft Mokotów</h3>
+                <p class="body-copy mt-2">Betongrey · drewno dębowe · ukryte AGD</p>
+              </div>
+            </article>
+
+            <article data-animate="reveal">
+              <div
+                class="aspect-[4/5] bg-gradient-to-br from-stone-800 via-zinc-900 to-black"
+              >
+                <div class="flex h-full items-end p-6">
+                  <p class="section-label text-white/50">Placeholder · foto</p>
+                </div>
+              </div>
+              <div class="mt-6">
+                <h3 class="font-display text-2xl font-light">Dom Konstancin</h3>
+                <p class="body-copy mt-2">Wyspa centralna · spiek kwarcowy</p>
+              </div>
+            </article>
+
+            <article data-animate="reveal">
+              <div
+                class="aspect-[3/4] bg-gradient-to-br from-zinc-700 via-zinc-900 to-black"
+              >
+                <div class="flex h-full items-end p-6">
+                  <p class="section-label text-white/50">Placeholder · foto</p>
+                </div>
+              </div>
+              <div class="mt-6">
+                <h3 class="font-display text-2xl font-light">Apartament River</h3>
+                <p class="body-copy mt-2">Fronty w wysokim połysku · oświetlenie Liniowe</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+          <a
+            href="contact.html"
+            class="flex items-center justify-between border border-neo-line px-6 py-5 font-sans text-xs uppercase tracking-ultra transition hover:border-white/30"
+          >
+            Umów konsultację
+            <span aria-hidden="true">→</span>
+          </a>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
