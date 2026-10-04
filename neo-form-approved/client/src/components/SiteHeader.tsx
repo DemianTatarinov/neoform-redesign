@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight, Instagram, Mail, Menu, Phone, Send, X } from "lucide-react";
 import { Link, useLocation } from "wouter";
-import BrandLogo from "@/components/BrandLogo";
+import Logo from "@/components/Logo";
 import { triggerHaptic } from "@/utils/haptics";
 
 const navLinks = [
@@ -43,31 +43,25 @@ export default function SiteHeader({ homePage = false }: SiteHeaderProps) {
   };
 
   return (
-    <header className={`site-header site-header--sticky shell ${menuOpen ? "site-header--menu-open" : ""}`}>
-      {homePage ? (
-        <a className="brand" href="#start" aria-label="Neo Form — strona główna" onClick={closeMenu}>
-          <BrandLogo />
-        </a>
-      ) : (
-        <Link className="brand" href="/" onClick={closeMenu}>
-          <BrandLogo />
-        </Link>
-      )}
+    <header
+      className={`site-header site-header--sticky pointer-events-auto fixed top-0 left-0 right-0 z-50 flex items-center justify-between gap-2 border-b border-white/10 bg-neutral-950/75 text-white shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] backdrop-blur-xl transition-all duration-300 pt-[max(0.75rem,env(safe-area-inset-top))] pb-3 px-4 sm:px-6 ${menuOpen ? "site-header--menu-open" : ""}`}
+    >
+      <Logo href={homePage ? "#start" : "/"} onClick={closeMenu} />
       <button
-        className="mobile-menu-button"
+        className="mobile-menu-button pointer-events-auto flex h-11 w-11 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white active:scale-95 transition-transform"
         type="button"
         aria-label={menuOpen ? "Zamknij menu" : "Otwórz menu"}
         aria-expanded={menuOpen}
         onClick={toggleMenu}
       >
-        {menuOpen ? <X size={21} strokeWidth={1.6} /> : <Menu size={21} strokeWidth={1.6} />}
+        {menuOpen ? <X size={20} strokeWidth={1.6} /> : <Menu size={20} strokeWidth={1.6} />}
       </button>
       <nav className={`main-nav ${menuOpen ? "main-nav--open" : ""}`} aria-label="Główna nawigacja">
         {navLinks.map(([label, href]) => (
-            <Link className={location === href ? "is-active" : ""} href={href} key={href} onClick={onNavClick}>
-              {label}
-            </Link>
-          ))}
+          <Link className={location === href ? "is-active" : ""} href={href} key={href} onClick={onNavClick}>
+            {label}
+          </Link>
+        ))}
         <div className="main-nav__actions">
           <a href={`tel:${contact.phone}`} onClick={() => triggerHaptic()}>
             <Phone size={17} />

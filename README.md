@@ -1,3 +1,1 @@
-# DemianTatarinov/neoform-redesign
-
-создан в манус
+neo-form-approved-React + TypeScript

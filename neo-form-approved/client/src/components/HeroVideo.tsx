@@ -1,37 +1,90 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { triggerHaptic } from "@/utils/haptics";
+
+const SLIDES = ["/videos/hero-main.mp4", "/videos/hero-1.mp4", "/videos/hero-2.mp4"] as const;
 
 export default function HeroVideo() {
-  const video2Ref = useRef<HTMLVideoElement>(null);
-  const [swiped, setSwiped] = useState(false);
+  const [index, setIndex] = useState(0);
+  const videosRef = useRef<Array<HTMLVideoElement | null>>([]);
+  const startXRef = useRef<number | null>(null);
 
-  const handleFirstEnded = useCallback(() => {
-    setSwiped(true);
-    const second = video2Ref.current;
-    if (!second) return;
-    second.loop = true;
-    void second.play().catch(() => undefined);
+  const goTo = useCallback((next: number) => {
+    setIndex((next + SLIDES.length) % SLIDES.length);
   }, []);
 
+  useEffect(() => {
+    videosRef.current.forEach((video, i) => {
+      if (!video) return;
+      if (i === index) {
+        video.currentTime = video.currentTime || 0;
+        void video.play().catch(() => undefined);
+      } else {
+        video.pause();
+      }
+    });
+  }, [index]);
+
+  const finishGesture = (clientX: number) => {
+    if (startXRef.current === null) return;
+    const delta = clientX - startXRef.current;
+    startXRef.current = null;
+    if (Math.abs(delta) < 50) return;
+    triggerHaptic();
+    goTo(index + (delta < 0 ? 1 : -1));
+  };
+
   return (
-    <div className="hero__video-carousel hero__video-carousel--auto pointer-events-none" aria-hidden>
-      <video
-        className={`absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-in-out ${swiped ? "-translate-x-full" : "translate-x-0"}`}
-        src="/videos/hero-1.mp4"
-        autoPlay
-        muted
-        playsInline
-        preload="auto"
-        onEnded={handleFirstEnded}
-      />
-      <video
-        ref={video2Ref}
-        className={`absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-in-out ${swiped ? "translate-x-0" : "translate-x-full"}`}
-        src="/videos/hero-2.mp4"
-        muted
-        playsInline
-        preload="auto"
-      />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-black/55" />
+    <div
+      className="hero__video-carousel absolute inset-0 z-0 overflow-hidden pointer-events-auto"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Hero video slider"
+      onTouchStart={(event) => {
+        startXRef.current = event.changedTouches[0].clientX;
+      }}
+      onTouchEnd={(event) => finishGesture(event.changedTouches[0].clientX)}
+      onPointerDown={(event) => {
+        if (event.pointerType === "touch") return;
+        startXRef.current = event.clientX;
+      }}
+      onPointerUp={(event) => {
+        if (event.pointerType === "touch") return;
+        finishGesture(event.clientX);
+      }}
+    >
+      {SLIDES.map((src, i) => (
+        <video
+          key={src}
+          ref={(node) => {
+            videosRef.current[i] = node;
+          }}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${i === index ? "opacity-100" : "opacity-0"}`}
+          src={src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden={i !== index}
+        />
+      ))}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/35" />
+      <div className="hero-video-dots" role="tablist" aria-label="Wybór wideo">
+        {SLIDES.map((src, i) => (
+          <button
+            key={src}
+            type="button"
+            role="tab"
+            aria-selected={i === index}
+            aria-label={`Wideo ${i + 1}`}
+            className={i === index ? "is-active" : ""}
+            onClick={() => {
+              triggerHaptic();
+              goTo(i);
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 }

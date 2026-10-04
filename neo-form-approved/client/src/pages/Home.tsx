@@ -9,6 +9,7 @@ import BackToTop from "@/components/BackToTop";
 import BrandLogo from "@/components/BrandLogo";
 import HeroVideo from "@/components/HeroVideo";
 import MaterialsCarousel from "@/components/MaterialsCarousel";
+import SectionDivider from "@/components/SectionDivider";
 import SiteHeader from "@/components/SiteHeader";
 import { credoCards, media } from "@/assets/media";
 import { triggerHaptic } from "@/utils/haptics";
@@ -123,27 +124,37 @@ export default function Home() {
 
   return (
     <div className="site">
-      <section className="hero" id="start">
+      <section className="hero pointer-events-none" id="start" data-header-surface="dark">
         <HeroVideo />
-        <div className="hero__overlay" />
         <SiteHeader homePage />
-        <div className="hero__content shell">
-          <Eyebrow light><span className="hero__reveal hero__reveal--1">NEO FORM / KUCHNIE I MEBLE NA WYMIAR</span></Eyebrow>
-          <h1 className="hero__reveal hero__reveal--2">NOWA FORMA.<br /><em>NIEOGRANICZONE</em><br />MOŻLIWOŚCI.</h1>
-          <p className="hero__lead hero__reveal hero__reveal--3">Dziś tworzymy meble i zabudowy dla całych wnętrz.</p>
-          <span className="hero__reveal hero__reveal--4"><Button href="#portfolio">Zobacz projekty</Button></span>
+        <div className="hero__content shell relative z-10">
+          <p className="hero__reveal hero__reveal--1 eyebrow eyebrow--light">
+            NEO FORM / KUCHNIE I MEBLE NA WYMIAR
+          </p>
+          <h1 className="hero__reveal hero__reveal--2">
+            NOWA FORMA.<br />
+            BEZWZGLĘDNA PRECYZJA.
+          </h1>
+          <p className="hero__lead hero__reveal hero__reveal--3">
+            Projektujemy i produkujemy autorskie kuchnie oraz zabudowy meblowe klasy bespoke.
+          </p>
+          <span className="hero__reveal hero__reveal--4">
+            <Button href="#portfolio">Zobacz projekty</Button>
+          </span>
         </div>
         <div className="hero__footer shell"><span>SCROLL TO EXPLORE</span><span className="hero__line" /><ArrowDown size={14} /><span className="hero__swipe-hint">SWIPE HORIZONTALLY FOR NEXT VIDEO</span></div>
       </section>
 
-      <section className="bespoke section-light" id="bespoke" data-reveal>
+      <SectionDivider index="01" label="BESPOKE" tone="light" />
+
+      <section className="bespoke section-light section-rhythm" id="bespoke" data-reveal data-header-surface="light">
         <div className="shell">
           <div className="bespoke__intro">
             <div><Eyebrow>BESPOKE / INDYWIDUALNOŚĆ</Eyebrow><h2>INDYWIDUALNOŚĆ<br /><span>NIE JEST OPCJĄ.</span></h2><span className="accent-rule" /></div>
             <p className="bespoke__manifesto">Każde wnętrze jest inne.<br />Inne są potrzeby jego mieszkańców.<br />Inna architektura. Inne światło. Inne materiały.<br />Inna historia.<br /><br /><strong>Dlatego w Neo Form nie zaczynamy od katalogu.<br />Zaczynamy od projektu.</strong></p>
           </div>
         </div>
-        <div className="bespoke__rail" tabIndex={0} aria-label="Galeria rozwiązań bespoke"><div className="bespoke__track">
+        <div className="bespoke__rail section-rhythm__body" tabIndex={0} aria-label="Galeria rozwiązań bespoke"><div className="bespoke__track">
           {bespokeCards.map(([number, title, description, image, ratio]) => (
             <article className={`solution-card solution-card--${ratio}`} key={number}>
               <div className="solution-card__image">
@@ -160,27 +171,37 @@ export default function Home() {
         <div className="shell bespoke__outro"><p>To właśnie takie projekty znamy najlepiej.<br />Nietypowe i wymagające realizacje są naszym chlebem powszednim.</p><Button href="#portfolio">Zobacz realizacje</Button></div>
       </section>
 
-      <section className="anatomy section-dark" id="anatomy" data-reveal>
+      <SectionDivider index="02" label="CREDO" tone="dark" />
+
+      <section className="anatomy section-dark section-rhythm" id="anatomy" data-reveal data-header-surface="dark">
         <div className="shell">
           <Eyebrow>NASZE CREDO</Eyebrow><h2>CZTERY ELEMENTY.<br />JEDNA FORMA.</h2>
           <p className="anatomy__lead">Wierzymy, że dobry mebel nie powinien dominować nad wnętrzem. Powinien być jego naturalną częścią. Dlatego zwracamy uwagę na proporcje, podziały, materiały, światło, sposób otwierania, dotyk i każdy detal.</p>
-          <MaterialsCarousel items={credoCards} />
+          <div className="section-rhythm__body">
+            <MaterialsCarousel items={credoCards} />
+          </div>
         </div>
       </section>
 
-      <section className="portfolio section-light" id="portfolio" data-reveal>
+      <SectionDivider index="03" label="PORTFOLIO" tone="light" />
+
+      <section className="portfolio section-light section-rhythm" id="portfolio" data-reveal data-header-surface="light">
         <div className="shell"><Eyebrow>PORTFOLIO</Eyebrow><h2>PRZESTRZENIE,<br />KTÓRE STWORZYLIŚMY.</h2><p className="portfolio__lead">Nie tworzymy mebli do pustych pokoi. Tworzymy rozwiązania dla konkretnej architektury. Zobacz, jak nasze podejście do proporcji i materiału sprawdza się w praktyce.</p>
-          <div className="project-grid">{projects.map(([title, description, image]) => <a href="#project-detail" className="project-tile" key={title} onClick={(event) => { event.preventDefault(); setSelectedProject([title, description, image]); }}><img src={image} alt={title} className="object-cover w-full h-full" /><div><h3>{title}</h3><p>{description}</p><span className="project-tile__link">Otwórz projekt <ArrowUpRight size={15} /></span></div></a>)}</div>
+          <div className="section-rhythm__body project-grid">{projects.map(([title, description, image]) => <a href="#project-detail" className="project-tile" key={title} onClick={(event) => { event.preventDefault(); setSelectedProject([title, description, image]); }}><img src={image} alt={title} className="object-cover w-full h-full" /><div><h3>{title}</h3><p>{description}</p><span className="project-tile__link">Otwórz projekt <ArrowUpRight size={15} /></span></div></a>)}</div>
         </div>
       </section>
 
-      <section className="architects" id="architects" data-reveal><div className="architects__copy"><Eyebrow>WSPÓŁPRACA Z ARCHITEKTEM</Eyebrow><h2>DOBRY PROJEKT POTRZEBUJE DOBREGO WYKONAWCY.</h2><p>Architekt tworzy wizję. My pomagamy nadać jej fizyczną formę. Pracujemy z projektantami już na etapie koncepcji, konsultując materiały, konstrukcję, technologię i możliwości wykonawcze.</p><p>Nie chcemy zmieniać projektu dlatego, że jest trudny. Chcemy znaleźć sposób, żeby go wykonać.</p><blockquote>Jedną z naszych obecnych współprac jest Matsko Studio. To właśnie dialog pomiędzy projektantem i wykonawcą pozwala powstawać rozwiązaniom, których nie da się znaleźć w katalogu.</blockquote><Button variant="ghost">Rozpocznij współpracę</Button></div><div className="architects__image" role="img" aria-label="Projektant i wykonawca omawiają projekt"><img src={images.architects} alt="Współpraca z architektem" className="object-cover w-full h-full" /></div></section>
+      <section className="architects section-rhythm" id="architects" data-reveal data-header-surface="light"><div className="architects__copy"><Eyebrow>WSPÓŁPRACA Z ARCHITEKTEM</Eyebrow><h2>DOBRY PROJEKT POTRZEBUJE DOBREGO WYKONAWCY.</h2><p>Architekt tworzy wizję. My pomagamy nadać jej fizyczną formę. Pracujemy z projektantami już na etapie koncepcji, konsultując materiały, konstrukcję, technologię i możliwości wykonawcze.</p><p>Nie chcemy zmieniać projektu dlatego, że jest trudny. Chcemy znaleźć sposób, żeby go wykonać.</p><blockquote>Jedną z naszych obecnych współprac jest Matsko Studio. To właśnie dialog pomiędzy projektantem i wykonawcą pozwala powstawać rozwiązaniom, których nie da się znaleźć w katalogu.</blockquote><Button variant="ghost">Rozpocznij współpracę</Button></div><div className="architects__image" role="img" aria-label="Projektant i wykonawca omawiają projekt"><img src={images.architects} alt="Współpraca z architektem" className="object-cover w-full h-full" /></div></section>
 
-      <section className="testimonials section-light" id="opinie" data-reveal><div className="shell"><div className="testimonials__heading"><Eyebrow>OPINIE / MATERIAŁ DEMONSTRACYJNY</Eyebrow><h2>FORMA, KTÓRA<br /><span>ZOSTAJE NA DŁUŻEJ.</span></h2><p>Teksty i portrety w tej wersji są demonstracyjne. Po otrzymaniu potwierdzonych opinii klientów zastąpię je prawdziwymi wypowiedziami i zgodami na publikację.</p></div><div className="testimonials__slider-wrap"><div className="testimonials__grid" aria-label="Opinie klientów — przesuń, aby zobaczyć kolejne opinie">{testimonials.map(([name, role, quote, image]) => <article className="testimonial-card" key={name}><div className="testimonial-card__top"><div className="testimonial-card__portrait"><img src={image} alt={name} className="object-cover w-full h-full" /></div><div><strong>{name}</strong><span>{role}</span></div></div><div className="testimonial-card__quote">“</div><p>{quote}</p><div className="testimonial-card__line" /></article>)}</div><div className="testimonials__mobile-hint"><span className="testimonials__hint-line" /><span>PRZESUŃ, ABY ZOBACZYĆ WIĘCEJ</span><ArrowUpRight size={14} /></div></div></div></section>
+      <section className="testimonials section-light section-rhythm" id="opinie" data-reveal data-header-surface="light"><div className="shell"><div className="testimonials__heading"><Eyebrow>OPINIE / MATERIAŁ DEMONSTRACYJNY</Eyebrow><h2>FORMA, KTÓRA<br /><span>ZOSTAJE NA DŁUŻEJ.</span></h2><p>Teksty i portrety w tej wersji są demonstracyjne. Po otrzymaniu potwierdzonych opinii klientów zastąpię je prawdziwymi wypowiedziami i zgodami na publikację.</p></div><div className="testimonials__slider-wrap section-rhythm__body"><div className="testimonials__grid" aria-label="Opinie klientów — przesuń, aby zobaczyć kolejne opinie">{testimonials.map(([name, role, quote, image]) => <article className="testimonial-card" key={name}><div className="testimonial-card__top"><div className="testimonial-card__portrait"><img src={image} alt={name} className="object-cover w-full h-full" /></div><div><strong>{name}</strong><span>{role}</span></div></div><div className="testimonial-card__quote">“</div><p>{quote}</p><div className="testimonial-card__line" /></article>)}</div><div className="testimonials__mobile-hint"><span className="testimonials__hint-line" /><span>PRZESUŃ, ABY ZOBACZYĆ WIĘCEJ</span><ArrowUpRight size={14} /></div></div></div></section>
 
-      <section className="process section-light" id="process" data-reveal><div className="shell"><div className="process__heading"><Eyebrow>PROCES</Eyebrow><h2>OD POMYSŁU DO<br />GOTOWEGO WNĘTRZA.</h2></div><div className="process-grid">{processSteps.map(([number, title, description, image]) => <article className="process-card" key={number}><div className="process-card__image"><img src={image} alt={title} className="object-cover w-full h-full" /></div><span className="process-card__number">{number}</span><div><h3>{title}</h3><p>{description}</p></div></article>)}</div></div></section>
+      <SectionDivider index="04" label="PROCES" tone="light" />
 
-      <section className="neo-lab section-dark" id="neo-lab" data-reveal>
+      <section className="process section-light section-rhythm" id="process" data-reveal data-header-surface="light"><div className="shell"><div className="process__heading"><Eyebrow>PROCES</Eyebrow><h2>OD POMYSŁU DO<br />GOTOWEGO WNĘTRZA.</h2></div><div className="section-rhythm__body process-grid">{processSteps.map(([number, title, description, image]) => <article className="process-card" key={number}><div className="process-card__image"><img src={image} alt={title} className="object-cover w-full h-full" /></div><span className="process-card__number">{number}</span><div><h3>{title}</h3><p>{description}</p></div></article>)}</div></div></section>
+
+      <SectionDivider index="05" label="NEO LAB" tone="dark" />
+
+      <section className="neo-lab section-dark section-rhythm" id="neo-lab" data-reveal data-header-surface="dark">
         <div className="shell neo-lab__grid">
           <div className="neo-lab__intro">
             <p className="lab-mark">NEO FORM <span>LAB</span></p>
@@ -208,7 +229,9 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="site-footer section-dark" id="contact" data-reveal><div className="shell"><div className="footer__hero"><Eyebrow light>NEO FORM</Eyebrow><h2>TWORZYMY MEBLE.<br />DZIELIMY SIĘ WIEDZĄ.<br />ROZWIJAMY BRANŻĘ.</h2><form className="lead-form" onSubmit={(event) => { triggerHaptic(); handleSubmit(event); }}>{[["Imię i nazwisko", "text", "name"], ["Numer telefonu", "tel", "phone"], ["Adres e-mail", "email", "email"]].map(([label, type, name]) => <label key={name}><span>{label}</span><input type={type} name={name} required={name !== "email"} /></label>)}<button className="button button--orange" type="submit">{sent ? "DZIĘKUJEMY" : "WYŚLIJ ZAPYTANIE"}<ArrowUpRight size={15} /></button>{sent && <p className="form-success">Otrzymaliśmy Twoją wiadomość. Skontaktujemy się wkrótce.</p>}</form></div><div className="footer__base"><div><span className="footer__brand"><BrandLogo /></span><p>ul. Przykładowa 12, Warszawa<br />+48 000 000 000<br />hello@neoform.pl</p></div><div className="footer__social"><a href="#contact">Instagram</a><a href="#contact">Facebook</a><a href="#contact">Pinterest</a></div><div className="footer__legal"><span>© 2026 NEO FORM</span><button className="footer-link" onClick={() => setLegalOpen("privacy")}>Polityka prywatności</button><button className="footer-link" onClick={() => setLegalOpen("cookies")}>Ustawienia cookies</button></div></div></div></footer>
+      <SectionDivider index="06" label="KONTAKT" tone="dark" />
+
+      <footer className="site-footer section-dark section-rhythm" id="contact" data-reveal data-header-surface="dark"><div className="shell"><div className="footer__hero"><Eyebrow light>NEO FORM</Eyebrow><h2>TWORZYMY MEBLE.<br />DZIELIMY SIĘ WIEDZĄ.<br />ROZWIJAMY BRANŻĘ.</h2><form className="lead-form" onSubmit={(event) => { triggerHaptic(); handleSubmit(event); }}>{[["Imię i nazwisko", "text", "name"], ["Numer telefonu", "tel", "phone"], ["Adres e-mail", "email", "email"]].map(([label, type, name]) => <label key={name}><span>{label}</span><input type={type} name={name} required={name !== "email"} /></label>)}<button className="button button--orange" type="submit">{sent ? "DZIĘKUJEMY" : "WYŚLIJ ZAPYTANIE"}<ArrowUpRight size={15} /></button>{sent && <p className="form-success">Otrzymaliśmy Twoją wiadomość. Skontaktujemy się wkrótce.</p>}</form></div><div className="footer__base"><div><span className="footer__brand"><BrandLogo /></span><p>ul. Przykładowa 12, Warszawa<br />+48 000 000 000<br />hello@neoform.pl</p></div><div className="footer__social"><a href="#contact">Instagram</a><a href="#contact">Facebook</a><a href="#contact">Pinterest</a></div><div className="footer__legal"><span>© 2026 NEO FORM</span><button className="footer-link" onClick={() => setLegalOpen("privacy")}>Polityka prywatności</button><button className="footer-link" onClick={() => setLegalOpen("cookies")}>Ustawienia cookies</button></div></div></div></footer>
       {selectedProject && (
         <div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onClick={() => setSelectedProject(null)}>
           <div className="project-modal__card" onClick={(event) => event.stopPropagation()}>

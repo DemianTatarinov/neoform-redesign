@@ -4,6 +4,7 @@ const u = (id: string, w = 1000) =>
 
 export const media = {
   logo: "/logo/logo.png",
+  logoOnDark: "/logo/logo-light.svg",
   heroSlide1: u("photo-1600585154340-be6161a56a0c", 1200),
   heroSlide2: u("photo-1600607687939-ce8a6b25145e", 1200),
   heroPoster: u("photo-1600585154340-be6161a56a0c", 1200),

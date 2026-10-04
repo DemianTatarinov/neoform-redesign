@@ -19,7 +19,7 @@ export default function MaterialsCarousel({
     const node = scrollerRef.current;
     if (!node) return;
     const card = node.querySelector<HTMLElement>(".materials-card");
-    const step = (card?.offsetWidth ?? 280) + 16;
+    const step = (card?.offsetWidth ?? 280) + 24;
     node.scrollBy({ left: direction * step, behavior: "smooth" });
   };
 
@@ -38,7 +38,7 @@ export default function MaterialsCarousel({
       </div>
       <div
         ref={scrollerRef}
-        className="materials-carousel__track overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+        className="materials-carousel__track gap-6 md:gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
         aria-label="Karuzela materiałów i systemów"
       >
         {items.map((item) => (
