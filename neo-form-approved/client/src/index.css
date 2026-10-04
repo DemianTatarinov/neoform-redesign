@@ -715,7 +715,8 @@ body { overflow-x: hidden; }
   color: #f26522;
 }
 .mobile-menu-drawer button[aria-label="Zamknij menu"] {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
 }
 .mobile-menu-drawer button[aria-label="Zamknij menu"]:hover {
   color: #f26522;

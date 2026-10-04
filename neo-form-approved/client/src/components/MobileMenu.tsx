@@ -66,7 +66,7 @@ export default function MobileMenu({
       >
         <button
           type="button"
-          className="absolute right-4 top-[max(1rem,env(safe-area-inset-top))] p-2 text-2xl text-white transition-colors hover:text-[#F26522]"
+          className="absolute right-4 top-[max(1rem,env(safe-area-inset-top))] p-2 text-2xl font-light text-white/70 transition-colors hover:text-[#F26522]"
           aria-label="Zamknij menu"
           tabIndex={open ? 0 : -1}
           onClick={handleClose}
@@ -79,7 +79,7 @@ export default function MobileMenu({
             const isActive = activePath === href;
             return (
               <Link
-                className={`mobile-menu-drawer__link border-b border-white/10 py-3.5 text-lg font-medium uppercase tracking-widest !text-white transition-colors duration-300 hover:text-[#F26522] active:text-[#F26522] ${isActive ? "is-active !text-[#F26522]" : ""}`}
+                className={`mobile-menu-drawer__link border-b border-white/10 py-4 font-sans text-[13px] font-bold uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-[#F26522] active:text-[#F26522] sm:text-[14px] ${isActive ? "is-active !text-[#F26522]" : ""}`}
                 href={href}
                 key={href}
                 onClick={onNavClick}
@@ -93,43 +93,43 @@ export default function MobileMenu({
 
         <div className="mobile-menu-drawer__contacts mt-auto grid grid-cols-2 gap-2 pb-[max(2rem,env(safe-area-inset-bottom))]">
           <a
-            className="mobile-menu-drawer__contact flex items-center justify-center gap-2 rounded-md border border-white/20 bg-white/5 px-2 py-3 text-xs !text-white transition-colors hover:border-[#F26522]/50 hover:text-[#F26522] active:text-[#F26522]"
+            className="mobile-menu-drawer__contact group flex items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-2 py-3 font-sans text-[10px] font-semibold uppercase tracking-widest text-white transition-colors hover:border-[#F26522]/50 hover:bg-[#F26522]/10 hover:text-[#F26522] active:text-[#F26522] sm:text-[11px]"
             href={`tel:${contact.phone}`}
             tabIndex={open ? 0 : -1}
             onClick={() => triggerHaptic()}
           >
-            <Phone size={15} className="text-current" />
+            <Phone size={15} className="text-white/60 transition-colors group-hover:text-[#F26522]" />
             Zadzwoń
           </a>
           <a
-            className="mobile-menu-drawer__contact flex items-center justify-center gap-2 rounded-md border border-white/20 bg-white/5 px-2 py-3 text-xs !text-white transition-colors hover:border-[#F26522]/50 hover:text-[#F26522] active:text-[#F26522]"
+            className="mobile-menu-drawer__contact group flex items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-2 py-3 font-sans text-[10px] font-semibold uppercase tracking-widest text-white transition-colors hover:border-[#F26522]/50 hover:bg-[#F26522]/10 hover:text-[#F26522] active:text-[#F26522] sm:text-[11px]"
             href={`mailto:${contact.email}`}
             tabIndex={open ? 0 : -1}
             onClick={() => triggerHaptic()}
           >
-            <Mail size={15} className="text-current" />
+            <Mail size={15} className="text-white/60 transition-colors group-hover:text-[#F26522]" />
             Napisz
           </a>
           <a
-            className="mobile-menu-drawer__contact flex items-center justify-center gap-2 rounded-md border border-white/20 bg-white/5 px-2 py-3 text-xs !text-white transition-colors hover:border-[#F26522]/50 hover:text-[#F26522] active:text-[#F26522]"
+            className="mobile-menu-drawer__contact group flex items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-2 py-3 font-sans text-[10px] font-semibold uppercase tracking-widest text-white transition-colors hover:border-[#F26522]/50 hover:bg-[#F26522]/10 hover:text-[#F26522] active:text-[#F26522] sm:text-[11px]"
             href={contact.telegram}
             target="_blank"
             rel="noreferrer"
             tabIndex={open ? 0 : -1}
             onClick={() => triggerHaptic()}
           >
-            <Send size={15} className="text-current" />
+            <Send size={15} className="text-white/60 transition-colors group-hover:text-[#F26522]" />
             Telegram
           </a>
           <a
-            className="mobile-menu-drawer__contact flex items-center justify-center gap-2 rounded-md border border-white/20 bg-white/5 px-2 py-3 text-xs !text-white transition-colors hover:border-[#F26522]/50 hover:text-[#F26522] active:text-[#F26522]"
+            className="mobile-menu-drawer__contact group flex items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-2 py-3 font-sans text-[10px] font-semibold uppercase tracking-widest text-white transition-colors hover:border-[#F26522]/50 hover:bg-[#F26522]/10 hover:text-[#F26522] active:text-[#F26522] sm:text-[11px]"
             href={contact.instagram}
             target="_blank"
             rel="noreferrer"
             tabIndex={open ? 0 : -1}
             onClick={() => triggerHaptic()}
           >
-            <Instagram size={15} className="text-current" />
+            <Instagram size={15} className="text-white/60 transition-colors group-hover:text-[#F26522]" />
             Instagram
           </a>
         </div>
