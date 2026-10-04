@@ -14,13 +14,26 @@
   }
   */
 
+  /*
+  Concrete & Walnut
   :root {
-    /* Concrete & Walnut — ACTIVE */
     --neo-bg: #020617;
     --neo-surface: #0f172a;
     --neo-text: #94a3b8;
     --neo-heading: #f8fafc;
     --neo-accent: #d98a6c;
+  }
+  */
+
+  /*
+  Minimalist White — ACTIVE
+  */
+  :root {
+    --neo-bg: #ffffff;
+    --neo-surface: #f4f4f5;
+    --neo-text: #3f3f46;
+    --neo-heading: #000000;
+    --neo-accent: #c5a059;
   }
 
   /*
@@ -98,18 +111,61 @@
   }
 
   .neo-glass-header {
-    @apply fixed left-1/2 top-0 z-50 flex w-full max-w-[480px] -translate-x-1/2 flex-col backdrop-blur-md;
-    border-bottom: 1px solid color-mix(in srgb, var(--neo-text) 10%, transparent);
-    background-color: color-mix(in srgb, var(--neo-bg) 70%, transparent);
+    @apply fixed top-0 left-1/2 z-50 flex w-full max-w-[480px] -translate-x-1/2 flex-col bg-white/75 backdrop-blur-md;
+    border-bottom: 1px solid rgb(0 0 0 / 0.1);
   }
 
   .neo-glass-bar {
-    @apply relative z-10 flex items-center justify-between px-6 py-5;
+    @apply relative z-10 flex items-center justify-between px-6 py-4;
   }
 
-  .neo-burger-line {
-    @apply block h-0.5 transition group-hover:opacity-70;
-    background-color: var(--neo-heading);
+  .neo-burger-btn {
+    @apply ml-auto rounded-sm p-2 text-neo-heading transition-colors;
+    border: 1px solid var(--neo-accent);
+  }
+
+  .neo-burger-btn:hover {
+    color: var(--neo-accent);
+  }
+
+  .neo-menu-dropdown {
+    @apply absolute top-full left-0 z-50 w-full bg-white/85 px-2 py-2 opacity-0 shadow-lg backdrop-blur-lg pointer-events-none;
+    border-bottom: 1px solid rgb(0 0 0 / 0.1);
+  }
+
+  .neo-menu-link {
+    @apply block py-4 text-center font-display text-2xl text-neo-heading transition-colors;
+  }
+
+  .neo-menu-link:hover {
+    color: var(--neo-accent);
+  }
+
+  .hero-video-overlay {
+    @apply pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/25;
+  }
+
+  .hero-on-video {
+    @apply uppercase text-white;
+  }
+
+  .hero-on-video .section-label {
+    @apply tracking-ultra;
+    color: rgb(255 255 255 / 0.85);
+  }
+
+  .hero-on-video .section-title {
+    @apply text-4xl leading-[1.08];
+    color: #ffffff;
+  }
+
+  .reviews-grid {
+    @apply mt-10 space-y-8;
+  }
+
+  .review-card {
+    @apply bg-neo-surface p-6;
+    border: 1px solid color-mix(in srgb, var(--neo-text) 20%, transparent);
   }
 
   .hero-copy-panel {

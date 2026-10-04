@@ -22,17 +22,14 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/assets/main-CxM7Kg3n.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main-PiaCSD7i.css">
+    <script type="module" crossorigin src="/assets/main-CLTGad7y.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-BCZ4hSKl.css">
   </head>
   <body>
     <div
       class="neo-root relative mx-auto min-h-screen max-w-[480px] overflow-hidden bg-neo-bg text-neo-text"
     >
-      <header
-        data-header
-        class="neo-glass-header"
-      >
+      <header data-header class="neo-glass-header">
         <div class="neo-glass-bar">
           <a href="index.html" class="inline-flex items-center">
             <img src="/logo.png" alt="Neo Form" class="h-8 w-auto" />
@@ -42,23 +39,31 @@
             data-menu-toggle
             aria-expanded="false"
             aria-label="Otwórz menu"
-            class="group flex h-10 w-10 flex-col items-center justify-center gap-1.5"
+            class="neo-burger-btn flex h-10 w-10 items-center justify-center"
           >
-            <span class="block neo-burger-line w-7 transition group-hover:opacity-70"></span>
-            <span class="block neo-burger-line w-5 transition group-hover:opacity-70"></span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <line x1="4" y1="7" x2="20" y2="7" />
+              <line x1="4" y1="13" x2="16" y2="13" />
+            </svg>
           </button>
         </div>
-        <nav
-          data-menu-panel
-          class="overflow-hidden border-t border-transparent px-6"
-          aria-label="Menu główne"
-        >
-          <ul class="flex flex-col gap-3 pb-5 pt-2">
-            <li><a href="index.html" class="nav-link">Główna</a></li>
-            <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-            <li><a href="about.html" class="nav-link">Produkcja</a></li>
-            <li><a href="lab.html" class="nav-link">Neo Lab</a></li>
-            <li><a href="contact.html" class="nav-link">Kontakt</a></li>
+        <nav data-menu-panel class="neo-menu-dropdown" aria-label="Menu główne" aria-hidden="true">
+          <ul>
+            <li><a href="index.html" class="neo-menu-link">Główna</a></li>
+            <li><a href="portfolio.html" class="neo-menu-link">Portfolio</a></li>
+            <li><a href="about.html" class="neo-menu-link">Produkcja</a></li>
+            <li><a href="lab.html" class="neo-menu-link">Neo Lab</a></li>
+            <li><a href="contact.html" class="neo-menu-link">Kontakt</a></li>
           </ul>
         </nav>
       </header>

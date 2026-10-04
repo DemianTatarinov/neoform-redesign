@@ -24,7 +24,7 @@ export default {
   safelist: [
     {
       pattern:
-        /^(bg|text|border|from|to|via)-(neo-(bg|surface|text|heading|accent))(\/\d+)?$/,
+        /^(bg|text|border|from|to|via)-(neo-(bg|surface|text|heading|accent)|black)(\/\d+)?$/,
     },
   ],
   plugins: [],

@@ -10,56 +10,45 @@ function initMenu() {
   const toggle = document.querySelector('[data-menu-toggle]')
   const panel = document.querySelector('[data-menu-panel]')
   const links = document.querySelectorAll('[data-menu-panel] a')
-  const header = document.querySelector('[data-header]')
 
   if (!toggle || !panel) return
 
   let open = false
 
-  gsap.set(panel, { height: 0, overflow: 'hidden', opacity: 0 })
+  gsap.set(panel, { autoAlpha: 0 })
+  panel.classList.add('pointer-events-none')
 
   const setOpen = (next) => {
     open = next
     toggle.setAttribute('aria-expanded', String(open))
-    panel.classList.toggle('border-neo-text/20', open)
-    header?.classList.toggle('border-neo-text/30', open)
-
+    panel.setAttribute('aria-hidden', String(!open))
     if (open) {
-      panel.style.height = 'auto'
-      const targetHeight = panel.offsetHeight
-      panel.style.height = '0px'
-
+      panel.classList.remove('pointer-events-none')
       gsap.to(panel, {
-        height: targetHeight,
-        opacity: 1,
-        duration: 0.42,
+        autoAlpha: 1,
+        duration: 0.45,
         ease: 'power2.out',
-        onComplete: () => {
-          panel.style.height = 'auto'
-        },
       })
 
       gsap.fromTo(
         links,
-        { y: 10, opacity: 0 },
+        { y: 12, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.38,
-          stagger: 0.05,
-          ease: 'power2.out',
-          delay: 0.08,
+          duration: 0.5,
+          stagger: 0.07,
+          ease: 'power3.out',
+          delay: 0.1,
         }
       )
     } else {
       gsap.to(panel, {
-        height: 0,
-        opacity: 0,
-        duration: 0.32,
+        autoAlpha: 0,
+        duration: 0.35,
         ease: 'power2.in',
         onComplete: () => {
-          panel.classList.remove('border-neo-text/20')
-          header?.classList.remove('border-neo-text/30')
+          panel.classList.add('pointer-events-none')
         },
       })
     }
@@ -117,8 +106,8 @@ function initHeader() {
     start: 'top -40',
     onUpdate: (self) => {
       const scrolled = self.scroll() > 24
-      header.classList.toggle('bg-neo-bg/90', scrolled)
-      header.classList.toggle('border-neo-text/20', scrolled)
+      header.classList.toggle('bg-white/90', scrolled)
+      header.classList.toggle('shadow-sm', scrolled)
     },
   })
 }
