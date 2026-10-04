@@ -5,23 +5,23 @@
 @layer base {
   :root {
     /* Warm Graphite — ACTIVE */
+    /*
     --neo-bg: #1a1a1a;
     --neo-surface: #222222;
     --neo-text: #a3a3a3;
     --neo-heading: #ffffff;
     --neo-accent: #8b7a66;
+    */
+
   }
 
-  /*
-  Concrete & Walnut
-  :root {
+  Concrete & Walnut :root {
     --neo-bg: #020617;
     --neo-surface: #0f172a;
     --neo-text: #94a3b8;
     --neo-heading: #f8fafc;
     --neo-accent: #d98a6c;
   }
-  */
 
   /*
   Obsidian Luxe
@@ -121,11 +121,9 @@
   .hero-copy-panel::before {
     content: '';
     @apply pointer-events-none absolute inset-0;
-    background: linear-gradient(
-      to bottom right,
-      color-mix(in srgb, var(--neo-accent) 12%, transparent),
-      transparent 55%
-    );
+    background: linear-gradient(to bottom right,
+        color-mix(in srgb, var(--neo-accent) 12%, transparent),
+        transparent 55%);
   }
 
   .hero-copy-inner {
