@@ -1,8 +1,9 @@
 import { FormEvent, useState, type ReactNode } from "react";
-import { ArrowUpRight, ChevronRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import SiteChrome from "@/components/SiteChrome";
 import MaterialsCarousel from "@/components/MaterialsCarousel";
+import NeoLabEvents from "@/components/NeoLabEvents";
 import { MapView } from "@/components/Map";
 import { credoCards, media } from "@/assets/media";
 import { triggerHaptic } from "@/utils/haptics";
@@ -230,20 +231,7 @@ export default function SectionPage({ page }: { page: PageKey }) {
               <p>{item.copy}</p>
               <strong className="lab-triad">LEARN. TEST. CREATE.</strong>
             </div>
-            <div className="neo-lab__events">
-              <h3>[ NAJBLIŻSZE WYDARZENIA ]</h3>
-              {[
-                ["Organizacja przestrzeni w kuchni i najnowsze rozwiązania.", "PEKA", media.pages.neoLab[0]],
-                ["Fornir, HPL, FENIX, ARPA i możliwości ich zastosowania.", "MATERIAŁY", media.pages.neoLab[1]],
-                ["Wymiana doświadczeń i spotkania dla architektów.", "ARCHITECTURE", media.pages.neoLab[2]],
-              ].map(([event, tag, image]) => (
-                <Link href="/contact" className="event-card event-card--media" key={event} onClick={() => triggerHaptic()} style={{ backgroundImage: `linear-gradient(90deg, rgba(20,20,20,.92), rgba(20,20,20,.55)), url(${image})` }}>
-                  <small>NEO LAB / {tag}</small>
-                  <strong>{event}</strong>
-                  <ChevronRight size={18} />
-                </Link>
-              ))}
-            </div>
+            <NeoLabEvents />
           </div>
           <div className="shell">
             <MaterialsCarousel eyebrow="NEO LAB / MATERIAŁY I SYSTEMY" />

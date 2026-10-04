@@ -2,13 +2,13 @@ import { FormEvent, useEffect, useState } from "react";
 import {
   ArrowDown,
   ArrowUpRight,
-  ChevronRight,
   X,
 } from "lucide-react";
 import BackToTop from "@/components/BackToTop";
 import BrandLogo from "@/components/BrandLogo";
 import HeroVideo from "@/components/HeroVideo";
 import MaterialsCarousel from "@/components/MaterialsCarousel";
+import NeoLabEvents from "@/components/NeoLabEvents";
 import SectionDivider from "@/components/SectionDivider";
 import SiteHeader from "@/components/SiteHeader";
 import { credoCards, media } from "@/assets/media";
@@ -210,22 +210,7 @@ export default function Home() {
             <p>Nie interesują nas szkolenia, po których wychodzisz z kolejnym PDF. Interesuje nas wiedza, którą wykorzystasz następnego dnia.</p>
             <strong className="lab-triad">LEARN. TEST. CREATE.</strong>
           </div>
-          <div className="neo-lab__events">
-            <h3>[ NAJBLIŻSZE WYDARZENIA ]</h3>
-            {[
-              ["Organizacja przestrzeni w kuchni i najnowsze rozwiązania.", "PEKA", media.pages.neoLab[0]],
-              ["Fornir, HPL, FENIX, ARPA i możliwości ich zastosowania.", "MATERIAŁY", media.pages.neoLab[1]],
-              ["Wymiana doświadczeń i spotkania dla architektów.", "ARCHITECTURE", media.pages.neoLab[2]],
-            ].map(([event, tag, image]) => (
-              <a href="#contact" className="event-card event-card--media" key={event}>
-                <img src={image} alt="" className="object-cover w-full h-full" />
-                <small>NEO LAB / {tag}</small>
-                <strong>{event}</strong>
-                <ChevronRight size={18} />
-              </a>
-            ))}
-            <a className="events-link" href="#contact">[ ZOBACZ WSZYSTKIE WYDARZENIA ]</a>
-          </div>
+          <NeoLabEvents />
         </div>
       </section>
 

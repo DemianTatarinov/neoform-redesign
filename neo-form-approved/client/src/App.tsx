@@ -17,6 +17,10 @@ function Router() {
     <Route path="/architects"><SectionPage page="architects" /></Route>
     <Route path="/process"><SectionPage page="process" /></Route>
     <Route path="/neo-lab"><SectionPage page="neo-lab" /></Route>
+    <Route path="/neolab"><SectionPage page="neo-lab" /></Route>
+    <Route path="/neolab/peka"><SectionPage page="neo-lab" /></Route>
+    <Route path="/neolab/materialy"><SectionPage page="neo-lab" /></Route>
+    <Route path="/neolab/architekci"><SectionPage page="neo-lab" /></Route>
     <Route path="/contact"><SectionPage page="contact" /></Route>
     <Route path="/404" component={NotFound} />
     <Route component={NotFound} />
