@@ -30,9 +30,9 @@
     >
       <header
         data-header
-        class="fixed left-1/2 top-0 z-30 flex w-full max-w-[480px] -translate-x-1/2 flex-col border-b border-transparent bg-black"
+        class="neo-glass-header"
       >
-        <div class="flex items-center justify-between px-6 py-5">
+        <div class="neo-glass-bar">
           <a href="index.html" class="inline-flex items-center">
             <img src="/logo.png" alt="Neo Form" class="h-8 w-auto" />
           </a>
@@ -43,8 +43,8 @@
             aria-label="Otwórz menu"
             class="group flex h-10 w-10 flex-col items-center justify-center gap-1.5"
           >
-            <span class="block h-px w-6 bg-white transition group-hover:opacity-70"></span>
-            <span class="block h-px w-4 bg-white transition group-hover:opacity-70"></span>
+            <span class="block h-0.5 w-7 bg-white transition group-hover:opacity-70"></span>
+            <span class="block h-0.5 w-5 bg-white transition group-hover:opacity-70"></span>
           </button>
         </div>
         <nav
@@ -62,7 +62,7 @@
         </nav>
       </header>
 
-      <main class="pt-24">
+      <main class="pt-28">
         <section class="px-6 pb-16" data-animate="hero">
           <p class="section-label mb-6">Neo Lab</p>
           <h1 class="section-title mb-8">Edukacja<br />& wspólna praktyka</h1>
@@ -73,33 +73,41 @@
         </section>
 
         <section
-          class="mx-6 mb-20 aspect-[16/10] border border-neo-line bg-gradient-to-tr from-zinc-900 to-black"
+          class="relative mx-6 mb-20 aspect-[16/10] overflow-hidden border border-white/10"
           data-animate="reveal"
         >
-          <div class="flex h-full flex-col justify-end p-6">
+          <img
+            src="https://images.unsplash.com/photo-1618221195710-dd2d4f785ee5?q=70&w=600&auto=format&fit=crop"
+            alt="Neo Lab — sesja materiałowa"
+            class="neo-img absolute inset-0"
+            width="600"
+            height="375"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 flex flex-col justify-end bg-black/45 p-6">
             <p class="section-label">Showroom · Warszawa</p>
-            <p class="font-display mt-2 text-2xl font-light">Sesja materiałowa</p>
+            <p class="font-display mt-2 text-3xl font-light text-white">Sesja materiałowa</p>
           </div>
         </section>
 
-        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+        <section class="border-t border-white/10 px-6 py-20" data-animate="reveal">
           <p class="section-label mb-8">Program</p>
           <ul class="space-y-10">
             <li>
-              <h3 class="font-display text-2xl font-light">Masterclass: Fronty</h3>
+              <h3 class="font-display text-3xl font-light text-white">Masterclass: Fronty</h3>
               <p class="body-copy mt-3">
                 Różnice między lakierem, fornirem a laminatem — dotyk, pielęgnacja, koszt
                 życia produktu.
               </p>
             </li>
             <li>
-              <h3 class="font-display text-2xl font-light">Blaty w projekcie</h3>
+              <h3 class="font-display text-3xl font-light text-white">Blaty w projekcie</h3>
               <p class="body-copy mt-3">
                 Spieki vs kamień naturalny — jak dobierać grubość, krawędzie i spadki.
               </p>
             </li>
             <li>
-              <h3 class="font-display text-2xl font-light">Oświetlenie kuchni</h3>
+              <h3 class="font-display text-3xl font-light text-white">Oświetlenie kuchni</h3>
               <p class="body-copy mt-3">
                 Warstwy światła: robocze, nastrojowe, akcentujące strefę jadalnianą.
               </p>
@@ -107,9 +115,9 @@
           </ul>
         </section>
 
-        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+        <section class="border-t border-white/10 px-6 py-20" data-animate="reveal">
           <p class="section-label mb-8">Partnerzy</p>
-          <div class="grid grid-cols-2 gap-px bg-neo-line">
+          <div class="grid grid-cols-2 gap-px bg-white/10">
             <div class="flex aspect-[3/2] items-center justify-center bg-black p-4">
               <span class="section-label text-center">Blum</span>
             </div>
@@ -125,20 +133,20 @@
           </div>
         </section>
 
-        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+        <section class="border-t border-white/10 px-6 py-20" data-animate="reveal">
           <p class="section-label mb-8">Nadchodzące wydarzenia</p>
           <div class="space-y-6">
-            <article class="border border-neo-line p-6">
+            <article class="border border-white/10 p-6">
               <time class="section-label" datetime="2026-04-12">12.04.2026</time>
               <h3 class="mt-4 font-display text-xl font-light">Neo Lab Open Day</h3>
               <p class="body-copy mt-2">Wizyta w zakładzie · grupy 8 osób · wolne miejsca: 4</p>
             </article>
-            <article class="border border-neo-line p-6">
+            <article class="border border-white/10 p-6">
               <time class="section-label" datetime="2026-05-08">08.05.2026</time>
               <h3 class="mt-4 font-display text-xl font-light">Warsztat: Ukryte AGD</h3>
               <p class="body-copy mt-2">Showroom · architekci · rejestracja mailowa</p>
             </article>
-            <article class="border border-neo-line p-6">
+            <article class="border border-white/10 p-6">
               <time class="section-label" datetime="2026-06-20">20.06.2026</time>
               <h3 class="mt-4 font-display text-xl font-light">Panel: Kuchnia 2030</h3>
               <p class="body-copy mt-2">Goście: projektanci Neo Form + partnerzy branżowi</p>
@@ -146,10 +154,10 @@
           </div>
         </section>
 
-        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+        <section class="border-t border-white/10 px-6 py-20" data-animate="reveal">
           <a
             href="contact.html"
-            class="flex items-center justify-between border border-neo-line px-6 py-5 font-sans text-xs uppercase tracking-ultra transition hover:border-white/30"
+            class="neo-btn-outline"
           >
             Zapisz się na wydarzenie
             <span aria-hidden="true">→</span>
