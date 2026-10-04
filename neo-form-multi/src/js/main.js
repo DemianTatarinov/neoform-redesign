@@ -16,8 +16,7 @@ function initMenu() {
   let open = false
 
   gsap.set(panel, { autoAlpha: 0 })
-  panel.classList.add('pointer-events-none')
-  panel.style.pointerEvents = 'none'
+  panel.classList.add('hidden', 'pointer-events-none')
 
   const setOpen = (next) => {
     open = next
@@ -26,13 +25,14 @@ function initMenu() {
     panel.classList.toggle('is-open', open)
 
     if (open) {
-      panel.classList.remove('pointer-events-none')
+      panel.classList.remove('hidden', 'pointer-events-none')
       panel.style.pointerEvents = 'auto'
 
       gsap.to(panel, {
         autoAlpha: 1,
         duration: 0.4,
         ease: 'power2.out',
+        overwrite: 'auto',
       })
 
       gsap.fromTo(
@@ -45,6 +45,7 @@ function initMenu() {
           stagger: 0.06,
           ease: 'power3.out',
           delay: 0.06,
+          overwrite: 'auto',
         }
       )
     } else {
@@ -52,9 +53,10 @@ function initMenu() {
         autoAlpha: 0,
         duration: 0.3,
         ease: 'power2.in',
+        overwrite: 'auto',
         onComplete: () => {
           panel.classList.remove('is-open')
-          panel.classList.add('pointer-events-none')
+          panel.classList.add('hidden', 'pointer-events-none')
           panel.style.pointerEvents = 'none'
         },
       })
@@ -112,6 +114,31 @@ function initReveal() {
   })
 }
 
+function initSlideIn() {
+  const items = document.querySelectorAll('.slide-in-left')
+  if (!items.length) return
+
+  const reveal = (el) => el.classList.add('is-inview')
+
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(reveal)
+    return
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+        reveal(entry.target)
+        observer.unobserve(entry.target)
+      })
+    },
+    { threshold: 0.25, rootMargin: '0px 0px -8% 0px' }
+  )
+
+  items.forEach((el) => observer.observe(el))
+}
+
 function initHeader() {
   const header = document.querySelector('[data-header]')
   if (!header) return
@@ -127,5 +154,6 @@ function initHeader() {
 document.addEventListener('DOMContentLoaded', () => {
   initMenu()
   initReveal()
+  initSlideIn()
   initHeader()
 })

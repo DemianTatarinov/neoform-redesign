@@ -141,8 +141,18 @@
   }
 
   .neo-menu-dropdown {
-    @apply absolute top-full left-0 z-[90] w-full bg-black/50 shadow-2xl backdrop-blur-xl opacity-0 pointer-events-none;
-    border-bottom: 1px solid rgb(255 255 255 / 0.1);
+    @apply absolute top-20 left-1/2 z-[90] w-[90%] max-w-sm -translate-x-1/2 rounded-2xl border border-white/10 bg-zinc-900/80 p-6 shadow-2xl backdrop-blur-2xl;
+  }
+
+  .slide-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s ease-out;
+  }
+
+  .slide-in-left.is-inview {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   .neo-menu-dropdown.is-open {
