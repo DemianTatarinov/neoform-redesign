@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 @layer base {
+  /*
+  Warm Graphite
   :root {
-    /* Warm Graphite — ACTIVE */
-    /*
     --neo-bg: #1a1a1a;
     --neo-surface: #222222;
     --neo-text: #a3a3a3;
     --neo-heading: #ffffff;
     --neo-accent: #8b7a66;
-    */
-
   }
+  */
 
-  Concrete & Walnut :root {
+  :root {
+    /* Concrete & Walnut — ACTIVE */
     --neo-bg: #020617;
     --neo-surface: #0f172a;
     --neo-text: #94a3b8;
