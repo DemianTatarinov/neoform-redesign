@@ -111,8 +111,8 @@
   }
 
   .neo-glass-header {
-    @apply fixed top-0 left-1/2 z-[100] flex w-full max-w-[480px] -translate-x-1/2 flex-col bg-white/50 backdrop-blur-xl;
-    border-bottom: 1px solid rgb(0 0 0 / 0.05);
+    @apply fixed top-0 left-1/2 z-[100] flex w-full max-w-[480px] -translate-x-1/2 flex-col bg-white/30 shadow-sm backdrop-blur-3xl;
+    border-bottom: 1px solid rgb(0 0 0 / 0.1);
   }
 
   .neo-glass-bar {
@@ -128,8 +128,8 @@
   }
 
   .neo-menu-dropdown {
-    @apply absolute top-full left-0 z-[90] w-full bg-white/50 px-2 py-2 opacity-0 shadow-lg backdrop-blur-xl pointer-events-none;
-    border-bottom: 1px solid rgb(0 0 0 / 0.05);
+    @apply absolute top-full left-0 z-[90] w-full bg-white/40 px-2 py-2 opacity-0 shadow-lg backdrop-blur-3xl pointer-events-none;
+    border-bottom: 1px solid rgb(0 0 0 / 0.1);
   }
 
   .neo-menu-dropdown.is-open {
@@ -149,7 +149,38 @@
   }
 
   .neo-band-muted {
-    @apply border-y border-black/5 bg-[#f7f7f8];
+    @apply bg-zinc-100;
+  }
+
+  .neo-band-invert {
+    @apply bg-zinc-950 text-zinc-300;
+  }
+
+  .neo-band-invert .section-label {
+    color: var(--neo-accent);
+  }
+
+  .neo-band-invert .body-copy {
+    color: #d4d4d8;
+  }
+
+  .neo-band-invert .subsection-title,
+  .neo-band-invert .section-title,
+  .neo-band-invert h2,
+  .neo-band-invert h3 {
+    color: #ffffff;
+  }
+
+  .neo-footer-dark {
+    @apply bg-black text-zinc-400;
+  }
+
+  .neo-footer-dark .body-copy {
+    color: #a1a1aa;
+  }
+
+  .neo-footer-dark img {
+    filter: brightness(0) invert(1);
   }
 
   .hero-video-overlay {
@@ -175,7 +206,7 @@
   }
 
   .review-card {
-    @apply bg-neo-surface p-6;
+    @apply bg-white p-6;
     border: 1px solid color-mix(in srgb, var(--neo-text) 20%, transparent);
   }
 

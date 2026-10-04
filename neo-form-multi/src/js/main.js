@@ -116,8 +116,7 @@ function initHeader() {
     start: 'top -40',
     onUpdate: (self) => {
       const scrolled = self.scroll() > 24
-      header.classList.toggle('bg-white/70', scrolled)
-      header.classList.toggle('shadow-sm', scrolled)
+      header.classList.toggle('shadow-md', scrolled)
     },
   })
 }

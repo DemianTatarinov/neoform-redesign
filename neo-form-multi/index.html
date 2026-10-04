@@ -28,7 +28,10 @@
     <div
       class="neo-root relative mx-auto min-h-screen max-w-[480px] overflow-hidden bg-neo-bg text-neo-text"
     >
-      <header data-header class="neo-glass-header">
+      <header
+        data-header
+        class="neo-glass-header bg-white/30 backdrop-blur-3xl border-b border-black/10 shadow-sm"
+      >
         <div class="neo-glass-bar">
           <a href="index.html" class="inline-flex items-center">
             <img src="/logo.png" alt="Neo Form" class="h-8 w-auto" />
@@ -56,7 +59,12 @@
             </svg>
           </button>
         </div>
-        <nav data-menu-panel class="neo-menu-dropdown" aria-label="Menu główne" aria-hidden="true">
+        <nav
+          data-menu-panel
+          class="neo-menu-dropdown bg-white/40 backdrop-blur-3xl"
+          aria-label="Menu główne"
+          aria-hidden="true"
+        >
           <ul>
             <li><a href="index.html" class="neo-menu-link">Główna</a></li>
             <li><a href="portfolio.html" class="neo-menu-link">Portfolio</a></li>
@@ -88,7 +96,7 @@
           </div>
         </section>
 
-        <section class="neo-band-white px-6 py-20" data-animate="reveal">
+        <section class="neo-band-white bg-white px-6 py-24" data-animate="reveal">
           <p class="section-label mb-6">Nowy etap</p>
           <h2 class="subsection-title mb-8">
             Neo Form to nowy rozdział marki Neo Kuchnie.
@@ -109,24 +117,27 @@
           </p>
         </section>
 
-        <section class="neo-band-muted px-6 py-20" data-animate="reveal">
-          <p class="section-label mb-6">Nasze Credo</p>
-          <h2 class="subsection-title mb-8 uppercase">
+        <section
+          class="neo-band-invert bg-zinc-950 px-6 py-32 text-zinc-300"
+          data-animate="reveal"
+        >
+          <p class="section-label mb-6 text-neo-accent">Nasze Credo</p>
+          <h2 class="subsection-title mb-8 uppercase text-white">
             Projekt. Materiał. Detal. Jakość.
           </h2>
-          <p class="body-copy mb-6">
+          <p class="body-copy mb-6 text-zinc-300">
             Cztery elementy. Jedna forma. Wierzymy, że dobry mebel nie powinien dominować
             przestrzeni — powinien ją porządkować, podkreślać proporcję i dawać poczucie
             trwałości na lata.
           </p>
-          <p class="body-copy">
+          <p class="body-copy text-zinc-300">
             W Neo Form łączymy wizję projektanta z rzemiosłem produkcji. Słuchamy,
             prototypujemy i dopracowujemy detale, które w codziennym użytkowaniu robią
             największą różnicę.
           </p>
         </section>
 
-        <section class="neo-band-white px-6 py-20" data-animate="reveal">
+        <section class="neo-band-white bg-white px-6 py-32" data-animate="reveal">
           <p class="section-label mb-6">Neo Standard</p>
           <h2 class="subsection-title mb-10">Standard, który definiujemy sami</h2>
           <ul class="grid grid-cols-1 gap-8">
@@ -191,7 +202,7 @@
           </ul>
         </section>
 
-        <section class="neo-band-muted px-6 py-20" data-animate="reveal">
+        <section class="neo-band-muted bg-zinc-100 px-6 py-24" data-animate="reveal">
           <p class="section-label mb-6">Historia</p>
           <h2 class="subsection-title uppercase leading-tight">
             Neo Kuchnie → Neo Form.<br />Nowy czas. Nowa forma.
@@ -202,14 +213,14 @@
           </p>
         </section>
 
-        <section class="neo-band-white px-6 py-20" data-animate="reveal">
+        <section class="neo-band-white bg-white px-6 py-24" data-animate="reveal">
           <a href="portfolio.html" class="neo-btn-outline">
             Zobacz realizacje
             <span aria-hidden="true">→</span>
           </a>
         </section>
 
-        <section class="neo-band-muted px-6 py-20" data-animate="reveal">
+        <section class="neo-band-muted bg-zinc-100 px-6 py-24" data-animate="reveal">
           <p class="section-label mb-6">Opinie</p>
           <h2 class="subsection-title mb-4">Głos klientów</h2>
           <div class="reviews-grid">
@@ -245,7 +256,7 @@
           </div>
         </section>
 
-        <section class="neo-band-white px-6 py-20" data-animate="reveal">
+        <section class="neo-band-white bg-white px-6 py-24" data-animate="reveal">
           <p class="section-label mb-6">Lokalizacja</p>
           <h2 class="subsection-title mb-4">Warszawa</h2>
           <p class="body-copy mb-8">
@@ -265,9 +276,9 @@
         </section>
       </main>
 
-      <footer class="border-t border-neo-text/20 px-6 py-12">
+      <footer class="neo-footer-dark bg-black px-6 py-24 text-zinc-400">
         <img src="/logo.png" alt="Neo Form" class="h-7 w-auto" />
-        <p class="body-copy mt-4">Neo Form · Warszawa</p>
+        <p class="body-copy mt-4 text-zinc-400">Neo Form · Warszawa</p>
         <a href="contact.html" class="body-copy mt-6 inline-block text-neo-accent"
           >Kontakt →</a
         >
