@@ -12,12 +12,20 @@ export default {
       },
       colors: {
         neo: {
-          muted: '#a1a1aa',
-          line: '#2a2a2a',
-          accent: '#c9b896',
+          bg: 'var(--neo-bg)',
+          surface: 'var(--neo-surface)',
+          text: 'var(--neo-text)',
+          heading: 'var(--neo-heading)',
+          accent: 'var(--neo-accent)',
         },
       },
     },
   },
+  safelist: [
+    {
+      pattern:
+        /^(bg|text|border|from|to|via)-(neo-(bg|surface|text|heading|accent))(\/\d+)?$/,
+    },
+  ],
   plugins: [],
 }

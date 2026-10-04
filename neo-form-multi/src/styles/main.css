@@ -3,49 +3,85 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Warm Graphite — ACTIVE */
+    --neo-bg: #1a1a1a;
+    --neo-surface: #222222;
+    --neo-text: #a3a3a3;
+    --neo-heading: #ffffff;
+    --neo-accent: #8b7a66;
+  }
+
+  /*
+  Concrete & Walnut
+  :root {
+    --neo-bg: #020617;
+    --neo-surface: #0f172a;
+    --neo-text: #94a3b8;
+    --neo-heading: #f8fafc;
+    --neo-accent: #d98a6c;
+  }
+  */
+
+  /*
+  Obsidian Luxe
+  :root {
+    --neo-bg: #09090b;
+    --neo-surface: #18181b;
+    --neo-text: #a1a1aa;
+    --neo-heading: #f4f4f5;
+    --neo-accent: #ffffff;
+  }
+  */
+
   html {
-    @apply bg-zinc-900 antialiased;
+    @apply antialiased;
+    background-color: var(--neo-bg);
   }
 
   body {
-    @apply font-sans text-lg text-zinc-200;
+    @apply font-sans text-lg;
+    color: var(--neo-text);
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply font-display text-white;
+    @apply font-display;
+    color: var(--neo-heading);
   }
 
   ::selection {
-    @apply bg-white/20 text-white;
+    background-color: color-mix(in srgb, var(--neo-accent) 35%, transparent);
+    color: var(--neo-heading);
   }
 }
 
 @layer components {
   .section-label {
-    @apply font-sans text-sm uppercase tracking-ultra text-zinc-400;
+    @apply font-sans text-sm uppercase tracking-ultra;
+    color: var(--neo-text);
   }
 
   .section-title {
-    @apply font-display text-5xl font-light leading-[1.02] tracking-tight text-white;
+    @apply font-display text-5xl font-light leading-[1.02] tracking-tight;
+    color: var(--neo-heading);
   }
 
   .subsection-title {
-    @apply font-display text-4xl font-light leading-tight text-white;
+    @apply font-display text-4xl font-light leading-tight;
+    color: var(--neo-heading);
   }
 
   .body-copy {
-    @apply font-sans text-lg font-light leading-relaxed text-zinc-200;
+    @apply font-sans text-lg font-light leading-relaxed;
+    color: var(--neo-text);
   }
 
   .nav-link {
-    @apply font-display text-2xl font-light tracking-tight text-white transition-opacity hover:opacity-60;
-  }
-
-  .neo-logo {
-    @apply font-display text-base font-normal uppercase tracking-[0.38em] text-white;
+    @apply font-display text-2xl font-light tracking-tight transition-opacity hover:opacity-60;
+    color: var(--neo-heading);
   }
 
   .neo-img {
@@ -57,22 +93,69 @@
   }
 
   .review-stars {
-    @apply font-sans text-base tracking-widest text-neo-accent;
+    @apply font-sans text-base tracking-widest;
+    color: var(--neo-accent);
   }
 
   .neo-glass-header {
-    @apply fixed left-1/2 top-0 z-50 flex w-full max-w-[480px] -translate-x-1/2 flex-col border-b border-white/10 bg-black/50 backdrop-blur-lg;
+    @apply fixed left-1/2 top-0 z-50 flex w-full max-w-[480px] -translate-x-1/2 flex-col backdrop-blur-md;
+    border-bottom: 1px solid color-mix(in srgb, var(--neo-text) 10%, transparent);
+    background-color: color-mix(in srgb, var(--neo-bg) 70%, transparent);
   }
 
   .neo-glass-bar {
     @apply relative z-10 flex items-center justify-between px-6 py-5;
   }
 
+  .neo-burger-line {
+    @apply block h-0.5 transition group-hover:opacity-70;
+    background-color: var(--neo-heading);
+  }
+
+  .hero-copy-panel {
+    @apply relative overflow-hidden rounded-sm p-8 shadow-[0_24px_48px_-24px_rgba(0,0,0,0.8)] backdrop-blur-md;
+    border: 1px solid color-mix(in srgb, var(--neo-text) 20%, transparent);
+    background-color: color-mix(in srgb, var(--neo-surface) 90%, transparent);
+  }
+
+  .hero-copy-panel::before {
+    content: '';
+    @apply pointer-events-none absolute inset-0;
+    background: linear-gradient(
+      to bottom right,
+      color-mix(in srgb, var(--neo-accent) 12%, transparent),
+      transparent 55%
+    );
+  }
+
+  .hero-copy-inner {
+    @apply relative z-[1];
+  }
+
   .neo-field {
-    @apply w-full border-b border-white/10 bg-transparent py-3 font-sans text-lg text-zinc-200 outline-none focus:border-white/30;
+    @apply w-full border-b bg-transparent py-3 font-sans text-lg outline-none;
+    border-color: color-mix(in srgb, var(--neo-text) 20%, transparent);
+    color: var(--neo-heading);
+  }
+
+  .neo-field:focus {
+    border-color: var(--neo-accent);
   }
 
   .neo-btn-outline {
-    @apply flex items-center justify-between border border-white/10 px-6 py-5 font-sans text-sm uppercase tracking-ultra text-zinc-200 transition hover:border-white/25;
+    @apply flex items-center justify-between px-6 py-5 font-sans text-sm uppercase tracking-ultra transition;
+    border: 1px solid color-mix(in srgb, var(--neo-accent) 40%, transparent);
+    color: var(--neo-text);
+  }
+
+  .neo-btn-outline:hover {
+    border-color: var(--neo-accent);
+    color: var(--neo-heading);
+  }
+
+  .neo-card {
+    @apply p-6;
+    background-color: var(--neo-surface);
+    border: 1px solid color-mix(in srgb, var(--neo-text) 20%, transparent);
   }
 }

@@ -21,8 +21,8 @@ function initMenu() {
   const setOpen = (next) => {
     open = next
     toggle.setAttribute('aria-expanded', String(open))
-    panel.classList.toggle('border-white/10', open)
-    header?.classList.toggle('border-white/20', open)
+    panel.classList.toggle('border-neo-text/20', open)
+    header?.classList.toggle('border-neo-text/30', open)
 
     if (open) {
       panel.style.height = 'auto'
@@ -58,8 +58,8 @@ function initMenu() {
         duration: 0.32,
         ease: 'power2.in',
         onComplete: () => {
-          panel.classList.remove('border-white/10')
-          header?.classList.remove('border-white/20')
+          panel.classList.remove('border-neo-text/20')
+          header?.classList.remove('border-neo-text/30')
         },
       })
     }
@@ -117,8 +117,8 @@ function initHeader() {
     start: 'top -40',
     onUpdate: (self) => {
       const scrolled = self.scroll() > 24
-      header.classList.toggle('bg-black/70', scrolled)
-      header.classList.toggle('border-white/20', scrolled)
+      header.classList.toggle('bg-neo-bg/90', scrolled)
+      header.classList.toggle('border-neo-text/20', scrolled)
     },
   })
 }
