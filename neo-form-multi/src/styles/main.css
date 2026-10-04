@@ -120,13 +120,12 @@
   }
 
   .neo-glass-header {
-    @apply fixed top-0 left-1/2 z-[100] flex w-full max-w-[480px] -translate-x-1/2 flex-col overflow-visible backdrop-blur-2xl;
-    background-color: rgb(var(--neo-bg) / 0.6);
-    border-bottom: 1px solid rgb(255 255 255 / 0.05);
+    @apply fixed top-0 left-1/2 z-[100] flex w-full max-w-[480px] -translate-x-1/2 flex-col overflow-visible bg-black/40 backdrop-blur-md;
+    border-bottom: 1px solid rgb(255 255 255 / 0.1);
   }
 
   .neo-glass-header.is-scrolled {
-    background-color: rgb(var(--neo-bg) / 0.78);
+    background-color: rgb(0 0 0 / 0.5);
   }
 
   .neo-glass-bar {
@@ -142,9 +141,8 @@
   }
 
   .neo-menu-dropdown {
-    @apply absolute top-full left-0 z-[90] w-full shadow-2xl backdrop-blur-3xl opacity-0 pointer-events-none;
-    background-color: rgb(var(--neo-bg) / 0.7);
-    border-bottom: 1px solid rgb(255 255 255 / 0.05);
+    @apply absolute top-full left-0 z-[90] w-full bg-black/50 shadow-2xl backdrop-blur-xl opacity-0 pointer-events-none;
+    border-bottom: 1px solid rgb(255 255 255 / 0.1);
   }
 
   .neo-menu-dropdown.is-open {
@@ -152,7 +150,7 @@
   }
 
   .neo-menu-link {
-    @apply relative z-50 block py-5 text-center font-display text-2xl text-neo-text transition-colors pointer-events-auto;
+    @apply relative z-50 block py-5 text-center font-display text-2xl text-white transition-colors pointer-events-auto;
   }
 
   .neo-menu-link:hover {
