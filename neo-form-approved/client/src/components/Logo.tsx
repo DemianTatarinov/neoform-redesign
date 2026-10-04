@@ -7,13 +7,13 @@ type LogoProps = {
   onClick?: () => void;
 };
 
-function LogoMark({ className = "h-12 sm:h-14" }: { className?: string }) {
+function LogoMark({ className = "h-11 sm:h-12" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 200 135"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`${className} w-auto`.trim()}
+      className={`${className} w-auto object-contain`.trim()}
       role="img"
       aria-label="NEO FORM Meble na wymiar"
     >
@@ -24,8 +24,8 @@ function LogoMark({ className = "h-12 sm:h-14" }: { className?: string }) {
         strokeLinecap="square"
         strokeLinejoin="miter"
       />
-      <rect x="74" y="12" width="44" height="6.5" fill="#D97724" />
-      <rect x="74" y="32" width="38" height="6.5" fill="#D97724" />
+      <rect x="74" y="12" width="44" height="6.5" fill="#F26522" />
+      <rect x="74" y="32" width="38" height="6.5" fill="#F26522" />
       <path
         d="M77 42V59H118"
         stroke="#FFFFFF"
@@ -46,7 +46,7 @@ function LogoMark({ className = "h-12 sm:h-14" }: { className?: string }) {
       >
         FORM
       </text>
-      <line x1="12" y1="99" x2="188" y2="99" stroke="#D97724" strokeWidth="2" />
+      <line x1="12" y1="99" x2="188" y2="99" stroke="#F26522" strokeWidth="2" />
       <text
         x="100"
         y="120"
@@ -64,7 +64,7 @@ function LogoMark({ className = "h-12 sm:h-14" }: { className?: string }) {
 }
 
 export default function Logo({
-  className = "h-12 sm:h-14",
+  className = "h-11 sm:h-12",
   linked = true,
   href = "/",
   onClick,

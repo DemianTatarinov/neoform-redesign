@@ -38,7 +38,7 @@ export default function SiteChrome({ eyebrow, title, lead, cta, children }: Site
       <section className="hero pointer-events-none" id="start">
         <HeroVideo />
         <SiteHeader />
-        <div className="hero__content shell relative z-10">
+        <div className="hero__content shell relative z-10 pointer-events-none">
           <p className="eyebrow eyebrow--light">
             <span className="hero__reveal hero__reveal--1">{eyebrow}</span>
           </p>

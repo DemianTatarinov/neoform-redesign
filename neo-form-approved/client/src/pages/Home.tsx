@@ -13,6 +13,7 @@ import SectionDivider from "@/components/SectionDivider";
 import SiteHeader from "@/components/SiteHeader";
 import { credoCards, media } from "@/assets/media";
 import { triggerHaptic } from "@/utils/haptics";
+import { hideBrokenImage } from "@/utils/images";
 
 const storage = {
   bespoke1: media.bespokeVeneer,
@@ -123,15 +124,15 @@ export default function Home() {
   };
 
   return (
-    <div className="site">
+    <main className="site overflow-x-hidden">
       <section className="hero pointer-events-none" id="start" data-header-surface="dark">
         <HeroVideo />
         <SiteHeader homePage />
-        <div className="hero__content shell relative z-10">
-          <p className="hero__reveal hero__reveal--1 eyebrow eyebrow--light">
-            NEO FORM / KUCHNIE I MEBLE NA WYMIAR
+        <div className="hero__content shell relative z-10 pointer-events-none">
+          <p className="hero__reveal hero__reveal--1 font-mono text-[10px] tracking-[0.18em] text-[#F26522] uppercase">
+            [ WARSZAWA I MAZOWSZE · MEBLE NA WYMIAR ]
           </p>
-          <h1 className="hero__reveal hero__reveal--2">
+          <h1 className="hero__reveal hero__reveal--2 text-white font-bold">
             NOWA FORMA.<br />
             BEZWZGLĘDNA PRECYZJA.
           </h1>
@@ -139,7 +140,14 @@ export default function Home() {
             Projektujemy i produkujemy autorskie kuchnie oraz zabudowy meblowe klasy bespoke.
           </p>
           <span className="hero__reveal hero__reveal--4">
-            <Button href="#portfolio">Zobacz projekty</Button>
+            <a
+              className="pointer-events-auto inline-flex items-center gap-2 rounded bg-[#F26522] px-6 py-3.5 font-medium text-white hover:bg-[#d95316]"
+              href="#portfolio"
+              onClick={() => triggerHaptic()}
+            >
+              ZOBACZ PROJEKTY
+              <ArrowUpRight size={15} strokeWidth={1.8} />
+            </a>
           </span>
         </div>
         <div className="hero__footer shell"><span>SCROLL TO EXPLORE</span><span className="hero__line" /><ArrowDown size={14} /><span className="hero__swipe-hint">SWIPE HORIZONTALLY FOR NEXT VIDEO</span></div>
@@ -158,7 +166,7 @@ export default function Home() {
           {bespokeCards.map(([number, title, description, image, ratio]) => (
             <article className={`solution-card solution-card--${ratio}`} key={number}>
               <div className="solution-card__image">
-                <img src={image} alt={title} className="object-cover w-full h-full" />
+                <img src={image} alt={title} className="object-cover w-full h-full" onError={hideBrokenImage} />
                 <span>{number}</span>
               </div>
               <div className="solution-card__copy">
@@ -187,19 +195,106 @@ export default function Home() {
 
       <section className="portfolio section-light section-rhythm" id="portfolio" data-reveal data-header-surface="light">
         <div className="shell"><Eyebrow>PORTFOLIO</Eyebrow><h2>PRZESTRZENIE,<br />KTÓRE STWORZYLIŚMY.</h2><p className="portfolio__lead">Nie tworzymy mebli do pustych pokoi. Tworzymy rozwiązania dla konkretnej architektury. Zobacz, jak nasze podejście do proporcji i materiału sprawdza się w praktyce.</p>
-          <div className="section-rhythm__body project-grid">{projects.map(([title, description, image]) => <a href="#project-detail" className="project-tile" key={title} onClick={(event) => { event.preventDefault(); setSelectedProject([title, description, image]); }}><img src={image} alt={title} className="object-cover w-full h-full" /><div><h3>{title}</h3><p>{description}</p><span className="project-tile__link">Otwórz projekt <ArrowUpRight size={15} /></span></div></a>)}</div>
+          <div className="section-rhythm__body project-grid">
+            {projects.map(([title, description, image]) => (
+              <a
+                href="#project-detail"
+                className="project-tile group"
+                key={title}
+                onClick={(event) => {
+                  event.preventDefault();
+                  setSelectedProject([title, description, image]);
+                }}
+              >
+                <img
+                  src={image}
+                  alt={title}
+                  className="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  onError={hideBrokenImage}
+                />
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                <div>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                  <span className="project-tile__link">Otwórz projekt <ArrowUpRight size={15} /></span>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="architects section-rhythm" id="architects" data-reveal data-header-surface="light"><div className="architects__copy"><Eyebrow>WSPÓŁPRACA Z ARCHITEKTEM</Eyebrow><h2>DOBRY PROJEKT POTRZEBUJE DOBREGO WYKONAWCY.</h2><p>Architekt tworzy wizję. My pomagamy nadać jej fizyczną formę. Pracujemy z projektantami już na etapie koncepcji, konsultując materiały, konstrukcję, technologię i możliwości wykonawcze.</p><p>Nie chcemy zmieniać projektu dlatego, że jest trudny. Chcemy znaleźć sposób, żeby go wykonać.</p><blockquote>Jedną z naszych obecnych współprac jest Matsko Studio. To właśnie dialog pomiędzy projektantem i wykonawcą pozwala powstawać rozwiązaniom, których nie da się znaleźć w katalogu.</blockquote><Button variant="ghost">Rozpocznij współpracę</Button></div><div className="architects__image" role="img" aria-label="Projektant i wykonawca omawiają projekt"><img src={images.architects} alt="Współpraca z architektem" className="object-cover w-full h-full" /></div></section>
+      <SectionDivider index="04" label="ARCHITEKCI" tone="light" />
 
-      <section className="testimonials section-light section-rhythm" id="opinie" data-reveal data-header-surface="light"><div className="shell"><div className="testimonials__heading"><Eyebrow>OPINIE / MATERIAŁ DEMONSTRACYJNY</Eyebrow><h2>FORMA, KTÓRA<br /><span>ZOSTAJE NA DŁUŻEJ.</span></h2><p>Teksty i portrety w tej wersji są demonstracyjne. Po otrzymaniu potwierdzonych opinii klientów zastąpię je prawdziwymi wypowiedziami i zgodami na publikację.</p></div><div className="testimonials__slider-wrap section-rhythm__body"><div className="testimonials__grid" aria-label="Opinie klientów — przesuń, aby zobaczyć kolejne opinie">{testimonials.map(([name, role, quote, image]) => <article className="testimonial-card" key={name}><div className="testimonial-card__top"><div className="testimonial-card__portrait"><img src={image} alt={name} className="object-cover w-full h-full" /></div><div><strong>{name}</strong><span>{role}</span></div></div><div className="testimonial-card__quote">“</div><p>{quote}</p><div className="testimonial-card__line" /></article>)}</div><div className="testimonials__mobile-hint"><span className="testimonials__hint-line" /><span>PRZESUŃ, ABY ZOBACZYĆ WIĘCEJ</span><ArrowUpRight size={14} /></div></div></div></section>
+      <section className="architects section-rhythm" id="architects" data-reveal data-header-surface="light"><div className="architects__copy"><Eyebrow>WSPÓŁPRACA Z ARCHITEKTEM</Eyebrow><h2>DOBRY PROJEKT POTRZEBUJE DOBREGO WYKONAWCY.</h2><p>Architekt tworzy wizję. My pomagamy nadać jej fizyczną formę. Pracujemy z projektantami już na etapie koncepcji, konsultując materiały, konstrukcję, technologię i możliwości wykonawcze.</p><p>Nie chcemy zmieniać projektu dlatego, że jest trudny. Chcemy znaleźć sposób, żeby go wykonać.</p><blockquote>Jedną z naszych obecnych współprac jest Matsko Studio. To właśnie dialog pomiędzy projektantem i wykonawcą pozwala powstawać rozwiązaniom, których nie da się znaleźć w katalogu.</blockquote><Button variant="ghost">Rozpocznij współpracę</Button></div><div className="architects__image" role="img" aria-label="Projektant i wykonawca omawiają projekt"><img src={images.architects} alt="Współpraca z architektem" className="object-cover w-full h-full" onError={hideBrokenImage} /></div></section>
 
-      <SectionDivider index="04" label="PROCES" tone="light" />
+      <section className="testimonials section-light section-rhythm" id="opinie" data-reveal data-header-surface="light">
+        <div className="shell">
+          <div className="testimonials__heading">
+            <Eyebrow>OPINIE / MATERIAŁ DEMONSTRACYJNY</Eyebrow>
+            <h2>FORMA, KTÓRA<br /><span>ZOSTAJE NA DŁUŻEJ.</span></h2>
+            <p>Teksty i portrety w tej wersji są demonstracyjne. Po otrzymaniu potwierdzonych opinii klientów zastąpię je prawdziwymi wypowiedziami i zgodami na publikację.</p>
+          </div>
+          <div className="testimonials__slider-wrap section-rhythm__body overflow-x-hidden">
+            <div
+              className="testimonials__grid flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-8 scrollbar-none sm:px-6 md:grid md:grid-cols-3 md:gap-px md:overflow-visible md:px-0 md:pb-0"
+              aria-label="Opinie klientów — przesuń, aby zobaczyć kolejne opinie"
+            >
+              {testimonials.map(([name, role, quote]) => {
+                const initials = name.split(" ").map((part) => part[0]).join("").slice(0, 2);
+                return (
+                  <article className="testimonial-card w-[85vw] max-w-md shrink-0 snap-center md:w-auto md:max-w-none md:shrink md:snap-align-none" key={name}>
+                    <div className="testimonial-card__top mb-4 flex items-center gap-3.5">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#F26522]/30 bg-[#F26522]/15 text-sm font-bold text-[#F26522]">
+                        {initials}
+                      </div>
+                      <div className="flex min-w-0 flex-col">
+                        <strong className="font-semibold text-neutral-900">{name}</strong>
+                        <span className="text-neutral-500">{role}</span>
+                      </div>
+                    </div>
+                    <div className="testimonial-card__quote">“</div>
+                    <p>{quote}</p>
+                    <div className="testimonial-card__line" />
+                  </article>
+                );
+              })}
+            </div>
+            <div className="testimonials__mobile-hint">
+              <span className="testimonials__hint-line" />
+              <span>PRZESUŃ, ABY ZOBACZYĆ WIĘCEJ</span>
+              <ArrowUpRight size={14} />
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <section className="process section-light section-rhythm" id="process" data-reveal data-header-surface="light"><div className="shell"><div className="process__heading"><Eyebrow>PROCES</Eyebrow><h2>OD POMYSŁU DO<br />GOTOWEGO WNĘTRZA.</h2></div><div className="section-rhythm__body process-grid">{processSteps.map(([number, title, description, image]) => <article className="process-card" key={number}><div className="process-card__image"><img src={image} alt={title} className="object-cover w-full h-full" /></div><span className="process-card__number">{number}</span><div><h3>{title}</h3><p>{description}</p></div></article>)}</div></div></section>
+      <SectionDivider index="05" label="PROCES" tone="light" />
 
-      <SectionDivider index="05" label="NEO LAB" tone="dark" />
+      <section className="process section-light section-rhythm" id="process" data-reveal data-header-surface="light">
+        <div className="shell">
+          <div className="process__heading">
+            <Eyebrow>PROCES</Eyebrow>
+            <h2>OD POMYSŁU DO<br />GOTOWEGO WNĘTRZA.</h2>
+          </div>
+          <div className="section-rhythm__body process-grid">
+            {processSteps.map(([number, title, description, image]) => (
+              <article className="process-card" key={number}>
+                <div className="process-card__image">
+                  <img src={image} alt={title} className="h-48 w-full rounded-t-sm object-cover" onError={hideBrokenImage} />
+                </div>
+                <span className="process-card__number">{number}</span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SectionDivider index="06" label="NEO LAB" tone="dark" />
 
       <section className="neo-lab section-dark section-rhythm" id="neo-lab" data-reveal data-header-surface="dark">
         <div className="shell neo-lab__grid">
@@ -214,14 +309,14 @@ export default function Home() {
         </div>
       </section>
 
-      <SectionDivider index="06" label="KONTAKT" tone="dark" />
+      <SectionDivider index="07" label="KONTAKT" tone="dark" />
 
       <footer className="site-footer section-dark section-rhythm" id="contact" data-reveal data-header-surface="dark"><div className="shell"><div className="footer__hero"><Eyebrow light>NEO FORM</Eyebrow><h2>TWORZYMY MEBLE.<br />DZIELIMY SIĘ WIEDZĄ.<br />ROZWIJAMY BRANŻĘ.</h2><form className="lead-form" onSubmit={(event) => { triggerHaptic(); handleSubmit(event); }}>{[["Imię i nazwisko", "text", "name"], ["Numer telefonu", "tel", "phone"], ["Adres e-mail", "email", "email"]].map(([label, type, name]) => <label key={name}><span>{label}</span><input type={type} name={name} required={name !== "email"} /></label>)}<button className="button button--orange" type="submit">{sent ? "DZIĘKUJEMY" : "WYŚLIJ ZAPYTANIE"}<ArrowUpRight size={15} /></button>{sent && <p className="form-success">Otrzymaliśmy Twoją wiadomość. Skontaktujemy się wkrótce.</p>}</form></div><div className="footer__base"><div><span className="footer__brand"><BrandLogo /></span><p>ul. Przykładowa 12, Warszawa<br />+48 000 000 000<br />hello@neoform.pl</p></div><div className="footer__social"><a href="#contact">Instagram</a><a href="#contact">Facebook</a><a href="#contact">Pinterest</a></div><div className="footer__legal"><span>© 2026 NEO FORM</span><button className="footer-link" onClick={() => setLegalOpen("privacy")}>Polityka prywatności</button><button className="footer-link" onClick={() => setLegalOpen("cookies")}>Ustawienia cookies</button></div></div></div></footer>
       {selectedProject && (
         <div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onClick={() => setSelectedProject(null)}>
           <div className="project-modal__card" onClick={(event) => event.stopPropagation()}>
             <button className="project-modal__close" aria-label="Zamknij projekt" onClick={() => setSelectedProject(null)}><X size={20} /></button>
-            <div className="project-modal__image"><img src={selectedProject[2]} alt={selectedProject[0]} className="object-cover w-full h-full" /></div><div className="project-modal__gallery">{[storage.penthouse, storage.wilanow, storage.konstancin, storage.loft].map((image, index) => <img src={image} alt={`Galeria projektu ${index + 1}`} className="object-cover w-full h-full" key={image} />)}</div>
+            <div className="project-modal__image"><img src={selectedProject[2]} alt={selectedProject[0]} className="object-cover w-full h-full" onError={hideBrokenImage} /></div><div className="project-modal__gallery">{[storage.penthouse, storage.wilanow, storage.konstancin, storage.loft].map((image, index) => <img src={image} alt={`Galeria projektu ${index + 1}`} className="object-cover w-full h-full" key={image} onError={hideBrokenImage} />)}</div>
             <div className="project-modal__body"><Eyebrow>REALIZACJA / NEO FORM</Eyebrow><h2 id="project-modal-title">{selectedProject[0]}</h2><p className="project-modal__meta">Powierzchnia: 140 m² &nbsp;|&nbsp; Współpraca: pracownia projektowa &nbsp;|&nbsp; Rok: 2026</p><p>{selectedProject[1]} Tworzymy rozwiązania dla konkretnej architektury — od pierwszej koncepcji po montaż.</p><Button href="#contact">Porozmawiajmy o Twoim projekcie</Button></div>
           </div>
         </div>
@@ -233,6 +328,6 @@ export default function Home() {
       )}
       {cookiesVisible && <aside className="cookie-banner" aria-label="Ustawienia cookies"><div><strong>Twoja prywatność</strong><p>Używamy niezbędnych cookies, aby strona działała poprawnie. Szczegóły znajdziesz w polityce prywatności.</p></div><div className="cookie-banner__actions"><button className="button button--orange" onClick={() => { localStorage.setItem("neo-form-cookies", "accepted"); setCookiesVisible(false); }}>Akceptuję</button><button className="cookie-link" onClick={() => setLegalOpen("cookies")}>Ustawienia</button></div></aside>}
       <BackToTop />
-    </div>
+    </main>
   );
 }

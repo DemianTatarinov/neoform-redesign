@@ -7,6 +7,7 @@ import NeoLabEvents from "@/components/NeoLabEvents";
 import { MapView } from "@/components/Map";
 import { credoCards, media } from "@/assets/media";
 import { triggerHaptic } from "@/utils/haptics";
+import { hideBrokenImage } from "@/utils/images";
 
 const content = {
   bespoke: {
@@ -207,7 +208,7 @@ export default function SectionPage({ page }: { page: PageKey }) {
               {item.points.map(([number, title, description], index) => (
                 <article className="process-card" key={number}>
                   <div className="process-card__image">
-                    <img src={media.pages.process[index] ?? item.image} alt={title} className="object-cover w-full h-full" />
+                    <img src={media.pages.process[index] ?? item.image} alt={title} className="h-48 w-full object-cover" onError={hideBrokenImage} />
                   </div>
                   <span className="process-card__number">{number}</span>
                   <div>

@@ -16,7 +16,6 @@ export default function HeroVideo() {
     videosRef.current.forEach((video, i) => {
       if (!video) return;
       if (i === index) {
-        video.currentTime = video.currentTime || 0;
         void video.play().catch(() => undefined);
       } else {
         video.pause();
@@ -35,7 +34,7 @@ export default function HeroVideo() {
 
   return (
     <div
-      className="hero__video-carousel absolute inset-0 z-0 overflow-hidden pointer-events-auto"
+      className="hero__video-carousel pointer-events-auto absolute inset-0 z-0 overflow-hidden"
       role="region"
       aria-roledescription="carousel"
       aria-label="Hero video slider"
@@ -60,7 +59,7 @@ export default function HeroVideo() {
           }}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${i === index ? "opacity-100" : "opacity-0"}`}
           src={src}
-          autoPlay
+          autoPlay={i === index}
           muted
           loop
           playsInline
@@ -69,7 +68,7 @@ export default function HeroVideo() {
         />
       ))}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/35" />
-      <div className="hero-video-dots" role="tablist" aria-label="Wybór wideo">
+      <div className="hero-video-dots pointer-events-auto" role="tablist" aria-label="Wybór wideo">
         {SLIDES.map((src, i) => (
           <button
             key={src}

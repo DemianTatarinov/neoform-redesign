@@ -4,6 +4,6 @@ type BrandLogoProps = {
   className?: string;
 };
 
-export default function BrandLogo({ className = "h-12 sm:h-14" }: BrandLogoProps) {
+export default function BrandLogo({ className = "h-11 sm:h-12" }: BrandLogoProps) {
   return <Logo className={className} linked={false} />;
 }

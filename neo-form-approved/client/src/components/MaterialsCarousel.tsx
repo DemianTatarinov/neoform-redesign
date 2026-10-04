@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { materialCards, type MaterialCard } from "@/assets/media";
 import { triggerHaptic } from "@/utils/haptics";
+import { hideBrokenImage } from "@/utils/images";
 
 type MaterialsCarouselProps = {
   eyebrow?: string;
@@ -53,6 +54,7 @@ export default function MaterialsCarousel({
                 className="object-cover w-full h-full"
                 loading="lazy"
                 referrerPolicy="no-referrer"
+                onError={hideBrokenImage}
               />
             </div>
             <div className="materials-card__copy">

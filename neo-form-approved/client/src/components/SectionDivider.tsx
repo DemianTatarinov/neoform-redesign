@@ -8,7 +8,11 @@ type SectionDividerProps = {
 export default function SectionDivider({ index, label, tone = "light" }: SectionDividerProps) {
   return (
     <div
-      className={`section-divider ${tone === "dark" ? "section-divider--on-dark" : "section-divider--on-light"}`}
+      className={`section-divider border-t ${
+        tone === "dark"
+          ? "section-divider--on-dark bg-neutral-950 border-white/10"
+          : "section-divider--on-light bg-transparent border-neutral-200/80"
+      }`}
       aria-hidden
     >
       <div className="shell section-divider__inner">

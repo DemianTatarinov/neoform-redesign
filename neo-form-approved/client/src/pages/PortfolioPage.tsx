@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import SiteChrome from "@/components/SiteChrome";
 import { media } from "@/assets/media";
 import { triggerHaptic } from "@/utils/haptics";
+import { hideBrokenImage } from "@/utils/images";
 
 const projects = [
   { slug: "penthouse-mokotow", title: "PENTHOUSE MOKOTÓW", description: "Wyzwanie: zachować czystość formy przy maksymalnej funkcjonalności.", cover: media.projectPenthouse, gallery: media.gallery.penthouse },
@@ -44,11 +45,17 @@ export default function PortfolioPage() {
             {projects.map((project) => (
               <button
                 type="button"
-                className="project-tile"
-                style={{ backgroundImage: `url(${project.cover})` }}
+                className="project-tile group"
                 key={project.slug}
                 onClick={() => open(project)}
               >
+                <img
+                  src={project.cover}
+                  alt={project.title}
+                  className="absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  onError={hideBrokenImage}
+                />
+                <span className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
                 <div>
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
@@ -89,7 +96,7 @@ export default function PortfolioPage() {
         >
           <button className="fullscreen-gallery__close" aria-label="Zamknij galerię" onClick={() => setActive(null)}><X /></button>
           <button className="fullscreen-gallery__arrow fullscreen-gallery__arrow--left" aria-label="Poprzednie zdjęcie" onClick={() => move(-1)}><ArrowLeft /></button>
-          <img src={active.gallery[index]} alt={`${active.title} — zdjęcie ${index + 1}`} loading="eager" />
+          <img src={active.gallery[index]} alt={`${active.title} — zdjęcie ${index + 1}`} loading="eager" onError={hideBrokenImage} />
           <button className="fullscreen-gallery__arrow fullscreen-gallery__arrow--right" aria-label="Następne zdjęcie" onClick={() => move(1)}><ArrowRight /></button>
           <div className="fullscreen-gallery__caption">
             <strong>{active.title}</strong>
