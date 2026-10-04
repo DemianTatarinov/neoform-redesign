@@ -12,11 +12,11 @@ export default {
       },
       colors: {
         neo: {
-          bg: 'var(--neo-bg)',
-          surface: 'var(--neo-surface)',
-          text: 'var(--neo-text)',
-          heading: 'var(--neo-heading)',
-          accent: 'var(--neo-accent)',
+          bg: 'rgb(var(--neo-bg) / <alpha-value>)',
+          surface: 'rgb(var(--neo-surface) / <alpha-value>)',
+          text: 'rgb(var(--neo-text) / <alpha-value>)',
+          heading: 'rgb(var(--neo-heading) / <alpha-value>)',
+          accent: 'rgb(var(--neo-accent) / <alpha-value>)',
         },
       },
     },

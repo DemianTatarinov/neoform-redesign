@@ -30,18 +30,18 @@
     >
       <header
         data-header
-        class="neo-glass-header bg-white/30 backdrop-blur-3xl border-b border-black/10 shadow-sm"
+        class="neo-glass-header fixed top-0 z-[100] w-full bg-neo-bg/60 backdrop-blur-2xl border-b border-white/5"
       >
         <div class="neo-glass-bar">
           <a href="index.html" class="inline-flex items-center">
-            <img src="/logo.png" alt="Neo Form" class="h-8 w-auto" />
+            <img src="/logo.png" alt="Neo Form" class="neo-logo h-8 w-auto" />
           </a>
           <button
             type="button"
             data-menu-toggle
             aria-expanded="false"
             aria-label="Otwórz menu"
-            class="neo-burger-btn flex h-10 w-10 items-center justify-center"
+            class="neo-burger-btn flex h-10 w-10 items-center justify-center border-neo-accent text-neo-heading"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -61,16 +61,26 @@
         </div>
         <nav
           data-menu-panel
-          class="neo-menu-dropdown bg-white/40 backdrop-blur-3xl"
+          class="neo-menu-dropdown absolute top-full left-0 w-full bg-neo-bg/70 backdrop-blur-3xl shadow-2xl border-b border-white/5 opacity-0 pointer-events-none"
           aria-label="Menu główne"
           aria-hidden="true"
         >
           <ul>
-            <li><a href="index.html" class="neo-menu-link">Główna</a></li>
-            <li><a href="portfolio.html" class="neo-menu-link">Portfolio</a></li>
-            <li><a href="about.html" class="neo-menu-link">Produkcja</a></li>
-            <li><a href="lab.html" class="neo-menu-link">Neo Lab</a></li>
-            <li><a href="contact.html" class="neo-menu-link">Kontakt</a></li>
+            <li>
+              <a href="index.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Główna</a>
+            </li>
+            <li>
+              <a href="portfolio.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Portfolio</a>
+            </li>
+            <li>
+              <a href="about.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Produkcja</a>
+            </li>
+            <li>
+              <a href="lab.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Neo Lab</a>
+            </li>
+            <li>
+              <a href="contact.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Kontakt</a>
+            </li>
           </ul>
         </nav>
       </header>
@@ -99,7 +109,7 @@
           />
         </section>
 
-        <section class="neo-band-white px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <p class="section-label mb-8">Materiał</p>
           <h2 class="subsection-title">Paleta premium</h2>
           <p class="body-copy mt-8">
@@ -171,7 +181,7 @@
           </div>
         </section>
 
-        <section class="neo-band-muted px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <p class="section-label mb-8">Technologia</p>
           <h2 class="subsection-title">Maszyna + ręka</h2>
           <p class="body-copy mt-8">
@@ -181,7 +191,7 @@
           </p>
         </section>
 
-        <section class="neo-band-white px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <p class="section-label mb-8">Blat</p>
           <h2 class="subsection-title">Strefa robocza</h2>
           <p class="body-copy mt-8">
@@ -191,49 +201,49 @@
           </p>
         </section>
 
-        <section class="neo-band-muted px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <p class="section-label mb-8">Proces</p>
           <h2 class="subsection-title">Pięć kroków</h2>
-          <ol class="mt-12 space-y-8">
-            <li class="flex gap-6 border-t border-neo-text/20 pt-8">
-              <span class="font-display text-3xl text-neo-accent/50">1</span>
+          <ol class="mt-12 space-y-4">
+            <li class="neo-card bg-neo-surface flex gap-6">
+              <span class="font-display text-3xl text-neo-accent">1</span>
               <div>
                 <h3 class="font-display text-2xl text-neo-heading">Brief & pomiar</h3>
-                <p class="body-copy mt-2">Spotkanie, inwentaryzacja, wstępna koncepcja.</p>
+                <p class="body-copy mt-2 text-neo-text">Spotkanie, inwentaryzacja, wstępna koncepcja.</p>
               </div>
             </li>
-            <li class="flex gap-6 border-t border-neo-text/20 pt-8">
-              <span class="font-display text-3xl text-neo-accent/50">2</span>
+            <li class="neo-card bg-neo-surface flex gap-6">
+              <span class="font-display text-3xl text-neo-accent">2</span>
               <div>
                 <h3 class="font-display text-2xl text-neo-heading">Projekt 3D</h3>
-                <p class="body-copy mt-2">Wizualizacje i lista materiałów.</p>
+                <p class="body-copy mt-2 text-neo-text">Wizualizacje i lista materiałów.</p>
               </div>
             </li>
-            <li class="flex gap-6 border-t border-neo-text/20 pt-8">
-              <span class="font-display text-3xl text-neo-accent/50">3</span>
+            <li class="neo-card bg-neo-surface flex gap-6">
+              <span class="font-display text-3xl text-neo-accent">3</span>
               <div>
                 <h3 class="font-display text-2xl text-neo-heading">Produkcja</h3>
-                <p class="body-copy mt-2">Zakład Neo Form · ok. 6–10 tygodni.</p>
+                <p class="body-copy mt-2 text-neo-text">Zakład Neo Form · ok. 6–10 tygodni.</p>
               </div>
             </li>
-            <li class="flex gap-6 border-t border-neo-text/20 pt-8">
-              <span class="font-display text-3xl text-neo-accent/50">4</span>
+            <li class="neo-card bg-neo-surface flex gap-6">
+              <span class="font-display text-3xl text-neo-accent">4</span>
               <div>
                 <h3 class="font-display text-2xl text-neo-heading">Logistyka</h3>
-                <p class="body-copy mt-2">Transport i przygotowanie miejsca montażu.</p>
+                <p class="body-copy mt-2 text-neo-text">Transport i przygotowanie miejsca montażu.</p>
               </div>
             </li>
-            <li class="flex gap-6 border-t border-neo-text/20 pt-8">
-              <span class="font-display text-3xl text-neo-accent/50">5</span>
+            <li class="neo-card bg-neo-surface flex gap-6">
+              <span class="font-display text-3xl text-neo-accent">5</span>
               <div>
                 <h3 class="font-display text-2xl text-neo-heading">Montaż & odbiór</h3>
-                <p class="body-copy mt-2">Własna ekipa · protokół i serwis.</p>
+                <p class="body-copy mt-2 text-neo-text">Własna ekipa · protokół i serwis.</p>
               </div>
             </li>
           </ol>
         </section>
 
-        <section class="neo-band-white px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <p class="section-label mb-8">Współpraca</p>
           <h2 class="subsection-title">Dla architektów i inwestorów</h2>
           <p class="body-copy mt-8">

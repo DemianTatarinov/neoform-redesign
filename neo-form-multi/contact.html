@@ -30,18 +30,18 @@
     >
       <header
         data-header
-        class="neo-glass-header bg-white/30 backdrop-blur-3xl border-b border-black/10 shadow-sm"
+        class="neo-glass-header fixed top-0 z-[100] w-full bg-neo-bg/60 backdrop-blur-2xl border-b border-white/5"
       >
         <div class="neo-glass-bar">
           <a href="index.html" class="inline-flex items-center">
-            <img src="/logo.png" alt="Neo Form" class="h-8 w-auto" />
+            <img src="/logo.png" alt="Neo Form" class="neo-logo h-8 w-auto" />
           </a>
           <button
             type="button"
             data-menu-toggle
             aria-expanded="false"
             aria-label="Otwórz menu"
-            class="neo-burger-btn flex h-10 w-10 items-center justify-center"
+            class="neo-burger-btn flex h-10 w-10 items-center justify-center border-neo-accent text-neo-heading"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -61,16 +61,26 @@
         </div>
         <nav
           data-menu-panel
-          class="neo-menu-dropdown bg-white/40 backdrop-blur-3xl"
+          class="neo-menu-dropdown absolute top-full left-0 w-full bg-neo-bg/70 backdrop-blur-3xl shadow-2xl border-b border-white/5 opacity-0 pointer-events-none"
           aria-label="Menu główne"
           aria-hidden="true"
         >
           <ul>
-            <li><a href="index.html" class="neo-menu-link">Główna</a></li>
-            <li><a href="portfolio.html" class="neo-menu-link">Portfolio</a></li>
-            <li><a href="about.html" class="neo-menu-link">Produkcja</a></li>
-            <li><a href="lab.html" class="neo-menu-link">Neo Lab</a></li>
-            <li><a href="contact.html" class="neo-menu-link">Kontakt</a></li>
+            <li>
+              <a href="index.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Główna</a>
+            </li>
+            <li>
+              <a href="portfolio.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Portfolio</a>
+            </li>
+            <li>
+              <a href="about.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Produkcja</a>
+            </li>
+            <li>
+              <a href="lab.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Neo Lab</a>
+            </li>
+            <li>
+              <a href="contact.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Kontakt</a>
+            </li>
           </ul>
         </nav>
       </header>
@@ -85,7 +95,7 @@
           </p>
         </section>
 
-        <section class="neo-band-white px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <p class="section-label mb-8">Historia</p>
           <h2 class="subsection-title">
             Neo Kuchnie → Neo Form
@@ -102,7 +112,7 @@
           </p>
         </section>
 
-        <section class="neo-band-muted px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <p class="section-label mb-8">Showroom</p>
           <address class="not-italic">
             <p class="font-display text-3xl font-light text-neo-heading">ul. Przykładowa 14</p>
@@ -123,7 +133,7 @@
           </ul>
         </section>
 
-        <section class="neo-band-white px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <p class="section-label mb-8">Lokalizacja</p>
           <h2 class="subsection-title">Warszawa</h2>
           <p class="body-copy mt-4 max-w-[32ch]">
@@ -142,27 +152,27 @@
           </div>
         </section>
 
-        <section class="neo-band-muted px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <p class="section-label mb-8">Opinie</p>
           <h2 class="subsection-title">Głos klientów</h2>
-          <ul class="mt-12 space-y-12">
-            <li class="border-t border-neo-text/20 pt-10">
+          <ul class="mt-12 space-y-6">
+            <li class="review-card bg-neo-surface">
               <p class="review-stars" aria-label="Ocena 5 na 5">★★★★★</p>
               <blockquote class="mt-5 font-display text-2xl font-light leading-snug text-neo-heading">
                 „Perfekcyjne dopasowanie do architektury loftu. Montaż bez kompromisów, a
                 komunikacja na każdym etapie — wzorowa.”
               </blockquote>
-              <p class="body-copy mt-6">Anna K. · Loft Mokotów</p>
+              <p class="body-copy mt-6 text-neo-text">Anna K. · Loft Mokotów</p>
             </li>
-            <li class="border-t border-neo-text/20 pt-10">
+            <li class="review-card bg-neo-surface">
               <p class="review-stars" aria-label="Ocena 5 na 5">★★★★★</p>
               <blockquote class="mt-5 font-display text-2xl font-light leading-snug text-neo-heading">
                 „Neo Form zrealizowało kuchnię dokładnie tak, jak na wizualizacjach. Materiały
                 premium i termin, którego dotrzymali.”
               </blockquote>
-              <p class="body-copy mt-6">Michał i Karolina W. · Dom Konstancin</p>
+              <p class="body-copy mt-6 text-neo-text">Michał i Karolina W. · Dom Konstancin</p>
             </li>
-            <li class="border-t border-neo-text/20 pt-10">
+            <li class="review-card bg-neo-surface">
               <p class="review-stars" aria-label="Ocena 4 na 5">★★★★<span class="text-neo-text/40"
                   >★</span
                 ></p>
@@ -170,12 +180,12 @@
                 „Współpraca z architektem była płynna, a ekipa montażowa zostawiła po sobie
                 idealny porządek. Polecam studio.”
               </blockquote>
-              <p class="body-copy mt-6">Piotr S. · Willowa Residence</p>
+              <p class="body-copy mt-6 text-neo-text">Piotr S. · Willowa Residence</p>
             </li>
           </ul>
         </section>
 
-        <section class="neo-band-white px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <form class="space-y-8" action="#" method="post">
             <div>
               <label class="section-label mb-3 block" for="name">Imię i nazwisko</label>
@@ -216,17 +226,17 @@
         </section>
       </main>
 
-      <footer class="neo-footer-dark bg-black px-6 py-24 text-zinc-400" data-animate="reveal">
-        <img src="/logo.png" alt="Neo Form" class="h-7 w-auto" />
-        <p class="body-copy mt-6 max-w-[28ch] text-zinc-400">
+      <footer class="border-t border-white/5 px-6 py-24 text-neo-text" data-animate="reveal">
+        <img src="/logo.png" alt="Neo Form" class="neo-logo h-7 w-auto" />
+        <p class="body-copy mt-6 max-w-[28ch] text-neo-text">
           Meble architektoniczne · produkcja · montaż · Neo Lab
         </p>
-        <div class="mt-10 flex flex-wrap gap-6 font-sans text-xs uppercase tracking-widest text-zinc-400">
-          <a href="https://instagram.com" class="hover:text-white transition">Instagram</a>
-          <a href="https://vimeo.com" class="hover:text-white transition">Vimeo</a>
-          <a href="https://linkedin.com" class="hover:text-white transition">LinkedIn</a>
+        <div class="mt-10 flex flex-wrap gap-6 font-sans text-xs uppercase tracking-widest text-neo-text">
+          <a href="https://instagram.com" class="hover:text-neo-heading transition">Instagram</a>
+          <a href="https://vimeo.com" class="hover:text-neo-heading transition">Vimeo</a>
+          <a href="https://linkedin.com" class="hover:text-neo-heading transition">LinkedIn</a>
         </div>
-        <p class="body-copy mt-12 text-xs text-zinc-400">© Neo Form · Wszelkie prawa zastrzeżone</p>
+        <p class="body-copy mt-12 text-xs text-neo-text">© Neo Form · Wszelkie prawa zastrzeżone</p>
       </footer>
     </div>
   </body>

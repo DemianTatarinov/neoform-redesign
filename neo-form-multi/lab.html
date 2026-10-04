@@ -30,18 +30,18 @@
     >
       <header
         data-header
-        class="neo-glass-header bg-white/30 backdrop-blur-3xl border-b border-black/10 shadow-sm"
+        class="neo-glass-header fixed top-0 z-[100] w-full bg-neo-bg/60 backdrop-blur-2xl border-b border-white/5"
       >
         <div class="neo-glass-bar">
           <a href="index.html" class="inline-flex items-center">
-            <img src="/logo.png" alt="Neo Form" class="h-8 w-auto" />
+            <img src="/logo.png" alt="Neo Form" class="neo-logo h-8 w-auto" />
           </a>
           <button
             type="button"
             data-menu-toggle
             aria-expanded="false"
             aria-label="Otwórz menu"
-            class="neo-burger-btn flex h-10 w-10 items-center justify-center"
+            class="neo-burger-btn flex h-10 w-10 items-center justify-center border-neo-accent text-neo-heading"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -61,16 +61,26 @@
         </div>
         <nav
           data-menu-panel
-          class="neo-menu-dropdown bg-white/40 backdrop-blur-3xl"
+          class="neo-menu-dropdown absolute top-full left-0 w-full bg-neo-bg/70 backdrop-blur-3xl shadow-2xl border-b border-white/5 opacity-0 pointer-events-none"
           aria-label="Menu główne"
           aria-hidden="true"
         >
           <ul>
-            <li><a href="index.html" class="neo-menu-link">Główna</a></li>
-            <li><a href="portfolio.html" class="neo-menu-link">Portfolio</a></li>
-            <li><a href="about.html" class="neo-menu-link">Produkcja</a></li>
-            <li><a href="lab.html" class="neo-menu-link">Neo Lab</a></li>
-            <li><a href="contact.html" class="neo-menu-link">Kontakt</a></li>
+            <li>
+              <a href="index.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Główna</a>
+            </li>
+            <li>
+              <a href="portfolio.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Portfolio</a>
+            </li>
+            <li>
+              <a href="about.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Produkcja</a>
+            </li>
+            <li>
+              <a href="lab.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Neo Lab</a>
+            </li>
+            <li>
+              <a href="contact.html" class="neo-menu-link relative z-50 block py-5 text-center text-2xl text-neo-text hover:text-neo-accent transition-colors">Kontakt</a>
+            </li>
           </ul>
         </nav>
       </header>
@@ -103,32 +113,32 @@
           </div>
         </section>
 
-        <section class="neo-band-white px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <p class="section-label mb-8">Program</p>
-          <ul class="space-y-10">
-            <li>
+          <ul class="space-y-4">
+            <li class="neo-card bg-neo-surface">
               <h3 class="font-display text-3xl font-light text-neo-heading">Masterclass: Fronty</h3>
-              <p class="body-copy mt-3">
+              <p class="body-copy mt-3 text-neo-text">
                 Różnice między lakierem, fornirem a laminatem — dotyk, pielęgnacja, koszt
                 życia produktu.
               </p>
             </li>
-            <li>
+            <li class="neo-card bg-neo-surface">
               <h3 class="font-display text-3xl font-light text-neo-heading">Blaty w projekcie</h3>
-              <p class="body-copy mt-3">
+              <p class="body-copy mt-3 text-neo-text">
                 Spieki vs kamień naturalny — jak dobierać grubość, krawędzie i spadki.
               </p>
             </li>
-            <li>
+            <li class="neo-card bg-neo-surface">
               <h3 class="font-display text-3xl font-light text-neo-heading">Oświetlenie kuchni</h3>
-              <p class="body-copy mt-3">
+              <p class="body-copy mt-3 text-neo-text">
                 Warstwy światła: robocze, nastrojowe, akcentujące strefę jadalnianą.
               </p>
             </li>
           </ul>
         </section>
 
-        <section class="neo-band-muted px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <p class="section-label mb-8">Partnerzy</p>
           <div class="grid grid-cols-2 gap-px bg-neo-text/20">
             <div class="flex aspect-[3/2] items-center justify-center bg-neo-surface p-4">
@@ -146,28 +156,28 @@
           </div>
         </section>
 
-        <section class="neo-band-white px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <p class="section-label mb-8">Nadchodzące wydarzenia</p>
           <div class="space-y-6">
-            <article class="neo-card">
+            <article class="neo-card bg-neo-surface">
               <time class="section-label" datetime="2026-04-12">12.04.2026</time>
-              <h3 class="mt-4 font-display text-xl font-light">Neo Lab Open Day</h3>
-              <p class="body-copy mt-2">Wizyta w zakładzie · grupy 8 osób · wolne miejsca: 4</p>
+              <h3 class="mt-4 font-display text-xl font-light text-neo-heading">Neo Lab Open Day</h3>
+              <p class="body-copy mt-2 text-neo-text">Wizyta w zakładzie · grupy 8 osób · wolne miejsca: 4</p>
             </article>
-            <article class="neo-card">
+            <article class="neo-card bg-neo-surface">
               <time class="section-label" datetime="2026-05-08">08.05.2026</time>
-              <h3 class="mt-4 font-display text-xl font-light">Warsztat: Ukryte AGD</h3>
-              <p class="body-copy mt-2">Showroom · architekci · rejestracja mailowa</p>
+              <h3 class="mt-4 font-display text-xl font-light text-neo-heading">Warsztat: Ukryte AGD</h3>
+              <p class="body-copy mt-2 text-neo-text">Showroom · architekci · rejestracja mailowa</p>
             </article>
-            <article class="neo-card">
+            <article class="neo-card bg-neo-surface">
               <time class="section-label" datetime="2026-06-20">20.06.2026</time>
-              <h3 class="mt-4 font-display text-xl font-light">Panel: Kuchnia 2030</h3>
-              <p class="body-copy mt-2">Goście: projektanci Neo Form + partnerzy branżowi</p>
+              <h3 class="mt-4 font-display text-xl font-light text-neo-heading">Panel: Kuchnia 2030</h3>
+              <p class="body-copy mt-2 text-neo-text">Goście: projektanci Neo Form + partnerzy branżowi</p>
             </article>
           </div>
         </section>
 
-        <section class="neo-band-muted px-6 py-24" data-animate="reveal">
+        <section class="px-6 py-24" data-animate="reveal">
           <a
             href="contact.html"
             class="neo-btn-outline"

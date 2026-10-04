@@ -17,6 +17,7 @@ function initMenu() {
 
   gsap.set(panel, { autoAlpha: 0 })
   panel.classList.add('pointer-events-none')
+  panel.style.pointerEvents = 'none'
 
   const setOpen = (next) => {
     open = next
@@ -30,27 +31,26 @@ function initMenu() {
 
       gsap.to(panel, {
         autoAlpha: 1,
-        duration: 0.45,
+        duration: 0.4,
         ease: 'power2.out',
       })
 
       gsap.fromTo(
         links,
-        { y: 12, opacity: 0 },
+        { y: 10, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.5,
-          stagger: 0.07,
+          duration: 0.45,
+          stagger: 0.06,
           ease: 'power3.out',
-          delay: 0.1,
-          pointerEvents: 'auto',
+          delay: 0.06,
         }
       )
     } else {
       gsap.to(panel, {
         autoAlpha: 0,
-        duration: 0.35,
+        duration: 0.3,
         ease: 'power2.in',
         onComplete: () => {
           panel.classList.remove('is-open')
@@ -62,10 +62,14 @@ function initMenu() {
   }
 
   toggle.addEventListener('click', (e) => {
+    e.preventDefault()
     e.stopPropagation()
     setOpen(!open)
   })
-  links.forEach((link) => link.addEventListener('click', () => setOpen(false)))
+
+  links.forEach((link) => {
+    link.addEventListener('click', () => setOpen(false))
+  })
 }
 
 function initReveal() {
@@ -115,8 +119,7 @@ function initHeader() {
   ScrollTrigger.create({
     start: 'top -40',
     onUpdate: (self) => {
-      const scrolled = self.scroll() > 24
-      header.classList.toggle('shadow-md', scrolled)
+      header.classList.toggle('is-scrolled', self.scroll() > 24)
     },
   })
 }
