@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neo Lab — Neo Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/assets/main-Cewb3gQm.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-CbBpVzfw.css">
+  </head>
+  <body>
+    <div
+      class="neo-root relative mx-auto min-h-screen max-w-[480px] overflow-hidden bg-black text-white"
+    >
+      <header
+        data-header
+        class="fixed left-1/2 top-0 z-30 flex w-full max-w-[480px] -translate-x-1/2 flex-col border-b border-transparent bg-black"
+      >
+        <div class="flex items-center justify-between px-6 py-5">
+          <a href="index.html" class="inline-flex items-center gap-3">
+            <!-- <img src="/logo.svg" class="w-24" alt="Neo Form" /> -->
+            <span class="neo-logo">Neo Form</span>
+          </a>
+          <button
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-label="Otwórz menu"
+            class="group flex h-10 w-10 flex-col items-center justify-center gap-1.5"
+          >
+            <span class="block h-px w-6 bg-white transition group-hover:opacity-70"></span>
+            <span class="block h-px w-4 bg-white transition group-hover:opacity-70"></span>
+          </button>
+        </div>
+        <nav
+          data-menu-panel
+          class="overflow-hidden border-t border-transparent px-6"
+          aria-label="Menu główne"
+        >
+          <ul class="flex flex-col gap-3 pb-5 pt-2">
+            <li><a href="index.html" class="nav-link">Główna</a></li>
+            <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+            <li><a href="about.html" class="nav-link">Produkcja</a></li>
+            <li><a href="lab.html" class="nav-link">Neo Lab</a></li>
+            <li><a href="contact.html" class="nav-link">Kontakt</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main class="pt-24">
+        <section class="px-6 pb-16" data-animate="hero">
+          <p class="section-label mb-6">Neo Lab</p>
+          <h1 class="section-title mb-8">Edukacja<br />& wspólna praktyka</h1>
+          <p class="body-copy max-w-[34ch]">
+            Neo Lab to przestrzeń wymiany wiedzy dla architektów wnętrz, projektantów i
+            wykonawców. Warsztaty, materiały i spotkania przy realnych realizacjach.
+          </p>
+        </section>
+
+        <section
+          class="mx-6 mb-20 aspect-[16/10] border border-neo-line bg-gradient-to-tr from-zinc-900 to-black"
+          data-animate="reveal"
+        >
+          <div class="flex h-full flex-col justify-end p-6">
+            <p class="section-label">Showroom · Warszawa</p>
+            <p class="font-display mt-2 text-2xl font-light">Sesja materiałowa</p>
+          </div>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+          <p class="section-label mb-8">Program</p>
+          <ul class="space-y-10">
+            <li>
+              <h3 class="font-display text-2xl font-light">Masterclass: Fronty</h3>
+              <p class="body-copy mt-3">
+                Różnice między lakierem, fornirem a laminatem — dotyk, pielęgnacja, koszt
+                życia produktu.
+              </p>
+            </li>
+            <li>
+              <h3 class="font-display text-2xl font-light">Blaty w projekcie</h3>
+              <p class="body-copy mt-3">
+                Spieki vs kamień naturalny — jak dobierać grubość, krawędzie i spadki.
+              </p>
+            </li>
+            <li>
+              <h3 class="font-display text-2xl font-light">Oświetlenie kuchni</h3>
+              <p class="body-copy mt-3">
+                Warstwy światła: robocze, nastrojowe, akcentujące strefę jadalnianą.
+              </p>
+            </li>
+          </ul>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+          <p class="section-label mb-8">Partnerzy</p>
+          <div class="grid grid-cols-2 gap-px bg-neo-line">
+            <div class="flex aspect-[3/2] items-center justify-center bg-black p-4">
+              <span class="section-label text-center">Blum</span>
+            </div>
+            <div class="flex aspect-[3/2] items-center justify-center bg-black p-4">
+              <span class="section-label text-center">Egger</span>
+            </div>
+            <div class="flex aspect-[3/2] items-center justify-center bg-black p-4">
+              <span class="section-label text-center">Cosentino</span>
+            </div>
+            <div class="flex aspect-[3/2] items-center justify-center bg-black p-4">
+              <span class="section-label text-center">Häfele</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+          <p class="section-label mb-8">Nadchodzące wydarzenia</p>
+          <div class="space-y-6">
+            <article class="border border-neo-line p-6">
+              <time class="section-label" datetime="2026-04-12">12.04.2026</time>
+              <h3 class="mt-4 font-display text-xl font-light">Neo Lab Open Day</h3>
+              <p class="body-copy mt-2">Wizyta w zakładzie · grupy 8 osób · wolne miejsca: 4</p>
+            </article>
+            <article class="border border-neo-line p-6">
+              <time class="section-label" datetime="2026-05-08">08.05.2026</time>
+              <h3 class="mt-4 font-display text-xl font-light">Warsztat: Ukryte AGD</h3>
+              <p class="body-copy mt-2">Showroom · architekci · rejestracja mailowa</p>
+            </article>
+            <article class="border border-neo-line p-6">
+              <time class="section-label" datetime="2026-06-20">20.06.2026</time>
+              <h3 class="mt-4 font-display text-xl font-light">Panel: Kuchnia 2030</h3>
+              <p class="body-copy mt-2">Goście: projektanci Neo Form + partnerzy branżowi</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+          <a
+            href="contact.html"
+            class="flex items-center justify-between border border-neo-line px-6 py-5 font-sans text-xs uppercase tracking-ultra transition hover:border-white/30"
+          >
+            Zapisz się na wydarzenie
+            <span aria-hidden="true">→</span>
+          </a>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

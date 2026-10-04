@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Produkcja — Neo Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="/src/js/main.js"></script>
+  </head>
+  <body>
+    <div
+      class="neo-root relative mx-auto min-h-screen max-w-[480px] overflow-hidden bg-black text-white"
+    >
+      <header
+        data-header
+        class="fixed left-1/2 top-0 z-30 flex w-full max-w-[480px] -translate-x-1/2 flex-col border-b border-transparent bg-black"
+      >
+        <div class="flex items-center justify-between px-6 py-5">
+          <a href="index.html" class="inline-flex items-center gap-3">
+            <!-- <img src="/logo.svg" class="w-24" alt="Neo Form" /> -->
+            <span class="neo-logo">Neo Form</span>
+          </a>
+          <button
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-label="Otwórz menu"
+            class="group flex h-10 w-10 flex-col items-center justify-center gap-1.5"
+          >
+            <span class="block h-px w-6 bg-white transition group-hover:opacity-70"></span>
+            <span class="block h-px w-4 bg-white transition group-hover:opacity-70"></span>
+          </button>
+        </div>
+        <nav
+          data-menu-panel
+          class="overflow-hidden border-t border-transparent px-6"
+          aria-label="Menu główne"
+        >
+          <ul class="flex flex-col gap-3 pb-5 pt-2">
+            <li><a href="index.html" class="nav-link">Główna</a></li>
+            <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+            <li><a href="about.html" class="nav-link">Produkcja</a></li>
+            <li><a href="lab.html" class="nav-link">Neo Lab</a></li>
+            <li><a href="contact.html" class="nav-link">Kontakt</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main class="pt-24">
+        <section class="px-6 pb-20" data-animate="hero">
+          <p class="section-label mb-6">Produkcja</p>
+          <h1 class="section-title mb-8">Od materiału<br />do montażu.</h1>
+          <p class="body-copy max-w-[34ch]">
+            Własny zakład w Warszawie pozwala nam kontrolować każdy etap — od dobrego
+            płyty po ostatni milimetr frontu przy montażu u klienta.
+          </p>
+        </section>
+
+        <section
+          class="mx-6 mb-4 aspect-[16/11] overflow-hidden border border-neo-line bg-zinc-950"
+          data-animate="reveal"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1502672022468-788587000221?q=70&w=600&auto=format&fit=crop"
+            alt="Architektura nowoczesna — Neo Form produkcja"
+            class="neo-img"
+            width="600"
+            height="413"
+            loading="lazy"
+          />
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+          <p class="section-label mb-8">Materiał</p>
+          <h2 class="font-display text-3xl font-light">Paleta premium</h2>
+          <p class="body-copy mt-8">
+            Laminaty, forniry, lakierowane MDF, aluminium i szkło — dobieramy powierzchnie
+            pod klimat wnętrza i intensywność użytkowania. Pracujemy z próbnikami fizycznymi,
+            nie tylko z katalogami PDF.
+          </p>
+          <div class="mt-12 grid grid-cols-3 gap-2" data-animate="reveal">
+            <div class="aspect-square overflow-hidden bg-zinc-950">
+              <img
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=70&w=600&auto=format&fit=crop"
+                alt="Grafitowa tekstura materiału"
+                class="neo-img"
+                width="200"
+                height="200"
+                loading="lazy"
+              />
+            </div>
+            <div class="aspect-square overflow-hidden bg-zinc-950">
+              <img
+                src="https://images.unsplash.com/photo-1618221195710-dd2d4f785ee5?q=70&w=600&auto=format&fit=crop"
+                alt="Ciemna powierzchnia kuchni"
+                class="neo-img"
+                width="200"
+                height="200"
+                loading="lazy"
+              />
+            </div>
+            <div class="aspect-square overflow-hidden bg-zinc-950">
+              <img
+                src="https://images.unsplash.com/photo-1557683316-973673baf926?q=70&w=600&auto=format&fit=crop"
+                alt="Abstrakcyjna tekstura grafitu"
+                class="neo-img"
+                width="200"
+                height="200"
+                loading="lazy"
+              />
+            </div>
+            <div class="aspect-square overflow-hidden border border-neo-line bg-zinc-950">
+              <img
+                src="https://images.unsplash.com/photo-1618005182384-a83a87380b21?q=70&w=600&auto=format&fit=crop"
+                alt="Minimalistyczna faktura"
+                class="neo-img"
+                width="200"
+                height="200"
+                loading="lazy"
+              />
+            </div>
+            <div class="aspect-square overflow-hidden bg-zinc-950">
+              <img
+                src="https://images.unsplash.com/photo-1615876234566-337999657659?q=70&w=600&auto=format&fit=crop"
+                alt="Detal ciemnej kuchni"
+                class="neo-img"
+                width="200"
+                height="200"
+                loading="lazy"
+              />
+            </div>
+            <div class="aspect-square overflow-hidden border border-neo-line bg-zinc-950">
+              <img
+                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=70&w=600&auto=format&fit=crop"
+                alt="Nowoczesne wnętrze — materiały"
+                class="neo-img"
+                width="200"
+                height="200"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+          <p class="section-label mb-8">Technologia</p>
+          <h2 class="font-display text-3xl font-light">Maszyna + ręka</h2>
+          <p class="body-copy mt-8">
+            Cięcie i okleinowanie na linii CNC, frezowanie detali, a następnie ręczna
+            kontrola jakości i montaż okuć premium. Każdy moduł otrzymuje numer seryjny
+            powiązany z projektem.
+          </p>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+          <p class="section-label mb-8">Blat</p>
+          <h2 class="font-display text-3xl font-light">Strefa robocza</h2>
+          <p class="body-copy mt-8">
+            Spieki kwarcowe, konglomeraty i drewno — blaty traktujemy jak rzeźbę użytkową.
+            Współpracujemy z dostawcami kamienia i wykonujemy precyzyjne wycięcia pod
+            zlewozmywaki i płyty indukcyjne.
+          </p>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+          <p class="section-label mb-8">Proces</p>
+          <h2 class="font-display text-3xl font-light">Pięć kroków</h2>
+          <ol class="mt-12 space-y-8">
+            <li class="flex gap-6 border-t border-neo-line pt-8">
+              <span class="font-display text-3xl text-white/20">1</span>
+              <div>
+                <h3 class="font-display text-xl">Brief & pomiar</h3>
+                <p class="body-copy mt-2">Spotkanie, inwentaryzacja, wstępna koncepcja.</p>
+              </div>
+            </li>
+            <li class="flex gap-6 border-t border-neo-line pt-8">
+              <span class="font-display text-3xl text-white/20">2</span>
+              <div>
+                <h3 class="font-display text-xl">Projekt 3D</h3>
+                <p class="body-copy mt-2">Wizualizacje i lista materiałów.</p>
+              </div>
+            </li>
+            <li class="flex gap-6 border-t border-neo-line pt-8">
+              <span class="font-display text-3xl text-white/20">3</span>
+              <div>
+                <h3 class="font-display text-xl">Produkcja</h3>
+                <p class="body-copy mt-2">Zakład Neo Form · ok. 6–10 tygodni.</p>
+              </div>
+            </li>
+            <li class="flex gap-6 border-t border-neo-line pt-8">
+              <span class="font-display text-3xl text-white/20">4</span>
+              <div>
+                <h3 class="font-display text-xl">Logistyka</h3>
+                <p class="body-copy mt-2">Transport i przygotowanie miejsca montażu.</p>
+              </div>
+            </li>
+            <li class="flex gap-6 border-t border-neo-line pt-8">
+              <span class="font-display text-3xl text-white/20">5</span>
+              <div>
+                <h3 class="font-display text-xl">Montaż & odbiór</h3>
+                <p class="body-copy mt-2">Własna ekipa · protokół i serwis.</p>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+          <p class="section-label mb-8">Współpraca</p>
+          <h2 class="font-display text-3xl font-light">Dla architektów i inwestorów</h2>
+          <p class="body-copy mt-8">
+            Oferujemy dedykowanego opiekuna projektu, rabaty B2B i wsparcie techniczne na
+            etapie dokumentacji wykonawczej. Zapraszamy do showroomu i na wizytę w zakładzie.
+          </p>
+          <a
+            href="contact.html"
+            class="mt-12 flex items-center justify-between border border-neo-line px-6 py-5 font-sans text-xs uppercase tracking-ultra transition hover:border-white/30"
+          >
+            Napisz do nas
+            <span aria-hidden="true">→</span>
+          </a>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
