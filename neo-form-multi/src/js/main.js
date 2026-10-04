@@ -9,59 +9,62 @@ const MOBILE_ROOT = '.neo-root'
 function initMenu() {
   const toggle = document.querySelector('[data-menu-toggle]')
   const panel = document.querySelector('[data-menu-panel]')
-  const overlay = document.querySelector('[data-menu-overlay]')
   const links = document.querySelectorAll('[data-menu-panel] a')
+  const header = document.querySelector('[data-header]')
 
   if (!toggle || !panel) return
 
   let open = false
 
+  gsap.set(panel, { height: 0, overflow: 'hidden', opacity: 0 })
+
   const setOpen = (next) => {
     open = next
     toggle.setAttribute('aria-expanded', String(open))
-    document.body.classList.toggle('overflow-hidden', open)
-
-    gsap.to(overlay, {
-      autoAlpha: open ? 1 : 0,
-      duration: 0.45,
-      ease: 'power2.out',
-      onStart: () => {
-        overlay?.style.setProperty('pointer-events', open ? 'auto' : 'none')
-      },
-      onComplete: () => {
-        if (!open) overlay?.style.setProperty('pointer-events', 'none')
-      },
-    })
-
-    gsap.to(panel, {
-      x: open ? 0 : '100%',
-      duration: 0.55,
-      ease: 'power3.inOut',
-    })
+    panel.classList.toggle('border-neo-line', open)
+    header?.classList.toggle('border-neo-line/80', open)
 
     if (open) {
+      panel.style.height = 'auto'
+      const targetHeight = panel.offsetHeight
+      panel.style.height = '0px'
+
+      gsap.to(panel, {
+        height: targetHeight,
+        opacity: 1,
+        duration: 0.42,
+        ease: 'power2.out',
+        onComplete: () => {
+          panel.style.height = 'auto'
+        },
+      })
+
       gsap.fromTo(
         links,
-        { y: 24, opacity: 0 },
+        { y: 10, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.5,
-          stagger: 0.06,
+          duration: 0.38,
+          stagger: 0.05,
           ease: 'power2.out',
-          delay: 0.15,
+          delay: 0.08,
         }
       )
+    } else {
+      gsap.to(panel, {
+        height: 0,
+        opacity: 0,
+        duration: 0.32,
+        ease: 'power2.in',
+        onComplete: () => {
+          panel.classList.remove('border-neo-line')
+        },
+      })
     }
   }
 
-  gsap.set(panel, { x: '100%' })
-  gsap.set(overlay, { autoAlpha: 0 })
-  overlay?.style.setProperty('pointer-events', 'none')
-  panel.style.pointerEvents = 'auto'
-
   toggle.addEventListener('click', () => setOpen(!open))
-  overlay?.addEventListener('click', () => setOpen(false))
   links.forEach((link) => link.addEventListener('click', () => setOpen(false)))
 }
 
@@ -112,9 +115,10 @@ function initHeader() {
   ScrollTrigger.create({
     start: 'top -40',
     onUpdate: (self) => {
-      header.classList.toggle('border-neo-line/80', self.scroll() > 24)
-      header.classList.toggle('bg-black/90', self.scroll() > 24)
-      header.classList.toggle('backdrop-blur-md', self.scroll() > 24)
+      const scrolled = self.scroll() > 24
+      header.classList.toggle('border-neo-line/80', scrolled)
+      header.classList.toggle('bg-black/95', scrolled)
+      header.classList.toggle('backdrop-blur-md', scrolled)
     },
   })
 }

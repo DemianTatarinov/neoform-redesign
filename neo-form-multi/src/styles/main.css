@@ -7,6 +7,17 @@
     @apply bg-zinc-900 antialiased;
   }
 
+  body {
+    @apply font-sans text-zinc-400;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-white;
+  }
+
   ::selection {
     @apply bg-white/20 text-white;
   }
@@ -14,25 +25,34 @@
 
 @layer components {
   .section-label {
-    @apply font-sans text-[10px] uppercase tracking-ultra text-neo-muted;
+    @apply font-sans text-[10px] uppercase tracking-ultra text-zinc-500;
   }
 
   .section-title {
-    @apply font-display text-4xl font-light leading-[1.05] tracking-tight md:text-5xl;
+    @apply font-display text-4xl font-light leading-[1.05] tracking-tight text-white md:text-5xl;
   }
 
   .body-copy {
-    @apply font-sans text-sm font-light leading-relaxed text-neo-muted;
+    @apply font-sans text-sm font-light leading-relaxed text-zinc-400;
   }
 
   .nav-link {
-    @apply font-display text-3xl font-light tracking-tight transition-opacity hover:opacity-60;
+    @apply font-display text-xl font-light tracking-tight text-white transition-opacity hover:opacity-60;
   }
-}
 
-@layer utilities {
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
+  .neo-logo {
+    @apply font-display text-[15px] font-normal uppercase tracking-[0.38em] text-white;
+  }
+
+  .neo-img {
+    @apply h-full w-full object-cover;
+  }
+
+  .neo-map {
+    filter: grayscale(100%) invert(90%);
+  }
+
+  .review-stars {
+    @apply font-sans text-sm tracking-widest text-neo-accent;
   }
 }

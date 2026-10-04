@@ -3,6 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Projektujemy i produkujemy kuchnie oraz meble na miarę z precyzją rzemiosła."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Neo Form - Studio Mebli Architektonicznych" />
+    <meta
+      property="og:description"
+      content="Projektujemy i produkujemy kuchnie oraz meble na miarę z precyzją rzemiosła."
+    />
+    <meta property="og:image" content="/og-image.jpg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Kontakt — Neo Form</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,48 +28,38 @@
     <div
       class="neo-root relative mx-auto min-h-screen max-w-[480px] overflow-hidden bg-black text-white"
     >
-      <div class="pointer-events-none fixed inset-0 z-40 flex justify-center">
-        <div class="relative h-full w-full max-w-[480px]">
-          <div
-            data-menu-overlay
-            class="absolute inset-0 bg-black/70 opacity-0"
-            aria-hidden="true"
-          ></div>
-          <nav
-            data-menu-panel
-            class="absolute right-0 top-0 flex h-full w-[min(100%,320px)] flex-col justify-between border-l border-neo-line bg-black px-8 py-10"
-            aria-label="Menu główne"
-          >
-        <p class="section-label">Menu</p>
-        <ul class="flex flex-col gap-6">
-          <li><a href="index.html" class="nav-link">Główna</a></li>
-          <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-          <li><a href="about.html" class="nav-link">Produkcja</a></li>
-          <li><a href="lab.html" class="nav-link">Neo Lab</a></li>
-          <li><a href="contact.html" class="nav-link">Kontakt</a></li>
-        </ul>
-        <p class="body-copy text-xs">Mobile experience · Neo Form</p>
-          </nav>
-        </div>
-      </div>
-
       <header
         data-header
-        class="fixed left-1/2 top-0 z-30 flex w-full max-w-[480px] -translate-x-1/2 items-center justify-between border-b border-transparent px-6 py-5"
+        class="fixed left-1/2 top-0 z-30 flex w-full max-w-[480px] -translate-x-1/2 flex-col border-b border-transparent bg-black"
       >
-        <a href="index.html" class="font-display text-base tracking-[0.28em] uppercase"
-          >Neo Form</a
+        <div class="flex items-center justify-between px-6 py-5">
+          <a href="index.html" class="inline-flex items-center">
+            <img src="/logo.png" alt="Neo Form" class="h-8 w-auto" />
+          </a>
+          <button
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-label="Otwórz menu"
+            class="group flex h-10 w-10 flex-col items-center justify-center gap-1.5"
+          >
+            <span class="block h-px w-6 bg-white transition group-hover:opacity-70"></span>
+            <span class="block h-px w-4 bg-white transition group-hover:opacity-70"></span>
+          </button>
+        </div>
+        <nav
+          data-menu-panel
+          class="overflow-hidden border-t border-transparent px-6"
+          aria-label="Menu główne"
         >
-        <button
-          type="button"
-          data-menu-toggle
-          aria-expanded="false"
-          aria-label="Otwórz menu"
-          class="group flex h-10 w-10 flex-col items-center justify-center gap-1.5"
-        >
-          <span class="block h-px w-6 bg-white transition group-hover:opacity-70"></span>
-          <span class="block h-px w-4 bg-white transition group-hover:opacity-70"></span>
-        </button>
+          <ul class="flex flex-col gap-3 pb-5 pt-2">
+            <li><a href="index.html" class="nav-link">Główna</a></li>
+            <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+            <li><a href="about.html" class="nav-link">Produkcja</a></li>
+            <li><a href="lab.html" class="nav-link">Neo Lab</a></li>
+            <li><a href="contact.html" class="nav-link">Kontakt</a></li>
+          </ul>
+        </nav>
       </header>
 
       <main class="pt-24">
@@ -108,6 +110,58 @@
           </ul>
         </section>
 
+        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+          <p class="section-label mb-8">Lokalizacja</p>
+          <h2 class="font-display text-3xl font-light">Warszawa</h2>
+          <p class="body-copy mt-4 max-w-[32ch]">
+            Showroom i biuro projektowe — centrum miasta. Mapa poniżej (docelowo pin pod
+            właściwy adres).
+          </p>
+          <div class="mt-10 aspect-[4/3] overflow-hidden border border-neo-line bg-zinc-950">
+            <iframe
+              title="Mapa Neo Form — Warszawa"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d155778.72215074267!2d21.017532!3d52.2296756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc669a869fac%3A0x72f3346621818870!2sWarszawa%2C%20Polska!5e0!3m2!1spl!2spl!4v1710000000000!5m2!1spl!2spl"
+              class="neo-map h-full w-full border-0"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </section>
+
+        <section class="border-t border-neo-line px-6 py-20" data-animate="reveal">
+          <p class="section-label mb-8">Opinie</p>
+          <h2 class="font-display text-3xl font-light">Głos klientów</h2>
+          <ul class="mt-12 space-y-12">
+            <li class="border-t border-neo-line pt-10">
+              <p class="review-stars" aria-label="Ocena 5 na 5">★★★★★</p>
+              <blockquote class="mt-5 font-display text-xl font-light leading-snug text-white">
+                „Perfekcyjne dopasowanie do architektury loftu. Montaż bez kompromisów, a
+                komunikacja na każdym etapie — wzorowa.”
+              </blockquote>
+              <p class="body-copy mt-6">Anna K. · Loft Mokotów</p>
+            </li>
+            <li class="border-t border-neo-line pt-10">
+              <p class="review-stars" aria-label="Ocena 5 na 5">★★★★★</p>
+              <blockquote class="mt-5 font-display text-xl font-light leading-snug text-white">
+                „Neo Form zrealizowało kuchnię dokładnie tak, jak na wizualizacjach. Materiały
+                premium i termin, którego dotrzymali.”
+              </blockquote>
+              <p class="body-copy mt-6">Michał i Karolina W. · Dom Konstancin</p>
+            </li>
+            <li class="border-t border-neo-line pt-10">
+              <p class="review-stars" aria-label="Ocena 4 na 5">★★★★<span class="text-zinc-600"
+                  >★</span
+                ></p>
+              <blockquote class="mt-5 font-display text-xl font-light leading-snug text-white">
+                „Współpraca z architektem była płynna, a ekipa montażowa zostawiła po sobie
+                idealny porządek. Polecam studio.”
+              </blockquote>
+              <p class="body-copy mt-6">Piotr S. · Willowa Residence</p>
+            </li>
+          </ul>
+        </section>
+
         <section class="border-t border-neo-line px-6 py-16" data-animate="reveal">
           <form class="space-y-8" action="#" method="post">
             <div>
@@ -150,7 +204,7 @@
       </main>
 
       <footer class="border-t border-neo-line px-6 py-16" data-animate="reveal">
-        <p class="font-display text-lg tracking-[0.2em] uppercase">Neo Form</p>
+        <img src="/logo.png" alt="Neo Form" class="h-7 w-auto" />
         <p class="body-copy mt-6 max-w-[28ch]">
           Meble architektoniczne · produkcja · montaż · Neo Lab
         </p>

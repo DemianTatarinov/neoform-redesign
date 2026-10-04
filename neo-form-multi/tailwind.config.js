@@ -12,7 +12,7 @@ export default {
       },
       colors: {
         neo: {
-          muted: '#8a8a8a',
+          muted: '#a1a1aa',
           line: '#2a2a2a',
           accent: '#c9b896',
         },
