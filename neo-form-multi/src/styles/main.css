@@ -33,7 +33,7 @@
     --neo-surface: #f4f4f5;
     --neo-text: #3f3f46;
     --neo-heading: #000000;
-    --neo-accent: #c5a059;
+    --neo-accent: #e8751a;
   }
 
   /*
@@ -111,34 +111,45 @@
   }
 
   .neo-glass-header {
-    @apply fixed top-0 left-1/2 z-50 flex w-full max-w-[480px] -translate-x-1/2 flex-col bg-white/75 backdrop-blur-md;
-    border-bottom: 1px solid rgb(0 0 0 / 0.1);
+    @apply fixed top-0 left-1/2 z-[100] flex w-full max-w-[480px] -translate-x-1/2 flex-col bg-white/50 backdrop-blur-xl;
+    border-bottom: 1px solid rgb(0 0 0 / 0.05);
   }
 
   .neo-glass-bar {
-    @apply relative z-10 flex items-center justify-between px-6 py-4;
+    @apply relative z-[110] flex items-center justify-between px-6 py-4;
   }
 
   .neo-burger-btn {
-    @apply ml-auto rounded-sm p-2 text-neo-heading transition-colors;
-    border: 1px solid var(--neo-accent);
+    @apply relative z-[110] ml-auto rounded-sm border border-neo-accent p-2 text-neo-accent transition-colors;
   }
 
   .neo-burger-btn:hover {
-    color: var(--neo-accent);
+    background-color: color-mix(in srgb, var(--neo-accent) 12%, transparent);
   }
 
   .neo-menu-dropdown {
-    @apply absolute top-full left-0 z-50 w-full bg-white/85 px-2 py-2 opacity-0 shadow-lg backdrop-blur-lg pointer-events-none;
-    border-bottom: 1px solid rgb(0 0 0 / 0.1);
+    @apply absolute top-full left-0 z-[90] w-full bg-white/50 px-2 py-2 opacity-0 shadow-lg backdrop-blur-xl pointer-events-none;
+    border-bottom: 1px solid rgb(0 0 0 / 0.05);
+  }
+
+  .neo-menu-dropdown.is-open {
+    pointer-events: auto;
   }
 
   .neo-menu-link {
-    @apply block py-4 text-center font-display text-2xl text-neo-heading transition-colors;
+    @apply relative z-50 block py-4 text-center font-display text-2xl text-neo-heading transition-colors pointer-events-auto;
   }
 
   .neo-menu-link:hover {
     color: var(--neo-accent);
+  }
+
+  .neo-band-white {
+    @apply bg-white;
+  }
+
+  .neo-band-muted {
+    @apply border-y border-black/5 bg-[#f7f7f8];
   }
 
   .hero-video-overlay {

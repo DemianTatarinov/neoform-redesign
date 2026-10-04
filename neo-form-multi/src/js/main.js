@@ -22,8 +22,12 @@ function initMenu() {
     open = next
     toggle.setAttribute('aria-expanded', String(open))
     panel.setAttribute('aria-hidden', String(!open))
+    panel.classList.toggle('is-open', open)
+
     if (open) {
       panel.classList.remove('pointer-events-none')
+      panel.style.pointerEvents = 'auto'
+
       gsap.to(panel, {
         autoAlpha: 1,
         duration: 0.45,
@@ -40,6 +44,7 @@ function initMenu() {
           stagger: 0.07,
           ease: 'power3.out',
           delay: 0.1,
+          pointerEvents: 'auto',
         }
       )
     } else {
@@ -48,13 +53,18 @@ function initMenu() {
         duration: 0.35,
         ease: 'power2.in',
         onComplete: () => {
+          panel.classList.remove('is-open')
           panel.classList.add('pointer-events-none')
+          panel.style.pointerEvents = 'none'
         },
       })
     }
   }
 
-  toggle.addEventListener('click', () => setOpen(!open))
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation()
+    setOpen(!open)
+  })
   links.forEach((link) => link.addEventListener('click', () => setOpen(false)))
 }
 
@@ -106,7 +116,7 @@ function initHeader() {
     start: 'top -40',
     onUpdate: (self) => {
       const scrolled = self.scroll() > 24
-      header.classList.toggle('bg-white/90', scrolled)
+      header.classList.toggle('bg-white/70', scrolled)
       header.classList.toggle('shadow-sm', scrolled)
     },
   })
