@@ -724,7 +724,8 @@ body { overflow-x: hidden; }
 
 
 /* Sticky contact navigation */
-.site-header--sticky { position: fixed !important; top: 0; right: 0; left: 0; z-index: 50; width: 100%; margin: 0; border-bottom: 1px solid rgba(255,255,255,.1); background: rgba(0,0,0,.25); box-shadow: 0 8px 32px rgba(0,0,0,.37); backdrop-filter: blur(24px); transition: background .3s ease, border-color .3s ease; }
+.site-header--sticky { position: fixed !important; top: 0; right: 0; left: 0; z-index: 50 !important; width: 100%; height: auto; margin: 0; border-bottom: 1px solid rgba(255,255,255,.1); background: rgb(13 13 13 / 0.9); box-shadow: none; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: background .3s ease, border-color .3s ease; }
+.project-modal, .legal-modal { z-index: 80; }
 .site-header--sticky.site-header--inner { width: min(100% - 48px, 1280px); border-bottom-color: rgba(30,30,30,.12); background: rgba(248,248,246,.82); }
 .site-header--sticky.site-header--hidden { transform: translateY(0); }
 .site-header--inner.site-header--sticky.site-header--menu-open { background: #2b2b2b; border-bottom-color: transparent; }
@@ -962,6 +963,13 @@ body { overflow-x: hidden; }
 }
 @media (min-width: 921px) {
   .site-header--sticky .mobile-menu-button { display: none; }
+  .site-header--sticky .main-nav { gap: 12px; margin-right: 16px; font-size: 10px; letter-spacing: .08em; }
+}
+@media (min-width: 921px) and (max-width: 1180px) {
+  .site-header--sticky .header-actions { display: none; }
+}
+@media (min-width: 1280px) {
+  .site-header--sticky .main-nav { gap: 18px; margin-right: 28px; font-size: 11px; letter-spacing: .12em; }
 }
 @media (max-width: 360px) {
   .site-header--sticky .brand img, .site-header--sticky .brand .brand-logo { max-width: min(46vw, 180px); height: 2.25rem; }
@@ -1046,4 +1054,43 @@ body { overflow-x: hidden; }
 @media (max-width: 720px) {
   .section-rhythm.bespoke, .section-rhythm.anatomy, .section-rhythm.portfolio, .section-rhythm.process, .section-rhythm.neo-lab, .section-rhythm.testimonials, .section-rhythm.site-footer { padding-top: 4rem; padding-bottom: 4rem; }
   .process-grid { gap: 16px; }
+}
+
+/* Monochrome header (home page): no glow, no orange accents on controls */
+.site-header--sticky.site-header--mono { background: rgba(13,13,13,.82); box-shadow: none; border-bottom-color: rgba(255,255,255,.1); }
+.site-header--mono .main-nav a:hover,
+.site-header--mono .header-cta:hover,
+.site-header--sticky.site-header--mono .main-nav a.is-active { color: #fff; }
+.site-header--mono .main-nav a.is-active { text-decoration: underline; text-underline-offset: 6px; }
+.site-header--mono .header-cta svg { color: #fff; }
+.site-header--sticky.site-header--mono .header-actions a:hover { border-color: #fff; background: #fff; color: #0d0d0d; }
+.site-header--sticky.site-header--mono .mobile-menu-button:hover { border-color: #fff; background: rgba(255,255,255,.08); color: #fff; }
+.site-header--sticky.site-header--mono.site-header--menu-open .mobile-menu-button { border-color: #fff; background: #fff; color: #0d0d0d; }
+
+/* Header: always above page content; background is controlled in SiteHeader.tsx */
+.neo-site-header {
+  isolation: isolate;
+}
+
+.neo-site-header a {
+  mix-blend-mode: normal;
+  filter: none;
+  opacity: 1;
+}
+
+.neo-site-header a span {
+  color: #f26522;
+}
+
+.neo-hero-media,
+.neo-hero-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+#root {
+  position: relative;
+  z-index: 0;
 }

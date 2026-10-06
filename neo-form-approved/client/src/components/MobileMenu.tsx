@@ -1,10 +1,8 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { Instagram, Mail, Phone, Send } from "lucide-react";
+import { Facebook, Instagram, Send } from "lucide-react";
 import { Link } from "wouter";
 import { triggerHaptic } from "@/utils/haptics";
-
-type NavLink = readonly [label: string, href: string];
 
 type ContactLinks = {
   phone: string;
@@ -16,124 +14,96 @@ type ContactLinks = {
 type MobileMenuProps = {
   open: boolean;
   onClose: () => void;
-  activePath: string;
-  onNavClick: () => void;
-  links: readonly NavLink[];
   contact: ContactLinks;
 };
 
-export default function MobileMenu({
-  open,
-  onClose,
-  activePath,
-  onNavClick,
-  links,
-  contact,
-}: MobileMenuProps) {
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [open]);
+const menuLinks = [
+  { label: "Credo", href: "/credo" },
+  { label: "Zespół", href: "/zespol" },
+  { label: "Bespoke", href: "/bespoke" },
+  { label: "Materiały", href: "/materialy" },
+  { label: "Technologia", href: "/technologia" },
+  { label: "Architekci", href: "/architekci" },
+  { label: "Proces", href: "/proces" },
+  { label: "Realizacje", href: "/realizacje" },
+  { label: "Neo Lab", href: "/neo-lab" },
+  { label: "Kontakt", href: "/kontakt" },
+] as const;
 
-  const handleClose = () => {
-    triggerHaptic();
-    onClose();
-  };
+const facebookUrl = "https://www.facebook.com/neoform";
+
+export default function MobileMenu({ open, onClose, contact }: MobileMenuProps) {
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
 
   return createPortal(
     <div
-      className={`min-[921px]:hidden ${open ? "pointer-events-auto" : "pointer-events-none"}`}
-      aria-hidden={!open}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu nawigacji"
+      className="fixed inset-0 z-[100] flex flex-col justify-between bg-[#111111] px-6 pb-8 pt-24 text-white sm:px-12"
     >
-      <button
-        type="button"
-        className={`fixed inset-0 z-[999] bg-black/40 backdrop-blur-sm transition-opacity duration-300 ease-out ${open ? "opacity-100" : "opacity-0"}`}
-        aria-label="Zamknij menu"
-        tabIndex={open ? 0 : -1}
-        onClick={handleClose}
-      />
-      <aside
-        role="dialog"
-        aria-modal="true"
-        aria-label="Menu nawigacji"
-        className={`mobile-menu-drawer fixed top-0 right-0 z-[1000] flex h-full w-[85vw] max-w-sm transform-gpu flex-col overflow-y-auto border-l border-white/10 bg-neutral-950/70 p-6 pt-[max(3.5rem,env(safe-area-inset-top))] text-white shadow-[-20px_0_40px_rgba(0,0,0,0.5)] backdrop-blur-2xl transition-transform duration-300 ease-out ${open ? "translate-x-0" : "translate-x-full"}`}
-      >
-        <button
-          type="button"
-          className="absolute right-4 top-[max(1rem,env(safe-area-inset-top))] p-2 text-2xl font-light text-white/70 transition-colors hover:text-[#F26522]"
-          aria-label="Zamknij menu"
-          tabIndex={open ? 0 : -1}
-          onClick={handleClose}
+      <nav className="flex min-h-0 flex-1 flex-col justify-center overflow-y-auto" aria-label="Główna nawigacja">
+        {menuLinks.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="py-2 text-3xl font-bold text-white transition-colors hover:text-[#F26522]"
+            onClick={() => {
+              triggerHaptic();
+              onClose();
+            }}
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+
+      <div className="flex items-center gap-6">
+        <a
+          href={contact.instagram}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Instagram"
+          className="text-white transition-colors hover:text-[#F26522]"
+          onClick={() => triggerHaptic()}
         >
-          ✕
-        </button>
-
-        <nav className="mobile-menu-drawer__nav flex flex-1 flex-col pt-2" aria-label="Główna nawigacja mobilna">
-          {links.map(([label, href]) => {
-            const isActive = activePath === href;
-            return (
-              <Link
-                className={`mobile-menu-drawer__link border-b border-white/10 py-4 font-sans text-[13px] font-bold uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:text-[#F26522] active:text-[#F26522] sm:text-[14px] ${isActive ? "is-active !text-[#F26522]" : ""}`}
-                href={href}
-                key={href}
-                onClick={onNavClick}
-                tabIndex={open ? 0 : -1}
-              >
-                {label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="mobile-menu-drawer__contacts mt-auto grid grid-cols-2 gap-2 pb-[max(2rem,env(safe-area-inset-bottom))]">
-          <a
-            className="mobile-menu-drawer__contact group flex items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-2 py-3 font-sans text-[10px] font-semibold uppercase tracking-widest text-white transition-colors hover:border-[#F26522]/50 hover:bg-[#F26522]/10 hover:text-[#F26522] active:text-[#F26522] sm:text-[11px]"
-            href={`tel:${contact.phone}`}
-            tabIndex={open ? 0 : -1}
-            onClick={() => triggerHaptic()}
-          >
-            <Phone size={15} className="text-white/60 transition-colors group-hover:text-[#F26522]" />
-            Zadzwoń
-          </a>
-          <a
-            className="mobile-menu-drawer__contact group flex items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-2 py-3 font-sans text-[10px] font-semibold uppercase tracking-widest text-white transition-colors hover:border-[#F26522]/50 hover:bg-[#F26522]/10 hover:text-[#F26522] active:text-[#F26522] sm:text-[11px]"
-            href={`mailto:${contact.email}`}
-            tabIndex={open ? 0 : -1}
-            onClick={() => triggerHaptic()}
-          >
-            <Mail size={15} className="text-white/60 transition-colors group-hover:text-[#F26522]" />
-            Napisz
-          </a>
-          <a
-            className="mobile-menu-drawer__contact group flex items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-2 py-3 font-sans text-[10px] font-semibold uppercase tracking-widest text-white transition-colors hover:border-[#F26522]/50 hover:bg-[#F26522]/10 hover:text-[#F26522] active:text-[#F26522] sm:text-[11px]"
-            href={contact.telegram}
-            target="_blank"
-            rel="noreferrer"
-            tabIndex={open ? 0 : -1}
-            onClick={() => triggerHaptic()}
-          >
-            <Send size={15} className="text-white/60 transition-colors group-hover:text-[#F26522]" />
-            Telegram
-          </a>
-          <a
-            className="mobile-menu-drawer__contact group flex items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-2 py-3 font-sans text-[10px] font-semibold uppercase tracking-widest text-white transition-colors hover:border-[#F26522]/50 hover:bg-[#F26522]/10 hover:text-[#F26522] active:text-[#F26522] sm:text-[11px]"
-            href={contact.instagram}
-            target="_blank"
-            rel="noreferrer"
-            tabIndex={open ? 0 : -1}
-            onClick={() => triggerHaptic()}
-          >
-            <Instagram size={15} className="text-white/60 transition-colors group-hover:text-[#F26522]" />
-            Instagram
-          </a>
-        </div>
-      </aside>
+          <Instagram size={22} strokeWidth={1.6} />
+        </a>
+        <a
+          href={facebookUrl}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Facebook"
+          className="text-white transition-colors hover:text-[#F26522]"
+          onClick={() => triggerHaptic()}
+        >
+          <Facebook size={22} strokeWidth={1.6} />
+        </a>
+        <a
+          href={contact.telegram}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Telegram"
+          className="text-white transition-colors hover:text-[#F26522]"
+          onClick={() => triggerHaptic()}
+        >
+          <Send size={22} strokeWidth={1.6} />
+        </a>
+      </div>
     </div>,
     document.body,
   );

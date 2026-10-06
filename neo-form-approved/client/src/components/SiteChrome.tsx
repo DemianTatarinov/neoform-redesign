@@ -2,7 +2,6 @@ import { useEffect, type ReactNode } from "react";
 import { ArrowDown } from "lucide-react";
 import BackToTop from "@/components/BackToTop";
 import HeroVideo from "@/components/HeroVideo";
-import SiteHeader from "@/components/SiteHeader";
 
 type SiteChromeProps = {
   eyebrow: string;
@@ -37,7 +36,6 @@ export default function SiteChrome({ eyebrow, title, lead, cta, children }: Site
     <div className="site">
       <section className="hero pointer-events-none" id="start">
         <HeroVideo />
-        <SiteHeader />
         <div className="hero__content shell relative z-10 pointer-events-none">
           <p className="eyebrow eyebrow--light">
             <span className="hero__reveal hero__reveal--1">{eyebrow}</span>

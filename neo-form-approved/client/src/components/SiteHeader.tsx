@@ -1,19 +1,9 @@
-import { useState } from "react";
-import { ArrowUpRight, Instagram, Mail, Menu, Phone, Send } from "lucide-react";
-import { Link, useLocation } from "wouter";
-import Logo from "@/components/Logo";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { useLocation } from "wouter";
 import MobileMenu from "@/components/MobileMenu";
+import Logo from "@/components/Logo";
 import { triggerHaptic } from "@/utils/haptics";
-
-const navLinks = [
-  ["Bespoke", "/bespoke"],
-  ["Portfolio", "/portfolio"],
-  ["Credo", "/credo"],
-  ["Architekci", "/architects"],
-  ["Proces", "/process"],
-  ["Neo Lab", "/neo-lab"],
-  ["Kontakt", "/contact"],
-] as const;
 
 const contact = {
   phone: "+48000000000",
@@ -22,14 +12,47 @@ const contact = {
   instagram: "https://www.instagram.com/neoform/",
 };
 
-type SiteHeaderProps = {
-  /** Home hero uses in-page anchor for logo; inner routes use `/`. */
-  homePage?: boolean;
-};
-
-export default function SiteHeader({ homePage = false }: SiteHeaderProps) {
+export default function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [onLight, setOnLight] = useState(false);
   const [location] = useLocation();
+  const homePage = location === "/";
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const band = 80;
+    const nodes = document.querySelectorAll<HTMLElement>("[data-header-tone]");
+    if (!nodes.length) {
+      setOnLight(location !== "/");
+      return;
+    }
+
+    const pick = () => {
+      const top = band;
+      let match: HTMLElement | null = null;
+      nodes.forEach((node) => {
+        const rect = node.getBoundingClientRect();
+        if (rect.top <= top && rect.bottom > top) match = node;
+      });
+      if (!match) return;
+      setOnLight(match.dataset.headerTone === "light");
+    };
+
+    pick();
+    window.addEventListener("scroll", pick, { passive: true });
+    window.addEventListener("resize", pick);
+    return () => {
+      window.removeEventListener("scroll", pick);
+      window.removeEventListener("resize", pick);
+    };
+  }, [location]);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -38,65 +61,52 @@ export default function SiteHeader({ homePage = false }: SiteHeaderProps) {
     setMenuOpen((value) => !value);
   };
 
-  const onNavClick = () => {
-    triggerHaptic();
-    closeMenu();
-  };
+  const lightInk = onLight && !menuOpen;
+  const ink = lightInk ? "text-neutral-950" : "text-white";
+  const line = lightInk ? "bg-neutral-950" : "bg-white";
+  const bar = menuOpen
+    ? "border-white/10 bg-transparent text-white"
+    : lightInk
+      ? "border-neutral-950/10 bg-[#f8f8f7]/80 text-neutral-950 backdrop-blur-md"
+      : scrolled
+        ? "border-white/10 bg-black/50 text-white backdrop-blur-md"
+        : "border-white/10 bg-transparent text-white";
 
-  return (
+  return createPortal(
     <>
       <header
-        className={`site-header site-header--sticky pointer-events-auto fixed top-0 left-0 right-0 z-50 flex items-center justify-between gap-2 border-b border-white/10 bg-neutral-950/75 text-white shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] backdrop-blur-xl transition-all duration-300 pt-[max(0.75rem,env(safe-area-inset-top))] pb-3 px-4 sm:px-6 ${menuOpen ? "site-header--menu-open" : ""}`}
+        className={`neo-site-header fixed top-0 left-0 right-0 z-[110] flex h-20 items-center justify-between px-6 transition-all duration-300 sm:px-12 ${bar}`}
       >
-        <Logo href={homePage ? "#start" : "/"} onClick={closeMenu} />
+        <Logo
+          href="/"
+          tone={lightInk ? "dark" : "light"}
+          className="h-8 w-auto object-contain md:h-10"
+          onClick={() => {
+            closeMenu();
+            if (homePage) window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        />
+
         <button
-          className="mobile-menu-button pointer-events-auto flex h-11 w-11 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white active:scale-95 transition-transform min-[921px]:hidden"
           type="button"
+          className={`relative z-50 flex h-10 w-8 cursor-pointer flex-col items-center justify-center gap-[5px] ${ink}`}
           aria-label={menuOpen ? "Zamknij menu" : "Otwórz menu"}
           aria-expanded={menuOpen}
           onClick={toggleMenu}
         >
-          <Menu size={20} strokeWidth={1.6} />
+          {menuOpen ? (
+            <span className="text-2xl font-light leading-none">✕</span>
+          ) : (
+            <>
+              <span className={`block h-px w-6 ${line}`} />
+              <span className={`block h-px w-6 ${line}`} />
+              <span className={`block h-px w-6 ${line}`} />
+            </>
+          )}
         </button>
-        <nav className="main-nav" aria-label="Główna nawigacja">
-          {navLinks.map(([label, href]) => (
-            <Link className={location === href ? "is-active" : ""} href={href} key={href} onClick={onNavClick}>
-              {label}
-            </Link>
-          ))}
-        </nav>
-        <div className="header-actions" aria-label="Szybki kontakt">
-          <a href={`tel:${contact.phone}`} aria-label="Zadzwoń" onClick={() => triggerHaptic()}>
-            <Phone size={15} />
-          </a>
-          <a href={`mailto:${contact.email}`} aria-label="Napisz e-mail" onClick={() => triggerHaptic()}>
-            <Mail size={15} />
-          </a>
-          <a href={contact.telegram} target="_blank" rel="noreferrer" aria-label="Telegram" onClick={() => triggerHaptic()}>
-            <Send size={15} />
-          </a>
-          <a href={contact.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" onClick={() => triggerHaptic()}>
-            <Instagram size={15} />
-          </a>
-        </div>
-        {homePage ? (
-          <a className="header-cta" href="/contact" onClick={onNavClick}>
-            Porozmawiajmy <ArrowUpRight size={15} />
-          </a>
-        ) : (
-          <Link className="header-cta" href="/contact" onClick={onNavClick}>
-            Porozmawiajmy <ArrowUpRight size={15} />
-          </Link>
-        )}
       </header>
-      <MobileMenu
-        open={menuOpen}
-        onClose={closeMenu}
-        activePath={location}
-        onNavClick={onNavClick}
-        links={navLinks}
-        contact={contact}
-      />
-    </>
+      <MobileMenu open={menuOpen} onClose={closeMenu} contact={contact} />
+    </>,
+    document.body,
   );
 }

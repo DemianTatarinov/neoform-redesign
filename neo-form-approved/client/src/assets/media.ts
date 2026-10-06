@@ -163,6 +163,57 @@ export const credoCards: MaterialCard[] = [
   },
 ];
 
+export const kitchenProjects = [
+  {
+    slug: "apartament-wilanow",
+    title: "Wilanów",
+    materials: "Fornir Dębowy & Spiek",
+    caption: "Wilanów // Fornir Dębowy & Spiek",
+    description: "Dialog między kamieniem a drewnem. Ciągłość usłojenia przez całą zabudowę.",
+    image: u("photo-1600566753086-00f18fb6b3ea", 1800),
+  },
+  {
+    slug: "penthouse-mokotow",
+    title: "Mokotów",
+    materials: "Lakier Mat & FENIX",
+    caption: "Mokotów // Lakier Mat & FENIX",
+    description: "Czysta forma i maksymalna funkcjonalność w penthousie.",
+    image: u("photo-1600210492486-724fe641c677", 1800),
+  },
+  {
+    slug: "dom-konstancin",
+    title: "Konstancin",
+    materials: "Kamień & Drewno",
+    caption: "Konstancin // Kamień & Drewno",
+    description: "Zintegrowana zabudowa na wymiar sięgająca ponad trzech metrów.",
+    image: u("photo-1600585154526-990dced4db0d", 1800),
+  },
+  {
+    slug: "loft-powisle",
+    title: "Powiśle",
+    materials: "Stal Szczotkowana & Mat",
+    caption: "Powiśle // Stal Szczotkowana & Mat",
+    description: "Szczotkowana stal i głęboki mat w ascetycznej formie loftu.",
+    image: u("photo-1600607687920-4e2a09cf159d", 1800),
+  },
+  {
+    slug: "apartament-zoliborz",
+    title: "Żoliborz",
+    materials: "Orzech & Spiek Kwarcowy",
+    caption: "Żoliborz // Orzech & Spiek Kwarcowy",
+    description: "Ciepły orzech i monolityczny blat spieku w jednej płaszczyźnie.",
+    image: u("photo-1556911220-bff31c812dba", 1800),
+  },
+  {
+    slug: "saska-kepa",
+    title: "Saska Kępa",
+    materials: "HPL & Fornir",
+    caption: "Saska Kępa // HPL & Fornir",
+    description: "HPL i fornir prowadzone przez kuchnię, spiżarnię i zabudowę ścienną.",
+    image: u("photo-1631679706909-1844bbd07221", 1800),
+  },
+] as const;
+
 export const materialCards: MaterialCard[] = [
   {
     number: "01",
