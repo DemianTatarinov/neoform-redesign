@@ -1,2 +1,2 @@
-neo-form-approved-React + TypeScript меняем концепцию под стиль зайца 
+neo-form-approved-React + TypeScript Третий сайт для NEOFORM
 
