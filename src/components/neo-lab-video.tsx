@@ -25,7 +25,7 @@ export function NeoLabVideo() {
 
   return (
     <div className="neo-lab-video" aria-hidden="true">
-      <video ref={videoRef} className="neo-lab-video-media" poster={poster.url} autoPlay loop muted playsInline preload="metadata">
+      <video ref={videoRef} className="neo-lab-video-media" poster={poster.url} autoPlay loop muted playsInline preload="auto">
         <source src={clipWebm.url} type="video/webm" />
         <source src={clip.url} type="video/mp4" />
       </video>

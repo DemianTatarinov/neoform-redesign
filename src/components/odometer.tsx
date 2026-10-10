@@ -5,10 +5,10 @@ const DIGITS = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 const STEP = 0.55; // seconds per digit drum
 const STAGGER = 0.45; // next digit starts as the previous one settles
 
-/** Mechanical counter: each digit spins independently from 9 down to its value once visible. */
+/** Mechanical counter: each digit spins from 9 down to its value every time it enters the viewport. */
 export function Odometer({ value, className }: { value: string; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.5 });
+  const inView = useInView(ref, { once: false, amount: 0.5 });
   const reduce = useReducedMotion();
 
   return (

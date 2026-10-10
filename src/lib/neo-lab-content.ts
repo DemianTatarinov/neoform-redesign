@@ -1,8 +1,13 @@
 export const neoLab = {
   title: 'WIEDZA, KTÓRA POWSTAJE W PRAKTYCE',
-  slogan: 'LEARN TEST CREATE',
+  slogan: 'Learn. Test. Create',
   contactLabel: 'ZAPYTAJ O WYDARZENIE',
-  description: 'Program wydarzenia: organizacja przestrzeni w meblach kuchennych oraz prezentacja nowej odsłony marki NEO FORM.',
+  description: 'Doświadczenie ma wartość dopiero wtedy, kiedy można się nim podzielić. Neo Lab to przestrzeń wiedzy, spotkań i wymiany doświadczeń dla projektantów, architektów, producentów i montażystów. Nie chcemy zatrzymywać wiedzy wewnątrz firmy – chcemy ją przekazywać dalej. Nie interesują nas szkolenia, po których wychodzisz z kolejnym PDF. Interesuje nas wiedza, którą wykorzystasz następnego dnia. Prawdziwe projekty, prawdziwe problemy, prawdziwe rozwiązania.',
+  partnerIntro: 'Nie chcemy być jedynym źródłem wiedzy. Neo Lab tworzymy wspólnie z markami, które wyznaczają standardy: Blum, Häfele, Viefe, PEKA, ARPA, FENIX. To spotkania, podczas których produkt można dotknąć, przetestować i w pełni zrozumieć.',
+  upcomingLabel: 'NAJBLIŻSZE WYDARZENIA',
+  registrationLabel: 'ZAPISZ SIĘ',
+  archiveLabel: 'ARCHIWUM NEO LAB',
+  archiveIntro: 'Te spotkania już się odbyły...',
   videoLabel: 'WIDEO / NEO LAB',
   invitationLabel: 'ZAPROSZENIE',
   programLabel: 'PROGRAM / NEO LAB × PEKA',
@@ -10,6 +15,19 @@ export const neoLab = {
   galleryTitle: 'Название обучения',
   galleryDate: 'Дата обучения',
 };
+
+export const neoLabEducation = [
+  { id: 'knowledge', title: 'Wiedza dla architektów', text: 'Pokazujemy nowe materiały, systemy, rozwiązania techniczne i sposoby łączenia materiałów w wymagających projektach.' },
+  { id: 'practice', title: 'Praktyka zamiast teorii', text: 'Prawdziwe projekty, realne problemy, technologia w działaniu i inspiracja, która zaczyna się od rozmowy.' },
+];
+
+export const neoLabEvents = ['PEKA', 'Materiały', 'Technology'];
+export const neoLabArchive = [
+  { title: 'Front Lab', date: '11.02.2026', dateTime: '2026-02-11' },
+  { title: 'Kamień & Spiek', date: '11.03.2026', dateTime: '2026-03-11' },
+  { title: 'Blum: Okucia meblowe', date: '15.04.2026', dateTime: '2026-04-15' },
+];
+export const footerSignature = { brand: 'NEO FORM', lines: ['Tworzymy meble', 'Dzielimy się wiedzą', 'Rozwijamy branżę'] };
 
 export const neoLabCategories = [
   {

@@ -1,4 +1,6 @@
 # NEO FORM landing
+- [x] Unify all interface accents with the PROGRAM / NEO LAB × PEKA copper, enlarge mobile typography, balance wrapping and heading gaps across pages/dialogs, and audit UI punctuation without changing prose; verified both pages and NEO LAB/archive/hardware dialogs at 320/390/768/1280px, no overflow or runtime errors, six tests pass.
+- [x] Rebuild NEO LAB from the supplied exact prose with solid dark introduction, partner marks, two educational accordions, Instagram registration handoff and three state-only six-photo archive galleries; center stacked branding at the bottom. Six tests pass; all galleries and nested modal scroll restoration verified at desktop/phone widths without runtime errors. ARPA remains a typographic mark pending an accessible official logo asset.
 - [x] Move the "TWORZYMY MEBLE..." slogan directly above the map and remove the empty band under the form button; enlarge and bold "KONTAKT" in brand orange #F48024; enlarge and recolor the "Imię"/"Wiadomość" labels; rename the submit button to "ZAMÓW PROJEKT" as the primary action; verified at 390/1280px, six tests pass.
 - [x] Delete the address panel on the map and the old details strip, and build a new address block under the map: ADRES label, copper rule, large address, outlined "JAK DOJEDZIĆ" link, company details beside it; verified revealed, no overflow and no console errors at 320/390/1280px; six tests pass.
 - [x] Remove closing contact branding and evolution block, remove unsupported Maps channel, enlarge process typography and conditionally mount NEO LAB; verified 320/390/1280px layouts, zero opening scroll events and scroll restoration; four tests pass. Live map pin requires verification on the published origin.
@@ -24,5 +26,5 @@
 - [x] Refine landing spacing, typography, left-aligned copy and visual cleanliness; verify phone/desktop layouts.
 - [x] Add gentle scroll reveals and verify scrolling, navigation and reduced-motion behavior.
 - [x] Add NEO LAB near the end with three accordions and the exact PEKA schedule; verify interactions.
-- [ ] Restore the original NEO LAB description — awaiting the old wording; uploaded program introduction used provisionally.
+- [x] Restore NEO LAB description — exact main paragraph, partner introduction and accordion copy supplied by the client October 2026.
 - [x] Quick action buttons (Email/Zadzwoń/WhatsApp/Instagram) in contact section + floating back-to-top button; test contact values pending real ones

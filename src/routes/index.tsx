@@ -10,11 +10,13 @@ import materials from '@/assets/neo-materials.jpg';
 import detail from '@/assets/neo-detail.jpg';
 import plans from '@/assets/neo-plans.jpg';
 import team from '@/assets/neo-team.asset.json';
+import { HardwareDialog } from '@/components/hardware-dialog';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import { ContactMap } from '@/components/contact-map';
 import { HeroVideo } from '@/components/hero-video';
 import { ContactAddress } from '@/components/contact-address';
 import { ContactForm } from '@/components/contact-form';
+import { SiteFooterSignature } from '@/components/site-footer-signature';
 
 export const Route = createFileRoute('/')({
   head: () => ({ meta: [
@@ -51,6 +53,7 @@ function Index() {
   const [category, setCategory] = useState(0);
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [principle, setPrinciple] = useState(0);
+  const [hardwareBrand, setHardwareBrand] = useState<string | null>(null);
   const galleryImages = [interior, materials, plans, detail];
   return (
     <main ref={pageRef}>
@@ -67,7 +70,7 @@ function Index() {
           <div className="credo-body"><Paragraphs texts={copy.credo.slice(1)} /></div>
           <ul className="individuality-slider" aria-label="Każde wnętrze jest inne">{copy.individuality.map((t, i) => <li key={t} className="individuality-card"><span>0{i + 1}</span><p>{t}</p></li>)}</ul>
           <div className="principles-split">
-            <div className="principles-tabs"><p className="principles-title">Cztery elementy. Jedna forma.</p><div role="tablist" aria-label="Cztery zasady NEO FORM">{principles.map((p, i) => <button key={p.title} type="button" role="tab" id={`principle-tab-${i}`} aria-selected={principle === i} aria-controls="principle-panel" className={principle === i ? 'principle-tab active' : 'principle-tab'} onClick={() => setPrinciple(i)}><span>0{i + 1}</span>{p.title}</button>)}</div></div>
+            <div className="principles-tabs"><p className="principles-title">Cztery elementy. Jedna forma</p><div role="tablist" aria-label="Cztery zasady NEO FORM">{principles.map((p, i) => <button key={p.title} type="button" role="tab" id={`principle-tab-${i}`} aria-selected={principle === i} aria-controls="principle-panel" className={principle === i ? 'principle-tab active' : 'principle-tab'} onClick={() => setPrinciple(i)}><span>0{i + 1}</span>{p.title}</button>)}</div></div>
             <div className="principles-photo" role="tabpanel" id="principle-panel" aria-labelledby={`principle-tab-${principle}`}>{principles.map((p, i) => <img key={p.title} src={p.image} alt={p.title} loading="lazy" width={1536} height={1024} className={principle === i ? 'active' : ''} aria-hidden={principle !== i} />)}</div>
           </div>
         </div>
@@ -79,9 +82,9 @@ function Index() {
 
       <section className="section graphite" id="material"><div className="container"><Label number="05">MATERIAŁ</Label><div className="section-heading"><h2>MATERIAŁ<br />MA ZNACZENIE</h2><Paragraphs texts={copy.materials} /></div><div className="material-grid">{['Drewno / Fornir', 'Kamień / Spieki', 'FENIX / ARPA / HPL', 'Stal'].map((name, i) => <figure key={name}><div className={`material-crop material-${i}`}><Photo src={materials} alt={name} /></div><figcaption><span>{name}</span><span>0{i + 1}</span></figcaption></figure>)}</div></div></section>
 
-      <section className="section steel" id="technologia"><div className="container"><Label number="06">TECHNOLOGIA</Label><div className="image-text"><Photo src={detail} alt="Precyzyjnie spasowane fronty i ukryty zawias" /><div><h2>INŻYNIERIA<br />UKRYTA W FORMIE</h2><Paragraphs texts={copy.technology} /><div className="system-names"><span>Blum</span><span>PEKA</span><span>Hettich</span></div></div></div></div></section>
+      <section className="section steel" id="technologia"><div className="container"><Label number="06">TECHNOLOGIA</Label><div className="image-text"><Photo src={detail} alt="Precyzyjnie spasowane fronty i ukryty zawias" /><div><h2>INŻYNIERIA<br />UKRYTA W FORMIE</h2><Paragraphs texts={copy.technology} /><div className="system-names">{['Blum', 'PEKA', 'Hettich'].map(name => <button key={name} type="button" className="system-name" onClick={() => setHardwareBrand(name)}>{name}</button>)}</div></div></div></div></section>
 
-      <section className="section ink" id="blat"><div className="container"><Label number="07">BLAT</Label><div className="image-text reversed"><div><h2>OSTATNI ELEMENT<br />KTÓRY POTRAFI<br />ZMIENIĆ CAŁOŚĆ</h2><Paragraphs texts={copy.countertop} /></div><Photo src={detail} alt="Połączenie naturalnego kamienia z matowym frontem" className="countertop-photo" /></div></div></section>
+      <section className="section graphite" id="blat"><div className="container"><Label number="07">BLAT</Label><div className="image-text reversed"><div><h2>OSTATNI ELEMENT<br />KTÓRY POTRAFI<br />ZMIENIĆ CAŁOŚĆ</h2><Paragraphs texts={copy.countertop} /></div><Photo src={detail} alt="Połączenie naturalnego kamienia z matowym frontem" className="countertop-photo" /></div></div></section>
 
       <section className="section paper" id="architekci"><div className="container"><Label number="08">WSPÓŁPRACA Z ARCHITEKTAMI</Label><div className="image-text reversed"><div><h2>DOBRY PROJEKT<br />POTRZEBUJE DOBREGO<br />WYKONAWCY</h2><Paragraphs texts={copy.architects} /><a className="text-link" href="#kontakt">KONTAKT<ArrowUpRight size={18} /></a></div><Photo src={plans} alt="Rysunki architektoniczne i próbki materiałów podczas współpracy projektowej" /></div></div></section>
 
@@ -90,10 +93,11 @@ function Index() {
       <section className="section paper" id="realizacje"><div className="container"><Label number="10">REALIZACJE</Label><div className="section-heading"><h2>PRZESTRZENIE,<br />KTÓRE NABRAŁY FORMY</h2><Paragraphs texts={copy.portfolio} /></div><ul className="portfolio-grid">{categories.slice(0, 4).map((c, i) => <li key={c}><button type="button" className="portfolio-tile" onClick={() => { setCategory(i); setGalleryOpen(true); }} aria-label={`Powiększ zdjęcie: ${c}`}><img src={galleryImages[i]} alt={c} loading="lazy" width={1536} height={1024} /><span className="portfolio-caption"><strong>{c}</strong><span>{copy.portfolio[1]}</span></span></button></li>)}</ul></div></section>
 
       <footer className="contact-footer" id="kontakt"><div className="container"><div className="footer-top"><h2>KONTAKT</h2><a href="#top" aria-label="Wróć na początek strony"><ArrowUpRight size={40} /></a></div><ContactForm /></div>
-        <div className="container"><p className="footer-slogan">TWORZYMY MEBLE<br />DZIELIMY SIĘ WIEDZĄ<br />ROZWIJAMY BRANŻĘ</p></div>
         <ContactMap />
         <ContactAddress />
+        <SiteFooterSignature />
       </footer>
+      <HardwareDialog brand={hardwareBrand} onOpenChange={open => { if (!open) setHardwareBrand(null); }} />
       <Dialog open={galleryOpen} onOpenChange={setGalleryOpen}><DialogContent className="portfolio-dialog"><DialogTitle>{categories[category]}</DialogTitle><Photo src={galleryImages[category] ?? interior} alt={categories[category] ?? 'Realizacje'} /><div className="dialog-navigation"><Button variant="ghost" size="icon" aria-label="Poprzednie zdjęcie" onClick={() => setCategory((category + 3) % 4)}><ArrowLeft /></Button><span>0{category + 1} / 04</span><Button variant="ghost" size="icon" aria-label="Następne zdjęcie" onClick={() => setCategory((category + 1) % 4)}><ArrowRight /></Button></div></DialogContent></Dialog>
     </main>
   );
