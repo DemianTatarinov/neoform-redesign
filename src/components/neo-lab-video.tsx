@@ -1,35 +1,50 @@
 import { useEffect, useRef } from 'react';
-import clip from '@/assets/neo-lab-mobile.mp4.asset.json';
-import clipWebm from '@/assets/neo-lab-mobile.webm.asset.json';
-import poster from '@/assets/neo-lab-poster.jpg.asset.json';
+import labClip from '@/assets/VIDEO/VIDEO1.mp4';
 
 export function NeoLabVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const sync = () => {
-      if (preference.matches) video.pause();
-      else void video.play().catch(() => {});
+
+    // Мгновенный старт воспроизведения
+    const playVideo = () => {
+      video.play().catch(() => {
+        // браузерные политики автовоспроизведения
+      });
     };
-    const respectPreference = () => { if (preference.matches) video.pause(); };
-    sync();
-    preference.addEventListener('change', sync);
-    video.addEventListener('play', respectPreference);
-    return () => {
-      preference.removeEventListener('change', sync);
-      video.removeEventListener('play', respectPreference);
-    };
+
+    if (video.readyState >= 2) {
+      playVideo();
+    } else {
+      video.addEventListener('loadeddata', playVideo, { once: true });
+    }
   }, []);
 
   return (
-    <div className="neo-lab-video" aria-hidden="true">
-      <video ref={videoRef} className="neo-lab-video-media" poster={poster.url} autoPlay loop muted playsInline preload="auto">
-        <source src={clipWebm.url} type="video/webm" />
-        <source src={clip.url} type="video/mp4" />
+    <div className="relative w-full h-[60vh] md:h-[75vh] overflow-hidden bg-black">
+      <video
+        ref={videoRef}
+        className="w-full h-full object-cover"
+        playsInline
+        muted
+        loop
+        autoPlay
+        preload="auto"
+      >
+        <source src={labClip} type="video/mp4" />
       </video>
-      <div className="neo-lab-video-shade" />
+
+      {/* Оформленный текст поверх видео */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 md:p-16 z-10">
+        <div className="hero-kicker">
+          NEO LAB
+        </div>
+        <h1 className="text-3xl md:text-6xl font-light tracking-tight text-white max-w-3xl uppercase leading-tight">
+          WIEDZA, KTÓRA POWSTAJE W PRAKTYCE
+        </h1>
+      </div>
     </div>
   );
 }

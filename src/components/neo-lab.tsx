@@ -38,10 +38,6 @@ export function NeoLab() {
     <section className="neo-lab" id="neo-lab" aria-labelledby="neo-lab-title">
       <div className="lab-hero">
         <NeoLabVideo />
-        <div className="container lab-introduction">
-          <h3 className="lab-eyebrow">NEO LAB</h3>
-          <h2 id="neo-lab-title">{neoLab.title}</h2>
-        </div>
       </div>
       <div className="lab-statement">
         <div className="container lab-statement-grid">
