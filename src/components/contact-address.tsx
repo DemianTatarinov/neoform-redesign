@@ -12,8 +12,8 @@ export function ContactAddress() {
           <span className="accent-line" aria-hidden="true" />
           <p className="contact-address-street">{companyDetails.street}</p>
           <p className="contact-address-locality">{companyDetails.locality}</p>
-          <a className="contact-address-link" href={studioMapsUrl} target="_blank" rel="noopener noreferrer">
-            JAK DOJEDZIĆ<ArrowUpRight size={18} aria-hidden="true" />
+          <a className="contact-address-link normal-case" href={studioMapsUrl} target="_blank" rel="noopener noreferrer">
+            Jak dojechać<ArrowUpRight size={18} aria-hidden="true" />
           </a>
         </div>
         <address className="contact-address-legal">

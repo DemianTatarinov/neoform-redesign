@@ -1,0 +1,1735 @@
+import { n as __toESM } from "../_runtime.mjs";
+import { n as useReducedMotion, r as motion, t as useInView } from "../_libs/framer-motion+[...].mjs";
+import { _ as require_jsx_runtime, v as require_react } from "../_libs/@radix-ui/react-accordion+[...].mjs";
+import { n as cn, t as Button } from "./button-DRsC1qZi.mjs";
+import { d as neo_plans_default, h as useScrollReveal, i as contactInstagram, l as neo_interior_default, m as studioMapsUrl, n as companyDetails, p as studioAddress, r as contactActions, t as SiteFooterSignature, u as neo_materials_default } from "./site-footer-signature-1SEgqnX3.mjs";
+import { a as Mail, d as ArrowLeft, f as ArrowDown, l as ArrowUpRight, n as Phone, o as Instagram, r as MessageCircle, t as X, u as ArrowRight } from "../_libs/lucide-react.mjs";
+import { a as DialogOverlay$1, i as DialogDescription$1, n as DialogClose$1, o as DialogPortal$1, r as DialogContent$1, s as DialogTitle$1, t as Dialog$1 } from "../_libs/@radix-ui/react-dialog+[...].mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-CN1Yw_Qv.js
+var import_react = /* @__PURE__ */ __toESM(require_react());
+var import_jsx_runtime = require_jsx_runtime();
+var DIGITS = [
+	9,
+	8,
+	7,
+	6,
+	5,
+	4,
+	3,
+	2,
+	1,
+	0
+];
+var STEP = .55;
+var STAGGER = .45;
+/** Mechanical counter: each digit spins from 9 down to its value every time it enters the viewport. */
+function Odometer({ value, className }) {
+	const ref = (0, import_react.useRef)(null);
+	const inView = useInView(ref, {
+		once: false,
+		amount: .5
+	});
+	const reduce = useReducedMotion();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+		ref,
+		className: `odometer ${className ?? ""}`,
+		"aria-label": value,
+		children: value.split("").map((char, i) => {
+			const digit = Number(char);
+			if (Number.isNaN(digit)) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				"aria-hidden": "true",
+				children: char
+			}, i);
+			const target = DIGITS.indexOf(digit);
+			return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: "odometer-digit",
+				"aria-hidden": "true",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
+					className: "odometer-reel",
+					initial: false,
+					animate: { y: `${-(inView || reduce ? target : 0) * 10}%` },
+					transition: reduce ? { duration: 0 } : {
+						duration: STEP,
+						delay: i * STAGGER,
+						ease: [
+							.22,
+							1,
+							.36,
+							1
+						]
+					},
+					children: DIGITS.map((d) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: d }, d))
+				})
+			}, i);
+		})
+	});
+}
+var Dialog = Dialog$1;
+var DialogPortal = DialogPortal$1;
+var DialogClose = DialogClose$1;
+var DialogOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogOverlay$1, {
+	ref,
+	className: cn("fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0", className),
+	...props
+}));
+DialogOverlay.displayName = DialogOverlay$1.displayName;
+var DialogContent = import_react.forwardRef(({ className, children, galleryCard = false, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogPortal, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogOverlay, { className: cn(galleryCard && "flex items-center justify-center p-4 bg-black/90") }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent$1, {
+	ref,
+	className: cn(galleryCard ? "fixed left-1/2 top-1/2 z-50 flex w-full max-w-6xl h-auto max-h-[95dvh] max-lg:w-[95vw] -translate-x-1/2 -translate-y-1/2 max-lg:rounded-2xl flex-col gap-0 overflow-hidden border-0 bg-background p-4 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-2xl" : "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg", className),
+	...props,
+	children: [children, !galleryCard && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogClose$1, {
+		className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background cursor-pointer transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { className: "h-4 w-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+			className: "sr-only",
+			children: "Close"
+		})]
+	})]
+})] }));
+DialogContent.displayName = DialogContent$1.displayName;
+var DialogHeader = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	className: cn("flex flex-col space-y-1.5 text-center sm:text-left", className),
+	...props
+});
+DialogHeader.displayName = "DialogHeader";
+var DialogFooter = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	className: cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className),
+	...props
+});
+DialogFooter.displayName = "DialogFooter";
+var DialogTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle$1, {
+	ref,
+	className: cn("text-lg font-semibold leading-none tracking-tight", className),
+	...props
+}));
+DialogTitle.displayName = DialogTitle$1.displayName;
+var DialogDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogDescription$1, {
+	ref,
+	className: cn("text-sm text-muted-foreground", className),
+	...props
+}));
+DialogDescription.displayName = DialogDescription$1.displayName;
+var copy = {
+	hero: "Dziś tworzymy meble i zabudowy dla całych wnętrz",
+	credo: [
+		"Nie szukamy gotowych odpowiedzi. Tworzymy je dla każdego projektu osobno.",
+		"Wierzymy, że dobry mebel nie powinien dominować nad wnętrzem. Powinien być jego naturalną częścią.",
+		"Dlatego zwracamy uwagę na proporcje, podziały, materiały, światło, sposób otwierania, dotyk i każdy detal, który decyduje o tym, jak mebel będzie odbierany po latach.",
+		"Najwyższa jakość nie jest dodatkiem do projektu. Jest jego częścią."
+	],
+	individuality: [
+		"Każde wnętrze jest inne.",
+		"Inne są potrzeby jego mieszkańców.",
+		"Inna architektura.",
+		"Inne światło."
+	],
+	team: [
+		"Za każdą idealną formą stoją ludzie, którzy żyją swoim rzemiosłem. Neo Form to zespół ekspertów, w którym każdy wnosi swój unikalny talent i pełne zaangażowanie",
+		"Sukses naszych realizacji to suma indywidualnego profesjonalizmu – od pierwszej kreski projektanta, po ostatni szlif montażysty",
+		"Tworzymy w naturalnym rytmie, z szacunkiem do przestrzeni i materiału. Wierzymy, że najwyższa jakość nie potrzebuje głośnych słów - obroni się sama. Nasza praca to sztuka wyczucia i dbałości o to, co niewidoczne na pierwszy rzut oka. Tworzymy z myślą o tym, by każda przestrzeń zyskała swój własny, unikalny oddech"
+	],
+	bespoke: [
+		"Każda realizacja zaczyna się od ludzi – ich potrzeb, rytmu dnia i sposobu życia. Dopiero potem forma, materiały i detal nadają temu konkretny kształt",
+		"Kiedy standardowe rozwiązania to za mało, tworzymy architekturę dopasowaną do wnętrza. Nietypowe wymiary, ukryte drzwi, płynne przejścia forniur czy zabudowy sięgające kilku metrów nie są dla nas komplikacją. Są naturalną częścią projektu, którego nie ograniczają żadne szablony",
+		"Najlepszy efekt pojawia się wtedy, gdy forma, funkcja i codzienność przestają ze sobą konkuruować"
+	],
+	materials: [
+		"Od szlachetnego drewna, naturalnego forniru, kamienia i spieków, po perfekcyjne powierzchnie lakierowane oraz zaawansowane technologicznie materiały: FENIX, ARPA, HPL i stal",
+		"Każdy z tych surowców ma własną tożsamość. Inaczej pochłania światło, inaczej poddaje się obróbce i w unikalny sposób zapisuje upływ czasu",
+		"Dlatego w NEO FORM nie traktujemy materiałów jak gotowych próbek z katalogu. Znamy ich naturę. Pracujemy z nimi i łączymy je tak, by bezkompromisowa estetyka płynnie przenikała się z codzienną funkcjonalnością."
+	],
+	technology: [
+		"Design przyciąga wzrok, ale to technologia decyduje o комфорcie. Prawdziwy luksus jest bezszelestny. Ukrywa się w płynnym ruchu, perfekcyjnym spasowaniu i niezawodności każdego detalu",
+		"Wykorzystujemy zaawansowany park maszynowy CNC oraz światowej klasy systemy okuć (Blum, PEKA, Hettich). Niewidoczne zawiasy, systemy bezuchwytowe, mechanizmy kieszeniowe i ukryte drzwi - to dla nas fundament",
+		"Technologia zawsze służy tu designowi. Dzięki niej nawet najbardziej masywna bryła zyskuje lekkość",
+		"Najwyższa jakość to nie tylko to, co widzisz. To sposób, w jaki forma współpracuje z Tobą każdego dnia"
+	],
+	countertop: [
+		"Kamień naturalny i spieki kwarcowe są nieodłącznym dopełnieniem naszych realizacji. W NEO FORM nie traktujemy blatu jako osobnego elementu. Jest on integralną częścią projektu",
+		"Jego odcień, grubość, struktura, precyzja łączenia i wykończenie muszą idealnie współgrać z meblem",
+		"Dlatego pracujemy z materiałami, które pozwalają zachować bezkompromisową spójność wizualną - od pierwszej szafki po ostatnią krawędź blatu"
+	],
+	architects: [
+		"Architekt tworzy wizję. My nadajemy jej fizyczną formę i przekładamy ją na język inżynierii i materiału.",
+		"Nie szukamy uproszczeń kosztem designu. Wymagające koncepcje traktujemy jako wyzwanie, realizując je ze 100-procentową wiernością wobec pierwotnych założeń",
+		"Współpracując z czołowymi pracowniami (m.in. MACKO Studio), stanowimy zaawansowane zaplecze technologiczne dla ich wizji. Jesteśmy partnerem, który chroni integralność całego projektu"
+	],
+	process: [
+		["KONCEPCJA", "Poznajemy projekt, przestrzeń i potrzeby."],
+		["TECHNOLOGIA", "Szukamy najlepszego sposobu realizacji."],
+		["MATERIAŁ", "Dobieramy materiały, wykończenia i detale."],
+		["PRODUKCJA", "Projekt trafia do naszej produkcji."],
+		["MONTAŻ", "Każdy element trafia na swoje miejsce."],
+		["GOTOWA REALIZACJA", "Dopiero wtedy projekt staje się rzeczywistością"]
+	],
+	portfolio: ["Każde wnętrze to dla nas unikalna historia, w której precyzja rzemiosła spotyka się ze sztuką architektury. Z najwyższym szacunkiem do wizji projektantów i zaufania naszych klientów, nadajemy ideom namacalny, doskonały kształt", "Zapraszamy do odkrycia przestrzeni, w których bezkompromisowa jakość, szlachetne materiały i czysta forma tworzą harmonijną całość"],
+	evolution: [
+		"Neo Kuchnie było początkiem. To tam zdobywaliśmy doświadczenie, poznawaliśmy materiały, technologie i potrzeby klientów",
+		"To tam powstały setki decyzji, które dziś pozwalają nam realizować jeszcze bardziej wymagające projekty",
+		"Neo Form nie odcina się od Neo Kuchnie. Jesteśmy jego naturalną, bezkompromisową ewolucją"
+	],
+	about: [
+		"NEO FORM to naturalna ewolucja marki Neo Kuchnie.",
+		"Zaczynaliśmy od przestrzeni najbardziej wymagającej - od kuchni. To tam doskonaliliśmy nasz warsztat we współpracy z czołowymi architektami. Zrozumieliśmy jednak, że dobra architektura nie lubi granic, a kuchnia jest tylko początkiem.",
+		"Dziś projektujemy meble, które płynnie łączą całe wnętrze w jedną całość. Bierzymy pełną odpowiedzialność za proces: od pierwszej kreski na papierze, przez bezkompromisowy dobór materiałów, aż po finalny detal na montażu.",
+		"Nie wierzymy w szablony. Każda forma, którą tworzymy, powstaje tylko raz - z myślą o jednym, konkretnym projekcie"
+	]
+};
+var categories = [
+	"Kuchnie",
+	"Garderoby",
+	"Biblioteki",
+	"Zabudowy ścienne",
+	"Home office",
+	"Meble wolnostojące",
+	"Nietypowe konstrukcje"
+];
+var Drewno_Fornir_default = "/assets/Drewno-Fornir-ajBiWHaA.webp";
+var Kamień_Spiek_default = "/assets/Kamie%C5%84-Spiek-D7Oy_mk0.webp";
+var Fenix_ARPA_HPL_default = "/assets/Fenix-ARPA-HPL-DEIYVeu-.webp";
+var Stał_default = "/assets/Sta%C5%82-C04bXG9P.webp";
+var Blat_web_default = "/assets/Blat_web-dxUwYvKG.webp";
+var Главное_фото_default = "/assets/%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%BE%D0%B5%20%D1%84%D0%BE%D1%82%D0%BE-BJGYtzQV.webp";
+var hardwareModules = /* #__PURE__ */ Object.assign({
+	"../assets/TECHNOLOGIA/Blum/Blum1.webp": "/assets/Blum1-Dkc6lP0-.webp",
+	"../assets/TECHNOLOGIA/Blum/Blum2.webp": "/assets/Blum2-Bbq8KGoa.webp",
+	"../assets/TECHNOLOGIA/Blum/Blum3.webp": "/assets/Blum3-E2YkpkN9.webp",
+	"../assets/TECHNOLOGIA/Blum/Blum4.webp": "/assets/Blum4-MXfffmrV.webp",
+	"../assets/TECHNOLOGIA/Hettich/Hettich1.webp": "/assets/Hettich1-DQLu2bsa.webp",
+	"../assets/TECHNOLOGIA/Hettich/Hettich2.webp": "/assets/Hettich2-CtOdMqh0.webp",
+	"../assets/TECHNOLOGIA/Hettich/Hettich3.webp": "/assets/Hettich3-CFIdfaO7.webp",
+	"../assets/TECHNOLOGIA/Hettich/Hettich4.webp": "/assets/Hettich4-Bn6YNFvt.webp",
+	"../assets/TECHNOLOGIA/Peka/Peka1.webp": "/assets/Peka1-DIKG5YXg.webp",
+	"../assets/TECHNOLOGIA/Peka/Peka2.webp": "/assets/Peka2-CJePUMhb.webp",
+	"../assets/TECHNOLOGIA/Peka/Peka3.webp": "/assets/Peka3-Bd0Qm81C.webp",
+	"../assets/TECHNOLOGIA/Peka/Peka4.webp": "/assets/Peka4-9rQYjeNw.webp",
+	"../assets/TECHNOLOGIA/Главное фото/Главное фото.webp": Главное_фото_default
+});
+var hardwareBrandIds = [
+	"Blum",
+	"PEKA",
+	"Hettich"
+];
+var hardwareBrandLabels = {
+	Blum: "BLUM",
+	PEKA: "PEKA",
+	Hettich: "HETTICH"
+};
+function extractBrandFolder(modulePath) {
+	const segments = modulePath.split("/");
+	for (let i = 0; i < segments.length - 1; i += 1) {
+		if (segments[i].trim().toUpperCase() !== "TECHNOLOGIA") continue;
+		const folder = segments[i + 1];
+		return folder?.trim() ? folder : null;
+	}
+	return null;
+}
+function resolveBrandId(folderName) {
+	const normalized = folderName.trim().toLowerCase();
+	if (normalized === "blum") return "Blum";
+	if (normalized === "peka") return "PEKA";
+	if (normalized === "hettich") return "Hettich";
+	return null;
+}
+function buildHardwareGalleriesByBrand() {
+	const buckets = new Map(hardwareBrandIds.map((id) => [id, []]));
+	for (const [modulePath, url] of Object.entries(hardwareModules)) {
+		if (!url) continue;
+		const folder = extractBrandFolder(modulePath);
+		if (!folder) continue;
+		const brandId = resolveBrandId(folder);
+		if (!brandId) continue;
+		buckets.get(brandId)?.push({
+			modulePath,
+			url
+		});
+	}
+	return Object.fromEntries(hardwareBrandIds.map((id) => [id, (buckets.get(id) ?? []).sort((a, b) => a.modulePath.localeCompare(b.modulePath, void 0, {
+		numeric: true,
+		sensitivity: "base"
+	})).map((entry) => entry.url)]));
+}
+/** Gallery image URLs per hardware brand (Blum, PEKA, Hettich). */
+var hardwareGalleriesByBrand = buildHardwareGalleriesByBrand();
+var neo_architects_default = "/assets/neo-architects-OSwf_BKk.webp";
+var Neo_STANDARD_default = "/assets/Neo_STANDARD-BUr8YrM6.webp";
+var Фоновая_главная_default = "/assets/%D0%A4%D0%BE%D0%BD%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-10Dg42et.webp";
+var netypowe_wymiary1_default = "/assets/netypowe%20wymiary1-D0hBpP-i.webp";
+var netypowe_wymiary2_default = "/assets/netypowe%20wymiary2-rEWx9IhR.webp";
+var ukryte_drzwi_1_default = "/assets/ukryte%20drzwi%201-BEnybLWS.webp";
+var ukryte_drzwi_2_default = "/assets/ukryte%20drzwi%202-F9mmVTsB.webp";
+var Zabudowy_sięgające_kilku_metrów__1_default = "/assets/Zabudowy%20si%C4%99gaj%C4%85ce%20kilku%20metr%C3%B3w%20%201-CSpVIaCy.webp";
+var Zabudowy_sięgające_kilku_metrów__2_default = "/assets/Zabudowy%20si%C4%99gaj%C4%85ce%20kilku%20metr%C3%B3w%20%202-C2hk9MV6.webp";
+var Для_тезисов1_default = "/assets/%D0%94%D0%BB%D1%8F%20%D1%82%D0%B5%D0%B7%D0%B8%D1%81%D0%BE%D0%B21-ClWn8gg9.webp";
+var Для_тезисов2_default = "/assets/%D0%94%D0%BB%D1%8F%20%D1%82%D0%B5%D0%B7%D0%B8%D1%81%D0%BE%D0%B22-nzpfN6Wl.webp";
+var Для_тезисов3_default = "/assets/%D0%94%D0%BB%D1%8F%20%D1%82%D0%B5%D0%B7%D0%B8%D1%81%D0%BE%D0%B23-CMxjHuCq.webp";
+var Для_тезисов4_default = "/assets/%D0%94%D0%BB%D1%8F%20%D1%82%D0%B5%D0%B7%D0%B8%D1%81%D0%BE%D0%B24-CvZzEcnl.webp";
+var Material_web_default = "/assets/Material_web-j6PJ6rjv.webp";
+var Detal_web_default = "/assets/Detal_web-BtBMA-oB.webp";
+var Jakość_web_default = "/assets/Jako%C5%9B%C4%87_web-E7Gk6tkc.webp";
+/** Shared layout tokens for photo gallery modals (card + horizontal swipe). */
+var galleryOverlayLayoutClass = "flex items-center justify-center p-4";
+var galleryCardClass = "w-full max-w-6xl h-auto max-h-[95dvh] max-lg:w-[95vw] max-lg:rounded-2xl flex flex-col overflow-hidden min-w-0";
+var galleryBarClass = "shrink-0";
+var galleryPhotoWrapClass = "m-0 h-auto w-full relative";
+var galleryTrackClass = "flex w-full h-auto overflow-x-auto snap-x snap-mandatory touch-pan-x scroll-smooth overscroll-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden";
+var gallerySlideClass = "relative w-full flex-[0_0_100%] h-auto flex snap-center items-center justify-center";
+var galleryImageClass = "mx-auto w-full h-auto max-h-[65vh] object-contain md:max-h-[85vh]";
+var SWIPE_THRESHOLD_PX = 48;
+function BespokeGalleryLightbox({ open, images, index: startIndex, categoryLabel, imageLabels, onOpenChange }) {
+	const [index, setIndex] = (0, import_react.useState)(startIndex);
+	const touchStartX = (0, import_react.useRef)(null);
+	const current = images[index];
+	const slideLabel = imageLabels?.[index] ?? categoryLabel;
+	(0, import_react.useEffect)(() => {
+		if (open) setIndex(startIndex);
+	}, [open, startIndex]);
+	const step = (delta) => {
+		if (images.length <= 1) return;
+		setIndex((currentIndex) => (currentIndex + delta + images.length) % images.length);
+	};
+	const onTouchStart = (event) => {
+		touchStartX.current = event.touches[0]?.clientX ?? null;
+	};
+	const onTouchEnd = (event) => {
+		const startX = touchStartX.current;
+		touchStartX.current = null;
+		if (startX === null || images.length <= 1) return;
+		const endX = event.changedTouches[0]?.clientX;
+		if (endX === void 0) return;
+		const delta = endX - startX;
+		if (Math.abs(delta) < SWIPE_THRESHOLD_PX) return;
+		step(delta > 0 ? -1 : 1);
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog$1, {
+		open,
+		onOpenChange,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogPortal$1, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogOverlay$1, { className: `hardware-overlay ${galleryOverlayLayoutClass}` }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent$1, {
+			className: `hardware-dialog ${galleryCardClass}`,
+			"aria-describedby": void 0,
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: `hardware-bar ${galleryBarClass}`,
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle$1, {
+						className: "hardware-title",
+						children: slideLabel
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogClose$1, {
+						asChild: true,
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							variant: "ghost",
+							size: "icon",
+							className: "hardware-close",
+							"aria-label": "Zamknij galerię",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { "aria-hidden": "true" })
+						})
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("figure", {
+					className: `hardware-photo ${galleryPhotoWrapClass} flex justify-center`,
+					onTouchStart,
+					onTouchEnd,
+					children: current && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+						src: current,
+						alt: slideLabel,
+						className: "mx-auto w-full h-auto max-h-[65vh] object-contain md:max-h-[85vh]",
+						width: 1536,
+						height: 1024,
+						draggable: false
+					}, current)
+				}),
+				images.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: `hardware-nav shrink-0`,
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							variant: "ghost",
+							size: "icon",
+							className: "hardware-arrow",
+							"aria-label": "Poprzednie zdjęcie",
+							onClick: () => step(-1),
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { "aria-hidden": "true" })
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							className: "hardware-counter",
+							"aria-live": "polite",
+							children: [
+								index + 1,
+								" / ",
+								images.length
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							variant: "ghost",
+							size: "icon",
+							className: "hardware-arrow",
+							"aria-label": "Następne zdjęcie",
+							onClick: () => step(1),
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { "aria-hidden": "true" })
+						})
+					]
+				})
+			]
+		})] })
+	});
+}
+var realizacjeModules = /* #__PURE__ */ Object.assign({
+	"../assets/REALIZACJE /Biblioteki/Biblioteki1.webp": "/assets/Biblioteki1-BDWtGNIt.webp",
+	"../assets/REALIZACJE /Biblioteki/Biblioteki2.webp": "/assets/Biblioteki2-BequuIQ_.webp",
+	"../assets/REALIZACJE /Biblioteki/Biblioteki3.webp": "/assets/Biblioteki3-AtLUB4XC.webp",
+	"../assets/REALIZACJE /Biblioteki/Biblioteki4.webp": "/assets/Biblioteki4-D7Gqdhh9.webp",
+	"../assets/REALIZACJE /Garderoby /Garderoby1.webp": "/assets/Garderoby1-BxXYr2ZU.webp",
+	"../assets/REALIZACJE /Garderoby /Garderoby2.webp": "/assets/Garderoby2-CTs2OwvD.webp",
+	"../assets/REALIZACJE /Garderoby /Garderoby3.webp": "/assets/Garderoby3-B5jFA92x.webp",
+	"../assets/REALIZACJE /Garderoby /Garderoby4.webp": "/assets/Garderoby4-Q2QnVzvI.webp",
+	"../assets/REALIZACJE /Garderoby /Garderoby5.webp": "/assets/Garderoby5-B6_Zv-9j.webp",
+	"../assets/REALIZACJE /Garderoby /Garderoby6.webp": "/assets/Garderoby6-DnlNRxNx.webp",
+	"../assets/REALIZACJE /Garderoby /Garderoby7.webp": "/assets/Garderoby7-CcJA176P.webp",
+	"../assets/REALIZACJE /Garderoby /Garderoby8.webp": "/assets/Garderoby8-Dqf-_5b1.webp",
+	"../assets/REALIZACJE /Garderoby /Garderoby9.webp": "/assets/Garderoby9-BgiNHN9W.webp",
+	"../assets/REALIZACJE /Home office /Home_office1.webp": "/assets/Home_office1-CDFRk2wb.webp",
+	"../assets/REALIZACJE /Home office /Home_office2.webp": "/assets/Home_office2-0vPO7asE.webp",
+	"../assets/REALIZACJE /Home office /Home_office3.webp": "/assets/Home_office3-pRvO1NR5.webp",
+	"../assets/REALIZACJE /Home office /Home_office4.webp": "/assets/Home_office4-COT-aZPY.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie1.webp": "/assets/Kuchnie1-C96lLqdx.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie10.webp": "/assets/Kuchnie10-Dkfp8a-2.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie11.webp": "/assets/Kuchnie11-YQBBk6Bd.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie12.webp": "/assets/Kuchnie12-CgLywEOq.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie13.webp": "/assets/Kuchnie13-CgkoOwPL.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie14.webp": "/assets/Kuchnie14-BlKJUmXK.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie15.webp": "/assets/Kuchnie15-BKJ_InfV.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie16.webp": "/assets/Kuchnie16-CZDI2f1g.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie17.webp": "/assets/Kuchnie17-xgLmkxpm.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie18.webp": "/assets/Kuchnie18-CrUUf0Gd.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie19.webp": "/assets/Kuchnie19-DnltHwS7.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie2.webp": "/assets/Kuchnie2-CB41xgc5.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie20.webp": "/assets/Kuchnie20-DR8EN8_z.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie21.webp": "/assets/Kuchnie21-DHyBoQgl.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie22.webp": "/assets/Kuchnie22-C_Ken0Vn.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie23.webp": "/assets/Kuchnie23-DoglAapX.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie24.webp": "/assets/Kuchnie24-Br2Q4hQv.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie3.webp": "/assets/Kuchnie3-DZiYOteJ.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie4.webp": "/assets/Kuchnie4-Cr-gfrSI.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie5.webp": "/assets/Kuchnie5-CsiyQhmu.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie6.webp": "/assets/Kuchnie6-FAfW-4E3.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie7.webp": "/assets/Kuchnie7-DEZDaVWj.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie8.webp": "/assets/Kuchnie8-Bcj1rl3h.webp",
+	"../assets/REALIZACJE /Kuchnie /Kuchnie9.webp": "/assets/Kuchnie9-BTVyRZlp.webp",
+	"../assets/REALIZACJE /Meble wolnostojące/Meble_wolnostojące1.webp": "/assets/Meble_wolnostoj%C4%85ce1-Dl1UO2Ch.webp",
+	"../assets/REALIZACJE /Meble wolnostojące/Meble_wolnostojące2.webp": "/assets/Meble_wolnostoj%C4%85ce2-DuDDMEBD.webp",
+	"../assets/REALIZACJE /Meble wolnostojące/Meble_wolnostojące3.webp": "/assets/Meble_wolnostoj%C4%85ce3-DXuyIAzA.webp",
+	"../assets/REALIZACJE /Meble wolnostojące/Meble_wolnostojące4.webp": "/assets/Meble_wolnostoj%C4%85ce4-DAnECdl6.webp",
+	"../assets/REALIZACJE /Meble wolnostojące/Meble_wolnostojące5.webp": "/assets/Meble_wolnostoj%C4%85ce5-DI9Xi_E6.webp",
+	"../assets/REALIZACJE /Nietypowe konstrukcje /Nietypowe_konstrukcje1.webp": "/assets/Nietypowe_konstrukcje1-DU54Vt4_.webp",
+	"../assets/REALIZACJE /Nietypowe konstrukcje /Nietypowe_konstrukcje2.webp": "/assets/Nietypowe_konstrukcje2-DDwSg_ck.webp",
+	"../assets/REALIZACJE /Nietypowe konstrukcje /Nietypowe_konstrukcje3.webp": "/assets/Nietypowe_konstrukcje3-BdnkHbtM.webp",
+	"../assets/REALIZACJE /Zabudowy ścienne/Zabudowy_ścienne2.webp": "/assets/Zabudowy_%C5%9Bcienne2-CujJs9GB.webp",
+	"../assets/REALIZACJE /Zabudowy ścienne/Zabudowy_ścienne3.webp": "/assets/Zabudowy_%C5%9Bcienne3-X_n3LmFx.webp",
+	"../assets/REALIZACJE /Zabudowy ścienne/Zabudowy_ścienne4.webp": "/assets/Zabudowy_%C5%9Bcienne4-DCkJfJCR.webp",
+	"../assets/REALIZACJE /Zabudowy ścienne/Zabudowy_ścienne5.webp": "/assets/Zabudowy_%C5%9Bcienne5-Dr4WQxvk.webp",
+	"../assets/REALIZACJE /Zabudowy ścienne/Zabudowy_ścienne6.webp": "/assets/Zabudowy_%C5%9Bcienne6-BkJ3yOFl.webp",
+	"../assets/REALIZACJE /Zabudowy ścienne/Zabudowy_ścienne7.webp": "/assets/Zabudowy_%C5%9Bcienne7-DQzEAVx7.webp",
+	"../assets/REALIZACJE /Zabudowy ścienne/Zabudowy_ścienne8.webp": "/assets/Zabudowy_%C5%9Bcienne8-D-J3SskI.webp",
+	"../assets/REALIZACJE /Zabudowy ścienne/Zabudowy_ścienne9.webp": "/assets/Zabudowy_%C5%9Bcienne9-CexW5d7t.webp"
+});
+function extractCategoryFolder(modulePath) {
+	const segments = modulePath.split("/");
+	for (let i = 0; i < segments.length - 1; i += 1) {
+		if (segments[i].trim() !== "REALIZACJE") continue;
+		return segments[i + 1]?.trim() || null;
+	}
+	return null;
+}
+function resolveCategoryLabel(folderName) {
+	const normalizedFolder = folderName.trim();
+	return categories.find((category) => category.trim() === normalizedFolder) ?? null;
+}
+function buildRealizacjeGalleriesByCategory() {
+	const buckets = new Map(categories.map((category) => [category, []]));
+	for (const [modulePath, url] of Object.entries(realizacjeModules)) {
+		if (!url) continue;
+		const folder = extractCategoryFolder(modulePath);
+		if (!folder) continue;
+		const category = resolveCategoryLabel(folder);
+		if (!category) continue;
+		buckets.get(category)?.push({
+			modulePath,
+			url
+		});
+	}
+	return categories.map((category) => {
+		return (buckets.get(category) ?? []).sort((a, b) => a.modulePath.localeCompare(b.modulePath, void 0, {
+			numeric: true,
+			sensitivity: "base"
+		})).map((entry) => entry.url);
+	});
+}
+/** All images per category, aligned with `categories` in neo-content.ts */
+var realizacjeGalleriesByCategory = buildRealizacjeGalleriesByCategory();
+var fallbackCoverImage = realizacjeGalleriesByCategory.find((images) => images.length > 0)?.[0] ?? "";
+/** First image per category for portfolio grid covers (fallback when folder is empty). */
+var portfolioCoverImages = realizacjeGalleriesByCategory.map((images) => images[0] ?? fallbackCoverImage);
+function CredoThesisLightbox({ active, onOpenChange }) {
+	const label = active ? `${String(active.index + 1).padStart(2, "0")} — ${active.title}` : "";
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog$1, {
+		open: active !== null,
+		onOpenChange,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogPortal$1, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogOverlay$1, { className: `hardware-overlay ${galleryOverlayLayoutClass}` }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent$1, {
+			className: `hardware-dialog ${galleryCardClass}`,
+			"aria-describedby": void 0,
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: `hardware-bar ${galleryBarClass}`,
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle$1, {
+						className: "hardware-title",
+						children: label
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogClose$1, {
+						asChild: true,
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							variant: "ghost",
+							size: "icon",
+							className: "hardware-close",
+							"aria-label": "Zamknij podgląd",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { "aria-hidden": "true" })
+						})
+					})]
+				}),
+				active && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("figure", {
+					className: `m-0 h-auto w-full relative flex justify-center`,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+						src: active.src,
+						alt: active.title,
+						className: "mx-auto w-full h-auto max-h-[65vh] object-contain md:max-h-[85vh]",
+						width: 1536,
+						height: 1024
+					})
+				}),
+				active && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+					className: `shrink-0 shrink-0 pt-3 text-center text-sm text-muted-foreground`,
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "text-[var(--brand)]",
+							children: String(active.index + 1).padStart(2, "0")
+						}),
+						" ",
+						active.title
+					]
+				})
+			]
+		})] })
+	});
+}
+function HardwareDialog({ brand, images, onOpenChange }) {
+	const [index, setIndex] = (0, import_react.useState)(0);
+	const trackRef = (0, import_react.useRef)(null);
+	const scrollRaf = (0, import_react.useRef)(null);
+	const photos = images.map((src, photoIndex) => ({
+		src,
+		alt: brand ? `${brand} — detal mechanizmu ${photoIndex + 1}` : "Detal mechanizmu"
+	}));
+	const scrollToSlide = (0, import_react.useCallback)((slideIndex, behavior = "smooth") => {
+		const track = trackRef.current;
+		if (!track) return;
+		track.children.item(slideIndex)?.scrollIntoView({
+			behavior,
+			inline: "center",
+			block: "nearest"
+		});
+	}, []);
+	(0, import_react.useEffect)(() => {
+		setIndex(0);
+	}, [brand, images]);
+	(0, import_react.useEffect)(() => {
+		if (brand === null) return;
+		requestAnimationFrame(() => scrollToSlide(0, "instant"));
+	}, [
+		brand,
+		images,
+		scrollToSlide
+	]);
+	const onTrackScroll = () => {
+		if (photos.length <= 1) return;
+		if (scrollRaf.current !== null) cancelAnimationFrame(scrollRaf.current);
+		scrollRaf.current = requestAnimationFrame(() => {
+			const track = trackRef.current;
+			if (!track) return;
+			const width = track.clientWidth;
+			if (width <= 0) return;
+			const nextIndex = Math.min(photos.length - 1, Math.max(0, Math.round(track.scrollLeft / width)));
+			if (nextIndex !== index) setIndex(nextIndex);
+		});
+	};
+	const step = (delta) => {
+		if (photos.length <= 1) return;
+		const next = (index + delta + photos.length) % photos.length;
+		setIndex(next);
+		scrollToSlide(next, "smooth");
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog$1, {
+		open: brand !== null,
+		onOpenChange,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogPortal$1, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogOverlay$1, { className: `hardware-overlay ${galleryOverlayLayoutClass}` }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent$1, {
+			className: `hardware-dialog ${galleryCardClass}`,
+			"aria-describedby": void 0,
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: `hardware-bar ${galleryBarClass}`,
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle$1, {
+						className: "hardware-title",
+						children: brand
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogClose$1, {
+						asChild: true,
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							variant: "ghost",
+							size: "icon",
+							className: "hardware-close",
+							"aria-label": "Zamknij galerię",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { "aria-hidden": "true" })
+						})
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: `hardware-photo ${galleryPhotoWrapClass}`,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						ref: trackRef,
+						className: galleryTrackClass,
+						onScroll: onTrackScroll,
+						children: photos.map((photo) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: gallerySlideClass,
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: photo.src,
+								alt: photo.alt,
+								className: galleryImageClass,
+								decoding: "async",
+								width: 1536,
+								height: 1024,
+								draggable: false
+							})
+						}, photo.src))
+					})
+				}),
+				photos.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: `hardware-nav shrink-0`,
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							variant: "ghost",
+							size: "icon",
+							className: "hardware-arrow",
+							"aria-label": "Poprzednie zdjęcie",
+							onClick: () => step(-1),
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { "aria-hidden": "true" })
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							className: "hardware-counter",
+							"aria-live": "polite",
+							"aria-label": `Zdjęcie ${index + 1} z ${photos.length}`,
+							children: [
+								String(index + 1).padStart(2, "0"),
+								" / ",
+								String(photos.length).padStart(2, "0")
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							variant: "ghost",
+							size: "icon",
+							className: "hardware-arrow",
+							"aria-label": "Następne zdjęcie",
+							onClick: () => step(1),
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { "aria-hidden": "true" })
+						})
+					]
+				})
+			]
+		})] })
+	});
+}
+var embedUrl = `https://www.google.com/maps?q=${encodeURIComponent(studioAddress)}&output=embed`;
+function ContactMap() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "contact-map",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("iframe", {
+			title: `NEO FORM — ${studioAddress} — Google Maps`,
+			src: embedUrl,
+			width: "100%",
+			height: "400",
+			loading: "lazy",
+			allowFullScreen: true,
+			referrerPolicy: "no-referrer"
+		})
+	});
+}
+var VIDEO2_default = "/assets/VIDEO2-B7toEKxO.mp4";
+function HeroVideo() {
+	const videoRef = (0, import_react.useRef)(null);
+	(0, import_react.useEffect)(() => {
+		const video = videoRef.current;
+		if (!video) return;
+		video.muted = true;
+		video.defaultMuted = true;
+		const startPlayback = () => {
+			if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+				video.pause();
+				return;
+			}
+			const promise = video.play();
+			if (promise !== void 0) promise.catch(() => {
+				video.addEventListener("canplay", () => void video.play(), { once: true });
+			});
+		};
+		if (video.readyState >= 2) startPlayback();
+		else video.addEventListener("loadeddata", startPlayback, { once: true });
+	}, []);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("video", {
+		ref: videoRef,
+		src: VIDEO2_default,
+		className: "w-full h-full object-cover",
+		playsInline: true,
+		muted: true,
+		loop: true,
+		autoPlay: true,
+		preload: "auto",
+		poster: neo_interior_default
+	});
+}
+function ContactAddress() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "contact-address",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "container contact-address-inner",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "contact-address-main",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "contact-address-label",
+						children: "ADRES"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "accent-line",
+						"aria-hidden": "true"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "contact-address-street",
+						children: companyDetails.street
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "contact-address-locality",
+						children: companyDetails.locality
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+						className: "contact-address-link",
+						href: studioMapsUrl,
+						target: "_blank",
+						rel: "noopener noreferrer",
+						children: ["JAK DOJEDZIĆ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, {
+							size: 18,
+							"aria-hidden": "true"
+						})]
+					})
+				]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("address", {
+				className: "contact-address-legal",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: companyDetails.name }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: ["NIP: ", companyDetails.nip] })]
+			})]
+		})
+	});
+}
+var Input = import_react.forwardRef(({ className, type, ...props }, ref) => {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+		type,
+		className: cn("flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
+		ref,
+		...props
+	});
+});
+Input.displayName = "Input";
+var Textarea = import_react.forwardRef(({ className, ...props }, ref) => {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
+		className: cn("flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
+		ref,
+		...props
+	});
+});
+Textarea.displayName = "Textarea";
+var actions = [
+	{
+		label: "Email",
+		href: `mailto:${contactActions.email}`,
+		icon: Mail,
+		external: false
+	},
+	{
+		label: "Zadzwoń",
+		href: `tel:${contactActions.phone}`,
+		icon: Phone,
+		external: false
+	},
+	{
+		label: "WhatsApp",
+		href: `https://wa.me/${contactActions.whatsapp}`,
+		icon: MessageCircle,
+		external: true
+	},
+	{
+		label: "Instagram",
+		href: contactInstagram.url,
+		icon: Instagram,
+		external: true
+	}
+];
+function QuickActions() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+		className: "quick-actions",
+		"aria-label": "Szybki kontakt",
+		children: actions.map(({ label, href, icon: Icon, external }) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+			className: "quick-action",
+			href,
+			...external ? {
+				target: "_blank",
+				rel: "noopener noreferrer"
+			} : {},
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, {
+				size: 20,
+				"aria-hidden": "true"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: label })]
+		}) }, label))
+	});
+}
+function ContactForm() {
+	const [prepared, setPrepared] = (0, import_react.useState)("");
+	const [copyState, setCopyState] = (0, import_react.useState)("idle");
+	function openInstagram(event) {
+		event.preventDefault();
+		const data = new FormData(event.currentTarget);
+		const name = String(data.get("name") ?? "").trim();
+		const message = String(data.get("message") ?? "").trim();
+		if (!name || !message) return;
+		const text = `${name}\n\n${message}`;
+		setPrepared(text);
+		setCopyState("manual");
+		window.open(contactInstagram.url, "_blank", "noopener,noreferrer");
+		if (navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(() => setCopyState("copied"), () => setCopyState("manual"));
+	}
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "contact-layout",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "contact-intro",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { children: contactInstagram.title }),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: contactInstagram.intro }),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(QuickActions, {})
+			]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+			className: "contact-form",
+			onSubmit: openInstagram,
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "contact-field",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+						htmlFor: "contact-name",
+						children: contactInstagram.nameLabel
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+						id: "contact-name",
+						name: "name",
+						autoComplete: "given-name",
+						required: true,
+						maxLength: 100,
+						pattern: ".*\\S.*",
+						className: "contact-input"
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "contact-field",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+						htmlFor: "contact-message",
+						children: contactInstagram.messageLabel
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Textarea, {
+						id: "contact-message",
+						name: "message",
+						required: true,
+						minLength: 2,
+						maxLength: 3e3,
+						rows: 4,
+						className: "contact-input contact-message"
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "contact-actions",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "contact-note",
+						children: contactInstagram.note
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+						type: "submit",
+						className: "contact-submit",
+						children: [contactInstagram.submitLabel, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, {
+							size: 18,
+							"aria-hidden": "true"
+						})]
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "contact-status",
+					role: "status",
+					"aria-live": "polite",
+					children: copyState === "copied" ? contactInstagram.copied : copyState === "manual" ? contactInstagram.fallback : ""
+				}),
+				copyState === "manual" && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "contact-field",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+						htmlFor: "contact-prepared",
+						children: contactInstagram.preparedLabel
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Textarea, {
+						id: "contact-prepared",
+						readOnly: true,
+						value: prepared,
+						className: "contact-input contact-message",
+						onFocus: (event) => event.currentTarget.select()
+					})]
+				})
+			]
+		})]
+	});
+}
+var materialCardImages = {
+	"Drewno / Fornir": Drewno_Fornir_default,
+	"Kamień / Spieki": Kamień_Spiek_default,
+	"FENIX / ARPA / HPL": Fenix_ARPA_HPL_default,
+	Stal: Stał_default
+};
+var materialCardPhotoClass = "!relative !left-0 !w-full !max-w-full !h-full object-cover";
+var materialGalleryNames = [
+	"Drewno / Fornir",
+	"Kamień / Spieki",
+	"FENIX / ARPA / HPL",
+	"Stal"
+];
+var materialGalleryPhotos = materialGalleryNames.map((name) => materialCardImages[name]);
+var bespokeCategories = [
+	{
+		id: "wymiary",
+		label: "Nietypowe wymiary",
+		layout: "half",
+		images: [netypowe_wymiary1_default, netypowe_wymiary2_default]
+	},
+	{
+		id: "drzwi",
+		label: "Ukryte drzwi",
+		layout: "half",
+		images: [ukryte_drzwi_1_default, ukryte_drzwi_2_default]
+	},
+	{
+		id: "metry",
+		label: "Zabudowy sięgające kilku metrów",
+		layout: "full",
+		images: [Zabudowy_sięgające_kilku_metrów__1_default, Zabudowy_sięgające_kilku_metrów__2_default]
+	},
+	{
+		id: "fornir",
+		label: "Płynne przejścia forniru",
+		layout: "full",
+		images: [neo_materials_default]
+	}
+];
+var credoThesisPhotos = [
+	Для_тезисов1_default,
+	Для_тезисов2_default,
+	Для_тезисов3_default,
+	Для_тезисов4_default
+];
+var THESIS_TAP_MOVE_PX = 8;
+var principles = [
+	{
+		title: "PROJEKT",
+		image: neo_plans_default,
+		target: "#architekci"
+	},
+	{
+		title: "MATERIAŁ",
+		image: Material_web_default,
+		target: "#material"
+	},
+	{
+		title: "DETAL",
+		image: Detal_web_default,
+		target: "#technologia"
+	},
+	{
+		title: "JAKOŚĆ",
+		image: Jakość_web_default,
+		target: "#realizacje"
+	}
+];
+function Label({ children, number }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "section-label",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+			className: "section-number",
+			children: [number, " / 10"]
+		})]
+	});
+}
+function Paragraphs({ texts, className = "" }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: `paragraphs ${className}`,
+		children: texts.map((text, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+			className: i === texts.length - 1 ? "last-paragraph" : "",
+			children: text
+		}, text))
+	});
+}
+var contentPhotoImgClass = "w-full h-auto object-cover max-lg:rounded-none lg:rounded-sm";
+function ContentPhotoShell({ children }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "w-full max-lg:px-0 lg:container lg:mx-auto",
+		children
+	});
+}
+function Photo({ src, alt, className = "" }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+		src,
+		alt,
+		className: `editorial-photo ${className}`,
+		loading: "lazy",
+		width: 1536,
+		height: 1024
+	});
+}
+function Index() {
+	const pageRef = (0, import_react.useRef)(null);
+	useScrollReveal(pageRef);
+	const [galleryOpen, setGalleryOpen] = (0, import_react.useState)(false);
+	const [galleryCategory, setGalleryCategory] = (0, import_react.useState)(0);
+	const [gallerySlideIndex, setGallerySlideIndex] = (0, import_react.useState)(0);
+	const activeRealizacjePhotos = realizacjeGalleriesByCategory[galleryCategory] ?? [];
+	const portfolioModalPhotos = activeRealizacjePhotos.length > 0 ? activeRealizacjePhotos : [portfolioCoverImages[galleryCategory] ?? portfolioCoverImages[0]].filter(Boolean);
+	const portfolioTrackRef = (0, import_react.useRef)(null);
+	const portfolioScrollRaf = (0, import_react.useRef)(null);
+	const scrollPortfolioToSlide = (0, import_react.useCallback)((slideIndex, behavior = "smooth") => {
+		const track = portfolioTrackRef.current;
+		if (!track) return;
+		track.children.item(slideIndex)?.scrollIntoView({
+			behavior,
+			inline: "center",
+			block: "nearest"
+		});
+	}, []);
+	(0, import_react.useEffect)(() => {
+		if (!galleryOpen) return;
+		requestAnimationFrame(() => scrollPortfolioToSlide(gallerySlideIndex, "instant"));
+	}, [
+		galleryOpen,
+		galleryCategory,
+		scrollPortfolioToSlide
+	]);
+	const onPortfolioTrackScroll = () => {
+		if (portfolioModalPhotos.length <= 1) return;
+		if (portfolioScrollRaf.current !== null) cancelAnimationFrame(portfolioScrollRaf.current);
+		portfolioScrollRaf.current = requestAnimationFrame(() => {
+			const track = portfolioTrackRef.current;
+			if (!track) return;
+			const width = track.clientWidth;
+			if (width <= 0) return;
+			const nextIndex = Math.min(portfolioModalPhotos.length - 1, Math.max(0, Math.round(track.scrollLeft / width)));
+			if (nextIndex !== gallerySlideIndex) setGallerySlideIndex(nextIndex);
+		});
+	};
+	const stepPortfolioSlide = (delta) => {
+		if (portfolioModalPhotos.length <= 1) return;
+		const next = (gallerySlideIndex + delta + portfolioModalPhotos.length) % portfolioModalPhotos.length;
+		setGallerySlideIndex(next);
+		scrollPortfolioToSlide(next, "smooth");
+	};
+	const [principle, setPrinciple] = (0, import_react.useState)(0);
+	const [activeBrand, setActiveBrand] = (0, import_react.useState)(null);
+	const [activeThesisImage, setActiveThesisImage] = (0, import_react.useState)(null);
+	const [activeCategory, setActiveCategory] = (0, import_react.useState)("metry");
+	const [lightboxOpen, setLightboxOpen] = (0, import_react.useState)(false);
+	const [lightboxIndex, setLightboxIndex] = (0, import_react.useState)(0);
+	const [materialLightboxOpen, setMaterialLightboxOpen] = (0, import_react.useState)(false);
+	const [materialLightboxIndex, setMaterialLightboxIndex] = (0, import_react.useState)(0);
+	const activeBespokeItem = bespokeCategories.find((category) => category.id === activeCategory);
+	const currentPhotos = activeBespokeItem?.images ?? [];
+	const activeCategoryLabel = activeBespokeItem?.label ?? "";
+	(0, import_react.useEffect)(() => {
+		setLightboxOpen(false);
+		setLightboxIndex(0);
+	}, [activeCategory]);
+	const thesisPointer = (0, import_react.useRef)(null);
+	const onThesisPointerDown = (event) => {
+		thesisPointer.current = {
+			x: event.clientX,
+			y: event.clientY,
+			moved: false
+		};
+	};
+	const onThesisPointerMove = (event) => {
+		const pointer = thesisPointer.current;
+		if (!pointer || pointer.moved) return;
+		if (Math.abs(event.clientX - pointer.x) > THESIS_TAP_MOVE_PX || Math.abs(event.clientY - pointer.y) > THESIS_TAP_MOVE_PX) pointer.moved = true;
+	};
+	const clearThesisPointer = () => {
+		thesisPointer.current = null;
+	};
+	const openThesisLightbox = (index, title) => {
+		setActiveThesisImage({
+			src: credoThesisPhotos[index],
+			title,
+			index
+		});
+	};
+	const onThesisPointerUp = (index, title) => {
+		if (thesisPointer.current && !thesisPointer.current.moved) openThesisLightbox(index, title);
+		clearThesisPointer();
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
+		ref: pageRef,
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "hero",
+				id: "top",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(HeroVideo, {}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "hero-shade" }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "hero-copy",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "hero-kicker",
+								children: "NEO FORM"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", { children: [
+								"NOWA FORMA",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+								"NIEOGRANICZONE",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+								"MOŻLIWOŚCI"
+							] }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: copy.hero })
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "hero-bottom",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "PROJEKT · MATERIAŁ · DETAL · JAKOŚĆ" }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+								href: "#credo",
+								"aria-label": "Przejdź do CREDO",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowDown, { size: 22 })
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "01 / 10" })
+						]
+					})
+				]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "section credo",
+				id: "credo",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "container",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+							number: "02",
+							children: "CREDO"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "credo-intro",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", { children: [
+								"INDYWIDUALNOŚĆ",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+								"BEZ KOMROMISÓW"
+							] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "accent-line",
+								"aria-hidden": "true"
+							})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "lead",
+								children: copy.credo[0]
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "credo-body",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Paragraphs, { texts: copy.credo.slice(1) })
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+							className: "individuality-slider",
+							"aria-label": "Każde wnętrze jest inne",
+							children: copy.individuality.map((t, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+								className: "individuality-card relative isolate aspect-square cursor-pointer overflow-hidden",
+								role: "button",
+								tabIndex: 0,
+								"aria-label": `Powiększ zdjęcie: ${t}`,
+								onPointerDown: onThesisPointerDown,
+								onPointerMove: onThesisPointerMove,
+								onPointerUp: () => onThesisPointerUp(i, t),
+								onPointerCancel: clearThesisPointer,
+								onKeyDown: (event) => {
+									if (event.key === "Enter" || event.key === " ") {
+										event.preventDefault();
+										openThesisLightbox(i, t);
+									}
+								},
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+										src: credoThesisPhotos[i],
+										alt: "",
+										className: "pointer-events-none absolute inset-0 size-full object-cover",
+										loading: "lazy",
+										decoding: "async",
+										"aria-hidden": true
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "pointer-events-none absolute inset-0 bg-black/50",
+										"aria-hidden": true
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "relative z-[1]",
+										children: ["0", i + 1]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "relative z-[1] text-white",
+										children: t
+									})
+								]
+							}, t))
+						})
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "w-full max-lg:px-0 lg:container lg:mx-auto",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "principles-split",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "principles-tabs max-lg:px-[max(var(--page-gutter),env(safe-area-inset-left))] max-lg:pr-[max(var(--page-gutter),env(safe-area-inset-right))]",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "principles-title",
+								children: "Cztery elementy. Jedna forma"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								role: "tablist",
+								"aria-label": "Cztery zasady NEO FORM",
+								children: principles.map((p, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+									type: "button",
+									role: "tab",
+									id: `principle-tab-${i}`,
+									"aria-selected": principle === i,
+									"aria-controls": "principle-panel",
+									className: principle === i ? "principle-tab active" : "principle-tab",
+									onClick: () => setPrinciple(i),
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: ["0", i + 1] }), p.title]
+								}, p.title))
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "principles-photo aspect-[4/3] w-full max-lg:px-0",
+							role: "tabpanel",
+							id: "principle-panel",
+							"aria-labelledby": `principle-tab-${principle}`,
+							children: principles.map((p, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: p.image,
+								alt: p.title,
+								loading: "lazy",
+								width: 1536,
+								height: 1024,
+								className: `${contentPhotoImgClass} transition-opacity ${p.title === "DETAL" ? "" : "object-center"} ${principle === i ? "active" : ""}`,
+								style: p.title === "DETAL" ? { objectPosition: "15% 50%" } : void 0,
+								"aria-hidden": principle !== i
+							}, p.title))
+						})]
+					})
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "section paper",
+				id: "zespol",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "container",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+							number: "03",
+							children: "NEO STANDARD"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "section-heading",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", {
+								className: "text-[#121315]",
+								children: [
+									"FORMA TWORZONA",
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+									"PRZEZ LUDZI"
+								]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "lead text-neutral-700 leading-[1.7]",
+								children: copy.team[0]
+							})]
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContentPhotoShell, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Photo, {
+						src: Neo_STANDARD_default,
+						alt: "Zespół NEO FORM przy pracy",
+						className: `team-photo my-8 grayscale contrast-105 ${contentPhotoImgClass}`
+					}) }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "container",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "team-copy text-neutral-700 leading-[1.7]",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: copy.team[1] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: copy.team[2] })]
+						})
+					})
+				]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "bespoke photo-section",
+				id: "bespoke",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+						src: Фоновая_главная_default,
+						alt: "",
+						className: "photo-background editorial-photo size-full object-cover",
+						loading: "lazy",
+						width: 1920,
+						height: 1080,
+						"aria-hidden": true
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "photo-shade bg-black/65",
+						"aria-hidden": true
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "container",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+								number: "04",
+								children: "BESPOKE"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", { children: [
+								"FORMA W GOTOWEJ",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+								"PRZESTRZENI"
+							] }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "bespoke-copy",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "lead",
+										children: "Każda realizacja zaczyna się od ludzi – ich potrzeb, rytmu dnia i sposobu życia. Dopiero potem forma, materiały i detal nadają temu konkretny kształt"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Kiedy standardowe rozwiązania to za mało, tworzymy architekturę dopasowaną do wnętrza. Nasz standard to:" }),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "bespoke-chips-grid w-full",
+										children: bespokeCategories.map((category) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+											type: "button",
+											onClick: () => setActiveCategory(category.id),
+											"aria-pressed": activeCategory === category.id,
+											className: `bespoke-chip w-full border backdrop-blur-sm text-center text-[18px] leading-[1.35] tracking-wide py-3 px-4 ${category.layout === "half" ? "bespoke-chip--half" : "bespoke-chip--full"} ${activeCategory === category.id ? "border-[var(--brand,#F48024)] bg-white/10 text-white" : "border-white/20 bg-white/5 text-neutral-300"}`,
+											children: category.label
+										}, category.id))
+									}),
+									currentPhotos.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "grid w-full grid-cols-1 gap-4 my-6 sm:grid-cols-2",
+										children: currentPhotos.map((imgSrc, imgIndex) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+											type: "button",
+											className: "relative aspect-[4/3] cursor-pointer overflow-hidden rounded-sm border border-white/10 bg-neutral-900/40 p-0 transition-opacity hover:opacity-95",
+											"aria-label": `Powiększ: ${activeCategoryLabel} — ${imgIndex + 1} z ${currentPhotos.length}`,
+											onClick: () => {
+												setLightboxIndex(imgIndex);
+												setLightboxOpen(true);
+											},
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+												src: imgSrc,
+												alt: activeCategoryLabel,
+												className: "pointer-events-none size-full object-cover",
+												loading: "lazy",
+												width: 1536,
+												height: 1024,
+												draggable: false
+											})
+										}, `${activeCategory}-${imgSrc}`))
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Te elementy nie są dla nas komplikacją. Są naturalną częścią projektu, którego nie ograniczają żadne szablony." }),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+										className: "strong-statement",
+										children: "Najlepszy efekt pojawia się wtedy, gdy forma, funkcja i codzienność przestają ze sobą konkurować."
+									})
+								]
+							})
+						]
+					})
+				]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+				className: "section graphite",
+				id: "material",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "container",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+							number: "05",
+							children: "MATERIAŁ"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "section-heading",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", { children: [
+								"MATERIAŁ",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+								"MA ZNACZENIE"
+							] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Paragraphs, {
+								texts: copy.materials,
+								className: "normal-case gap-4 font-[family-name:var(--font-editorial)] text-base font-normal leading-[1.7] tracking-normal sm:text-[17px] lg:text-[18px] [&_p]:font-[family-name:var(--font-editorial)] [&_p]:text-base [&_p]:font-normal [&_p]:leading-[1.7] [&_p]:tracking-normal [&_p]:text-[color:var(--subtle-ink)] [&_p]:sm:text-[17px] [&_p]:lg:text-[18px] [&_p.last-paragraph]:font-medium [&_p.last-paragraph]:text-[color:var(--on-ink)]"
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "material-grid",
+							children: materialGalleryNames.map((name, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("figure", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: `material-crop material-${i} cursor-pointer`,
+								role: "button",
+								tabIndex: 0,
+								"aria-label": `Powiększ: ${name}`,
+								onClick: () => {
+									setMaterialLightboxIndex(i);
+									setMaterialLightboxOpen(true);
+								},
+								onKeyDown: (event) => {
+									if (event.key === "Enter" || event.key === " ") {
+										event.preventDefault();
+										setMaterialLightboxIndex(i);
+										setMaterialLightboxOpen(true);
+									}
+								},
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Photo, {
+									src: materialCardImages[name],
+									alt: name,
+									className: `${materialCardPhotoClass} pointer-events-none`
+								})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("figcaption", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: name }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: ["0", i + 1] })] })] }, name))
+						})
+					]
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "section steel",
+				id: "technologia",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "container",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+							number: "06",
+							children: "TECHNOLOGIA"
+						})
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContentPhotoShell, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Photo, {
+						src: Главное_фото_default,
+						alt: "Precyzyjnie spasowane fronty i ukryty zawias",
+						className: contentPhotoImgClass
+					}) }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "container",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "image-text",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", { children: [
+									"INŻYNIERIA",
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+									"UKRYTA W FORMIE"
+								] }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Paragraphs, { texts: copy.technology }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "system-names flex flex-nowrap w-full max-w-[100vw] overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth touch-pan-x gap-4 [&::-webkit-scrollbar]:hidden",
+									children: hardwareBrandIds.map((name) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										type: "button",
+										className: "system-name flex-none snap-start whitespace-nowrap",
+										onClick: () => setActiveBrand(name),
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+												className: "system-name-pulse",
+												"aria-hidden": "true",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "system-name-pulse-ring" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "system-name-pulse-core" })]
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+												className: "system-name-label",
+												children: hardwareBrandLabels[name]
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, {
+												className: "system-name-arrow",
+												size: 14,
+												strokeWidth: 1.75,
+												"aria-hidden": "true"
+											})
+										]
+									}, name))
+								})
+							] })
+						})
+					})
+				]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "section graphite",
+				id: "blat",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "container",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+						number: "07",
+						children: "BLAT"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "image-text reversed",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", { children: [
+							"OSTATNI ELEMENT",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+							"KTÓRY POTRAFI",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+							"ZMIENIĆ CAŁOŚĆ"
+						] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Paragraphs, { texts: copy.countertop })] })
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContentPhotoShell, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Photo, {
+					src: Blat_web_default,
+					alt: "Połączenie naturalnego kamienia z matowym frontem",
+					className: `countertop-photo ${contentPhotoImgClass}`
+				}) })]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "section paper",
+				id: "architekci",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "container",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+						number: "08",
+						children: "WSPÓŁPRACA Z ARCHITEKTAMI"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "image-text reversed",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", { children: [
+								"DOBRY PROJEKT",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+								"POTRZEBUJE DOBREGO",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+								"WYKONAWCY"
+							] }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Paragraphs, { texts: copy.architects }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+								className: "text-link architekci-contact-link group inline-flex cursor-pointer items-center gap-2",
+								href: "#kontakt",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+										className: "system-name-pulse",
+										"aria-hidden": "true",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "system-name-pulse-ring" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "system-name-pulse-core" })]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "system-name-label font-medium tracking-wider",
+										children: "KONTAKT"
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, {
+										size: 16,
+										strokeWidth: 2,
+										className: "transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
+										"aria-hidden": "true"
+									})
+								]
+							})
+						] })
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContentPhotoShell, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Photo, {
+					src: neo_architects_default,
+					alt: "Rysunki architektoniczne i próbki materiałów podczas współpracy projektowej",
+					className: contentPhotoImgClass
+				}) })]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+				className: "section ink",
+				id: "proces",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "container",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+							number: "09",
+							children: "PROCES"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", { children: [
+							"OD POMYSŁU",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+							"DO GOTOWEGO WNĘTRZA"
+						] }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ol", {
+							className: "process-timeline",
+							children: copy.process.map(([title, text], i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+								className: "process-step",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Odometer, {
+										className: "process-watermark",
+										value: `0${i + 1}`
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { children: title }),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: text })
+								]
+							}, title))
+						})
+					]
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "section paper text-neutral-900",
+				id: "realizacje",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "w-full px-[max(var(--page-gutter),env(safe-area-inset-left))] pr-[max(var(--page-gutter),env(safe-area-inset-right))] lg:container lg:mx-auto lg:max-w-[1440px] lg:px-8",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+						number: "10",
+						children: "REALIZACJE"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "section-heading",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", {
+							className: "text-neutral-900",
+							children: [
+								"PRZESTRZENIE,",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
+								"KTÓRE NABRAŁY FORMY"
+							]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Paragraphs, {
+							texts: copy.portfolio,
+							className: "normal-case gap-4 font-[family-name:var(--font-editorial)] text-base font-normal leading-relaxed tracking-normal text-neutral-900 md:text-lg [&_p]:font-[family-name:var(--font-editorial)] [&_p]:text-base [&_p]:font-normal [&_p]:leading-relaxed [&_p]:tracking-normal [&_p]:md:text-lg [&_p.last-paragraph]:font-medium"
+						})]
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+					className: "portfolio-grid portfolio-grid--realizacje w-full max-lg:mx-0 max-lg:gap-0 max-lg:px-0 lg:container lg:mx-auto lg:max-w-[1440px] lg:gap-[var(--space-inline)] lg:px-8",
+					children: categories.map((c, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
+						className: "max-lg:w-full",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+							type: "button",
+							className: "portfolio-tile max-lg:w-full max-lg:rounded-none",
+							onClick: () => {
+								setGalleryCategory(i);
+								setGallerySlideIndex(0);
+								setGalleryOpen(true);
+							},
+							"aria-label": `Powiększ zdjęcie: ${c}`,
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: portfolioCoverImages[i],
+								alt: c,
+								loading: "lazy",
+								width: 1536,
+								height: 1024
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "portfolio-caption text-white bg-gradient-to-t from-black/70 via-black/30 to-transparent",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: c })
+							})]
+						})
+					}, c))
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("footer", {
+				className: "contact-footer",
+				id: "kontakt",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "container",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "footer-top",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: "KONTAKT" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+								href: "#top",
+								"aria-label": "Wróć na początek strony",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, { size: 40 })
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContactForm, {})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContactMap, {}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ContactAddress, {}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SiteFooterSignature, {})
+				]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BespokeGalleryLightbox, {
+				open: lightboxOpen,
+				images: currentPhotos,
+				index: lightboxIndex,
+				categoryLabel: activeCategoryLabel,
+				onOpenChange: setLightboxOpen
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BespokeGalleryLightbox, {
+				open: materialLightboxOpen,
+				images: materialGalleryPhotos,
+				index: materialLightboxIndex,
+				categoryLabel: "MATERIAŁ",
+				imageLabels: [...materialGalleryNames],
+				onOpenChange: setMaterialLightboxOpen
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CredoThesisLightbox, {
+				active: activeThesisImage,
+				onOpenChange: (open) => {
+					if (!open) setActiveThesisImage(null);
+				}
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(HardwareDialog, {
+				brand: activeBrand ? hardwareBrandLabels[activeBrand] : null,
+				images: activeBrand ? hardwareGalleriesByBrand[activeBrand] : [],
+				onOpenChange: (open) => {
+					if (!open) setActiveBrand(null);
+				}
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
+				open: galleryOpen,
+				onOpenChange: setGalleryOpen,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
+					galleryCard: true,
+					className: "portfolio-dialog shadow-none sm:rounded-2xl",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: `${galleryBarClass} flex items-center justify-between gap-3 pb-3`,
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
+								className: "text-base font-semibold uppercase tracking-wide",
+								children: categories[galleryCategory]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogClose, {
+								asChild: true,
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+									variant: "ghost",
+									size: "icon",
+									className: "h-10 w-10 shrink-0",
+									"aria-label": "Zamknij galerię",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
+										className: "h-4 w-4",
+										"aria-hidden": "true"
+									})
+								})
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: galleryPhotoWrapClass,
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								ref: portfolioTrackRef,
+								className: galleryTrackClass,
+								onScroll: onPortfolioTrackScroll,
+								children: portfolioModalPhotos.map((src, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: gallerySlideClass,
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+										src,
+										alt: `${categories[galleryCategory] ?? "Realizacje"} — ${i + 1}`,
+										className: galleryImageClass,
+										loading: "eager",
+										decoding: "async",
+										width: 1536,
+										height: 1024,
+										draggable: false
+									})
+								}, `${galleryCategory}-${i}-${src}`))
+							})
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: `dialog-navigation ${galleryBarClass} pt-3`,
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+									variant: "ghost",
+									size: "icon",
+									"aria-label": "Poprzednie zdjęcie",
+									onClick: () => stepPortfolioSlide(-1),
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, {})
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
+									String(gallerySlideIndex + 1).padStart(2, "0"),
+									" / ",
+									String(portfolioModalPhotos.length).padStart(2, "0")
+								] }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+									variant: "ghost",
+									size: "icon",
+									"aria-label": "Następne zdjęcie",
+									onClick: () => stepPortfolioSlide(1),
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, {})
+								})
+							]
+						})
+					]
+				})
+			})
+		]
+	});
+}
+//#endregion
+export { Index as component };

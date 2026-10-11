@@ -41,7 +41,7 @@ export function SiteHeader() {
         <Link to="/neo-lab" className={labLinkClass} onClick={closeMenu}>NEO LAB</Link>
       </nav>
       <Link className="contact-link" to="/" hash="kontakt" hashScrollIntoView={scrollOptions} onClick={event => selectSection(event, 'kontakt')}>KONTAKT <ArrowUpRight size={15} /></Link>
-      <Button ref={menuToggle} variant="ghost" size="icon" className="menu-toggle" aria-label={menuOpen ? 'Zamknij menu' : 'Otwórz menu'} aria-expanded={menuOpen} aria-controls="mobile-menu" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
+      <Button ref={menuToggle} variant="ghost" size="icon" className="menu-toggle shrink-0" aria-label={menuOpen ? 'Zamknij menu' : 'Otwórz menu'} aria-expanded={menuOpen} aria-controls="mobile-menu" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={24} /> : <Menu size={24} />}</Button>
     </header>
     {menuOpen && <nav className="mobile-nav" id="mobile-menu" aria-label="Menu mobilne">
       {sections.map(([text, hash]) => <Link key={hash} to="/" hash={hash} hashScrollIntoView={scrollOptions} onClick={event => selectSection(event, hash)}>{text}<ArrowUpRight size={20} /></Link>)}
