@@ -816,7 +816,6 @@ p {
 .material-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 25px 12px;
 }
 
 .material-crop {
@@ -847,6 +846,24 @@ p {
   left: -300%;
 }
 
+#material {
+  --on-ink: var(--credo-ink);
+  --subtle-ink: var(--credo-subtle);
+  color: var(--credo-ink);
+  background:
+    radial-gradient(90% 75% at 88% 0%, var(--credo-glow) 0%, transparent 62%),
+    radial-gradient(75% 60% at 0% 100%, var(--credo-glow) 0%, transparent 55%),
+    var(--credo-bg);
+}
+
+#material .section-heading {
+  color: var(--credo-ink);
+}
+
+#material .section-heading h2 {
+  color: inherit;
+}
+
 #material .section-heading .paragraphs {
   text-transform: none;
   font-size: 1rem;
@@ -861,7 +878,8 @@ p {
 }
 
 #material .section-heading .paragraphs .last-paragraph {
-  font-weight: 500;
+  font-weight: 400;
+  color: var(--subtle-ink);
 }
 
 @media (min-width: 640px) {
@@ -878,6 +896,10 @@ p {
 
 #material .material-crop {
   overflow: hidden;
+}
+
+#material figcaption {
+  margin-top: 0;
 }
 
 #material .material-crop img {
@@ -1742,8 +1764,8 @@ figcaption span:last-child {
     padding-top: 5px;
   }
 
-  .credo-body {
-    margin-top: 64px;
+  #credo .credo-body {
+    margin-top: 0;
   }
 
   .principles-heading {
@@ -1795,7 +1817,6 @@ figcaption span:last-child {
 
   .material-grid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
   }
 
   .material-crop {
@@ -2846,7 +2867,7 @@ figcaption,
 .back-to-top {
   position: fixed;
   right: max(20px, env(safe-area-inset-right));
-  bottom: max(20px, env(safe-area-inset-bottom));
+  bottom: calc(max(20px, env(safe-area-inset-bottom)) + 25px);
   z-index: 30;
   display: inline-flex;
   align-items: center;
@@ -2947,7 +2968,26 @@ figcaption,
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--layout-gap);
-  margin-top: var(--section-space);
+  margin-top: var(--layout-gap);
+}
+
+#credo > .container {
+  display: grid;
+  row-gap: var(--layout-gap);
+}
+
+#credo .credo-body,
+#credo .individuality-slider {
+  margin-top: 0;
+}
+
+#credo .principles-tabs {
+  display: grid;
+  gap: var(--space-copy);
+}
+
+#credo .principles-title {
+  margin-bottom: 0;
 }
 
 @media (max-width: 1023px) {
@@ -3129,17 +3169,80 @@ figcaption,
 }
 
 #realizacje .portfolio-caption {
-  padding: 0;
   gap: 0;
+  box-sizing: border-box;
+  padding: var(--space-card);
+}
+
+#realizacje .portfolio-caption strong {
+  display: block;
+  max-width: 100%;
+}
+
+.realizacje-neo-lab-teaser.section {
+  background: oklch(0.255 0 0);
+  padding-block: var(--section-space);
+}
+
+.realizacje-neo-lab-teaser__names {
+  background: oklch(0.255 0 0);
+}
+
+.realizacje-neo-lab-teaser__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--heading-space);
+}
+
+.realizacje-neo-lab-teaser__heading {
+  max-width: none;
+  font-family: var(--font-editorial);
+  font-size: var(--type-heading);
+  line-height: 1.2;
+  text-wrap: balance;
+  color: var(--on-ink);
+}
+
+.realizacje-neo-lab-teaser__names a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.realizacje-neo-lab-teaser__category {
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--brand);
+}
+
+.realizacje-neo-lab-teaser__chevron {
+  color: var(--brand);
+}
+
+.realizacje-neo-lab-teaser__description {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .realizacje-neo-lab-teaser__inner {
+    gap: var(--layout-gap);
+  }
 }
 
 /* REALIZACJE — edge-to-edge category covers on phones/tablets */
 @media (max-width: 1023px) {
   #realizacje .portfolio-grid--realizacje {
-    width: 100vw;
-    max-width: 100vw;
-    margin-inline: calc(50% - 50vw);
+    width: 100svw;
+    max-width: 100svw;
+    margin-inline: calc(50% - 50svw);
     padding-inline: 0;
+  }
+
+  #realizacje .portfolio-caption {
+    padding-top: var(--page-gutter);
+    padding-right: max(var(--page-gutter), env(safe-area-inset-right));
+    padding-bottom: max(var(--page-gutter), env(safe-area-inset-bottom));
+    padding-left: max(var(--page-gutter), env(safe-area-inset-left));
   }
 
   #realizacje .portfolio-grid--realizacje .portfolio-tile {
@@ -3249,8 +3352,61 @@ figcaption,
   color: var(--on-ink);
   --foreground: var(--on-ink);
   --muted-foreground: var(--subtle-ink);
-  --contact-rule: var(--on-ink);
-  --border: color-mix(in oklab, var(--on-ink) 30%, transparent);
+  --contact-rule: oklch(1 0 0 / 22%);
+  --contact-focus: var(--brand);
+  --contact-accent: var(--brand);
+  --contact-address-background: var(--steel);
+  --contact-address-text: var(--on-ink);
+  --contact-address-subtle: var(--subtle-ink);
+  --map-background: var(--ink);
+  --border: oklch(1 0 0 / 22%);
+}
+
+.contact-footer .footer-top h2 {
+  color: var(--brand);
+}
+
+.contact-footer .footer-top a {
+  color: var(--brand);
+  transition: opacity 0.2s ease;
+}
+
+.contact-footer .footer-top a:hover,
+.contact-footer .footer-top a:focus-visible {
+  opacity: 0.82;
+}
+
+.contact-footer .contact-intro h3 {
+  color: var(--on-ink);
+}
+
+.contact-footer .contact-field label {
+  color: var(--brand);
+}
+
+.contact-footer .contact-submit {
+  background-color: var(--brand);
+  border-color: var(--brand);
+  color: var(--ink);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.contact-footer .contact-submit:hover,
+.contact-footer .contact-submit:focus-visible {
+  background-color: transparent;
+  color: var(--brand);
+}
+
+.contact-footer .contact-address-link {
+  border-color: oklch(1 0 0 / 22%);
+  color: var(--on-ink);
+}
+
+.contact-footer .contact-address-link:hover,
+.contact-footer .contact-address-link:focus-visible {
+  border-color: var(--brand);
+  color: var(--brand);
 }
 
 .footer-slogan {
@@ -3262,13 +3418,17 @@ figcaption,
   max-width: 18ch;
 }
 
-.contact-form .contact-input {
+.contact-footer .contact-form .contact-input {
   border: 0;
-  border-bottom: 1px solid var(--on-ink);
+  border-bottom: 1px solid var(--contact-rule);
   background: transparent;
-  color: var(--on-ink);
+  color: var(--foreground);
   box-shadow: none;
   padding-inline: 0;
+}
+
+.contact-footer .contact-form .contact-input::placeholder {
+  color: color-mix(in oklch, var(--subtle-ink) 85%, transparent);
 }
 
 @media (min-width: 768px) {
@@ -3293,6 +3453,10 @@ figcaption,
 
 .contact-footer>.container {
   padding-bottom: 0;
+}
+
+.contact-footer .site-footer-signature {
+  background: var(--ink);
 }
 
 .odometer {

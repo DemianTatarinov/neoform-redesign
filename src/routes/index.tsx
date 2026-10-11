@@ -1,7 +1,7 @@
 import { Odometer } from "@/components/odometer";
 import { createFileRoute } from '@tanstack/react-router';
 import { useCallback, useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react';
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, X } from 'lucide-react';
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ChevronRight, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { copy, categories } from '@/lib/neo-content';
@@ -20,6 +20,24 @@ const materialCardImages: Record<string, string> = {
 const materialCardPhotoClass = '!relative !left-0 !w-full !max-w-full !h-full object-cover';
 const materialGalleryNames = ['Drewno / Fornir', 'Kamień / Spieki', 'FENIX / ARPA / HPL', 'Stal'] as const;
 const materialGalleryPhotos = materialGalleryNames.map(name => materialCardImages[name]);
+
+const realizacjeNeoLabTeasers = [
+  {
+    category: 'NEO KUCHNIE / FEO FORM',
+    description: 'Rebranding marki i koncepcja kuchni NEO FORM',
+    href: '#',
+  },
+  {
+    category: 'NEO LAB',
+    description: 'Spotkania, szkolenia i testy rozwiązań dla architektów',
+    href: '#',
+  },
+  {
+    category: 'JOURNAL / TRENDY',
+    description: 'Inspiracje, reportaże z wyjazdów i przegląd trendów w architekturze',
+    href: '#',
+  },
+] as const;
 import blatWebImg from '@/assets/BLAT/Blat_web.webp';
 import technologiaMainImg from '@/assets/TECHNOLOGIA/Главное фото/Главное фото.webp';
 import {
@@ -216,7 +234,7 @@ function Index() {
         <div className="hero-shade" />
         <div className="hero-foreground">
           <div className="hero-copy"><div className="hero-kicker">NEO FORM</div><h1>NOWA FORMA<br />NIEOGRANICZONE<br />MOŻLIWOŚCI</h1><p>{copy.hero}</p></div>
-          <div className="hero-bottom"><span>PROJEKT · MATERIAŁ · DETAL · JAKOŚĆ</span><a href="#credo" aria-label="Przejdź do CREDO"><ArrowDown size={22} /></a><span>01 / 10</span></div>
+          <div className="hero-bottom"><span>PROJEKT · MATERIAŁ · DETAL · JAKOŚĆ</span><a href="#kontakt" aria-label="Przejdź do kontaktu"><ArrowDown size={22} /></a><span>01 / 10</span></div>
         </div>
       </section>
 
@@ -349,22 +367,22 @@ function Index() {
               </div>
             )}
             <p>
-              Te elementy nie są dla nas komplikacją. Są naturalną częścią projektu, którego nie ograniczają żadne szablony.
+              Te elementy nie są dla nas komplikacją. Są naturalną częścią projektu, którego nie ograniczają żadne szablony
             </p>
             <strong className="strong-statement">
-              Najlepszy efekt pojawia się wtedy, gdy forma, funkcja i codzienność przestają ze sobą konkurować.
+              Najlepszy efekt pojawia się wtedy, gdy forma, funkcja i codzienność przestają ze sobą konkurować
             </strong>
           </div>
         </div>
       </section>
 
-      <section className="section graphite" id="material"><div className="container"><Label number="05">MATERIAŁ</Label><div className="section-heading"><h2>MATERIAŁ<br />MA ZNACZENIE</h2><Paragraphs
+      <section className="section" id="material"><div className="container"><Label number="05">MATERIAŁ</Label><div className="section-heading"><h2>MATERIAŁ<br />MA ZNACZENIE</h2><Paragraphs
             texts={copy.materials}
-            className="normal-case gap-4 font-[family-name:var(--font-editorial)] text-base font-normal leading-[1.7] tracking-normal sm:text-[17px] lg:text-[18px] [&_p]:font-[family-name:var(--font-editorial)] [&_p]:text-base [&_p]:font-normal [&_p]:leading-[1.7] [&_p]:tracking-normal [&_p]:text-[color:var(--subtle-ink)] [&_p]:sm:text-[17px] [&_p]:lg:text-[18px] [&_p.last-paragraph]:font-medium [&_p.last-paragraph]:text-[color:var(--on-ink)]"
-          /></div><div className="material-grid">{materialGalleryNames.map((name, i) => (
+            className="normal-case gap-4 font-[family-name:var(--font-editorial)] text-base font-normal leading-[1.7] tracking-normal sm:text-[17px] lg:text-[18px] [&_p]:font-[family-name:var(--font-editorial)] [&_p]:text-base [&_p]:font-normal [&_p]:leading-[1.7] [&_p]:tracking-normal [&_p]:text-[color:var(--subtle-ink)] [&_p]:sm:text-[17px] [&_p]:lg:text-[18px] [&_p.last-paragraph]:font-normal [&_p.last-paragraph]:text-[color:var(--subtle-ink)]"
+          /></div><div className="material-grid gap-4 sm:gap-6">{materialGalleryNames.map((name, i) => (
         <figure key={name}>
           <div
-            className={`material-crop material-${i} cursor-pointer`}
+            className={`material-crop material-${i} cursor-pointer overflow-hidden rounded-sm border border-neutral-800/15 transition-colors duration-300 hover:border-neutral-800/35`}
             role="button"
             tabIndex={0}
             aria-label={`Powiększ: ${name}`}
@@ -382,7 +400,7 @@ function Index() {
           >
             <Photo src={materialCardImages[name]} alt={name} className={`${materialCardPhotoClass} pointer-events-none`} />
           </div>
-          <figcaption><span>{name}</span><span>0{i + 1}</span></figcaption>
+          <figcaption className="mt-3"><span>{name}</span><span>0{i + 1}</span></figcaption>
         </figure>
       ))}</div></div></section>
 
@@ -502,13 +520,67 @@ function Index() {
                 aria-label={`Powiększ zdjęcie: ${c}`}
               >
                 <img src={portfolioCoverImages[i]} alt={c} loading="lazy" width={1536} height={1024} />
-                <span className="portfolio-caption p-0 gap-0 text-white bg-gradient-to-t from-black/70 via-black/30 to-transparent">
+                <span className="portfolio-caption gap-0 text-white bg-gradient-to-t from-black/70 via-black/30 to-transparent">
                   <strong>{c}</strong>
                 </span>
               </button>
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="section graphite realizacje-neo-lab-teaser" aria-labelledby="realizacje-neo-lab-teaser-heading">
+        <div className="container realizacje-neo-lab-teaser__inner">
+          <h2
+            id="realizacje-neo-lab-teaser-heading"
+            className="realizacje-neo-lab-teaser__heading font-semibold tracking-tight text-neutral-100"
+          >
+            NEO FORM — WIĘCEJ
+            <br />
+            NIŻ TYLKO MEBLE
+          </h2>
+          <div
+            className="realizacje-neo-lab-teaser__names w-full overflow-hidden rounded-none border border-neutral-800 divide-y divide-neutral-700/60"
+          >
+            {realizacjeNeoLabTeasers.map(item => (
+              <a
+                key={item.category}
+                href={item.href}
+                className="group flex cursor-pointer items-center justify-between gap-4 p-6 transition-colors duration-200 hover:bg-[#2e2e2e] sm:p-7"
+              >
+                <div className="min-w-0 flex-1 pr-2">
+                  <span className="realizacje-neo-lab-teaser__category block font-mono text-[18px] font-medium uppercase leading-[1.2] tracking-wider">
+                    {item.category}
+                  </span>
+                  <p className="realizacje-neo-lab-teaser__description mt-2 text-[16px] font-normal leading-snug text-neutral-300">
+                    {item.description}
+                  </p>
+                </div>
+                <ChevronRight
+                  className="realizacje-neo-lab-teaser__chevron ml-4 size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1"
+                  aria-hidden
+                />
+              </a>
+            ))}
+            <a
+              href="#"
+              className="group flex cursor-pointer items-center justify-between gap-4 p-6 transition-colors duration-200 hover:bg-[#2e2e2e] sm:p-7"
+            >
+              <div className="min-w-0 flex-1 pr-2">
+                <span className="realizacje-neo-lab-teaser__category block font-mono text-[18px] font-medium uppercase leading-[1.2] tracking-widest">
+                  NAJBLIŻSZE WYDARZENIA
+                </span>
+                <p className="realizacje-neo-lab-teaser__description mt-2 text-[16px] font-normal leading-snug text-neutral-300">
+                  Nadchodzące spotkania NEO LAB — daty, miejsca i zapisy
+                </p>
+              </div>
+              <ChevronRight
+                className="realizacje-neo-lab-teaser__chevron ml-4 size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1"
+                aria-hidden
+              />
+            </a>
+          </div>
+        </div>
       </section>
 
       <footer className="contact-footer" id="kontakt"><div className="container"><div className="footer-top"><h2>KONTAKT</h2><a href="#top" aria-label="Wróć na początek strony"><ArrowUpRight size={40} /></a></div><ContactForm /></div>

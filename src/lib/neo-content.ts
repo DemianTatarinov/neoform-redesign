@@ -2,10 +2,10 @@
 export const copy = {
   hero: 'Dziś tworzymy meble i zabudowy dla całych wnętrz',
   credo: [
-    'Nie szukamy gotowych odpowiedzi. Tworzymy je dla każdego projektu osobno.',
-    'Wierzymy, że dobry mebel nie powinien dominować nad wnętrzem. Powinien być jego naturalną częścią.',
-    'Dlatego zwracamy uwagę na proporcje, podziały, materiały, światło, sposób otwierania, dotyk i każdy detal, który decyduje o tym, jak mebel będzie odbierany po latach.',
-    'Najwyższa jakość nie jest dodatkiem do projektu. Jest jego częścią.',
+    'Nie szukamy gotowych odpowiedzi. Tworzymy je dla każdego projektu osobno',
+    'Wierzymy, że dobry mebel nie powinien dominować nad wnętrzem. Powinien być jego naturalną częścią',
+    'Dlatego zwracamy uwagę na proporcje, podziały, materiały, światło, sposób otwierania, dotyk i każdy detal, który decyduje o tym, jak mebel będzie odbierany po latach',
+    'Najwyższa jakość nie jest dodatkiem do projektu. Jest jego częścią',
   ],
   individuality: ['Każde wnętrze jest inne.', 'Inne są potrzeby jego mieszkańców.', 'Inna architektura.', 'Inne światło.'],
   team: [
@@ -21,7 +21,7 @@ export const copy = {
   materials: [
     'Od szlachetnego drewna, naturalnego forniru, kamienia i spieków, po perfekcyjne powierzchnie lakierowane oraz zaawansowane technologicznie materiały: FENIX, ARPA, HPL i stal',
     'Każdy z tych surowców ma własną tożsamość. Inaczej pochłania światło, inaczej poddaje się obróbce i w unikalny sposób zapisuje upływ czasu',
-    'Dlatego w NEO FORM nie traktujemy materiałów jak gotowych próbek z katalogu. Znamy ich naturę. Pracujemy z nimi i łączymy je tak, by bezkompromisowa estetyka płynnie przenikała się z codzienną funkcjonalnością.',
+    'Dlatego w NEO FORM nie traktujemy materiałów jak gotowych próbek z katalogu. Znamy ich naturę. Pracujemy z nimi i łączymy je tak, by bezkompromisowa estetyka płynnie przenikała się z codzienną funkcjonalnością',
   ],
   technology: [
     'Design przyciąga wzrok, ale to technologia decyduje o комфорcie. Prawdziwy luksus jest bezszelestny. Ukrywa się w płynnym ruchu, perfekcyjnym spasowaniu i niezawodności każdego detalu',
@@ -35,16 +35,16 @@ export const copy = {
     'Dlatego pracujemy z materiałami, które pozwalają zachować bezkompromisową spójność wizualną - od pierwszej szafki po ostatnią krawędź blatu',
   ],
   architects: [
-    'Architekt tworzy wizję. My nadajemy jej fizyczną formę i przekładamy ją na język inżynierii i materiału.',
+    'Architekt tworzy wizję. My nadajemy jej fizyczną formę i przekładamy ją na język inżynierii i materiału',
     'Nie szukamy uproszczeń kosztem designu. Wymagające koncepcje traktujemy jako wyzwanie, realizując je ze 100-procentową wiernością wobec pierwotnych założeń',
     'Współpracując z czołowymi pracowniami (m.in. MACKO Studio), stanowimy zaawansowane zaplecze technologiczne dla ich wizji. Jesteśmy partnerem, który chroni integralność całego projektu',
   ],
   process: [
-    ['KONCEPCJA', 'Poznajemy projekt, przestrzeń i potrzeby.'],
-    ['TECHNOLOGIA', 'Szukamy najlepszego sposobu realizacji.'],
-    ['MATERIAŁ', 'Dobieramy materiały, wykończenia i detale.'],
-    ['PRODUKCJA', 'Projekt trafia do naszej produkcji.'],
-    ['MONTAŻ', 'Każdy element trafia na swoje miejsce.'],
+    ['KONCEPCJA', 'Poznajemy projekt, przestrzeń i potrzeby'],
+    ['TECHNOLOGIA', 'Szukamy najlepszego sposobu realizacji'],
+    ['MATERIAŁ', 'Dobieramy materiały, wykończenia i detale'],
+    ['PRODUKCJA', 'Projekt trafia do naszej produkcji'],
+    ['MONTAŻ', 'Każdy element trafia na swoje miejsce'],
     ['GOTOWA REALIZACJA', 'Dopiero wtedy projekt staje się rzeczywistością'],
   ],
   portfolio: [

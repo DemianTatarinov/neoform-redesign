@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import heroVideo from '@/assets/VIDEO/VIDEO2.mp4';
-import interior from '@/assets/neo-interior.jpg';
+import heroPoster from '@/assets/hero-video-poster.jpg';
 
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -39,16 +39,18 @@ export function HeroVideo() {
   }, []);
 
   return (
-    <video
-      ref={videoRef}
-      src={heroVideo}
-      className="w-full h-full object-cover"
-      playsInline
-      muted
-      loop
-      autoPlay
-      preload="auto"
-      poster={interior}
-    />
+    <div className="h-full w-full bg-neutral-950">
+      <video
+        ref={videoRef}
+        src={heroVideo}
+        poster={heroPoster}
+        className="h-full w-full object-cover"
+        playsInline
+        muted
+        loop
+        autoPlay
+        preload="auto"
+      />
+    </div>
   );
 }
