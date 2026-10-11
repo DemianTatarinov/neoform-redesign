@@ -9,33 +9,46 @@ export function HeroVideo() {
     const video = videoRef.current;
     if (!video) return;
 
-    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const updatePlayback = () => {
+    // 1. Принудительно глушим звук на уровне DOM (обход блокировки Autoplay)
+    video.muted = true;
+    video.defaultMuted = true;
+
+    // 2. Функция гарантированного мгновенного запуска
+    const startPlayback = () => {
+      const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
       if (preference.matches) {
         video.pause();
-      } else {
-        void video.play().catch(() => {
-          /* Poster remains visible */
+        return;
+      }
+
+      const promise = video.play();
+      if (promise !== undefined) {
+        promise.catch(() => {
+          // Если браузер все-таки заблокировал, пробуем запустить еще раз по событию canplay
+          video.addEventListener('canplay', () => void video.play(), { once: true });
         });
       }
     };
 
-    updatePlayback();
-    preference.addEventListener('change', updatePlayback);
-    return () => preference.removeEventListener('change', updatePlayback);
+    // Если видео уже в кэше/памяти — запускаем сразу, иначе ждем минимальной готовности
+    if (video.readyState >= 2) {
+      startPlayback();
+    } else {
+      video.addEventListener('loadeddata', startPlayback, { once: true });
+    }
   }, []);
 
   return (
     <video
       ref={videoRef}
+      src={heroVideo}
       className="w-full h-full object-cover"
       playsInline
       muted
       loop
       autoPlay
+      preload="auto"
       poster={interior}
-    >
-      <source src={heroVideo} type="video/mp4" />
-    </video>
+    />
   );
 }

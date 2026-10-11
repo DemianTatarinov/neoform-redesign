@@ -1,4 +1,7 @@
 # NEO FORM landing
+
+- [ ] CREDO: визуальная концепция, типографика и цветовая схема на согласовании (текущая версия заморожена)
+
 - [x] Unify all interface accents with the PROGRAM / NEO LAB × PEKA copper, enlarge mobile typography, balance wrapping and heading gaps across pages/dialogs, and audit UI punctuation without changing prose; verified both pages and NEO LAB/archive/hardware dialogs at 320/390/768/1280px, no overflow or runtime errors, six tests pass.
 - [x] Rebuild NEO LAB from the supplied exact prose with solid dark introduction, partner marks, two educational accordions, Instagram registration handoff and three state-only six-photo archive galleries; center stacked branding at the bottom. Six tests pass; all galleries and nested modal scroll restoration verified at desktop/phone widths without runtime errors. ARPA remains a typographic mark pending an accessible official logo asset.
 - [x] Move the "TWORZYMY MEBLE..." slogan directly above the map and remove the empty band under the form button; enlarge and bold "KONTAKT" in brand orange #F48024; enlarge and recolor the "Imię"/"Wiadomość" labels; rename the submit button to "ZAMÓW PROJEKT" as the primary action; verified at 390/1280px, six tests pass.

@@ -29,3 +29,10 @@
 - Keep archive galleries conditionally mounted with Radix dialogs, prevent-scroll focus restoration and placeholder photos explicitly identified in alt text, so nested NEO LAB dialogs remain accessible without navigation.
 - Reuse the footer signature after all content on each content route; event registration uses the configured Instagram handoff without claiming confirmed enrollment, because no registration service is connected.
 - Keep the contact form as a client-only message handoff: open the configured Instagram profile on the user gesture, copy text when available and expose a manual-copy fallback; never transmit form data through URL parameters or claim delivery, because this is not a messaging API.
+
+### Статус согласования дизайна и типографики (Блок CREDO):
+- **Стиль блока CREDO не утверждён:** текущая реализация является промежуточной и подлежит пересмотру.
+- **Шрифт (Manrope/Cinzel):** является временным и рассматривается исключительно как опциональный вариант.
+- **Цветовая палитра:** не является финальной и требует отдельного утверждения.
+- **Изоляция решений:** текущее оформление блока CREDO не является эталоном (benchmark) и категорически запрещено к распространению на остальные разделы сайта (BESPOKE, TECHNOLOGIA, MATERIAŁY, REALIZACJE) до финального согласования заказчиком.
+- **Требование:** сохранять исходный визуальный стиль и механику блока до получения официальных правок.

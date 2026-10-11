@@ -244,7 +244,7 @@ p {  font-weight: 300; line-height: 1.6; max-width: var(--copy-width); text-alig
 .hero-image, .hero-shade { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; object-fit: cover; }
 .hero-image { object-position: 51% center; }
 .hero-shade { z-index: -1; background: linear-gradient(180deg, var(--hero-overlay), var(--hero-overlay) 35%, var(--photo-deep-shade)); }
-.site-header { position: fixed; inset: 0 0 auto; z-index: 40; height: var(--header-height); display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 8px 20px; background: var(--header-glass); backdrop-filter: blur(20px) saturate(180%); color: var(--on-ink); --accent: var(--steel); --accent-foreground: var(--on-ink); }
+.site-header { height: var(--header-height); display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 8px 20px; background: var(--header-glass); backdrop-filter: blur(20px) saturate(180%); color: var(--on-ink); --accent: var(--steel); --accent-foreground: var(--on-ink); }
 .header-logo { display: inline-flex; align-items: center; flex-shrink: 0; }
 .header-logo img { display: block; height: auto; max-height: 32px; width: auto; object-fit: contain; }
 .desktop-nav a, .contact-link { transition: color .2s; }
@@ -290,6 +290,14 @@ p {  font-weight: 300; line-height: 1.6; max-width: var(--copy-width); text-alig
 .principle a:hover { color: var(--brand-hover); }
 .team-photo { aspect-ratio: 4/3; object-position: center 40%; filter: grayscale(1); }
 .team-copy { display: grid; gap: 36px; margin-top: var(--heading-space); }
+#zespol { background: #f9f9f9; color: #121315; }
+#zespol .section-label > span:first-child { color: #737373; text-transform: uppercase; letter-spacing: 0.1em; }
+#zespol .section-number { color: #a3a3a3; }
+#zespol .section-heading,
+#zespol .section-heading h2 { color: #121315; }
+#zespol .section-heading .lead,
+#zespol .team-copy p { color: #374151; line-height: 1.7; }
+#zespol .team-photo { width: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.05); }
 .photo-section { position: relative; isolation: isolate; padding-block: var(--section-space); }
 .photo-background { position: absolute; inset: 0; z-index: -2; }
 .photo-shade { position: absolute; inset: 0; z-index: -1; background: var(--photo-deep-shade); }
@@ -305,6 +313,38 @@ p {  font-weight: 300; line-height: 1.6; max-width: var(--copy-width); text-alig
 .material-1 img { left: -115%; }
 .material-2 img { left: -230%; }
 .material-3 img { left: -300%; }
+#material .section-heading .paragraphs {
+  text-transform: none;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0;
+  color: inherit;
+}
+#material .section-heading .paragraphs p {
+  font-weight: 400;
+}
+#material .section-heading .paragraphs .last-paragraph {
+  font-weight: 500;
+}
+@media (min-width: 640px) {
+  #material .section-heading .paragraphs { font-size: 17px; }
+}
+@media (min-width: 1024px) {
+  #material .section-heading .paragraphs { font-size: 18px; }
+}
+#material .material-crop { overflow: hidden; }
+#material .material-crop img {
+  transition: transform 500ms ease-out;
+  will-change: transform;
+}
+#material .material-crop:hover img { transform: scale(1.04); }
+#material .material-crop:active img { transform: scale(1.02); }
+@media (prefers-reduced-motion: reduce) {
+  #material .material-crop img { transition: none; will-change: auto; }
+  #material .material-crop:hover img,
+  #material .material-crop:active img { transform: none; }
+}
 figcaption { display: flex; justify-content: space-between; margin-top: 15px;  gap: 8px; }
 figcaption span:last-child { opacity: .5; }
 .image-text { display: grid; gap: var(--layout-gap); }
@@ -808,8 +848,8 @@ p { font-size: var(--type-body); font-weight: 400; line-height: 1.6; }
 .principle-tab:hover, .principle-tab.active { color: var(--credo-ink); }
 .principle-tab.active { border-bottom-color: var(--brand); }
 .principle-tab:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
-.principles-photo { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
-.principles-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) brightness(.85); opacity: 0; transition: opacity .7s ease; }
+.principles-photo { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; }
+.principles-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: grayscale(1) brightness(.85); opacity: 0; transition: opacity .7s ease; }
 .principles-photo img.active { opacity: 1; }
 
 .portfolio-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-inline); margin-top: var(--heading-space); }
@@ -831,7 +871,6 @@ p { font-size: var(--type-body); font-weight: 400; line-height: 1.6; }
 .process-step p { font-size: var(--type-lead); line-height: 1.6; color: var(--subtle-ink); }
 @media (min-width: 768px) {
   .principles-split { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
-  .principles-photo { aspect-ratio: auto; min-height: 480px; }
   .process-timeline { padding-left: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 96px; row-gap: 0; }
   .process-timeline::before { left: 50%; }
   .process-step { padding-block: 56px; }
@@ -856,6 +895,215 @@ p { font-size: var(--type-body); font-weight: 400; line-height: 1.6; }
 /* Interactive hardware brand galleries (Blum / PEKA / Hettich). */
 .system-names .system-name { background: none; border: 0; padding: 0; color: var(--contact-accent); font: inherit; cursor: pointer; transition: opacity .3s ease; }
 .system-names .system-name:hover, .system-names .system-name:focus-visible { opacity: .65; text-decoration: underline; text-underline-offset: 10px; text-decoration-thickness: 1px; }
+
+#technologia .system-names {
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 10px;
+  max-width: 100%;
+  font-size: 18px;
+  line-height: 1.2;
+}
+#technologia .system-names .system-name {
+  position: relative;
+  display: inline-flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: none;
+  padding: 8px 10px;
+  font-size: 18px;
+  line-height: 1.2;
+  border: 1px solid color-mix(in oklch, var(--brand) 38%, transparent);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--contact-accent);
+  cursor: pointer;
+  opacity: 1;
+  text-decoration: none;
+  transition: transform 300ms ease-out, background-color 300ms ease-out, border-color 300ms ease-out, box-shadow 300ms ease-out;
+  animation: technologia-system-name-breathe 3s ease-in-out infinite;
+}
+#technologia .system-names .system-name:hover,
+#technologia .system-names .system-name:focus-visible {
+  opacity: 1;
+  transform: translateY(-2px);
+  border-color: var(--brand);
+  background: oklch(1 0 0 / 10%);
+  box-shadow: 0 10px 28px oklch(0 0 0 / 22%);
+  text-decoration: none;
+}
+#technologia .system-names .system-name:active {
+  transform: translateY(0);
+  transition-duration: 150ms;
+}
+#technologia .system-name-label {
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+#technologia .system-name-arrow {
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+#technologia .system-names .system-name:hover .system-name-arrow,
+#technologia .system-names .system-name:focus-visible .system-name-arrow {
+  opacity: 1;
+  transform: translate(1px, -1px);
+}
+#technologia .system-name-pulse {
+  position: relative;
+  display: inline-flex;
+  height: 8px;
+  width: 8px;
+  flex-shrink: 0;
+}
+#technologia .system-name-pulse-core {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+#technologia .system-name-pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--brand);
+  opacity: 0.4;
+  animation: technologia-system-name-ping 3s ease-out infinite;
+}
+@keyframes technologia-system-name-breathe {
+  0%, 100% {
+    border-color: color-mix(in oklch, var(--brand) 34%, transparent);
+    box-shadow: 0 0 0 0 color-mix(in oklch, var(--brand) 0%, transparent);
+  }
+  50% {
+    border-color: color-mix(in oklch, var(--brand) 55%, transparent);
+    box-shadow: 0 0 16px color-mix(in oklch, var(--brand) 18%, transparent);
+  }
+}
+@keyframes technologia-system-name-ping {
+  0% { transform: scale(1); opacity: 0.4; }
+  65%, 100% { transform: scale(2.15); opacity: 0; }
+}
+@media (min-width: 768px) {
+  #technologia .system-names {
+    gap: 14px;
+  }
+  #technologia .system-names .system-name {
+    flex: 0 1 auto;
+    justify-content: flex-start;
+    padding: 10px 14px;
+    gap: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #technologia .system-names .system-name {
+    animation: none;
+  }
+  #technologia .system-name-pulse-ring {
+    animation: none;
+    opacity: 0.25;
+  }
+  #technologia .system-names .system-name:hover,
+  #technologia .system-names .system-name:focus-visible {
+    transform: none;
+  }
+  #technologia .system-names .system-name:hover .system-name-arrow,
+  #technologia .system-names .system-name:focus-visible .system-name-arrow {
+    transform: none;
+  }
+}
+
+#architekci .architekci-contact-link {
+  gap: 10px;
+  margin-top: 48px;
+  max-width: 100%;
+  padding: 12px 18px;
+  border: 1px solid color-mix(in oklch, var(--brand) 42%, transparent);
+  border-radius: 4px;
+  background: color-mix(in oklch, var(--brand) 6%, var(--background));
+  color: var(--brand);
+  font-size: 18px;
+  line-height: 1.2;
+  text-decoration: none;
+  box-shadow: 0 4px 20px color-mix(in oklch, var(--brand) 12%, transparent);
+  transition: transform 300ms ease-out, background-color 300ms ease-out, border-color 300ms ease-out, box-shadow 300ms ease-out, color 300ms ease-out;
+  animation: technologia-system-name-breathe 3s ease-in-out infinite;
+}
+#architekci .architekci-contact-link:hover,
+#architekci .architekci-contact-link:focus-visible {
+  opacity: 1;
+  transform: translateY(-2px);
+  border-color: var(--brand);
+  background: color-mix(in oklch, var(--brand) 14%, var(--background));
+  box-shadow: 0 12px 32px color-mix(in oklch, var(--brand) 22%, transparent);
+  text-decoration: none;
+  color: var(--brand);
+}
+#architekci .architekci-contact-link:active {
+  transform: translateY(0);
+  transition-duration: 150ms;
+}
+#architekci .system-name-pulse {
+  position: relative;
+  display: inline-flex;
+  height: 8px;
+  width: 8px;
+  flex-shrink: 0;
+}
+#architekci .system-name-pulse-core {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+#architekci .system-name-pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--brand);
+  opacity: 0.4;
+  animation: technologia-system-name-ping 3s ease-out infinite;
+}
+#architekci .system-name-label {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+#architekci .architekci-contact-link svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+#architekci .architekci-contact-link:hover svg,
+#architekci .architekci-contact-link:focus-visible svg {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  #architekci .architekci-contact-link {
+    animation: none;
+  }
+  #architekci .architekci-contact-link:hover,
+  #architekci .architekci-contact-link:focus-visible {
+    transform: none;
+  }
+  #architekci .system-name-pulse-ring {
+    animation: none;
+    opacity: 0.25;
+  }
+}
+
 .hardware-overlay { position: fixed; inset: 0; z-index: 60; background: oklch(0 0 0 / 70%); backdrop-filter: blur(14px) saturate(140%); animation: hardware-fade .35s ease; }
 .hardware-dialog { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 61; width: min(960px, calc(100vw - 32px)); max-height: calc(100dvh - 64px); overflow-y: auto; overscroll-behavior: contain; background: var(--background); color: var(--foreground); padding: 24px; animation: hardware-fade .35s ease; }
 .hardware-bar { display: grid; grid-template-columns: minmax(0, 1fr) 44px; align-items: center; gap: var(--space-inline); margin-bottom: var(--space-card); }
@@ -938,3 +1186,126 @@ p { font-size: var(--type-body); font-weight: 400; line-height: 1.6; }
 .contact-footer .contact-map { margin-top: var(--heading-space); }
 @media (min-width: 620px) { .lab-partner-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .lab-archive-photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 900px) { .lab-statement-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } .lab-event-grid, .lab-archive-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .lab-partner-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+/* ==========================================================================
+   NEO FORM — СИСТЕМА ТИПОГРАФИКИ И БЛОКОВ ПО ТЗ
+   ========================================================================== */
+
+/* 1. Tag [H3] / Nadtytuł (CREDO, TECHNOLOGIA, MATERIAŁ, BESPOKE, NEO LAB) */
+.section-kicker,
+.lab-eyebrow,
+.hero-kicker {
+  font-family: var(--font-family, 'Manrope', sans-serif);
+  font-size: 0.8125rem !important; /* ~13px */
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em !important;
+  color: var(--accent-yellow, #d4af37);
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+/* 2. Tag [H2] / Główny tytuł (PROJEKT MATERIAŁ DETAL JAKOŚĆ, FORMA TWORZONA...) */
+.section-title-strong,
+.section-heading {
+  font-family: var(--font-family, 'Manrope', sans-serif);
+  font-size: clamp(2rem, 4.5vw, 3.25rem) !important;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+/* 3. Wstęp / Lead (Вводный акцентный абзац перед основным текстом) */
+.lead-intro {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: #d4d4d4;
+  font-style: italic;
+  margin-bottom: 2rem;
+  max-width: 720px;
+}
+
+/* 4. Tag [p] / Обычные абзацы (Дышащая вёрстка, никакого "кирпича") */
+.section-body-text p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #a3a3a3;
+  margin-bottom: 1.25rem;
+  max-width: 680px;
+}
+
+/* 5. Tag [p] > <strong> / Финальное обязательное выделение по ТЗ */
+.section-body-text strong,
+.strong-statement {
+  display: block;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  margin-top: 1.75rem;
+}
+
+/* 6. Блок 4 (BESPOKE): Интерактивные чипсы/плашки */
+.bespoke-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 2rem 0;
+}
+
+.bespoke-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  color: #f5f5f5;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+
+.bespoke-chip:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent-yellow, #d4af37);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+#bespoke .bespoke-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  margin: 2rem 0;
+}
+#bespoke .bespoke-chip--full { grid-column: 1 / -1; }
+#bespoke button.bespoke-chip {
+  justify-content: center;
+  text-align: center;
+  min-width: 0;
+  padding: 12px 16px;
+  font-size: 18px;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  font: inherit;
+  cursor: pointer;
+  appearance: none;
+}
+@media (min-width: 768px) {
+  #bespoke .bespoke-chips-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  #bespoke .bespoke-chip--half { grid-column: span 2; }
+  #bespoke .bespoke-chip--full { grid-column: 1 / -1; }
+}
+
+/* 7. Фоны и контрасты секций по ТЗ */
+.bg-deep-black { background-color: #000000; }
+.bg-graphite   { background-color: #151515; }
+.bg-material   { background-color: #1a1a1a; }
+.bg-team-light { background-color: #f9f9f9; color: #121315 !important; }
