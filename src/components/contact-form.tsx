@@ -32,8 +32,15 @@ export function ContactForm() {
   return (
     <div className="contact-layout">
       <div className="contact-intro">
-        <h3>{contactInstagram.title}</h3>
-        <p>{contactInstagram.intro}</p>
+        <div className="section-heading-title">
+          <h3 className="m-0 font-[family-name:var(--font-editorial)] font-normal leading-[1.15] uppercase text-[color:var(--on-ink)]">
+            {contactInstagram.title}
+          </h3>
+          <span className="accent-line" aria-hidden="true" />
+        </div>
+        <p className="m-0 font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-neutral-300">
+          {contactInstagram.intro}
+        </p>
         <QuickActions />
       </div>
       <form className="contact-form" onSubmit={openInstagram}>

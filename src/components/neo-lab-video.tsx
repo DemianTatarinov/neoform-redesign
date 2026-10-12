@@ -48,6 +48,7 @@ export function NeoLabVideo() {
         <h1 className="max-w-3xl text-3xl font-light uppercase leading-tight tracking-tight text-white md:text-6xl">
           WIEDZA, KTÓRA POWSTAJE W PRAKTYCE
         </h1>
+        <span className="accent-line" aria-hidden="true" />
       </div>
     </div>
   );

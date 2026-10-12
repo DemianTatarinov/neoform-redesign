@@ -1,0 +1,91 @@
+---
+description: NEO FORM Golden Standard — типографика, 20px между абзацами, SMM, один проход
+alwaysApply: true
+---
+
+# NEO FORM — Golden Standard (типографика, ритм, пунктуация, защита от слипания)
+
+Дублирует корневой `.cursorrules`. Дополняет `AGENTS.md` (маршруты, контент-модули, Lovable). При конфликте по **публичной типографике и отступам секций** приоритет у этого файла.
+
+## Автоматическое применение (один проход)
+
+При **любом** редактировании секции (**CREDO**, **NEO STANDARD**, **BESPOKE**, **MATERIAŁ**, **TECHNOLOGIA**, **BLAT**, **ARCHITEKCI**, **REALIZACJE**, **NEO LAB**, **INSPIRACJE**, **KONTAKT**, **Ewolucja marki** и др.) **сразу за один проход** приводить блок к стандарту ниже — не ждать отдельных указаний на отступы, цвета или SMM.
+
+---
+
+## Реализация в коде (предпочитать дублированию)
+
+- Заголовок + акцент: `EditorialSectionTitle` (`src/components/editorial-section.tsx`) или `.section-heading-title` + `.accent-line`.
+- Текстовый столбец: `editorialBodyCopyClassName` / `EditorialBodyCopy`, либо полная связка классов из раздела «Слипание».
+- Сетка заголовок + copy как в CREDO: `.credo-intro` + обёртка `min-w-0` вокруг `EditorialSectionTitle`, второй child — параграфы (избегает двойных margin + gap).
+- Номер секции: `SectionLabel` (`src/components/section-label.tsx`).
+- Copy: `src/lib/neo-content.ts`, `contact-content.ts`, `inspiracje-content.ts` и т.д. — не менять формулировки при чистой вёрстке без запроса.
+- CSS-токены ритма: `--accent-line-gap` (12px, h2→линия), `--title-to-copy` (24px / 32px от `sm`, линия→текст или блок заголовка→copy). См. `src/styles.css`.
+
+---
+
+## 1. Железное правило: отступы между абзацами (анти-слипание)
+
+- Между соседними `<p>` в редакционных блоках — **ровно 20px** (`space-y-5` / `mt-5` = 1.25rem).
+- Относится ко всем: `.editorial-copy`, `.paragraphs`, `.team-copy`, `.editorial-body-copy`, `.bespoke-copy` (когда несёт текст).
+- Глобальные стили часто задают `p { margin: 0 }` — **нельзя** полагаться только на margin у `<p>`.
+
+**Обязательная обёртка для группы абзацев:**
+
+```txt
+flex flex-col space-y-5 [&>p+p]:mt-5
+```
+
+Плюс при необходимости: `paragraphs editorial-copy editorial-body-copy text-left`.
+
+- **Никогда** не выводить несколько `<p>` подряд без контейнера с принудительным вертикальным интервалом.
+- Не смешивать в одном блоке `gap-4`, `space-y-4` и эталон `space-y-5` без явной причины.
+
+---
+
+## 2. Golden Standard — типографика
+
+### Заголовки `h2`
+
+- `font-[family-name:var(--font-editorial)] font-normal leading-[1.15] uppercase`
+- Светлый фон (`.paper`, `#credo`, `#material`, …): `text-[#121315]` (класс `.editorial-section-title`).
+- Тёмный / фото (`.steel`, `.graphite`, `.photo-section`, NEO LAB, BESPOKE): `text-white` или `var(--on-ink)`.
+- Под заголовком: `accent-line` (3rem × 2px, `var(--brand)`).
+- **Без точки** в конце заголовка.
+
+### Абзацы `p`
+
+- `font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6]`
+- Светлый фон: `text-neutral-700`
+- Тёмный фон: `text-neutral-300` или `text-white/85` — **без** blur, text-shadow и «свечения» для основного copy.
+
+### Заголовок (блок с линией) → текст
+
+- Строго **`mt-6 sm:mt-8`** на первом блоке copy после `.section-heading-title` **или** эквивалент **только через один механизм**: `var(--title-to-copy)` / `gap` у `.credo-intro` / `.section-heading` (не дублировать margin и gap).
+
+### Между абзацами
+
+- См. раздел 1 — **20px**, связка `space-y-5` + `[&>p+p]:mt-5`.
+
+### Секция (внешние отступы)
+
+- Эталон: `py-16 sm:py-24` или `.section` + согласованный `--section-space`.
+- Светлые секции: `bg-[var(--bg-paper,#F9F9F9)]` / `.paper`.
+
+---
+
+## 3. Пунктуация (SMM-стандарт бренда)
+
+- **Строго без точки** в конце заголовков (`h1`–`h3`) и **без точки в конце абзаца** в публичном copy.
+- Внутри абзаца точки между предложениями **допустимы**; **финальная точка параграфа не ставится ни при каких условиях**.
+- Править строки в content-модулях, а не только в JSX.
+
+---
+
+## Чеклист одного прохода при правке секции
+
+1. `SectionLabel` + `EditorialSectionTitle` (или осознанное исключение hero).
+2. Copy: SMM, без финальных точек.
+3. Контейнер абзацев: `flex flex-col space-y-5 [&>p+p]:mt-5` + editorial-классы + цвет фона (700 / 300).
+4. Ритм заголовок → линия → текст: как CREDO (`credo-intro` или `--title-to-copy` / `mt-6 sm:mt-8`, без двойных отступов).
+5. Не ломать фото-шейды, маршруты и изолированную механику CREDO из `AGENTS.md`, если заказчик не согласовал иное.

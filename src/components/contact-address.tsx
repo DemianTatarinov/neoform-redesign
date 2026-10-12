@@ -8,7 +8,7 @@ export function ContactAddress() {
   return (
     <div className="contact-address">
       <div className="container contact-address-inner">
-        <SectionLabel number="13">ADRES</SectionLabel>
+        <SectionLabel number="11">ADRES</SectionLabel>
         <div className="contact-address-main">
           <span className="accent-line" aria-hidden="true" />
           <p className="contact-address-street">{companyDetails.street}</p>

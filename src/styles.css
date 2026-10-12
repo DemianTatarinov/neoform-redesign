@@ -146,6 +146,7 @@
 
 :root {
   --background: oklch(0.9821 0 0);
+  --bg-paper: #f9f9f9;
   --foreground: oklch(0.19 0 0);
   --brand: oklch(0.63443 0.10923 66.062);
   --brand-hover: var(--brand);
@@ -154,6 +155,8 @@
   --section-space: 104px;
   --heading-space: 56px;
   --layout-gap: 48px;
+  --accent-line-gap: 0.75rem;
+  --title-to-copy: 1.5rem;
   --copy-width: 54ch;
   --primary: var(--brand);
   --primary-foreground: oklch(0.99 0 0);
@@ -307,7 +310,7 @@ h3 {
 }
 
 .paper {
-  background: var(--background);
+  background: var(--bg-paper, #f9f9f9);
   color: var(--foreground);
 }
 
@@ -349,12 +352,8 @@ h3 {
   color: var(--credo-ink);
 }
 
-.credo p {}
-
-.credo .lead {}
-
 .credo .paragraphs {
-  gap: var(--credo-copy-gap);
+  gap: var(--space-copy);
 }
 
 .graphite {
@@ -373,13 +372,38 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: var(--space-inline);
+  margin-bottom: 0;
+  min-width: 0;
+}
+
+/* CREDO / BESPOKE etalon: odstęp od SectionLabel do nagłówka lub bloku copy */
+.section-label + * {
+  margin-top: var(--space-copy);
+}
+
+/* Section kicker + index: firm brand token (--brand: oklch(0.63443 0.10923 66.062)). */
+.section-label-title {
+  min-width: 0;
+  font-family: var(--font-editorial);
+  font-size: var(--type-small);
   font-weight: 500;
-  margin-bottom: var(--heading-space);
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brand);
 }
 
 .section-number {
-  opacity: .5;
+  flex-shrink: 0;
+  font-family: var(--font-editorial);
+  font-size: var(--type-small);
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0;
+  text-transform: none;
+  color: color-mix(in oklch, var(--brand) 72%, oklch(0.55 0 0));
+  opacity: 1;
   white-space: nowrap;
 }
 
@@ -394,14 +418,14 @@ h3 {
 }
 
 p {
-  font-weight: 300;
-  line-height: 1.6;
+  font-weight: 400;
+  line-height: 1.7;
   max-width: var(--copy-width);
   text-align: left;
 }
 
 .lead {
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .paragraphs {
@@ -411,12 +435,12 @@ p {
 }
 
 .last-paragraph {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .section-heading {
   display: grid;
-  gap: var(--layout-gap);
+  gap: var(--title-to-copy);
   margin-bottom: var(--heading-space);
 }
 
@@ -498,7 +522,7 @@ p {
   color: var(--brand);
 }
 
-.lab-menu-button {
+.desktop-nav .lab-menu-button {
   padding: 0;
   height: auto;
   border-radius: 0;
@@ -509,18 +533,9 @@ p {
   box-shadow: none;
 }
 
-.lab-menu-button:hover {
+.desktop-nav .lab-menu-button:hover {
   background: transparent;
   color: var(--brand);
-}
-
-.mobile-nav .lab-menu-button {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  width: 100%;
-  justify-content: space-between;
-  padding-block: 18px;
-  text-align: left;
 }
 
 .desktop-nav .nav-active,
@@ -571,24 +586,20 @@ p {
 }
 
 .mobile-nav {
-  position: fixed;
-  top: var(--header-height);
-  left: 0;
-  right: 0;
-  padding: 20px;
-  background: var(--header-glass);
-  backdrop-filter: blur(20px) saturate(180%);
-  z-index: 49;
-  color: var(--on-ink);
-  max-height: calc(100dvh - var(--header-height));
-  overflow-y: auto;
+  color: #fff;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-nav-backdrop {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
 }
 
 .mobile-nav a {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-block: 18px;
+  width: 100%;
+  text-align: left;
 }
 
 .mobile-nav a:hover {
@@ -659,17 +670,45 @@ p {
 
 .credo-intro {
   display: grid;
-  gap: var(--layout-gap);
-}
-
-.credo-intro .lead {
-  color: var(--subtle-ink);
+  gap: var(--title-to-copy);
+  justify-items: start;
+  text-align: left;
 }
 
 .credo-body {
   margin-top: 48px;
   display: grid;
   gap: 32px;
+}
+
+#credo .credo-text-column {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  width: 100%;
+  text-align: left;
+}
+
+#credo .credo-intro .editorial-section-title {
+  opacity: 1;
+  text-shadow: none;
+  filter: none;
+}
+
+#credo .credo-text-column > p {
+  display: block;
+  max-width: var(--copy-width, 640px);
+  margin: 0;
+  font-family: inherit;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: normal;
+  color: #374151;
+  opacity: 1;
+  text-shadow: none;
+  filter: none;
 }
 
 .individuality {
@@ -681,13 +720,6 @@ p {
   gap: var(--credo-copy-gap);
 }
 
-.credo-body .paragraphs {
-  color: var(--subtle-ink);
-}
-
-.credo-body .last-paragraph {
-  color: var(--on-ink);
-}
 
 .principles-heading {
   margin-top: 80px;
@@ -781,18 +813,16 @@ p {
 }
 
 #zespol {
-  background: #f9f9f9;
+  padding-top: var(--space-copy);
+  padding-bottom: 0;
+  background: var(--bg-paper, #f9f9f9);
   color: #121315;
 }
 
-#zespol .section-label>span:first-child {
-  color: #737373;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-#zespol .section-number {
-  color: #a3a3a3;
+@media (min-width: 768px) {
+  #zespol {
+    padding-top: var(--heading-space);
+  }
 }
 
 #zespol .section-heading,
@@ -801,10 +831,38 @@ p {
 }
 
 #zespol .section-heading .lead,
-#zespol .team-copy p {
+#zespol .team-copy > p {
   color: #374151;
-  line-height: 1.7;
   text-transform: none;
+  font-size: 19px;
+  line-height: 1.6;
+  font-weight: 400;
+  display: block;
+  margin: 0;
+}
+
+#zespol .section-heading h2 {
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+#zespol .team-copy.editorial-body-copy {
+  display: flex !important;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-block: var(--layout-gap);
+}
+
+#zespol .team-copy.editorial-body-copy > * {
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  #zespol .team-copy.editorial-body-copy {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--layout-gap);
+  }
 }
 
 #zespol .team-photo {
@@ -832,14 +890,34 @@ p {
   background: var(--photo-deep-shade);
 }
 
-.bespoke h2 {
-  margin-bottom: var(--heading-space);
-}
-
 .bespoke-copy {
   max-width: 600px;
   display: grid;
   gap: 36px;
+}
+
+#bespoke .bespoke-copy.editorial-body-copy {
+  display: flex !important;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+#bespoke .bespoke-copy.editorial-body-copy > * {
+  margin-top: 0;
+}
+
+#bespoke .editorial-body-copy > p,
+#bespoke .editorial-body-copy p,
+#bespoke .editorial-body-copy .strong-statement {
+  color: oklch(0.87 0 0);
+  font-size: 19px;
+  line-height: 1.6;
+  text-shadow: none;
+  filter: none;
+}
+
+#bespoke .editorial-body-copy .strong-statement {
+  font-weight: 400;
 }
 
 .technology-tiles {
@@ -901,42 +979,20 @@ p {
     var(--credo-bg);
 }
 
-#material .section-heading {
+#material .credo-intro {
   color: var(--credo-ink);
 }
 
-#material .section-heading h2 {
+#material .credo-intro h2 {
   color: inherit;
 }
 
-#material .section-heading .paragraphs {
-  text-transform: none;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.7;
-  letter-spacing: 0;
+#material .credo-intro .paragraphs {
   color: inherit;
 }
 
-#material .section-heading .paragraphs p {
-  font-weight: 400;
-}
-
-#material .section-heading .paragraphs .last-paragraph {
-  font-weight: 400;
-  color: var(--subtle-ink);
-}
-
-@media (min-width: 640px) {
-  #material .section-heading .paragraphs {
-    font-size: 17px;
-  }
-}
-
-@media (min-width: 1024px) {
-  #material .section-heading .paragraphs {
-    font-size: 18px;
-  }
+#material .credo-intro + .material-grid {
+  margin-top: var(--layout-gap);
 }
 
 #material .material-crop {
@@ -992,12 +1048,30 @@ figcaption span:last-child {
   aspect-ratio: 4/4.5;
 }
 
-.image-text h2 {
-  margin-bottom: var(--heading-space);
-}
-
 .image-text p {
   color: var(--subtle-ink);
+  font-family: var(--font-editorial);
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+@media (min-width: 640px) {
+  .image-text p {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .image-text p {
+    font-size: 18px;
+  }
+}
+
+.image-text .paragraphs .last-paragraph {
+  font-weight: 400;
 }
 
 .paper .image-text p {
@@ -1743,9 +1817,17 @@ figcaption span:last-child {
     gap: var(--layout-gap);
   }
 
-  .credo-intro .lead {
+  #credo .credo-text-column {
     max-width: 440px;
-    padding-top: 5px;
+    padding-top: 0;
+  }
+
+  #credo .credo-intro,
+  #material .credo-intro,
+  #technologia .credo-intro,
+  #blat .credo-intro,
+  #architekci .credo-intro {
+    gap: var(--heading-space);
   }
 
   #credo .credo-body {
@@ -1793,10 +1875,6 @@ figcaption span:last-child {
   .bespoke-copy {
     margin-left: 50%;
     max-width: 540px;
-  }
-
-  .bespoke h2 {
-    margin-bottom: var(--heading-space);
   }
 
   .material-grid {
@@ -2006,7 +2084,6 @@ figcaption span:last-child {
   .inspiracje-date {}
 
   .site-header,
-  .mobile-nav a,
   .section-label,
   .footer-top {
     display: grid;
@@ -2197,13 +2274,59 @@ h6 {
 p {
   font-size: var(--type-body);
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .lead,
 .about-evolution .paragraphs p:first-child,
 .team-copy p:first-child {
   font-size: var(--type-lead);
+  line-height: 1.7;
+}
+
+/* Homepage narrative copy: one family, one line rhythm, no display treatments */
+.editorial-copy {
+  font-family: var(--font-editorial);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.editorial-copy > p,
+.editorial-copy p {
+  font-family: inherit;
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.editorial-copy > p.lead,
+.editorial-copy p.lead,
+p.lead.editorial-copy {
+  font-size: var(--type-lead);
+}
+
+.editorial-copy .last-paragraph {
+  font-weight: 400;
+}
+
+@media (min-width: 640px) {
+  .editorial-copy > p,
+  .editorial-copy p {
+    font-size: 17px;
+  }
+
+  .editorial-copy > p.lead,
+  .editorial-copy p.lead,
+  p.lead.editorial-copy {
+    font-size: var(--type-lead);
+  }
+}
+
+@media (min-width: 1024px) {
+  .editorial-copy > p,
+  .editorial-copy p {
+    font-size: 18px;
+  }
 }
 
 .hero h1 {
@@ -2294,7 +2417,6 @@ figcaption,
 }
 
 .mobile-nav a,
-.mobile-nav .lab-menu-button,
 .neo-lab-overlay-title {
   font-size: var(--type-body);
 }
@@ -2392,7 +2514,7 @@ figcaption,
 
 .hero-bottom {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 44px auto;
+  grid-template-columns: minmax(0, 1fr) 44px;
   gap: var(--space-inline);
 }
 
@@ -2419,16 +2541,6 @@ figcaption,
 
   .hero-bottom {
     grid-template-columns: minmax(0, 1fr) 44px;
-  }
-
-  .hero-bottom>span:last-child {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .hero-bottom>a {
-    grid-column: 2;
-    grid-row: 1 / 3;
   }
 
   .image-text {
@@ -2499,10 +2611,6 @@ figcaption,
     display: inline-flex;
   }
 
-  .mobile-nav {
-    display: block;
-  }
-
   .bespoke-copy {
     margin-left: 0;
   }
@@ -2514,7 +2622,8 @@ figcaption,
   }
 
   .menu-toggle,
-  .mobile-nav {
+  .mobile-nav,
+  .mobile-nav-backdrop {
     display: none;
   }
 }
@@ -2600,10 +2709,6 @@ figcaption,
   min-height: 0;
 }
 
-.bespoke h2 {
-  margin-bottom: var(--space-copy);
-}
-
 .inspiracje-grid {
   gap: var(--layout-gap) var(--space-copy);
 }
@@ -2636,9 +2741,14 @@ figcaption,
 }
 
 .contact-intro {
-  display: grid;
-  align-content: start;
-  gap: var(--space-copy);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.contact-intro p + * {
+  margin-top: var(--space-copy);
 }
 
 .contact-intro h3 {
@@ -2802,7 +2912,8 @@ figcaption,
   .bespoke .container {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 var(--layout-gap);
+    column-gap: var(--layout-gap);
+    row-gap: 0;
   }
 
   .bespoke .section-label {
@@ -2905,10 +3016,90 @@ figcaption,
 
 .accent-line {
   display: block;
-  width: 100px;
+  width: 3rem;
   height: 2px;
-  margin-top: var(--space-copy);
+  margin-top: var(--accent-line-gap);
   background: var(--brand);
+}
+
+/* Rytm: nagłówek → linia → treść (mt-6 / sm:mt-8) */
+.section-heading-title h1,
+.section-heading-title h2,
+.section-heading-title h3 {
+  margin-bottom: 0;
+}
+
+.section-heading-title + *,
+.accent-line + * {
+  margin-top: var(--title-to-copy);
+}
+
+/* Jak w #credo: odstęp tylko przez gap siatki, bez dublowania margin-top */
+.section-heading .section-heading-title + *,
+.credo-intro .section-heading-title + * {
+  margin-top: 0;
+}
+
+/* Jasne sekcje (.paper, credo): wspólny nagłówek + copy wg szablonu sekcji */
+.editorial-section-title {
+  margin: 0;
+  font-family: var(--font-editorial);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.15;
+  color: #121315;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .editorial-section-title {
+    font-size: 36px;
+  }
+}
+
+.section-heading-title {
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --title-to-copy: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-heading {
+    gap: var(--layout-gap);
+  }
+
+  #credo .credo-intro,
+  #material .credo-intro,
+  #technologia .credo-intro,
+  #blat .credo-intro,
+  #architekci .credo-intro {
+    gap: var(--heading-space);
+  }
+}
+
+.steel .editorial-section-title,
+.graphite .editorial-section-title {
+  color: var(--on-ink);
+}
+
+.editorial-body-copy > p,
+.editorial-body-copy p {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.6;
+  color: #374151;
+}
+
+.paper .editorial-section-title,
+#credo .editorial-section-title,
+#material .editorial-section-title,
+#realizacje .editorial-section-title {
+  color: #121315;
 }
 
 .individuality-slider {
@@ -2954,14 +3145,23 @@ figcaption,
   margin-top: var(--layout-gap);
 }
 
-#credo > .container {
-  display: grid;
-  row-gap: var(--layout-gap);
+#credo {
+  padding-top: var(--space-copy);
+}
+
+@media (min-width: 768px) {
+  #credo {
+    padding-top: var(--heading-space);
+  }
 }
 
 #credo .credo-body,
 #credo .individuality-slider {
   margin-top: 0;
+}
+
+#credo .credo-intro + .individuality-slider {
+  margin-top: var(--layout-gap);
 }
 
 #credo .principles-tabs {
@@ -3174,7 +3374,7 @@ figcaption,
 .realizacje-neo-lab-teaser__inner {
   display: flex;
   flex-direction: column;
-  gap: var(--layout-gap);
+  gap: 0;
 }
 
 .realizacje-neo-lab-teaser__inner > .section-label {
@@ -3350,7 +3550,13 @@ figcaption,
 }
 
 .contact-footer .footer-top h2 {
+  font-size: var(--type-contact-title);
+  font-weight: 400;
   color: var(--brand);
+}
+
+.contact-footer .footer-top .section-heading-title {
+  min-width: 0;
 }
 
 .contact-footer .footer-top a {
@@ -3443,11 +3649,12 @@ figcaption,
 }
 
 .contact-footer > .container > .section-label {
-  margin-bottom: var(--space-copy);
+  margin-bottom: 0;
 }
 
 .contact-footer .site-footer-signature {
-  background: var(--ink);
+  background: #fff;
+  color: #121315;
 }
 
 .odometer {
@@ -3492,6 +3699,28 @@ figcaption,
   text-decoration-thickness: 1px;
 }
 
+#technologia {
+  padding-top: var(--space-copy);
+}
+
+#technologia > .container:first-child .section-label {
+  margin-bottom: var(--space-copy);
+}
+
+@media (min-width: 768px) {
+  #technologia {
+    padding-top: var(--heading-space);
+  }
+
+  #technologia > .container:first-child .section-label {
+    margin-bottom: var(--heading-space);
+  }
+}
+
+#technologia .credo-intro + .system-names {
+  margin-top: var(--heading-space);
+}
+
 #technologia .system-names {
   flex-wrap: nowrap;
   align-items: stretch;
@@ -3501,6 +3730,22 @@ figcaption,
   min-width: 0;
   font-size: 18px;
   line-height: 1.2;
+}
+
+#technologia .editorial-body-copy > p,
+#technologia .editorial-body-copy p,
+#blat .editorial-body-copy > p,
+#blat .editorial-body-copy p {
+  font-size: 19px;
+  line-height: 1.6;
+  color: oklch(0.87 0 0);
+  text-shadow: none;
+  filter: none;
+}
+
+#blat .editorial-section-title,
+#blat .section-heading-title h2 {
+  color: var(--on-ink);
 }
 
 #technologia .system-names .system-name {
@@ -3514,10 +3759,10 @@ figcaption,
   padding: 8px 10px;
   font-size: 18px;
   line-height: 1.2;
-  border: 1px solid color-mix(in oklch, var(--brand) 38%, transparent);
+  border: 1px solid oklch(1 0 0 / 20%);
   border-radius: 4px;
-  background: transparent;
-  color: var(--contact-accent);
+  background: oklch(1 0 0 / 5%);
+  color: var(--on-ink);
   cursor: pointer;
   opacity: 1;
   text-decoration: none;
@@ -3940,6 +4185,79 @@ figcaption,
   line-height: 1.15;
 }
 
+#neo-lab-partners .neo-lab-partner-brand {
+  position: relative;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: technologia-system-name-breathe 3s ease-in-out infinite;
+}
+
+#neo-lab-partners .system-name-pulse {
+  position: relative;
+  display: inline-flex;
+  height: 8px;
+  width: 8px;
+  flex-shrink: 0;
+}
+
+#neo-lab-partners .system-name-pulse-core {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+#neo-lab-partners .system-name-pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--brand);
+  opacity: 0.4;
+  animation: technologia-system-name-ping 3s ease-out infinite;
+}
+
+#neo-lab-partners .system-name-label {
+  font-size: inherit;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+#neo-lab-partners .system-name-arrow {
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+
+#neo-lab-partners .neo-lab-partner-brand:hover,
+#neo-lab-partners .neo-lab-partner-brand:focus-visible {
+  transform: translateY(-2px);
+}
+
+#neo-lab-partners .neo-lab-partner-brand:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 150ms;
+}
+
+#neo-lab-partners .neo-lab-partner-brand:hover .system-name-arrow,
+#neo-lab-partners .neo-lab-partner-brand:focus-visible .system-name-arrow {
+  opacity: 1;
+  transform: translate(1px, -1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #neo-lab-partners .neo-lab-partner-brand {
+    animation: none;
+  }
+
+  #neo-lab-partners .system-name-pulse-ring {
+    animation: none;
+  }
+}
+
 .lab-partners {
   padding-block: var(--layout-gap);
 }
@@ -4223,10 +4541,14 @@ figcaption,
 }
 
 .site-footer-signature {
-  background: var(--neo-lab-bg);
-  color: var(--on-ink);
-  padding-block: var(--heading-space) max(var(--heading-space), env(safe-area-inset-bottom));
+  background: #fff;
+  color: #121315;
+  padding-block: 16px max(16px, env(safe-area-inset-bottom));
   text-align: center;
+}
+
+.site-footer-signature .container {
+  gap: 8px;
 }
 
 .site-footer-brand {
@@ -4296,7 +4618,7 @@ figcaption,
 /* 1. Tag [H3] / Nadtytuł (CREDO, TECHNOLOGIA, MATERIAŁ, BESPOKE, NEO LAB) */
 .section-kicker,
 .lab-eyebrow {
-  font-family: var(--font-family, 'Manrope', sans-serif);
+  font-family: var(--font-editorial);
   font-size: 0.8125rem !important;
   /* ~13px */
   font-weight: 500;
@@ -4309,20 +4631,19 @@ figcaption,
 
 .neo-lab-overlay .hero-kicker,
 .lab-hero .hero-kicker {
-  font-family: var(--font-family, 'Manrope', sans-serif);
+  font-family: var(--font-editorial);
   font-size: 0.8125rem !important;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.2em !important;
-  color: var(--accent-yellow, #d4af37);
+  color: var(--brand);
   margin-bottom: 1rem;
   display: inline-block;
 }
 
 /* 2. Tag [H2] / Główny tytuł (PROJEKT MATERIAŁ DETAL JAKOŚĆ, FORMA TWORZONA...) */
-.section-title-strong,
-.section-heading {
-  font-family: var(--font-family, 'Manrope', sans-serif);
+.section-title-strong {
+  font-family: var(--font-editorial);
   font-size: clamp(2rem, 4.5vw, 3.25rem) !important;
   font-weight: 300;
   text-transform: uppercase;
@@ -4355,11 +4676,28 @@ figcaption,
 .section-body-text strong,
 .strong-statement {
   display: block;
+  font-family: var(--font-editorial);
   font-weight: 600;
-  color: #ffffff;
-  font-size: 1.0625rem;
-  line-height: 1.6;
+  color: inherit;
+  font-size: var(--type-body);
+  line-height: 1.7;
   margin-top: 1.75rem;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+@media (min-width: 640px) {
+  .section-body-text strong,
+  .strong-statement {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-body-text strong,
+  .strong-statement {
+    font-size: 18px;
+  }
 }
 
 /* 6. Блок 4 (BESPOKE): Интерактивные чипсы/плашки */
@@ -4447,4 +4785,35 @@ figcaption,
 .bg-team-light {
   background-color: #f9f9f9;
   color: #121315 !important;
+}
+
+/* Ewolucja marki — scrim: płynne przejście z tła (--ink) na zdjęcie */
+.ewolucja-hero-media__scrim {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: linear-gradient(
+    90deg,
+    var(--ink) 0%,
+    var(--ink) 12%,
+    color-mix(in oklch, var(--ink) 96%, transparent) 24%,
+    color-mix(in oklch, var(--ink) 82%, transparent) 38%,
+    color-mix(in oklch, var(--ink) 58%, transparent) 52%,
+    color-mix(in oklch, var(--ink) 32%, transparent) 66%,
+    color-mix(in oklch, var(--ink) 10%, transparent) 82%,
+    transparent 100%
+  );
+}
+
+@media (min-width: 1024px) {
+  .ewolucja-hero-media__scrim {
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--ink) 88%, transparent) 0%,
+      color-mix(in oklch, var(--ink) 52%, transparent) 22%,
+      color-mix(in oklch, var(--ink) 22%, transparent) 38%,
+      transparent 58%
+    );
+  }
 }

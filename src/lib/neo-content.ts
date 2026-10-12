@@ -7,11 +7,11 @@ export const copy = {
     'Dlatego zwracamy uwagę na proporcje, podziały, materiały, światło, sposób otwierania, dotyk i każdy detal, który decyduje o tym, jak mebel będzie odbierany po latach',
     'Najwyższa jakość nie jest dodatkiem do projektu. Jest jego częścią',
   ],
-  individuality: ['Każde wnętrze jest inne.', 'Inne są potrzeby jego mieszkańców.', 'Inna architektura.', 'Inne światło.'],
+  individuality: ['Każde wnętrze jest inne', 'Inne są potrzeby jego mieszkańców', 'Inna architektura', 'Inne światło'],
   team: [
     'Za każdą idealną formą stoją ludzie, którzy żyją swoim rzemiosłem. Neo Form to zespół ekspertów, w którym każdy wnosi swój unikalny talent i pełne zaangażowanie',
     'Sukses naszych realizacji to suma indywidualnego profesjonalizmu – od pierwszej kreski projektanta, po ostatni szlif montażysty',
-    'Tworzymy w naturalnym rytmie, z szacunkiem do przestrzeni i materiału. Wierzymy, że najwyższa jakość nie potrzebuje głośnych słów - obroni się sama. Nasza praca to sztuka wyczucia i dbałości o to, co niewidoczne na pierwszy rzut oka. Tworzymy z myślą o tym, by każda przestrzeń zyskała swój własny, unikalny oddech',
+    'Tworzymy w naturalnym rytmie, z szacunkiem do przestrzeni i materiału. Wierzymy, że najwyższa jakość nie potrzebuje głośnych słów – obroni się sama. Nasza praca to sztuka wyczucia i dbałości o to, co niewidoczne na pierwszy rzut oka. Tworzymy z myślą o tym, by każda przestrzeń zyskała swój własny, unikalny oddech',
   ],
   bespoke: [
     'Każda realizacja zaczyna się od ludzi – ich potrzeb, rytmu dnia i sposobu życia. Dopiero potem forma, materiały i detal nadają temu konkretny kształt',
@@ -24,7 +24,7 @@ export const copy = {
     'Dlatego w NEO FORM nie traktujemy materiałów jak gotowych próbek z katalogu. Znamy ich naturę. Pracujemy z nimi i łączymy je tak, by bezkompromisowa estetyka płynnie przenikała się z codzienną funkcjonalnością',
   ],
   technology: [
-    'Design przyciąga wzrok, ale to technologia decyduje o комфорcie. Prawdziwy luksus jest bezszelestny. Ukrywa się w płynnym ruchu, perfekcyjnym spasowaniu i niezawodności każdego detalu',
+    'Design przyciąga wzrok, ale to technologia decyduje o komforcie. Prawdziwy luksus jest bezszelestny. Ukrywa się w płynnym ruchu, perfekcyjnym spasowaniu i niezawodności każdego detalu',
     'Wykorzystujemy zaawansowany park maszynowy CNC oraz światowej klasy systemy okuć (Blum, PEKA, Hettich). Niewidoczne zawiasy, systemy bezuchwytowe, mechanizmy kieszeniowe i ukryte drzwi - to dla nas fundament',
     'Technologia zawsze służy tu designowi. Dzięki niej nawet najbardziej masywna bryła zyskuje lekkość',
     'Najwyższa jakość to nie tylko to, co widzisz. To sposób, w jaki forma współpracuje z Tobą każdego dnia',

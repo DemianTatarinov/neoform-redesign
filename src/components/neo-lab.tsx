@@ -1,13 +1,26 @@
-import { EditorialKicker } from '@/components/editorial-kicker';
+import { NeoLabArchiveGalleryDialog } from '@/components/neo-lab-archive-dialog';
 import { NeoLabVideo } from '@/components/neo-lab-video';
-import { neoLabArchive, pekaSchedule } from '@/lib/neo-lab-content';
+import { getNeoLabArchiveGallery } from '@/lib/neo-lab-archive-gallery';
+import { neoLab, neoLabArchive, pekaSchedule } from '@/lib/neo-lab-content';
 import { CONTACT_HASH } from '@/lib/scroll-to-section';
 import { navigateToHomeHash } from '@/lib/navigate-to-home-hash';
 import { useNavigate } from '@tanstack/react-router';
-import { ChevronDown, Plus, X } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Plus } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react';
 
 const partnerBrands = ['Blum', 'Häfele', 'Viefe', 'PEKA', 'ARPA', 'FENIX'] as const;
+
+const PARTNER_RETURN_SCROLL_KEY = 'neo-lab-partner-return-scroll';
+
+const partnerBrandButtonClassName =
+  'neo-lab-partner-brand inline-flex w-full items-center justify-center gap-2 rounded-[4px] border border-neutral-300/80 bg-white px-2.5 py-2 text-[18px] font-normal leading-[1.2] whitespace-nowrap text-[color:var(--foreground,#121315)] transition-all duration-300 ease-out hover:border-[color:var(--brand)] hover:shadow-sm';
+
+function restorePartnerScrollPosition(scrollY: number) {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.requestAnimationFrame(() => {
+    window.scrollTo({ top: scrollY, behavior: reduced ? 'auto' : 'smooth' });
+  });
+}
 
 const educationPanels = [
   {
@@ -24,29 +37,81 @@ const educationPanels = [
   },
 ] as const;
 
-const archiveGalleryPhotos = [
-  'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-] as const;
-
 export function NeoLab() {
   const navigate = useNavigate();
   const [openPanel, setOpenPanel] = useState<string | null>(educationPanels[0].id);
-  const [selectedGallery, setSelectedGallery] = useState<string | null>(null);
+  const [archiveGalleryOpen, setArchiveGalleryOpen] = useState(false);
+  const [activeArchiveTitle, setActiveArchiveTitle] = useState<string | null>(null);
   const archiveTriggerRef = useRef<HTMLButtonElement | null>(null);
 
-  const scrollToTechnologia = useCallback(() => {
-    const section = document.getElementById('technologia');
-    if (section) {
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      section.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+  const activeArchiveGallery = activeArchiveTitle ? getNeoLabArchiveGallery(activeArchiveTitle) : undefined;
+
+  const onPartnerBrandClick = useCallback(() => {
+    const currentScrollY = window.scrollY;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    window.history.pushState(
+      { prevScrollY: currentScrollY, fromNeoLab: true },
+      '',
+      `${window.location.pathname}${window.location.search}#technologia`,
+    );
+
+    try {
+      sessionStorage.setItem(PARTNER_RETURN_SCROLL_KEY, String(currentScrollY));
+    } catch {
+      // ignore
+    }
+
+    const target = document.getElementById('technologia');
+    if (target) {
+      target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
       return;
     }
+
     void navigateToHomeHash(navigate, 'technologia');
   }, [navigate]);
+
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state && typeof event.state.prevScrollY === 'number') {
+        restorePartnerScrollPosition(event.state.prevScrollY);
+      }
+    };
+
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (!event.persisted) return;
+      if (history.state && typeof history.state.prevScrollY === 'number') {
+        restorePartnerScrollPosition(history.state.prevScrollY);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('pageshow', onPageShow);
+
+    const stateScrollY = history.state?.prevScrollY;
+    const isNeoLabTechnologiaReturn =
+      window.location.pathname.includes('neo-lab') && window.location.hash === '#technologia';
+
+    if (history.state?.fromNeoLab && typeof stateScrollY === 'number') {
+      restorePartnerScrollPosition(stateScrollY);
+    } else if (isNeoLabTechnologiaReturn) {
+      try {
+        const stored = sessionStorage.getItem(PARTNER_RETURN_SCROLL_KEY);
+        if (stored !== null) {
+          const parsed = Number(stored);
+          sessionStorage.removeItem(PARTNER_RETURN_SCROLL_KEY);
+          if (!Number.isNaN(parsed)) restorePartnerScrollPosition(parsed);
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('pageshow', onPageShow);
+    };
+  }, []);
 
   const scrollToContact = useCallback(
     (event: MouseEvent<HTMLAnchorElement>) => {
@@ -61,24 +126,6 @@ export function NeoLab() {
     },
     [navigate],
   );
-
-  const closeArchive = useCallback(() => {
-    setSelectedGallery(null);
-    window.setTimeout(() => archiveTriggerRef.current?.focus({ preventScroll: true }), 0);
-  }, []);
-
-  useEffect(() => {
-    if (selectedGallery === null) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') closeArchive();
-    };
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', onKeyDown);
-    return () => {
-      document.body.style.overflow = 'auto';
-      window.removeEventListener('keydown', onKeyDown);
-    };
-  }, [selectedGallery, closeArchive]);
 
   return (
     <section className="neo-lab scroll-mt-32" id="neo-lab" aria-labelledby="neo-lab-title">
@@ -109,30 +156,59 @@ export function NeoLab() {
               <span>CREATE</span>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Element 3: partners */}
-          <div className="-mx-[max(1rem,env(safe-area-inset-left))] mt-16 border-y border-neutral-800/60 bg-neutral-900/30 px-[max(1rem,env(safe-area-inset-left))] py-12 sm:-mx-8 sm:mt-24 sm:px-8 sm:py-16">
-          <div className="flex flex-col gap-10 md:gap-12">
-            <p className="m-0 max-w-3xl font-[family-name:var(--font-editorial)] text-base font-light leading-relaxed text-neutral-300 sm:text-lg">
-              Nie chcemy być jedynym źródłem wiedzy. Neo LAB tworzymy wspólnie z markami, które wyznaczają standardy:{' '}
-              <span className="font-normal text-white">Blum, Häfele, Viefe, PEKA, ARPA, FENIX</span>. To spotkania,
-              podczas których produkt można dotknąć, przetestować i w pełni zrozumieć
-            </p>
-            <div className="grid grid-cols-2 gap-px border border-neutral-800/80 bg-neutral-800/80 sm:grid-cols-3 lg:grid-cols-6">
-              {partnerBrands.map(brand => (
-                <button
-                  key={brand}
-                  type="button"
-                  onClick={scrollToTechnologia}
-                  className="bg-neutral-950 px-4 py-6 text-center font-mono text-[16px] uppercase tracking-[0.25em] text-[color:var(--brand)] transition-colors hover:bg-neutral-900/50"
-                >
-                  {brand}
-                </button>
-              ))}
+      {/* Element 3: partners */}
+      <div className="bg-[var(--bg-paper,#f9f9f9)] px-4 py-12 text-[#121315] sm:px-8 sm:py-16">
+        <div className="mx-auto max-w-2xl">
+          <div className="section-heading mb-6 sm:mb-8">
+            <div className="section-label">
+              <span className="section-label-title">NEO LAB · PARTNERZY</span>
+            </div>
+            <div className="section-heading-title">
+              <h2
+                className="editorial-section-title font-[family-name:var(--font-editorial)] text-[28px] font-normal uppercase leading-[1.15] text-[#121315] sm:text-[36px]"
+              >
+                EKOSYSTEM
+                <br />
+                MAREK
+              </h2>
+              <span className="accent-line" aria-hidden="true" />
             </div>
           </div>
+          <div className="mt-6 flex flex-col gap-8 sm:mt-8 sm:gap-10">
+            <p
+              className="max-w-2xl text-left font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-neutral-700"
+            >
+              {neoLab.partnerIntro}
+            </p>
+            <div
+              id="neo-lab-partners"
+              className="neo-lab-partners grid w-full grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4"
+            >
+            {partnerBrands.map(brand => (
+              <button key={brand} type="button" onClick={onPartnerBrandClick} className={partnerBrandButtonClassName}>
+                <span className="system-name-pulse" aria-hidden="true">
+                  <span className="system-name-pulse-ring" />
+                  <span className="system-name-pulse-core" />
+                </span>
+                <span className="system-name-label min-w-0 truncate uppercase tracking-wide">{brand}</span>
+                <ArrowUpRight
+                  className="system-name-arrow shrink-0 opacity-55"
+                  size={14}
+                  strokeWidth={1.75}
+                  aria-hidden="true"
+                />
+              </button>
+            ))}
+            </div>
           </div>
+        </div>
+      </div>
 
+      <div className="bg-[#0A0A0A] text-white">
+        <div className="container mx-auto max-w-6xl px-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] py-12 sm:px-8 sm:py-16 md:py-20">
           {/* Element 4: accordion */}
           <div className="mt-14 border-t border-neutral-800/70 md:mt-20">
             {educationPanels.map((panel, index) => {
@@ -186,135 +262,134 @@ export function NeoLab() {
             id="wydarzenia"
             className="relative mt-16 scroll-mt-32 border border-neutral-800/80 bg-gradient-to-b from-neutral-900/40 to-neutral-950 p-6 shadow-2xl sm:mt-24 sm:p-12 lg:p-16"
           >
-            <div className="flex flex-col gap-8 sm:gap-10">
-              <EditorialKicker aside="01 / 03">NAJBLIŻSZE WYDARZENIE</EditorialKicker>
-              <div className="flex flex-col gap-3 sm:gap-4">
-                <h3 className="m-0 font-[family-name:var(--font-editorial)] text-4xl font-light uppercase tracking-tighter text-white sm:text-5xl lg:text-6xl">
+            <div className="section-heading mb-0">
+              <p className="m-0 section-label-title">NAJBLIŻSZE WYDARZENIE</p>
+              <p
+                className="m-0 font-[family-name:var(--font-editorial)] text-[16px] font-medium uppercase leading-[1.6] tracking-[0.1em] text-[color:var(--brand)]"
+              >
+                15.10.2026 · WARSZTATY
+              </p>
+              <div className="section-heading-title">
+                <h3
+                  className="m-0 font-[family-name:var(--font-editorial)] text-[32px] font-normal uppercase leading-[1.15] tracking-tight text-white sm:text-[42px] lg:text-[48px]"
+                >
                   NEO LAB × PEKA
                 </h3>
-                <p className="m-0 font-mono text-xs uppercase tracking-[0.15em] text-neutral-500 sm:text-sm">
+                <span className="accent-line" aria-hidden="true" />
+                <p className="!mt-2 font-mono text-xs uppercase tracking-[0.15em] text-neutral-400 sm:text-sm">
                   KAŻDY CENTYMETR MA ZNACZENIE
                 </p>
               </div>
-              <p className="m-0 max-w-3xl font-[family-name:var(--font-editorial)] text-lg font-light leading-relaxed text-neutral-300 sm:text-xl">
-                To nie jest klasyczne szkolenie produktowe. To zmiana sposobu myślenia o przestrzeni: funkcja →
-                ergonomia → organizacja → technologia → estetyka. PEKA dostarcza narzędzi, a NEO FORM pokazuje, jak
-                wykorzystać je w rzeczywistych, wymagających projektach. Uczysz się projektować wnętrze mebla pod realne
-                potrzeby użytkownika, eliminując błędy i reklamacje
-              </p>
             </div>
-            <ul className="mt-12 flex flex-col divide-y divide-neutral-700/50 border-y border-neutral-700/50">
+            <p
+              className="m-0 mt-6 max-w-3xl text-left font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-neutral-300 sm:mt-8"
+            >
+              To nie jest klasyczne szkolenie produktowe. To zmiana sposobu myślenia o przestrzeni: funkcja →
+              ergonomia → organizacja → technologia → estetyka. PEKA dostarcza narzędzi, a NEO FORM pokazuje, jak
+              wykorzystać je w rzeczywistych, wymagających projektach. Uczysz się projektować wnętrze mebla pod realne
+              potrzeby użytkownika, eliminując błędy i reklamacje
+            </p>
+            <ul className="mt-12 flex flex-col divide-y divide-neutral-800 border-y border-neutral-800">
               {pekaSchedule.map(entry => (
                 <li
                   key={entry.time}
                   className="group -mx-6 flex flex-col gap-2 px-6 py-5 transition-colors hover:bg-neutral-800/40 sm:mx-0 sm:flex-row sm:gap-8 sm:px-4 sm:py-6"
                 >
-                  <span className="shrink-0 pt-0.5 font-mono text-sm tracking-widest text-[color:var(--brand)] sm:w-20">
+                  <span
+                    className="shrink-0 font-mono text-[16px] font-semibold tracking-wider text-[color:var(--brand)] sm:w-20"
+                  >
                     {entry.time}
                   </span>
-                  <span className="flex-1 text-sm leading-relaxed text-neutral-400 sm:text-base">
-                    <span className="font-medium text-white transition-colors group-hover:text-[color:var(--brand)]">
-                      {entry.module}
-                    </span>
-                    {' — '}
-                    {entry.description}
-                  </span>
+                  <div className="flex min-w-0 flex-1 flex-col gap-1">
+                    <span className="font-medium text-white">{entry.module}</span>
+                    <p className="m-0 text-[15px] leading-[1.5] text-neutral-400 sm:text-[16px]">{entry.description}</p>
+                  </div>
                 </li>
               ))}
             </ul>
-            <p className="mt-10 max-w-2xl border-l-2 border-neutral-800 pl-4 text-sm leading-relaxed text-neutral-400 sm:text-base">
-              Dla architektów i projektantów wnętrz, którzy chcą łączyć bezkompromisowy design z idealną inżynierią
-            </p>
+            <div className="mt-10 max-w-2xl border-l-2 border-[color:var(--brand)] py-1 pl-5">
+              <p className="m-0 font-[family-name:var(--font-editorial)] text-[17px] leading-[1.5] text-neutral-300 sm:text-[18px]">
+                Dla architektów i projektantów wnętrz, którzy chcą łączyć bezkompromisowy design z idealną inżynierią
+              </p>
+            </div>
             <a
               href="/#kontakt"
               onClick={scrollToContact}
-              className="mt-8 inline-flex items-center gap-3 border border-[color:var(--brand)] px-8 py-4 font-mono text-xs uppercase tracking-[0.15em] text-[color:var(--brand)] transition-colors hover:bg-[color:var(--brand)] hover:text-black"
+              className="mt-8 inline-flex items-center justify-center gap-2.5 rounded-[4px] border border-[color:var(--brand)] px-6 py-3.5 font-mono text-xs uppercase tracking-widest text-[color:var(--brand)] transition-all duration-300 hover:bg-[color:var(--brand)] hover:text-black active:scale-[0.98]"
             >
               ZAPISZ SIĘ NA WYDARZENIE ↗
             </a>
           </article>
+        </div>
+      </div>
 
-          {/* Element 6: archive */}
-          <div className="mt-14 md:mt-20">
-            <EditorialKicker className="mb-[var(--heading-space)]" aside="02 / 03">
-              POPRZEDNIE SPOTKANIA
-            </EditorialKicker>
-            <p className="max-w-3xl font-[family-name:var(--font-editorial)] text-xl font-light leading-relaxed text-neutral-300 sm:text-2xl">
-              Te spotkania już się odbyły, ale energia i wiedza, które nam dały, wciąż pracują w kolejnych projektach.
-              Zobacz, jak wyglądają nasze warsztaty od środka
+      {/* Element 6: archive */}
+      <div
+        className="border-t border-neutral-200/80 bg-[var(--bg-paper,#F4F3EF)] px-4 pt-8 pb-10 text-[#121315] sm:px-8 sm:pt-10 sm:pb-12"
+      >
+        <div className="mx-auto flex max-w-6xl flex-col gap-6 sm:gap-8">
+          <div className="max-w-2xl">
+            <div className="section-label">
+              <span className="section-label-title">POPRZEDNIE SPOTKANIA</span>
+              <span className="section-number">02 / 03</span>
+            </div>
+            <p
+              className="m-0 text-left font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-neutral-700"
+            >
+              Te spotkania już się odbyły, ale energia i wiedza, które nam dały, wciąż pracują w kolejnych
+              projektach. Zobacz, jak wyglądają nasze warsztaty od środka
             </p>
-            <div className="mt-8 grid grid-cols-1 gap-px border border-neutral-800/80 bg-neutral-800/80 sm:grid-cols-2 lg:grid-cols-4">
-              {neoLabArchive.map(item => (
-                <button
-                  key={item.title}
-                  type="button"
-                  className="group flex min-h-full flex-col bg-gradient-to-br from-neutral-900/50 to-neutral-950 p-6 text-left transition-all duration-300 hover:from-neutral-800/60 hover:to-neutral-900/80 hover:shadow-xl sm:p-8"
-                  onClick={event => {
-                    archiveTriggerRef.current = event.currentTarget;
-                    setSelectedGallery(item.title);
-                  }}
-                >
+          </div>
+          <div
+            className="mt-4 flex min-w-0 max-w-4xl flex-col divide-y divide-neutral-200 border-y border-neutral-200 sm:mt-6"
+          >
+            {neoLabArchive.map(item => (
+              <button
+                key={item.title}
+                type="button"
+                className="group flex w-full min-w-0 items-center justify-between gap-3 rounded-sm px-3 py-4.5 text-left transition-all duration-200 hover:bg-neutral-100/70 active:scale-[0.99] sm:gap-5 sm:px-4 sm:py-5"
+                onClick={event => {
+                  if (!getNeoLabArchiveGallery(item.title)) return;
+                  archiveTriggerRef.current = event.currentTarget;
+                  setActiveArchiveTitle(item.title);
+                  setArchiveGalleryOpen(true);
+                }}
+              >
+                <div className="flex min-w-0 flex-1 items-center gap-3 sm:gap-6">
                   <time
-                    className="font-mono text-xs tracking-widest text-[color:var(--brand)] sm:text-sm"
+                    className="shrink-0 font-mono text-sm font-semibold tracking-wider text-[color:var(--brand)] sm:text-base"
                     dateTime={item.dateTime}
                   >
                     {item.date}
                   </time>
-                  <span className="mt-4 font-[family-name:var(--font-editorial)] text-2xl font-light text-white transition-colors group-hover:text-[color:var(--brand)] sm:text-3xl">
+                  <span
+                    className="truncate font-[family-name:var(--font-editorial)] text-[18px] font-normal uppercase leading-[1.2] tracking-tight text-[#121315] transition-colors group-hover:text-[color:var(--brand)] sm:text-xl"
+                  >
                     {item.title}
                   </span>
-                  <span className="mt-auto flex items-center gap-2 pt-10 font-mono text-[10px] uppercase tracking-widest text-neutral-500 transition-colors group-hover:text-white sm:text-[11px]">
-                    ZOBACZ GALERIĘ
-                    <span className="text-sm text-[color:var(--brand)] transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">
-                      ↗
-                    </span>
-                  </span>
-                </button>
-              ))}
-            </div>
+                </div>
+                <span
+                  className="flex shrink-0 items-center gap-1 whitespace-nowrap font-mono text-sm uppercase tracking-wider text-neutral-400 transition-colors group-hover:text-[#121315] sm:text-base"
+                >
+                  <span className="hidden sm:inline">ZOBACZ</span>
+                  ↗
+                </span>
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
-      {selectedGallery !== null && (
-        <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 p-4 backdrop-blur-md sm:p-8"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="neo-lab-archive-title"
-          onClick={closeArchive}
-        >
-          <button
-            type="button"
-            className="absolute right-6 top-6 z-50 cursor-pointer p-2 text-white transition-colors hover:text-[color:var(--brand)] sm:right-10 sm:top-10"
-            aria-label="Zamknij galerię"
-            onClick={closeArchive}
-          >
-            <X className="size-6" aria-hidden="true" />
-          </button>
-          <div
-            className="relative max-h-[90vh] w-full max-w-6xl overflow-y-auto"
-            onClick={event => event.stopPropagation()}
-          >
-            <h4
-              id="neo-lab-archive-title"
-              className="mb-8 font-[family-name:var(--font-editorial)] text-3xl font-light uppercase text-white sm:text-5xl"
-            >
-              {selectedGallery}
-            </h4>
-            <div className="grid grid-cols-1 gap-px border border-neutral-800/50 bg-neutral-800/50 sm:grid-cols-2 lg:grid-cols-3">
-              {archiveGalleryPhotos.map((src, index) => (
-                <img
-                  key={src}
-                  src={src}
-                  alt={`${selectedGallery} — zdjęcie poglądowe ${index + 1}`}
-                  className="aspect-[4/3] w-full object-cover bg-neutral-900"
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+      <NeoLabArchiveGalleryDialog
+        open={archiveGalleryOpen}
+        onOpenChange={open => {
+          setArchiveGalleryOpen(open);
+          if (!open) setActiveArchiveTitle(null);
+        }}
+        title={activeArchiveGallery?.dialogTitle ?? activeArchiveTitle ?? ''}
+        images={activeArchiveGallery?.photos ?? []}
+        returnFocusRef={archiveTriggerRef}
+      />
     </section>
   );
 }

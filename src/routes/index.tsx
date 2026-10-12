@@ -108,6 +108,13 @@ import { HeroVideo } from '@/components/hero-video';
 import { ContactAddress } from '@/components/contact-address';
 import { ContactForm } from '@/components/contact-form';
 import { SectionLabel } from '@/components/section-label';
+import {
+  EditorialSectionTitle,
+  editorialBodyCopyClassName,
+  editorialBodyCopyDarkClassName,
+  editorialH2DarkClassName,
+  copyAfterTitleClassName,
+} from '@/components/editorial-section';
 import { SiteFooterSignature } from '@/components/site-footer-signature';
 import { scrollToContactSection, scrollToHashTarget } from '@/lib/scroll-to-section';
 import { useHomeHashScroll } from '@/lib/use-home-hash-scroll';
@@ -146,8 +153,16 @@ function Label({ children, number }: { children: React.ReactNode; number: string
   return <SectionLabel number={number}>{children}</SectionLabel>;
 }
 function Paragraphs({ texts, className = '' }: { texts: string[]; className?: string }) {
-  return <div className={`paragraphs ${className}`}>{texts.map((text, i) => <p key={text} className={i === texts.length - 1 ? 'last-paragraph' : ''}>{text}</p>)}</div>;
+  return (
+    <div className={`${editorialBodyCopyClassName} ${className}`.trim()}>
+      {texts.map((text, i) => (
+        <p key={text} className={i === texts.length - 1 ? 'last-paragraph' : ''}>{text}</p>
+      ))}
+    </div>
+  );
 }
+
+const credoTextColumnClass = `credo-text-column ${editorialBodyCopyClassName}`;
 const contentPhotoImgClass =
   'w-full max-lg:aspect-[4/3] lg:h-auto object-cover max-lg:rounded-none lg:rounded-sm';
 
@@ -294,14 +309,24 @@ function Index() {
         <div className="hero-shade" />
         <div className="hero-foreground">
           <div className="hero-copy"><div className="hero-kicker">NEO FORM</div><h1>NOWA FORMA<br />NIEOGRANICZONE<br />MOŻLIWOŚCI</h1><p>{copy.hero}</p></div>
-          <div className="hero-bottom"><span>PROJEKT · MATERIAŁ · DETAL · JAKOŚĆ</span><a href="/" aria-label="Przejdź do kontaktu" onClick={onScrollToKontakt}><ArrowDown size={22} /></a><span>01 / 13</span></div>
+          <div className="hero-bottom"><span>PROJEKT · MATERIAŁ · DETAL · JAKOŚĆ</span><a href="/" aria-label="Przejdź do kontaktu" onClick={onScrollToKontakt}><ArrowDown size={22} /></a></div>
         </div>
       </section>
 
       <section className="section credo" id="credo">
-        <div className="container"><Label number="02">CREDO</Label>
-          <div className="credo-intro"><div><h2>INDYWIDUALNOŚĆ<br />BEZ KOMROMISÓW</h2><span className="accent-line" aria-hidden="true" /></div><p className="lead">{copy.credo[0]}</p></div>
-          <div className="credo-body"><Paragraphs texts={copy.credo.slice(1)} /></div>
+        <div className="container"><Label number="01">CREDO</Label>
+          <div className="credo-intro text-left">
+            <div className="min-w-0 text-left">
+              <EditorialSectionTitle>
+                INDYWIDUALNOŚĆ<br />BEZ KOMPROMISÓW
+              </EditorialSectionTitle>
+            </div>
+            <div className={credoTextColumnClass}>
+              {copy.credo.map(text => (
+                <p key={text}>{text}</p>
+              ))}
+            </div>
+          </div>
           <ul className="individuality-slider" aria-label="Każde wnętrze jest inne">{copy.individuality.map((t, i) => (
             <li
               key={t}
@@ -352,35 +377,42 @@ function Index() {
 
       <section className="section paper" id="zespol">
         <div className="container">
-          <Label number="03">NEO STANDARD</Label>
+          <Label number="02">NEO STANDARD</Label>
           <div className="section-heading">
-            <h2 className="text-[#121315]">FORMA TWORZONA<br />PRZEZ LUDZI</h2>
-            <p className="lead normal-case text-neutral-700 leading-[1.7]">{copy.team[0]}</p>
+            <EditorialSectionTitle>
+              FORMA TWORZONA<br />PRZEZ LUDZI
+            </EditorialSectionTitle>
+            <p className="lead m-0 font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-neutral-700">
+              {copy.team[0]}
+            </p>
           </div>
         </div>
         <ContentPhotoShell>
           <Photo
             src={neoStandardImg}
             alt="Zespół NEO FORM przy pracy"
-            className={`team-photo my-8 grayscale contrast-105 ${contentPhotoImgClass}`}
+            className={`team-photo grayscale contrast-105 ${contentPhotoImgClass}`}
           />
         </ContentPhotoShell>
         <div className="container">
-          <div className="team-copy text-neutral-700 leading-[1.7]"><p>{copy.team[1]}</p><p>{copy.team[2]}</p></div>
+          <div className={`team-copy ${editorialBodyCopyClassName}`}>
+            <p className="m-0">{copy.team[1]}</p>
+            <p className="m-0">{copy.team[2]}</p>
+          </div>
         </div>
       </section>
 
       <section className="bespoke photo-section" id="bespoke">
         <img src={bespokeBgImg} alt="" className="photo-background editorial-photo size-full object-cover" loading="lazy" width={1920} height={1080} aria-hidden />
-        <div className="photo-shade bg-black/65" aria-hidden />
+        <div className="photo-shade bg-black/65" aria-hidden="true" />
         <div className="container">
-          <Label number="04">BESPOKE</Label>
-          <h2>FORMA W GOTOWEJ<br />PRZESTRZENI</h2>
-          <div className="bespoke-copy">
-            <p className="lead">
-              Każda realizacja zaczyna się od ludzi – ich potrzeb, rytmu dnia i sposobu życia. Dopiero potem forma, materiały i detal nadają temu konkretny kształt
-            </p>
-            <p>
+          <Label number="03">BESPOKE</Label>
+          <EditorialSectionTitle titleClassName={editorialH2DarkClassName}>
+            FORMA W GOTOWEJ<br />PRZESTRZENI
+          </EditorialSectionTitle>
+          <div className={`bespoke-copy ${editorialBodyCopyDarkClassName}`}>
+            <p className="m-0">{copy.bespoke[0]}</p>
+            <p className="m-0">
               Kiedy standardowe rozwiązania to za mało, tworzymy architekturę dopasowaną do wnętrza. Nasz standard to:
             </p>
             <div className="bespoke-chips-grid w-full">
@@ -401,7 +433,7 @@ function Index() {
               ))}
             </div>
             {currentPhotos.length > 0 && (
-              <div className="grid w-full grid-cols-1 gap-4 my-6 sm:grid-cols-2">
+              <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
                 {currentPhotos.map((imgSrc, imgIndex) => (
                   <button
                     key={`${activeCategory}-${imgSrc}`}
@@ -426,19 +458,19 @@ function Index() {
                 ))}
               </div>
             )}
-            <p>
+            <p className="m-0">
               Te elementy nie są dla nas komplikacją. Są naturalną częścią projektu, którego nie ograniczają żadne szablony
             </p>
-            <strong className="strong-statement">
-              Najlepszy efekt pojawia się wtedy, gdy forma, funkcja i codzienność przestają ze sobą konkurować
+            <strong className="strong-statement m-0 font-[family-name:var(--font-editorial)] text-[19px] font-normal leading-[1.6] text-neutral-300">
+              {copy.bespoke[2]}
             </strong>
           </div>
         </div>
       </section>
 
-      <section className="section" id="material"><div className="container"><Label number="05">MATERIAŁ</Label><div className="section-heading"><h2>MATERIAŁ<br />MA ZNACZENIE</h2><Paragraphs
+      <section className="section" id="material"><div className="container"><Label number="04">MATERIAŁ</Label><div className="credo-intro text-left"><div className="min-w-0 text-left"><EditorialSectionTitle>MATERIAŁ<br />MA ZNACZENIE</EditorialSectionTitle></div><Paragraphs
             texts={copy.materials}
-            className="normal-case gap-4 font-[family-name:var(--font-editorial)] text-base font-normal leading-[1.7] tracking-normal sm:text-[17px] lg:text-[18px] [&_p]:font-[family-name:var(--font-editorial)] [&_p]:text-base [&_p]:font-normal [&_p]:leading-[1.7] [&_p]:tracking-normal [&_p]:text-[color:var(--subtle-ink)] [&_p]:sm:text-[17px] [&_p]:lg:text-[18px] [&_p.last-paragraph]:font-normal [&_p.last-paragraph]:text-[color:var(--subtle-ink)]"
+            className="normal-case text-neutral-700 [&_p]:text-[color:var(--subtle-ink)]"
           /></div><div className="material-grid gap-4 sm:gap-6">{materialGalleryNames.map((name, i) => (
         <figure key={name}>
           <div
@@ -466,9 +498,9 @@ function Index() {
 
       <section className="section steel" id="technologia">
         <div className="container">
-          <Label number="06">TECHNOLOGIA</Label>
+          <Label number="05">TECHNOLOGIA</Label>
         </div>
-        <ContentPhotoShell className="mb-[var(--heading-space)]">
+        <ContentPhotoShell className="mb-[var(--layout-gap)]">
           <Photo
             src={technologiaMainImg}
             alt="Precyzyjnie spasowane fronty i ukryty zawias"
@@ -478,8 +510,17 @@ function Index() {
         <div className="container">
           <div className="image-text">
             <div>
-              <h2>INŻYNIERIA<br />UKRYTA W FORMIE</h2>
-              <Paragraphs texts={copy.technology} />
+              <div className="credo-intro text-left">
+                <div className="min-w-0 text-left">
+                  <EditorialSectionTitle titleClassName={editorialH2DarkClassName}>
+                    INŻYNIERIA<br />UKRYTA W FORMIE
+                  </EditorialSectionTitle>
+                </div>
+                <Paragraphs
+                  texts={copy.technology}
+                  className="text-neutral-300 [&_p]:text-neutral-300"
+                />
+              </div>
               <div className="system-names flex flex-nowrap w-full max-w-[100vw] overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth touch-pan-x gap-4 [&::-webkit-scrollbar]:hidden">
                 {hardwareBrandIds.map(name => (
                   <button
@@ -504,11 +545,20 @@ function Index() {
 
       <section className="section graphite" id="blat">
         <div className="container">
-          <Label number="07">BLAT</Label>
+          <Label number="06">BLAT</Label>
           <div className="image-text reversed">
             <div>
-              <h2>OSTATNI ELEMENT<br />KTÓRY POTRAFI<br />ZMIENIĆ CAŁOŚĆ</h2>
-              <Paragraphs texts={copy.countertop} />
+              <div className="credo-intro text-left">
+                <div className="min-w-0 text-left">
+                  <EditorialSectionTitle titleClassName={editorialH2DarkClassName}>
+                    OSTATNI ELEMENT<br />KTÓRY POTRAFI<br />ZMIENIĆ CAŁOŚĆ
+                  </EditorialSectionTitle>
+                </div>
+                <Paragraphs
+                  texts={copy.countertop}
+                  className="text-neutral-300 [&_p]:text-neutral-300"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -523,11 +573,17 @@ function Index() {
 
       <section className="section paper" id="architekci">
         <div className="container">
-          <Label number="08">WSPÓŁPRACA Z ARCHITEKTAMI</Label>
+          <Label number="07">WSPÓŁPRACA Z ARCHITEKTAMI</Label>
           <div className="image-text reversed">
             <div>
-              <h2>DOBRY PROJEKT<br />POTRZEBUJE DOBREGO<br />WYKONAWCY</h2>
-              <Paragraphs texts={copy.architects} />
+              <div className="credo-intro text-left">
+                <div className="min-w-0 text-left">
+                  <EditorialSectionTitle>
+                    DOBRY PROJEKT<br />POTRZEBUJE DOBREGO<br />WYKONAWCY
+                  </EditorialSectionTitle>
+                </div>
+                <Paragraphs texts={copy.architects} />
+              </div>
               <a className="text-link architekci-contact-link group inline-flex cursor-pointer items-center gap-2" href="/" onClick={onScrollToKontakt}>
                 <span className="system-name-pulse" aria-hidden="true">
                   <span className="system-name-pulse-ring" />
@@ -553,16 +609,34 @@ function Index() {
         </ContentPhotoShell>
       </section>
 
-      <section className="section ink" id="proces"><div className="container"><Label number="09">PROCES</Label><h2>OD POMYSŁU<br />DO GOTOWEGO WNĘTRZA</h2><ol className="process-timeline">{copy.process.map(([title, text], i) => <li key={title} className="process-step"><Odometer className="process-watermark" value={`0${i + 1}`} /><h3>{title}</h3><p>{text}</p></li>)}</ol></div></section>
+      <section className="section ink" id="proces">
+        <div className="container">
+          <Label number="08">PROCES</Label>
+          <EditorialSectionTitle titleClassName={editorialH2DarkClassName}>
+            OD POMYSŁU<br />DO GOTOWEGO WNĘTRZA
+          </EditorialSectionTitle>
+          <ol className="process-timeline">
+            {copy.process.map(([title, text], i) => (
+              <li key={title} className="process-step">
+                <Odometer className="process-watermark" value={`0${i + 1}`} />
+                <h3>{title}</h3>
+                <p className="m-0 font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-neutral-300">{text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
       <section className="section paper text-neutral-900" id="realizacje">
         <div className="w-full px-[max(var(--page-gutter),env(safe-area-inset-left))] pr-[max(var(--page-gutter),env(safe-area-inset-right))] lg:container lg:mx-auto lg:max-w-[1440px] lg:px-8">
-          <Label number="10">REALIZACJE</Label>
+          <Label number="09">REALIZACJE</Label>
           <div className="section-heading">
-            <h2 className="text-neutral-900">PRZESTRZENIE,<br />KTÓRE NABRAŁY FORMY</h2>
+            <EditorialSectionTitle>
+              PRZESTRZENIE,<br />KTÓRE NABRAŁY FORMY
+            </EditorialSectionTitle>
             <Paragraphs
               texts={copy.portfolio}
-              className="normal-case gap-4 font-[family-name:var(--font-editorial)] text-base font-normal leading-relaxed tracking-normal text-neutral-900 md:text-lg [&_p]:font-[family-name:var(--font-editorial)] [&_p]:text-base [&_p]:font-normal [&_p]:leading-relaxed [&_p]:tracking-normal [&_p]:md:text-lg [&_p.last-paragraph]:font-medium"
+              className="normal-case text-neutral-700 [&_p]:text-neutral-700"
             />
           </div>
         </div>
@@ -591,15 +665,15 @@ function Index() {
 
       <section className="section graphite realizacje-neo-lab-teaser" aria-labelledby="realizacje-neo-lab-teaser-heading">
         <div className="container realizacje-neo-lab-teaser__inner">
-          <Label number="11">NEO LAB</Label>
-          <h2
-            id="realizacje-neo-lab-teaser-heading"
-            className="realizacje-neo-lab-teaser__heading font-semibold tracking-tight text-neutral-100"
+          <Label number="10">NEO LAB</Label>
+          <EditorialSectionTitle
+            titleId="realizacje-neo-lab-teaser-heading"
+            titleClassName={`realizacje-neo-lab-teaser__heading ${editorialH2DarkClassName} text-neutral-100`}
           >
             NEO FORM — WIĘCEJ
             <br />
             NIŻ TYLKO MEBLE
-          </h2>
+          </EditorialSectionTitle>
           <div
             className="realizacje-neo-lab-teaser__names w-full overflow-hidden rounded-none border border-neutral-800 divide-y divide-neutral-700/60"
           >
@@ -632,7 +706,14 @@ function Index() {
         </div>
       </section>
 
-      <footer className="contact-footer" id="kontakt"><div className="container"><Label number="12">KONTAKT</Label><div className="footer-top"><h2>KONTAKT</h2><a href="#top" aria-label="Wróć na początek strony"><ArrowUpRight size={40} /></a></div><ContactForm /></div>
+      <footer className="contact-footer" id="kontakt">
+        <div className="container">
+          <div className="footer-top">
+            <EditorialSectionTitle titleClassName={editorialH2DarkClassName}>KONTAKT</EditorialSectionTitle>
+            <a href="#top" aria-label="Wróć na początek strony"><ArrowUpRight size={40} /></a>
+          </div>
+          <ContactForm />
+        </div>
         <ContactMap />
         <ContactAddress />
         <SiteFooterSignature />

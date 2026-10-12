@@ -4,14 +4,8 @@ const footerSlogan = `${footerSignature.lines.join(' / ')}.`;
 
 export function SiteFooterSignature() {
   return (
-    <div
-      className="site-footer-signature text-neutral-900"
-      style={{
-        backgroundColor: 'oklch(0.9821 0 0)',
-        paddingBlock: '24px max(24px, env(safe-area-inset-bottom))',
-      }}
-    >
-      <div className="container flex flex-col items-center gap-4">
+    <div className="site-footer-signature text-neutral-900">
+      <div className="container flex flex-col items-center">
         <img
           src="/favicon_2.png"
           alt="NEO FORM"

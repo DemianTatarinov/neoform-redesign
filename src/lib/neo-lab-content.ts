@@ -3,7 +3,8 @@ export const neoLab = {
   slogan: 'Learn. Test. Create',
   contactLabel: 'ZAPYTAJ O WYDARZENIE',
   description: 'Doświadczenie ma wartość dopiero wtedy, kiedy można się nim podzielić. Neo Lab to przestrzeń wiedzy, spotkań i wymiany doświadczeń dla projektantów, architektów, producentów i montażystów. Nie chcemy zatrzymywać wiedzy wewnątrz firmy – chcemy ją przekazywać dalej. Nie interesują nas szkolenia, po których wychodzisz z kolejnym PDF. Interesuje nas wiedza, którą wykorzystasz następnego dnia. Prawdziwe projekty, prawdziwe problemy, prawdziwe rozwiązania.',
-  partnerIntro: 'Nie chcemy być jedynym źródłem wiedzy. Neo Lab tworzymy wspólnie z markami, które wyznaczają standardy: Blum, Häfele, Viefe, PEKA, ARPA, FENIX. To spotkania, podczas których produkt można dotknąć, przetestować i w pełni zrozumieć.',
+  partnerIntro:
+    'Nie chcemy być jedynym źródłem wiedzy. Neo LAB tworzymy wspólnie z markami, które wyznaczają standardy: Blum, Häfele, Viefe, PEKA, ARPA, FENIX. To spotkania, podczas których produkt można dotknąć, przetestować i w pełni zrozumieć',
   upcomingLabel: 'NAJBLIŻSZE WYDARZENIA',
   registrationLabel: 'ZAPISZ SIĘ',
   archiveLabel: 'ARCHIWUM NEO LAB',

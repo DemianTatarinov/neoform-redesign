@@ -2,18 +2,28 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useRef } from 'react';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import ewolucjaImg from '@/assets/EWOLUCJA/EWOLUCJA.webp';
+import { copyAfterTitleClassName } from '@/components/editorial-section';
 import { SiteFooterSignature } from '@/components/site-footer-signature';
+
+const heroMobileBodyClassName =
+  `ewolucja-hero-body font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-neutral-700 flex flex-col space-y-5 [&>p+p]:mt-5 ${copyAfterTitleClassName}`;
+
+const heroDesktopBodyClassName =
+  'font-[family-name:var(--font-editorial)] text-[18px] sm:text-[19px] leading-[1.6] text-neutral-800 flex flex-col space-y-5 [&>p+p]:mt-5';
+
+const heroDesktopTaglineClassName =
+  'hero-tagline m-0 block font-mono text-xs font-semibold uppercase tracking-wider text-[#B8860B] sm:text-sm';
 
 const transformationPillars = [
   {
     title: 'FUNDAMENT: WIEDZA I WARSZTAT',
     body:
-      'Doświadczenie zebrane przy setkach realizacji zabudów meblowych pozostaje naszym największym kapitałem.',
+      'Doświadczenie zebrane przy setkach realizacji zabudów meblowych pozostaje naszym największym kapitałem',
   },
   {
     title: 'KIERUNEK: ARCHITEKTURA I DETAL',
     body:
-      'Tworzymy spójne formy dla całych przestrzeni, łącząc zaawansowane materiały z bezkompromisową estetyką.',
+      'Tworzymy spójne formy dla całych przestrzeni, łącząc zaawansowane materiały z bezkompromisową estetyką',
   },
 ] as const;
 
@@ -44,139 +54,129 @@ function EwolucjaMarkiPage() {
 
   return (
     <>
-      <main
-        ref={pageRef}
-        className="min-h-dvh bg-neutral-950 text-white"
-        style={{ backgroundColor: 'var(--ink)' }}
-      >
-        <div
-          className="mx-auto max-w-4xl px-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] pb-16 pt-[calc(var(--header-height)+1rem)] sm:px-8 sm:pt-[calc(var(--header-height)+1.25rem)] md:pb-24 md:pt-[calc(var(--header-height)+3rem)] lg:max-w-6xl"
+      <main ref={pageRef} className="min-h-dvh">
+        <section
+          className="bg-[#F4F3EF] text-[#121315] pb-16 pt-[calc(var(--header-height)+var(--space-copy))] sm:pb-24 md:pb-32 md:pt-[calc(var(--header-height)+var(--heading-space))]"
         >
-          <article>
-            <div className="relative grid grid-cols-12 items-start gap-y-10 lg:grid-cols-12 lg:items-center lg:gap-0">
-              <div
-                className="ewolucja-hero-media relative z-0 order-1 col-span-9 col-start-4 row-start-1 flex min-h-0 items-start justify-end overflow-visible bg-transparent sm:col-span-8 sm:col-start-5 lg:order-2 lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:aspect-[4/3] lg:w-full lg:items-center lg:justify-center lg:overflow-visible"
-                data-reveal-enter
-                data-reveal-delay="0"
-                data-reveal-from="right"
-              >
-                <img
-                  src={ewolucjaImg}
-                  alt="Archiwalne ujęcie warsztatu i realizacji — kontekst transformacji marki NEO KUCHNIE w NEO FORM"
-                  className="mr-[calc(-1*max(1rem,env(safe-area-inset-right)))] block h-auto max-h-[min(52vh,440px)] w-full max-w-none object-contain object-right grayscale-[20%] contrast-[105%] sm:mr-[calc(-1*2rem)] lg:mr-0 lg:h-full lg:max-h-none lg:w-full lg:rounded-sm lg:object-contain lg:shadow-2xl"
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
-                />
-                <span
-                  className="pointer-events-none absolute bottom-3 right-3 z-20 hidden border border-neutral-800/80 bg-neutral-950/80 px-2 py-1 font-mono text-[9px] uppercase tracking-widest text-neutral-400/90 backdrop-blur-sm lg:inline-flex"
-                >
-                  [ ARCHIWUM / TRANSFORMATIO ]
-                </span>
-              </div>
-
-              <div
-                className="ewolucja-hero-copy relative z-20 order-2 col-span-10 col-start-1 row-start-1 flex max-lg:flex-col max-lg:gap-3.5 max-lg:mt-[min(14vh,118px)] max-lg:pt-0 sm:col-span-9 lg:order-1 lg:col-span-6 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex lg:flex-col lg:-mr-32 lg:gap-[var(--space-copy)] lg:rounded-l-lg lg:border lg:border-neutral-900/40 lg:bg-gradient-to-r lg:from-neutral-950 lg:via-neutral-950/80 lg:to-transparent lg:p-8 lg:pt-8 lg:shadow-xl lg:backdrop-blur-[2px]"
-                data-reveal-enter
-                data-reveal-delay="80"
-                data-reveal-from="left"
-              >
-                <span
-                  className="pointer-events-none inline-flex w-fit border border-neutral-500/60 bg-neutral-300/95 px-2 py-0.5 font-mono text-[11px] uppercase leading-tight tracking-wider text-neutral-900 shadow-sm sm:text-xs lg:hidden"
-                >
-                  [ ARCHIWUM / TRANSFORMATIO ]
-                </span>
-                <p
-                  className="relative z-20 m-0 font-mono text-sm uppercase text-[color:var(--brand)] lg:font-[family-name:var(--font-editorial)] lg:text-[length:var(--type-small)] lg:font-normal lg:leading-[1.6] lg:tracking-normal"
-                >
-                  EWOLUCJA MARKI
-                </p>
-                <h2
-                  className="relative z-20 m-0 max-w-[14ch] text-balance font-[family-name:var(--font-editorial)] text-[1.75rem] font-light leading-[1.15] text-white sm:text-[2.125rem] lg:max-w-none lg:text-[length:var(--type-display)] lg:font-normal lg:leading-[1.27] lg:text-[color:var(--on-ink)]"
-                >
-                  NOWY CZAS.
-                  <br />
-                  NOWA FORMA.
-                </h2>
-                <p
-                  className="hero-tagline m-0 mt-[var(--space-copy)] max-w-[var(--copy-width)] text-left text-[19px] leading-snug uppercase sm:text-[20px] lg:hidden"
-                  aria-label="Hasła marki"
-                >
-                  NEO KUCHNIE · NEO FORM
-                  <br />
-                  NOWY CZAS · NOWA FORMA
-                </p>
+          <div
+            className="mx-auto max-w-4xl px-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] sm:px-8 lg:max-w-6xl"
+          >
+            <article>
+              <div className="relative flex flex-col lg:grid lg:grid-cols-12 lg:items-center lg:gap-0">
                 <div
-                  className="hidden max-w-[min(100%,52ch)] flex-col gap-[var(--space-copy)] lg:flex"
+                  className="ewolucja-hero-copy flex flex-col lg:relative lg:z-20 lg:col-span-6 lg:col-start-1 lg:row-start-1 lg:-mr-44 lg:flex lg:flex-col lg:px-8"
+                  data-reveal-enter
+                  data-reveal-delay="80"
+                  data-reveal-from="left"
                 >
-                  <p
-                    className="m-0 text-left font-[family-name:var(--font-editorial)] text-[length:var(--type-body)] font-normal leading-[1.6] tracking-normal text-[color:var(--on-ink)]"
+                  <p className="m-0 font-mono text-xs uppercase tracking-widest text-[#B8860B] lg:font-bold lg:tracking-[0.2em]">
+                    EWOLUCJA MARKI
+                  </p>
+                  <div className="credo-intro mt-[var(--space-copy)] w-full min-w-0 text-left">
+                    <div className="min-w-0">
+                      <div className="section-heading-title">
+                        <h2
+                          className="editorial-section-title m-0 max-w-[14ch] text-balance text-[28px] sm:text-[34px] lg:max-w-none lg:text-[4rem] lg:leading-[0.95] lg:tracking-tight"
+                        >
+                          NOWY CZAS
+                          <br />
+                          NOWA FORMA
+                        </h2>
+                        <span
+                          className="mt-[var(--accent-line-gap)] block h-[2px] w-12 bg-[#B8860B]"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </div>
+                    <p
+                      className="hero-tagline m-0 max-w-full font-mono text-[clamp(9px,2.85vw,12px)] uppercase leading-relaxed tracking-wider text-neutral-500 whitespace-nowrap lg:hidden"
+                      aria-label="Hasła marki"
+                    >
+                      NEO KUCHNIE · NEO FORM · NOWY CZAS · NOWA FORMA
+                    </p>
+                  </div>
+                  <div
+                    className={`hidden max-w-[min(100%,52ch)] lg:flex ${copyAfterTitleClassName} ${heroDesktopBodyClassName}`}
                   >
+                    <p className="m-0 text-left">
+                      NEO KUCHNIE było początkiem. To tam zdobywaliśmy doświadczenie, poznawaliśmy materiały,
+                      technologie i potrzeby klientów
+                    </p>
+                    <p className="m-0 text-left">
+                      To tam powstały setki decyzji, które dziś pozwalają nam realizować jeszcze bardziej wymagające
+                      projekty
+                    </p>
+                    <p className={`${heroDesktopTaglineClassName} m-0 text-left`} aria-label="Hasła marki">
+                      NEO KUCHNIE · NEO FORM · NOWY CZAS · NOWA FORMA
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  className="ewolucja-hero-media relative z-0 my-6 w-full max-lg:-mx-[max(1rem,env(safe-area-inset-left))] max-lg:w-[calc(100%+max(1rem,env(safe-area-inset-left))+max(1rem,env(safe-area-inset-right)))] lg:col-span-7 lg:col-start-6 lg:row-start-1 lg:my-0 lg:flex lg:aspect-[4/3] lg:items-center lg:justify-center"
+                  data-reveal-enter
+                  data-reveal-delay="0"
+                  data-reveal-from="right"
+                >
+                  <div className="relative w-full lg:h-full lg:max-w-none lg:overflow-visible lg:rounded-sm lg:shadow-2xl">
+                    <div
+                      className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-1/3 bg-gradient-to-r from-[#F4F3EF] via-[#121315]/70 to-transparent lg:block"
+                      aria-hidden
+                    />
+                    <img
+                      src={ewolucjaImg}
+                      alt="Archiwalne ujęcie warsztatu i realizacji — kontekst transformacji marki NEO KUCHNIE w NEO FORM"
+                      className="block h-auto w-full max-lg:rounded-none rounded-sm object-contain shadow-lg max-lg:shadow-none grayscale-[20%] contrast-[105%] lg:h-full lg:w-full lg:object-cover lg:object-center lg:shadow-2xl lg:brightness-[0.85]"
+                      loading="eager"
+                      decoding="async"
+                      fetchPriority="high"
+                    />
+                  </div>
+                </div>
+
+                <div
+                  className={`${heroMobileBodyClassName} max-w-[var(--copy-width)] lg:hidden`}
+                  data-reveal-enter
+                  data-reveal-delay="200"
+                  data-reveal-from="left"
+                >
+                  <p className="m-0 text-left">
                     NEO KUCHNIE było początkiem. To tam zdobywaliśmy doświadczenie, poznawaliśmy materiały,
-                    technologie i potrzeby klientów.
+                    technologie i potrzeby klientów
                   </p>
-                  <p
-                    className="m-0 text-left font-[family-name:var(--font-editorial)] text-[length:var(--type-body)] font-normal leading-[1.6] tracking-normal text-[color:var(--on-ink)]"
-                  >
+                  <p className="m-0 text-left">
                     To tam powstały setki decyzji, które dziś pozwalają nam realizować jeszcze bardziej wymagające
-                    projekty.
-                  </p>
-                  <p
-                    className="hero-tagline m-0 text-left uppercase"
-                    aria-label="Hasła marki"
-                  >
-                    NEO KUCHNIE · NEO FORM
-                    <br />
-                    NOWY CZAS · NOWA FORMA
+                    projekty
                   </p>
                 </div>
               </div>
 
-              <div
-                className="ewolucja-hero-body relative z-10 col-span-12 row-start-2 flex max-w-[var(--copy-width)] flex-col gap-[var(--space-copy)] max-lg:pt-[var(--space-copy)] lg:hidden"
-                data-reveal-enter
-                data-reveal-delay="200"
-                data-reveal-from="left"
+              <blockquote
+                className="mt-[var(--layout-gap)] max-w-2xl border-l-[3px] border-[#B8860B] bg-transparent py-2 pl-6"
               >
-                <p
-                  className="m-0 text-left font-[family-name:var(--font-editorial)] text-[length:var(--type-body)] font-normal leading-[1.6] tracking-normal text-[color:var(--on-ink)]"
-                >
-                  NEO KUCHNIE było początkiem. To tam zdobywaliśmy doświadczenie, poznawaliśmy materiały,
-                  technologie i potrzeby klientów.
+                <p className="m-0 font-[family-name:var(--font-editorial)] text-xl font-normal italic leading-relaxed text-[#121315] sm:text-2xl">
+                  NEO FORM nie odcina się od NEO KUCHNIE. Jesteśmy jego naturalną, bezkompromisową ewolucją
                 </p>
-                <p
-                  className="m-0 text-left font-[family-name:var(--font-editorial)] text-[length:var(--type-body)] font-normal leading-[1.6] tracking-normal text-[color:var(--on-ink)]"
-                >
-                  To tam powstały setki decyzji, które dziś pozwalają nam realizować jeszcze bardziej wymagające
-                  projekty.
-                </p>
+              </blockquote>
+
+              <div className="my-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+                {transformationPillars.map(pillar => (
+                  <div
+                    key={pillar.title}
+                    className="flex flex-col gap-4 rounded-sm border border-neutral-200/60 bg-white/70 p-6 shadow-sm sm:p-8"
+                  >
+                    <h3 className="m-0 font-mono text-xs font-bold uppercase tracking-[0.15em] text-[#B8860B]">
+                      {pillar.title}
+                    </h3>
+                    <p className="m-0 font-[family-name:var(--font-editorial)] text-[16px] leading-[1.5] text-neutral-700 sm:text-[17px]">
+                      {pillar.body}
+                    </p>
+                  </div>
+                ))}
               </div>
-            </div>
-
-            <blockquote
-              className="mt-[var(--layout-gap)] max-w-2xl border-l border-[color:var(--brand)] bg-neutral-900/40 p-4 sm:p-6"
-            >
-              <p className="text-lg font-semibold leading-relaxed text-white sm:text-xl md:text-2xl">
-                NEO FORM nie odcina się od NEO KUCHNIE. Jesteśmy jego naturalną, bezkompromisową ewolucją.
-              </p>
-            </blockquote>
-
-            <div
-              className="my-10 grid grid-cols-1 gap-px border border-neutral-800/80 bg-neutral-800/80 md:grid-cols-2"
-            >
-              {transformationPillars.map(pillar => (
-                <div key={pillar.title} className="bg-neutral-950 p-6 sm:p-8">
-                  <h3 className="font-mono text-xs uppercase tracking-wider text-[color:var(--brand)]">
-                    {pillar.title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-neutral-300 sm:text-base">
-                    {pillar.body}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </article>
-        </div>
+            </article>
+          </div>
+        </section>
       </main>
       <SiteFooterSignature />
     </>

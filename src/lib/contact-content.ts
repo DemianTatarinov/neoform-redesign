@@ -20,7 +20,7 @@ export const contactInstagram = {
   url: 'https://www.instagram.com/neoform.meble?srtk=NXB3OTFpOWlmbWh2',
   handle: '@neoform.meble',
   title: 'POROZMAWIAJMY O TWOIM WNĘTRZU',
-  intro: 'Twój pomysł to początek nowej formy.',
+  intro: 'Twój pomysł to początek nowej formy',
   nameLabel: 'Imię',
   messageLabel: 'Wiadomość',
   submitLabel: 'ZAMÓW PROJEKT',
