@@ -1,6 +1,6 @@
 import { Odometer } from "@/components/odometer";
-import { createFileRoute } from '@tanstack/react-router';
-import { useCallback, useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react';
+import { createFileRoute, Link, useNavigate, useRouterState } from '@tanstack/react-router';
+import { useCallback, useEffect, useRef, useState, type MouseEvent, type PointerEvent, type ReactNode } from 'react';
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ChevronRight, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog';
@@ -23,21 +23,32 @@ const materialGalleryPhotos = materialGalleryNames.map(name => materialCardImage
 
 const realizacjeNeoLabTeasers = [
   {
-    category: 'NEO KUCHNIE / FEO FORM',
+    category: 'NEO KUCHNIE / NEO FORM',
     description: 'Rebranding marki i koncepcja kuchni NEO FORM',
-    href: '#',
+    to: '/ewolucja-marki' as const,
+    hash: undefined,
   },
   {
     category: 'NEO LAB',
     description: 'Spotkania, szkolenia i testy rozwiązań dla architektów',
-    href: '#',
+    to: '/' as const,
+    hash: 'neo-lab',
   },
   {
     category: 'JOURNAL / TRENDY',
     description: 'Inspiracje, reportaże z wyjazdów i przegląd trendów w architekturze',
-    href: '#',
+    to: '/' as const,
+    hash: 'inspiracje',
+  },
+  {
+    category: 'NAJBLIŻSZE WYDARZENIA',
+    description: 'Nadchodzące spotkania NEO LAB — daty, miejsca i zapisy',
+    to: '/' as const,
+    hash: 'wydarzenia',
   },
 ] as const;
+
+const neoLabPageHashes = new Set(['neo-lab', 'inspiracje', 'wydarzenia']);
 import blatWebImg from '@/assets/BLAT/Blat_web.webp';
 import technologiaMainImg from '@/assets/TECHNOLOGIA/Главное фото/Главное фото.webp';
 import {
@@ -96,17 +107,29 @@ import { ContactMap } from '@/components/contact-map';
 import { HeroVideo } from '@/components/hero-video';
 import { ContactAddress } from '@/components/contact-address';
 import { ContactForm } from '@/components/contact-form';
+import { SectionLabel } from '@/components/section-label';
 import { SiteFooterSignature } from '@/components/site-footer-signature';
+import { scrollToContactSection, scrollToHashTarget } from '@/lib/scroll-to-section';
+import { useHomeHashScroll } from '@/lib/use-home-hash-scroll';
 
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
       { title: 'NEO FORM — Nowa forma. Nieograniczone możliwości.' },
-      { name: 'description', content: 'Indywidualne meble i zabudowy dla całych wnętrz. Projekt, materiał, detal, jakość. Poznaj NEO FORM.' },
+      { name: 'title', content: 'NEO FORM — Nowa forma. Nieograniczone możliwości.' },
+      { name: 'description', content: 'Indywidualne meble i zabudowy dla całych wnętrz. Projekt, materiał, detal, jakość.' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: 'https://neoform.com.pl/' },
       { property: 'og:title', content: 'NEO FORM — Nowa forma. Nieograniczone możliwości.' },
       { property: 'og:description', content: 'Indywidualne meble i zabudowy dla całych wnętrz. Projekt, materiał, detal, jakość.' },
-      { property: 'og:type', content: 'website' },
+      { property: 'og:image', content: '/og-image.jpg' },
+      { property: 'og:image:width', content: '1200' },
+      { property: 'og:image:height', content: '630' },
       { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:url', content: 'https://neoform.com.pl/' },
+      { name: 'twitter:title', content: 'NEO FORM — Nowa forma. Nieograniczone możliwości.' },
+      { name: 'twitter:description', content: 'Indywidualne meble i zabudowy dla całych wnętrz. Projekt, materiał, detal, jakość.' },
+      { name: 'twitter:image', content: '/og-image.jpg' },
     ]
   }),
   component: Index,
@@ -120,7 +143,7 @@ const principles = [
 ];
 
 function Label({ children, number }: { children: React.ReactNode; number: string }) {
-  return <div className="section-label"><span>{children}</span><span className="section-number">{number} / 10</span></div>;
+  return <SectionLabel number={number}>{children}</SectionLabel>;
 }
 function Paragraphs({ texts, className = '' }: { texts: string[]; className?: string }) {
   return <div className={`paragraphs ${className}`}>{texts.map((text, i) => <p key={text} className={i === texts.length - 1 ? 'last-paragraph' : ''}>{text}</p>)}</div>;
@@ -138,7 +161,25 @@ function Photo({ src, alt, className = '' }: { src: string; alt: string; classNa
 
 function Index() {
   const pageRef = useRef<HTMLElement>(null);
+  const navigate = useNavigate();
   useScrollReveal(pageRef);
+
+  const onTeaserNavClick = useCallback(
+    (event: MouseEvent<HTMLAnchorElement>, hash: string | undefined) => {
+      if (!hash) return;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+      if (document.getElementById(hash)) {
+        event.preventDefault();
+        scrollToHashTarget(hash);
+        return;
+      }
+
+      event.preventDefault();
+      void navigate({ to: '/neo-lab', hash });
+    },
+    [navigate],
+  );
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [galleryCategory, setGalleryCategory] = useState(0);
   const [gallerySlideIndex, setGallerySlideIndex] = useState(0);
@@ -200,6 +241,21 @@ function Index() {
     setLightboxOpen(false);
     setLightboxIndex(0);
   }, [activeCategory]);
+
+  const locationHash = useRouterState({
+    select: state => {
+      const raw = state.location.hash ?? '';
+      return raw.startsWith('#') ? raw.slice(1) : raw;
+    },
+  });
+
+  useHomeHashScroll();
+
+  useEffect(() => {
+    if (!neoLabPageHashes.has(locationHash)) return;
+    if (document.getElementById(locationHash)) return;
+    void navigate({ to: '/neo-lab', hash: locationHash });
+  }, [locationHash, navigate]);
   const thesisPointer = useRef<{ x: number; y: number; moved: boolean } | null>(null);
   const onThesisPointerDown = (event: PointerEvent<HTMLLIElement>) => {
     thesisPointer.current = { x: event.clientX, y: event.clientY, moved: false };
@@ -226,6 +282,10 @@ function Index() {
     }
     clearThesisPointer();
   };
+  const onScrollToKontakt = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    scrollToContactSection();
+  };
 
   return (
     <main ref={pageRef}>
@@ -234,7 +294,7 @@ function Index() {
         <div className="hero-shade" />
         <div className="hero-foreground">
           <div className="hero-copy"><div className="hero-kicker">NEO FORM</div><h1>NOWA FORMA<br />NIEOGRANICZONE<br />MOŻLIWOŚCI</h1><p>{copy.hero}</p></div>
-          <div className="hero-bottom"><span>PROJEKT · MATERIAŁ · DETAL · JAKOŚĆ</span><a href="#kontakt" aria-label="Przejdź do kontaktu"><ArrowDown size={22} /></a><span>01 / 10</span></div>
+          <div className="hero-bottom"><span>PROJEKT · MATERIAŁ · DETAL · JAKOŚĆ</span><a href="/" aria-label="Przejdź do kontaktu" onClick={onScrollToKontakt}><ArrowDown size={22} /></a><span>01 / 13</span></div>
         </div>
       </section>
 
@@ -468,7 +528,7 @@ function Index() {
             <div>
               <h2>DOBRY PROJEKT<br />POTRZEBUJE DOBREGO<br />WYKONAWCY</h2>
               <Paragraphs texts={copy.architects} />
-              <a className="text-link architekci-contact-link group inline-flex cursor-pointer items-center gap-2" href="#kontakt">
+              <a className="text-link architekci-contact-link group inline-flex cursor-pointer items-center gap-2" href="/" onClick={onScrollToKontakt}>
                 <span className="system-name-pulse" aria-hidden="true">
                   <span className="system-name-pulse-ring" />
                   <span className="system-name-pulse-core" />
@@ -531,6 +591,7 @@ function Index() {
 
       <section className="section graphite realizacje-neo-lab-teaser" aria-labelledby="realizacje-neo-lab-teaser-heading">
         <div className="container realizacje-neo-lab-teaser__inner">
+          <Label number="11">NEO LAB</Label>
           <h2
             id="realizacje-neo-lab-teaser-heading"
             className="realizacje-neo-lab-teaser__heading font-semibold tracking-tight text-neutral-100"
@@ -543,9 +604,14 @@ function Index() {
             className="realizacje-neo-lab-teaser__names w-full overflow-hidden rounded-none border border-neutral-800 divide-y divide-neutral-700/60"
           >
             {realizacjeNeoLabTeasers.map(item => (
-              <a
+              <Link
                 key={item.category}
-                href={item.href}
+                to={item.to}
+                hash={item.hash}
+                preload="intent"
+                activeOptions={{ exact: true, includeHash: true, includeSearch: false }}
+                inactiveProps={{ 'aria-current': undefined }}
+                onClick={event => onTeaserNavClick(event, item.hash)}
                 className="group flex cursor-pointer items-center justify-between gap-4 p-6 transition-colors duration-200 hover:bg-[#2e2e2e] sm:p-7"
               >
                 <div className="min-w-0 flex-1 pr-2">
@@ -560,30 +626,13 @@ function Index() {
                   className="realizacje-neo-lab-teaser__chevron ml-4 size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1"
                   aria-hidden
                 />
-              </a>
+              </Link>
             ))}
-            <a
-              href="#"
-              className="group flex cursor-pointer items-center justify-between gap-4 p-6 transition-colors duration-200 hover:bg-[#2e2e2e] sm:p-7"
-            >
-              <div className="min-w-0 flex-1 pr-2">
-                <span className="realizacje-neo-lab-teaser__category block font-mono text-[18px] font-medium uppercase leading-[1.2] tracking-widest">
-                  NAJBLIŻSZE WYDARZENIA
-                </span>
-                <p className="realizacje-neo-lab-teaser__description mt-2 text-[16px] font-normal leading-snug text-neutral-300">
-                  Nadchodzące spotkania NEO LAB — daty, miejsca i zapisy
-                </p>
-              </div>
-              <ChevronRight
-                className="realizacje-neo-lab-teaser__chevron ml-4 size-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1"
-                aria-hidden
-              />
-            </a>
           </div>
         </div>
       </section>
 
-      <footer className="contact-footer" id="kontakt"><div className="container"><div className="footer-top"><h2>KONTAKT</h2><a href="#top" aria-label="Wróć na początek strony"><ArrowUpRight size={40} /></a></div><ContactForm /></div>
+      <footer className="contact-footer" id="kontakt"><div className="container"><Label number="12">KONTAKT</Label><div className="footer-top"><h2>KONTAKT</h2><a href="#top" aria-label="Wróć na początek strony"><ArrowUpRight size={40} /></a></div><ContactForm /></div>
         <ContactMap />
         <ContactAddress />
         <SiteFooterSignature />

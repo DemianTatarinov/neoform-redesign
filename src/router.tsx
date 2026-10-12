@@ -8,7 +8,9 @@ export const getRouter = () => {
   const router = createRouter({
     routeTree,
     context: { queryClient },
-    scrollRestoration: true,
+    // Boolean false keeps session cache off (a function is truthy and still restores scroll on mobile).
+    scrollRestoration: false,
+    defaultHashScrollIntoView: false,
     defaultPreloadStaleTime: 0,
   });
 

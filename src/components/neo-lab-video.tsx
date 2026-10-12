@@ -23,10 +23,10 @@ export function NeoLabVideo() {
   }, []);
 
   return (
-    <div className="relative w-full h-[60vh] md:h-[75vh] overflow-hidden bg-black">
+    <div className="relative h-[calc(100svh-30px)] min-h-[500px] w-full overflow-hidden md:min-h-[630px]">
       <video
         ref={videoRef}
-        className="w-full h-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover"
         playsInline
         muted
         loop
@@ -36,12 +36,16 @@ export function NeoLabVideo() {
         <source src={labClip} type="video/mp4" />
       </video>
 
-      {/* Оформленный текст поверх видео */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 md:p-16 z-10">
-        <div className="hero-kicker">
+      <div
+        className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#0A0A0A] via-black/40 to-transparent"
+        aria-hidden="true"
+      />
+
+      <div className="absolute inset-0 z-20 mx-auto flex w-full max-w-7xl flex-col justify-end px-[max(1rem,env(safe-area-inset-left))] pb-12 pr-[max(1rem,env(safe-area-inset-right))] sm:px-8 sm:pb-20">
+        <div className="hero-kicker text-[color:var(--brand)]">
           NEO LAB
         </div>
-        <h1 className="text-3xl md:text-6xl font-light tracking-tight text-white max-w-3xl uppercase leading-tight">
+        <h1 className="max-w-3xl text-3xl font-light uppercase leading-tight tracking-tight text-white md:text-6xl">
           WIEDZA, KTÓRA POWSTAJE W PRAKTYCE
         </h1>
       </div>

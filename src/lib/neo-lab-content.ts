@@ -17,15 +17,16 @@ export const neoLab = {
 };
 
 export const neoLabEducation = [
-  { id: 'knowledge', title: 'Wiedza dla architektów', text: 'Pokazujemy nowe materiały, systemy, rozwiązania techniczne i sposoby łączenia materiałów w wymagających projektach.' },
-  { id: 'practice', title: 'Praktyka zamiast teorii', text: 'Prawdziwe projekty, realne problemy, technologia w działaniu i inspiracja, która zaczyna się od rozmowy.' },
+  { id: 'knowledge', title: 'Wiedza dla architektów', text: 'Pokazujemy nowe materiały, systemy, rozwiązania techniczne i sposoby łączenia materiałów w wymagających projektach' },
+  { id: 'practice', title: 'Praktyka zamiast teorii', text: 'Prawdziwe projekty, realne problemy, technologia w działaniu i inspiracja, która zaczyna się od rozmowy' },
 ];
 
 export const neoLabEvents = ['PEKA', 'Materiały', 'Technology'];
 export const neoLabArchive = [
-  { title: 'Front Lab', date: '11.02.2026', dateTime: '2026-02-11' },
-  { title: 'Kamień & Spiek', date: '11.03.2026', dateTime: '2026-03-11' },
-  { title: 'Blum: Okucia meblowe', date: '15.04.2026', dateTime: '2026-04-15' },
+  { title: 'KRONOSPAN', date: '14.01.2026', dateTime: '2026-01-14' },
+  { title: 'FRONT LAB', date: '11.02.2026', dateTime: '2026-02-11' },
+  { title: 'KAMIEŃ I SPIEK', date: '11.03.2026', dateTime: '2026-03-11' },
+  { title: 'OKUCIA MEBLOWE', date: '15.04.2026', dateTime: '2026-04-15' },
 ];
 export const footerSignature = { brand: 'NEO FORM', lines: ['Tworzymy meble', 'Dzielimy się wiedzą', 'Rozwijamy branżę'] };
 
@@ -57,14 +58,43 @@ export const neoLabCategories = [
 ];
 
 export const pekaSchedule = [
-  { time: '13:45', module: 'OPENING', description: 'Prezentacja nowej odsłony marki NEO FORM.' },
-  { time: '14:00', module: 'MAPA KUCHNI', description: 'Jak kuchnia stała się osią życia domowego.' },
-  { time: '14:20', module: 'PEKA MASTERCLASS', description: 'Okucia i systemy, które realnie zmieniają sposób użytkowania kuchni.' },
-  { time: '14:55', module: 'CASE STUDY: KUCHNIA W CENTRUM', description: 'Projekt kuchni jako centrum domu: założenia, decyzje, efekt końcowy.' },
-  { time: '15:20', module: 'DRAWER LAB', description: 'Praktyczny warsztat organizacji przestrzeni w szufladach.' },
-  { time: '15:40', module: 'PROBLEM LAB', description: 'Trzy trudne układki kuchenne i trzy sposoby ich rozwiązania.' },
-  { time: '16:00', module: 'WORKSHOP: JAK ORGANIZOWAĆ PRZESTRZEŃ W KUCHNI', description: 'Praca z materiałem NEO FORM i rozwiązaniami PEKA.' },
-  { time: '16:30', module: 'NEO STANDARD', description: 'Prezentacja nowej linii wzorniczej NEO FORM.' },
-  { time: '16:40', module: 'REVEAL', description: 'Oficjalna odsłona nowej identyfikacji wizualnej NEO FORM.' },
-  { time: '16:50', module: 'Q&A / NETWORKING', description: 'Rozmowy o kuchni, marce i detalach.' },
+  {
+    time: '13:45',
+    module: 'Opening & Mapa Kuchni',
+    description: 'Nowe podejście do ergonomii i podziału na strefy robocze',
+  },
+  {
+    time: '14:20',
+    module: 'Peka Masterclass',
+    description:
+      'Wysoka zabudowa (Dispensa, Tandem), systemy narożne (LeMans) i sprytne wykorzystanie wąskich szafek',
+  },
+  {
+    time: '14:55',
+    module: 'Case Study',
+    description:
+      'Jedna kuchnia, trzy sposoby organizacji (od standardu po rozwiązanie premium NEO + PEKA)',
+  },
+  {
+    time: '15:20',
+    module: 'Drawer & Problem Lab',
+    description:
+      'Optymalizacja szuflad pod funkcje oraz rozwiązanie trudnych miejsc (ślepe narożniki, szafka pod zlew, fronty 150 mm)',
+  },
+  {
+    time: '16:00',
+    module: 'Workshop Neo Lab',
+    description: 'Praktyczne projektowanie wnętrza modułu pod okiem ekspertów',
+  },
+  {
+    time: '16:30',
+    module: 'Neo Standard & Reveal',
+    description:
+      'Filozofia realizacji NEO oraz oficjalna odsłona ewolucji marki Neo Kuchnie → NEO FORM',
+  },
+  {
+    time: '16:50',
+    module: 'Q&A / Networking',
+    description: 'Dyskusja, wymiana doświadczeń i rozmowy przy kawie'
+  },
 ];

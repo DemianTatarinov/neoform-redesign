@@ -4,13 +4,15 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { reloadScrollGuardScript } from "../lib/reload-scroll-guard";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from '@/components/site-header';
 import { BackToTop } from '@/components/back-to-top';
@@ -80,12 +82,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { title: "NEO FORM — Nowa forma" },
-      { name: "description", content: "Meble i zabudowy dla całych wnętrz. NEO FORM." },
-      { property: "og:title", content: "NEO FORM — Nowa forma" },
-      { property: "og:description", content: "Meble i zabudowy dla całych wnętrz. NEO FORM." },
+      { title: "NEO FORM — Nowa forma. Nieograniczone możliwości." },
+      { name: "title", content: "NEO FORM — Nowa forma. Nieograniczone możliwości." },
+      { name: "description", content: "Indywidualne meble i zabudowy dla całych wnętrz. Projekt, materiał, detal, jakość." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://neoform.com.pl/" },
+      { property: "og:title", content: "NEO FORM — Nowa forma. Nieograniczone możliwości." },
+      { property: "og:description", content: "Indywidualne meble i zabudowy dla całych wnętrz. Projekt, materiał, detal, jakość." },
+      { property: "og:image", content: "/og-image.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:url", content: "https://neoform.com.pl/" },
+      { name: "twitter:title", content: "NEO FORM — Nowa forma. Nieograniczone możliwości." },
+      { name: "twitter:description", content: "Indywidualne meble i zabudowy dla całych wnętrz. Projekt, materiał, detal, jakość." },
+      { name: "twitter:image", content: "/og-image.jpg" },
     ],
     links: [
       {
@@ -106,9 +117,11 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="pl">
       <head>
+        <script dangerouslySetInnerHTML={{ __html: reloadScrollGuardScript }} />
         <HeadContent />
       </head>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: reloadScrollGuardScript }} />
         {children}
         <Scripts />
       </body>
@@ -116,14 +129,25 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function useLockScrollOnFullLoad() {
+  useLayoutEffect(() => {
+    history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }, []);
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: state => state.location.pathname });
+  useLockScrollOnFullLoad();
 
   return (
     <QueryClientProvider client={queryClient}>
       <SiteHeader />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div key={pathname} className="relative z-0 animate-fadeIn">
+        <Outlet />
+      </div>
       <BackToTop />
     </QueryClientProvider>
   );

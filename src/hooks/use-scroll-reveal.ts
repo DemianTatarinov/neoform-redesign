@@ -6,7 +6,8 @@ const revealTargets = [
   '.material-grid figure', '.image-text > img', '.system-names', '.text-link',
   '.process-grid article', '.portfolio-filters', '.gallery-photo-button',
   '.gallery-caption', '.evolution-wordmark', '.about-evolution > div:first-child',
-'.footer-top', '.footer-bottom', '.contact-map', '.neo-lab-accordion',
+  '.footer-top', '.footer-bottom', '.contact-map', '.neo-lab-accordion',
+  '.ewolucja-hero-copy', '.ewolucja-hero-media', '.ewolucja-hero-body',
 ].join(', ');
 
 /** Progressive enhancement: server-rendered content stays readable without JS. */
@@ -47,9 +48,29 @@ export function useScrollReveal(rootRef: RefObject<HTMLElement | null>) {
       }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
 
       targets.forEach(element => {
-        // Never hide content already on screen, including direct anchor visits.
         const rect = element.getBoundingClientRect();
-        if (element.dataset['reveal'] === 'visible' || (rect.top < window.innerHeight && rect.bottom > 0)) {
+        const inView = rect.top < window.innerHeight && rect.bottom > 0;
+        const enterOnLoad = element.hasAttribute('data-reveal-enter');
+
+        if (element.dataset['reveal'] === 'visible') {
+          return;
+        }
+
+        if (enterOnLoad && inView) {
+          element.dataset['reveal'] = 'pending';
+          const delayMs = Number.parseInt(element.dataset['revealDelay'] ?? '0', 10) || 0;
+          const runShow = () => show(element);
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              if (delayMs > 0) window.setTimeout(runShow, delayMs);
+              else runShow();
+            });
+          });
+          return;
+        }
+
+        // Never hide content already on screen, including direct anchor visits.
+        if (inView) {
           show(element);
         } else {
           element.dataset['reveal'] = 'pending';

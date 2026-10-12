@@ -1,4 +1,5 @@
 import { ArrowUpRight } from 'lucide-react';
+import { SectionLabel } from '@/components/section-label';
 import { companyDetails, studioMapsUrl } from '@/lib/contact-content';
 
 // The address block sits under the map: the address itself is the headline,
@@ -7,8 +8,8 @@ export function ContactAddress() {
   return (
     <div className="contact-address">
       <div className="container contact-address-inner">
+        <SectionLabel number="13">ADRES</SectionLabel>
         <div className="contact-address-main">
-          <span className="contact-address-label">ADRES</span>
           <span className="accent-line" aria-hidden="true" />
           <p className="contact-address-street">{companyDetails.street}</p>
           <p className="contact-address-locality">{companyDetails.locality}</p>

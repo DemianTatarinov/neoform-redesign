@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EwolucjaMarkiRouteImport } from './routes/ewolucja-marki'
 import { Route as NeoLabRouteImport } from './routes/neo-lab'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EwolucjaMarkiRoute = EwolucjaMarkiRouteImport.update({
+  id: '/ewolucja-marki',
+  path: '/ewolucja-marki',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NeoLabRoute = NeoLabRouteImport.update({
@@ -25,27 +31,31 @@ const NeoLabRoute = NeoLabRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ewolucja-marki': typeof EwolucjaMarkiRoute
   '/neo-lab': typeof NeoLabRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ewolucja-marki': typeof EwolucjaMarkiRoute
   '/neo-lab': typeof NeoLabRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ewolucja-marki': typeof EwolucjaMarkiRoute
   '/neo-lab': typeof NeoLabRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/neo-lab'
+  fullPaths: '/' | '/ewolucja-marki' | '/neo-lab'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/neo-lab'
-  id: '__root__' | '/' | '/neo-lab'
+  to: '/' | '/ewolucja-marki' | '/neo-lab'
+  id: '__root__' | '/' | '/ewolucja-marki' | '/neo-lab'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EwolucjaMarkiRoute: typeof EwolucjaMarkiRoute
   NeoLabRoute: typeof NeoLabRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ewolucja-marki': {
+      id: '/ewolucja-marki'
+      path: '/ewolucja-marki'
+      fullPath: '/ewolucja-marki'
+      preLoaderRoute: typeof EwolucjaMarkiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/neo-lab': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EwolucjaMarkiRoute: EwolucjaMarkiRoute,
   NeoLabRoute: NeoLabRoute,
 }
 export const routeTree = rootRouteImport
