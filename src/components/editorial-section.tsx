@@ -4,10 +4,13 @@ import type { ReactNode } from 'react';
 const editorialBodyCopyBaseClassName =
   'paragraphs editorial-copy editorial-body-copy flex flex-col space-y-5 [&>p+p]:mt-5 text-left font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6]';
 
-export const editorialBodyCopyClassName = `${editorialBodyCopyBaseClassName} text-neutral-700`;
+/** Body copy on light surfaces — paragraphs only, max contrast (WCAG). */
+export const editorialBodyCopyClassName =
+  `${editorialBodyCopyBaseClassName} [&>p]:text-black [&_p]:text-black`;
 
+/** Body copy on dark / photo sections — paragraphs only. */
 export const editorialBodyCopyDarkClassName =
-  `${editorialBodyCopyBaseClassName} text-neutral-300 [&_p]:text-neutral-300`;
+  `${editorialBodyCopyBaseClassName} [&>p]:!text-white [&_p]:!text-white`;
 
 export const editorialH2LightClassName =
   'editorial-section-title text-left font-[family-name:var(--font-editorial)] text-[#121315] font-normal leading-[1.15] uppercase';

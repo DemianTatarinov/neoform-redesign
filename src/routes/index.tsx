@@ -1,15 +1,14 @@
 import { Odometer } from "@/components/odometer";
 import { createFileRoute, Link, useNavigate, useRouterState } from '@tanstack/react-router';
 import { useCallback, useEffect, useRef, useState, type MouseEvent, type PointerEvent, type ReactNode } from 'react';
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ChevronRight, X } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { copy, categories } from '@/lib/neo-content';
 import materials from '@/assets/neo-materials.jpg';
-import materialDrewnoFornir from '@/assets/MATERIAL /Drewno-Fornir/Drewno-Fornir.webp';
-import materialKamienSpiek from '@/assets/MATERIAL /Kamień-Spiek/Kamień-Spiek.webp';
-import fenixArpaHplImg from '@/assets/MATERIAL /Fenix-ARPA-HPL/Fenix-ARPA-HPL.webp';
-import materialStal from '@/assets/MATERIAL /Stał/Stał.webp';
+import materialDrewnoFornir from '@/assets/MATERIAL/Drewno-Fornir/Drewno-Fornir_web.webp';
+import materialKamienSpiek from '@/assets/MATERIAL/Kamień-Spiek/Kamień-Spiek_web.webp';
+import fenixArpaHplImg from '@/assets/MATERIAL/Fenix-ARPA-HPL/Fenix-ARPA-HPL_web.webp';
+import materialStal from '@/assets/MATERIAL/Stał/Stał_web.webp';
 
 const materialCardImages: Record<string, string> = {
   'Drewno / Fornir': materialDrewnoFornir,
@@ -81,24 +80,18 @@ const bespokeCategories: {
   { id: 'metry', label: 'Zabudowy sięgające kilku metrów', layout: 'full', images: [zabudowyImg1, zabudowyImg2] },
   { id: 'fornir', label: 'Płynne przejścia forniru', layout: 'full', images: [materials] },
 ];
-import credoThesis1 from '@/assets/CREDO/Для тезисов/Для тезисов1.webp';
-import credoThesis2 from '@/assets/CREDO/Для тезисов/Для тезисов2.webp';
-import credoThesis3 from '@/assets/CREDO/Для тезисов/Для тезисов3.webp';
-import credoThesis4 from '@/assets/CREDO/Для тезисов/Для тезисов4.webp';
-import credoMaterialWeb from '@/assets/CREDO/Material_web.webp';
-import credoDetalWeb from '@/assets/CREDO/Detal_web.webp';
-import credoJakoscWeb from '@/assets/CREDO/Jakość_web.webp';
+import credoThesis1 from '@/assets/CREDO/tezisy/tezis-1.webp';
+import credoThesis2 from '@/assets/CREDO/tezisy/tezis-2.webp';
+import credoThesis3 from '@/assets/CREDO/tezisy/tezis-3.webp';
+import credoThesis4 from '@/assets/CREDO/tezisy/tezis-4.webp';
+import credoMaterialWeb from '@/assets/CREDO/Material_web_web.webp';
+import credoDetalWeb from '@/assets/CREDO/Detal_web_web.webp';
+import credoJakoscWeb from '@/assets/CREDO/Jakość_web_web.webp';
 import { BespokeGalleryLightbox } from '@/components/bespoke-gallery-lightbox';
 import { portfolioCoverImages, realizacjeGalleriesByCategory } from '@/lib/realizacje-gallery';
 import { CredoThesisLightbox, type CredoThesisImage } from '@/components/credo-thesis-lightbox';
 import { HardwareDialog } from '@/components/hardware-dialog';
-import {
-  galleryBarClass,
-  galleryImageClass,
-  galleryPhotoWrapClass,
-  gallerySlideClass,
-  galleryTrackClass,
-} from '@/lib/gallery-lightbox-layout';
+import { PhotoSwipeGalleryDialog } from '@/components/photo-swipe-gallery-dialog';
 
 const credoThesisPhotos = [credoThesis1, credoThesis2, credoThesis3, credoThesis4];
 const THESIS_TAP_MOVE_PX = 8;
@@ -115,7 +108,7 @@ import {
   editorialH2DarkClassName,
   copyAfterTitleClassName,
 } from '@/components/editorial-section';
-import { SiteFooterSignature } from '@/components/site-footer-signature';
+import { primaryBrandCtaMinimalClassName } from '@/lib/primary-brand-cta';
 import { scrollToContactSection, scrollToHashTarget } from '@/lib/scroll-to-section';
 import { useHomeHashScroll } from '@/lib/use-home-hash-scroll';
 
@@ -152,17 +145,33 @@ const principles = [
 function Label({ children, number }: { children: React.ReactNode; number: string }) {
   return <SectionLabel number={number}>{children}</SectionLabel>;
 }
-function Paragraphs({ texts, className = '' }: { texts: string[]; className?: string }) {
+function Paragraphs({
+  texts,
+  className = '',
+  variant = 'light',
+}: {
+  texts: string[];
+  className?: string;
+  variant?: 'light' | 'dark';
+}) {
+  const base = variant === 'dark' ? editorialBodyCopyDarkClassName : editorialBodyCopyClassName;
+  const paragraphColorClass = variant === 'dark' ? 'text-white' : 'text-black';
   return (
-    <div className={`${editorialBodyCopyClassName} ${className}`.trim()}>
+    <div className={`${base} ${className}`.trim()}>
       {texts.map((text, i) => (
-        <p key={text} className={i === texts.length - 1 ? 'last-paragraph' : ''}>{text}</p>
+        <p
+          key={text}
+          className={`m-0 ${paragraphColorClass}${i === texts.length - 1 ? ' last-paragraph' : ''}`}
+        >
+          {text}
+        </p>
       ))}
     </div>
   );
 }
 
-const credoTextColumnClass = `credo-text-column ${editorialBodyCopyClassName}`;
+const credoTextColumnClass =
+  'credo-text-column paragraphs editorial-copy editorial-body-copy flex flex-col space-y-5 [&>p+p]:mt-5 text-left font-[family-name:var(--font-editorial)] text-[17px] leading-[1.6] [&>p]:!text-black';
 const contentPhotoImgClass =
   'w-full max-lg:aspect-[4/3] lg:h-auto object-cover max-lg:rounded-none lg:rounded-sm';
 
@@ -197,49 +206,11 @@ function Index() {
   );
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [galleryCategory, setGalleryCategory] = useState(0);
-  const [gallerySlideIndex, setGallerySlideIndex] = useState(0);
   const activeRealizacjePhotos = realizacjeGalleriesByCategory[galleryCategory] ?? [];
   const portfolioModalPhotos =
     activeRealizacjePhotos.length > 0
       ? activeRealizacjePhotos
       : [portfolioCoverImages[galleryCategory] ?? portfolioCoverImages[0]].filter(Boolean);
-  const portfolioTrackRef = useRef<HTMLDivElement>(null);
-  const portfolioScrollRaf = useRef<number | null>(null);
-
-  const scrollPortfolioToSlide = useCallback((slideIndex: number, behavior: ScrollBehavior = 'smooth') => {
-    const track = portfolioTrackRef.current;
-    if (!track) return;
-    const slide = track.children.item(slideIndex) as HTMLElement | null;
-    slide?.scrollIntoView({ behavior, inline: 'center', block: 'nearest' });
-  }, []);
-
-  useEffect(() => {
-    if (!galleryOpen) return;
-    requestAnimationFrame(() => scrollPortfolioToSlide(gallerySlideIndex, 'instant'));
-  }, [galleryOpen, galleryCategory, scrollPortfolioToSlide]);
-
-  const onPortfolioTrackScroll = () => {
-    if (portfolioModalPhotos.length <= 1) return;
-    if (portfolioScrollRaf.current !== null) cancelAnimationFrame(portfolioScrollRaf.current);
-    portfolioScrollRaf.current = requestAnimationFrame(() => {
-      const track = portfolioTrackRef.current;
-      if (!track) return;
-      const width = track.clientWidth;
-      if (width <= 0) return;
-      const nextIndex = Math.min(
-        portfolioModalPhotos.length - 1,
-        Math.max(0, Math.round(track.scrollLeft / width)),
-      );
-      if (nextIndex !== gallerySlideIndex) setGallerySlideIndex(nextIndex);
-    });
-  };
-
-  const stepPortfolioSlide = (delta: number) => {
-    if (portfolioModalPhotos.length <= 1) return;
-    const next = (gallerySlideIndex + delta + portfolioModalPhotos.length) % portfolioModalPhotos.length;
-    setGallerySlideIndex(next);
-    scrollPortfolioToSlide(next, 'smooth');
-  };
   const [principle, setPrinciple] = useState(0);
   const [activeBrand, setActiveBrand] = useState<HardwareBrandId | null>(null);
   const [activeThesisImage, setActiveThesisImage] = useState<CredoThesisImage | null>(null);
@@ -323,7 +294,9 @@ function Index() {
             </div>
             <div className={credoTextColumnClass}>
               {copy.credo.map(text => (
-                <p key={text}>{text}</p>
+                <p key={text} className="m-0 text-black">
+                  {text}
+                </p>
               ))}
             </div>
           </div>
@@ -382,7 +355,7 @@ function Index() {
             <EditorialSectionTitle>
               FORMA TWORZONA<br />PRZEZ LUDZI
             </EditorialSectionTitle>
-            <p className="lead m-0 font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-neutral-700">
+            <p className="lead m-0 font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-black">
               {copy.team[0]}
             </p>
           </div>
@@ -411,8 +384,8 @@ function Index() {
             FORMA W GOTOWEJ<br />PRZESTRZENI
           </EditorialSectionTitle>
           <div className={`bespoke-copy ${editorialBodyCopyDarkClassName}`}>
-            <p className="m-0">{copy.bespoke[0]}</p>
-            <p className="m-0">
+            <p className="m-0 text-white">{copy.bespoke[0]}</p>
+            <p className="m-0 text-white">
               Kiedy standardowe rozwiązania to za mało, tworzymy architekturę dopasowaną do wnętrza. Nasz standard to:
             </p>
             <div className="bespoke-chips-grid w-full">
@@ -458,10 +431,10 @@ function Index() {
                 ))}
               </div>
             )}
-            <p className="m-0">
+            <p className="m-0 text-white">
               Te elementy nie są dla nas komplikacją. Są naturalną częścią projektu, którego nie ograniczają żadne szablony
             </p>
-            <strong className="strong-statement m-0 font-[family-name:var(--font-editorial)] text-[19px] font-normal leading-[1.6] text-neutral-300">
+            <strong className="strong-statement m-0 font-[family-name:var(--font-editorial)] text-[19px] font-normal leading-[1.6] text-white">
               {copy.bespoke[2]}
             </strong>
           </div>
@@ -470,7 +443,7 @@ function Index() {
 
       <section className="section" id="material"><div className="container"><Label number="04">MATERIAŁ</Label><div className="credo-intro text-left"><div className="min-w-0 text-left"><EditorialSectionTitle>MATERIAŁ<br />MA ZNACZENIE</EditorialSectionTitle></div><Paragraphs
             texts={copy.materials}
-            className="normal-case text-neutral-700 [&_p]:text-[color:var(--subtle-ink)]"
+            className="normal-case"
           /></div><div className="material-grid gap-4 sm:gap-6">{materialGalleryNames.map((name, i) => (
         <figure key={name}>
           <div
@@ -516,10 +489,7 @@ function Index() {
                     INŻYNIERIA<br />UKRYTA W FORMIE
                   </EditorialSectionTitle>
                 </div>
-                <Paragraphs
-                  texts={copy.technology}
-                  className="text-neutral-300 [&_p]:text-neutral-300"
-                />
+                <Paragraphs texts={copy.technology} variant="dark" />
               </div>
               <div className="system-names flex flex-nowrap w-full max-w-[100vw] overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth touch-pan-x gap-4 [&::-webkit-scrollbar]:hidden">
                 {hardwareBrandIds.map(name => (
@@ -554,10 +524,7 @@ function Index() {
                     OSTATNI ELEMENT<br />KTÓRY POTRAFI<br />ZMIENIĆ CAŁOŚĆ
                   </EditorialSectionTitle>
                 </div>
-                <Paragraphs
-                  texts={copy.countertop}
-                  className="text-neutral-300 [&_p]:text-neutral-300"
-                />
+                <Paragraphs texts={copy.countertop} variant="dark" />
               </div>
             </div>
           </div>
@@ -584,18 +551,12 @@ function Index() {
                 </div>
                 <Paragraphs texts={copy.architects} />
               </div>
-              <a className="text-link architekci-contact-link group inline-flex cursor-pointer items-center gap-2" href="/" onClick={onScrollToKontakt}>
-                <span className="system-name-pulse" aria-hidden="true">
-                  <span className="system-name-pulse-ring" />
-                  <span className="system-name-pulse-core" />
-                </span>
-                <span className="system-name-label font-medium tracking-wider">KONTAKT</span>
-                <ArrowUpRight
-                  size={16}
-                  strokeWidth={2}
-                  className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  aria-hidden="true"
-                />
+              <a
+                href="/"
+                onClick={onScrollToKontakt}
+                className={`${primaryBrandCtaMinimalClassName} mt-6 sm:mt-8`}
+              >
+                ZAMÓW PROJEKT ↗
               </a>
             </div>
           </div>
@@ -620,7 +581,7 @@ function Index() {
               <li key={title} className="process-step">
                 <Odometer className="process-watermark" value={`0${i + 1}`} />
                 <h3>{title}</h3>
-                <p className="m-0 font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-neutral-300">{text}</p>
+                <p className="m-0 font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] !text-white">{text}</p>
               </li>
             ))}
           </ol>
@@ -636,7 +597,7 @@ function Index() {
             </EditorialSectionTitle>
             <Paragraphs
               texts={copy.portfolio}
-              className="normal-case text-neutral-700 [&_p]:text-neutral-700"
+              className="normal-case"
             />
           </div>
         </div>
@@ -648,7 +609,6 @@ function Index() {
                 className="portfolio-tile max-lg:w-full max-lg:rounded-none"
                 onClick={() => {
                   setGalleryCategory(i);
-                  setGallerySlideIndex(0);
                   setGalleryOpen(true);
                 }}
                 aria-label={`Powiększ zdjęcie: ${c}`}
@@ -692,7 +652,7 @@ function Index() {
                   <span className="realizacje-neo-lab-teaser__category block font-mono text-[18px] font-medium uppercase leading-[1.2] tracking-wider">
                     {item.category}
                   </span>
-                  <p className="realizacje-neo-lab-teaser__description mt-2 text-[16px] font-normal leading-snug text-neutral-300">
+                  <p className="realizacje-neo-lab-teaser__description mt-2 text-[16px] font-normal leading-snug text-white">
                     {item.description}
                   </p>
                 </div>
@@ -709,14 +669,26 @@ function Index() {
       <footer className="contact-footer" id="kontakt">
         <div className="container">
           <div className="footer-top">
-            <EditorialSectionTitle titleClassName={editorialH2DarkClassName}>KONTAKT</EditorialSectionTitle>
-            <a href="#top" aria-label="Wróć na początek strony"><ArrowUpRight size={40} /></a>
+            <div className="footer-top-heading min-w-0 flex-1">
+              <div className="footer-top-row flex items-center justify-between gap-4">
+                <h2 className="editorial-section-title m-0 shrink min-w-0 text-left font-[family-name:var(--font-editorial)] text-black font-normal leading-[1.15] uppercase">
+                  KONTAKT
+                </h2>
+                <a
+                  href="#top"
+                  aria-label="Wróć na początek strony"
+                  className="footer-top-scroll shrink-0 text-black transition-opacity hover:opacity-85 focus-visible:opacity-85"
+                >
+                  <ArrowUpRight size={40} strokeWidth={2} className="text-black" aria-hidden="true" />
+                </a>
+              </div>
+              <span className="accent-line" aria-hidden="true" />
+            </div>
           </div>
           <ContactForm />
         </div>
         <ContactMap />
         <ContactAddress />
-        <SiteFooterSignature />
       </footer>
       <BespokeGalleryLightbox
         open={lightboxOpen}
@@ -742,66 +714,13 @@ function Index() {
         images={activeBrand ? hardwareGalleriesByBrand[activeBrand] : []}
         onOpenChange={open => { if (!open) setActiveBrand(null); }}
       />
-      <Dialog open={galleryOpen} onOpenChange={setGalleryOpen}>
-        <DialogContent galleryCard className="portfolio-dialog shadow-none sm:rounded-2xl">
-          <div className={`${galleryBarClass} flex items-center justify-between gap-3 pb-3`}>
-            <DialogTitle className="text-base font-semibold uppercase tracking-wide">
-              {categories[galleryCategory]}
-            </DialogTitle>
-            <DialogClose asChild>
-              <Button variant="ghost" size="icon" className="h-10 w-10 shrink-0" aria-label="Zamknij galerię">
-                <X className="h-4 w-4" aria-hidden="true" />
-              </Button>
-            </DialogClose>
-          </div>
-          <div className={galleryPhotoWrapClass}>
-            <div
-              ref={portfolioTrackRef}
-              className={galleryTrackClass}
-              onScroll={onPortfolioTrackScroll}
-            >
-              {portfolioModalPhotos.map((src, i) => (
-                <div
-                  key={`${galleryCategory}-${i}-${src}`}
-                  className={gallerySlideClass}
-                >
-                  <img
-                    src={src}
-                    alt={`${categories[galleryCategory] ?? 'Realizacje'} — ${i + 1}`}
-                    className={galleryImageClass}
-                    loading="eager"
-                    decoding="async"
-                    width={1536}
-                    height={1024}
-                    draggable={false}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className={`dialog-navigation ${galleryBarClass} pt-3`}>
-            <Button
-              variant="ghost"
-              size="icon"
-              aria-label="Poprzednie zdjęcie"
-              onClick={() => stepPortfolioSlide(-1)}
-            >
-              <ArrowLeft />
-            </Button>
-            <span>
-              {String(gallerySlideIndex + 1).padStart(2, '0')} / {String(portfolioModalPhotos.length).padStart(2, '0')}
-            </span>
-            <Button
-              variant="ghost"
-              size="icon"
-              aria-label="Następne zdjęcie"
-              onClick={() => stepPortfolioSlide(1)}
-            >
-              <ArrowRight />
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <PhotoSwipeGalleryDialog
+        open={galleryOpen}
+        onOpenChange={setGalleryOpen}
+        title={categories[galleryCategory] ?? 'Realizacje'}
+        images={portfolioModalPhotos}
+        imageAltLabel={categories[galleryCategory] ?? 'Realizacje'}
+      />
     </main>
   );
 }

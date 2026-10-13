@@ -4,17 +4,24 @@ export const galleryOverlayLayoutClass =
   'flex items-center justify-center p-4';
 
 export const galleryCardClass =
-  'w-full max-w-6xl h-auto max-h-[95dvh] max-lg:w-[95vw] max-lg:rounded-2xl flex flex-col overflow-hidden min-w-0';
+  'h-auto min-h-0 w-auto max-w-[95vw] sm:max-w-[88vw] md:max-w-5xl max-h-[92dvh] flex flex-col overflow-hidden min-w-0';
 
 export const galleryBarClass = 'shrink-0';
 
-export const galleryPhotoWrapClass = 'm-0 h-auto w-full relative';
+export const galleryPhotoWrapClass =
+  'relative flex w-full min-w-0 items-center justify-center overflow-hidden py-2';
 
 export const galleryTrackClass =
-  'flex w-full h-auto overflow-x-auto snap-x snap-mandatory touch-pan-x scroll-smooth overscroll-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden';
+  'flex h-auto w-full overflow-x-auto snap-x snap-mandatory touch-pan-x scroll-smooth overscroll-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden';
 
 export const gallerySlideClass =
-  'relative w-full flex-[0_0_100%] h-auto flex snap-center items-center justify-center';
+  'relative flex w-full shrink-0 flex-[0_0_100%] snap-center items-center justify-center';
 
 export const galleryImageClass =
-  'mx-auto w-full h-auto max-h-[65vh] object-contain md:max-h-[85vh]';
+  'block h-auto w-full max-h-[72vh] select-none rounded-sm object-contain';
+
+export const galleryDialogNavButtonClass =
+  'h-8 w-8 rounded-sm hover:bg-neutral-100 active:scale-95';
+
+export const galleryDialogCounterClass =
+  'font-mono text-xs tracking-wider text-neutral-500';

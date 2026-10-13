@@ -3,16 +3,15 @@ import { useRef } from 'react';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
 import ewolucjaImg from '@/assets/EWOLUCJA/EWOLUCJA.webp';
 import { copyAfterTitleClassName } from '@/components/editorial-section';
-import { SiteFooterSignature } from '@/components/site-footer-signature';
 
 const heroMobileBodyClassName =
-  `ewolucja-hero-body font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-neutral-700 flex flex-col space-y-5 [&>p+p]:mt-5 ${copyAfterTitleClassName}`;
+  `ewolucja-hero-body font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-black flex flex-col space-y-5 [&>p+p]:mt-5 ${copyAfterTitleClassName}`;
 
 const heroDesktopBodyClassName =
-  'font-[family-name:var(--font-editorial)] text-[18px] sm:text-[19px] leading-[1.6] text-neutral-800 flex flex-col space-y-5 [&>p+p]:mt-5';
+  'font-[family-name:var(--font-editorial)] text-[18px] sm:text-[19px] leading-[1.6] text-black flex flex-col space-y-5 [&>p+p]:mt-5';
 
 const heroDesktopTaglineClassName =
-  'hero-tagline m-0 block font-mono text-xs font-semibold uppercase tracking-wider text-[#B8860B] sm:text-sm';
+  'hero-tagline m-0 block font-mono text-xs font-semibold uppercase tracking-wider text-[#EB7C20] sm:text-sm';
 
 const transformationPillars = [
   {
@@ -69,7 +68,7 @@ function EwolucjaMarkiPage() {
                   data-reveal-delay="80"
                   data-reveal-from="left"
                 >
-                  <p className="m-0 font-mono text-xs uppercase tracking-widest text-[#B8860B] lg:font-bold lg:tracking-[0.2em]">
+                  <p className="m-0 font-mono text-xs uppercase tracking-widest text-[#EB7C20] lg:font-bold lg:tracking-[0.2em]">
                     EWOLUCJA MARKI
                   </p>
                   <div className="credo-intro mt-[var(--space-copy)] w-full min-w-0 text-left">
@@ -83,7 +82,7 @@ function EwolucjaMarkiPage() {
                           NOWA FORMA
                         </h2>
                         <span
-                          className="mt-[var(--accent-line-gap)] block h-[2px] w-12 bg-[#B8860B]"
+                          className="mt-[var(--accent-line-gap)] block h-[2px] w-12 bg-[#EB7C20]"
                           aria-hidden="true"
                         />
                       </div>
@@ -152,7 +151,7 @@ function EwolucjaMarkiPage() {
               </div>
 
               <blockquote
-                className="mt-[var(--layout-gap)] max-w-2xl border-l-[3px] border-[#B8860B] bg-transparent py-2 pl-6"
+                className="mt-[var(--layout-gap)] max-w-2xl border-l-[3px] border-[#EB7C20] bg-transparent py-2 pl-6"
               >
                 <p className="m-0 font-[family-name:var(--font-editorial)] text-xl font-normal italic leading-relaxed text-[#121315] sm:text-2xl">
                   NEO FORM nie odcina się od NEO KUCHNIE. Jesteśmy jego naturalną, bezkompromisową ewolucją
@@ -165,10 +164,10 @@ function EwolucjaMarkiPage() {
                     key={pillar.title}
                     className="flex flex-col gap-4 rounded-sm border border-neutral-200/60 bg-white/70 p-6 shadow-sm sm:p-8"
                   >
-                    <h3 className="m-0 font-mono text-xs font-bold uppercase tracking-[0.15em] text-[#B8860B]">
+                    <h3 className="m-0 font-mono text-xs font-bold uppercase tracking-[0.15em] text-[#EB7C20]">
                       {pillar.title}
                     </h3>
-                    <p className="m-0 font-[family-name:var(--font-editorial)] text-[16px] leading-[1.5] text-neutral-700 sm:text-[17px]">
+                    <p className="m-0 font-[family-name:var(--font-editorial)] text-[16px] leading-[1.5] text-black sm:text-[17px]">
                       {pillar.body}
                     </p>
                   </div>
@@ -178,7 +177,6 @@ function EwolucjaMarkiPage() {
           </div>
         </section>
       </main>
-      <SiteFooterSignature />
     </>
   );
 }

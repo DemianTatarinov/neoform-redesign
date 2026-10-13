@@ -30,32 +30,37 @@ const DialogOverlay = React.forwardRef<
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
 type DialogContentProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
-  /** Centered card layout for photo galleries (no full-viewport stretch on mobile). */
+  /** Centered card layout for photo galleries (legacy card; prefer lightbox for swipe galleries). */
   galleryCard?: boolean;
+  /** Full-viewport photo lightbox (transparent chrome over image). */
+  lightbox?: boolean;
 };
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   DialogContentProps
->(({ className, children, galleryCard = false, ...props }, ref) => (
+>(({ className, children, galleryCard = false, lightbox = false, ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay
       className={cn(
-        galleryCard && "flex items-center justify-center p-4 bg-black/90",
+        lightbox && "bg-black/80 backdrop-blur-sm",
+        galleryCard && !lightbox && "flex items-center justify-center bg-black/90 p-4",
       )}
     />
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        galleryCard
-          ? "fixed left-1/2 top-1/2 z-50 flex w-full max-w-6xl h-auto max-h-[95dvh] max-lg:w-[95vw] -translate-x-1/2 -translate-y-1/2 max-lg:rounded-2xl flex-col gap-0 overflow-hidden border-0 bg-background p-4 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-2xl"
-          : "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
+        lightbox
+          ? "fixed inset-0 z-50 flex h-[100dvh] w-[100vw] flex-col items-center justify-center bg-transparent p-0 shadow-none outline-none duration-200 pointer-events-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+          : galleryCard
+            ? "fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
+            : "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
         className,
       )}
       {...props}
     >
       {children}
-      {!galleryCard && (
+      {!galleryCard && !lightbox && (
         <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background cursor-pointer transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
           <X className="h-4 w-4" />
           <span className="sr-only">Close</span>

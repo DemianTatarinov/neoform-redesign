@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { NeoLabExperience } from '@/components/neo-lab-experience';
-import { SiteFooterSignature } from '@/components/site-footer-signature';
 
 export const Route = createFileRoute('/neo-lab')({
   head: () => ({ meta: [
@@ -15,5 +14,5 @@ export const Route = createFileRoute('/neo-lab')({
 });
 
 function NeoLabPage() {
-   return <><NeoLabExperience /><SiteFooterSignature /></>;
+  return <NeoLabExperience />;
 }

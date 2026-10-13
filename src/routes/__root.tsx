@@ -15,6 +15,7 @@ import appCss from "../styles.css?url";
 import { reloadScrollGuardScript } from "../lib/reload-scroll-guard";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from '@/components/site-header';
+import { SiteFooter } from '@/components/site-footer';
 import { BackToTop } from '@/components/back-to-top';
 
 function NotFoundComponent() {
@@ -148,6 +149,7 @@ function RootComponent() {
       <div key={pathname} className="relative z-0 animate-fadeIn">
         <Outlet />
       </div>
+      <SiteFooter />
       <BackToTop />
     </QueryClientProvider>
   );

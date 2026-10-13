@@ -261,7 +261,7 @@ export function SiteHeader() {
         aria-controls="mobile-menu"
         onClick={() => (menuOpen ? closeMenu() : openMenu())}
       >
-        {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        {menuOpen ? <X size={16} /> : <Menu size={16} />}
       </Button>
     </header>
     {menuOpen && (

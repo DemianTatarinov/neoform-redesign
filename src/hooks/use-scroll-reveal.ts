@@ -19,7 +19,7 @@ export function useScrollReveal(rootRef: RefObject<HTMLElement | null>) {
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
     let observer: IntersectionObserver | undefined;
     const candidates = Array.from(root.querySelectorAll<HTMLElement>(revealTargets))
-      .filter(element => !element.closest('.hero, .site-header, .mobile-nav, .site-footer-signature'));
+      .filter(element => !element.closest('.hero, .site-header, .mobile-nav, .site-footer, .site-footer-signature'));
     const candidateSet = new Set(candidates);
     // Animate content groups once, not both parent and child simultaneously.
     const targets = candidates.filter(element => {

@@ -33,12 +33,12 @@ export function ContactForm() {
     <div className="contact-layout">
       <div className="contact-intro">
         <div className="section-heading-title">
-          <h3 className="m-0 font-[family-name:var(--font-editorial)] font-normal leading-[1.15] uppercase text-[color:var(--on-ink)]">
+          <h3 className="m-0 font-[family-name:var(--font-editorial)] font-normal leading-[1.15] uppercase text-black">
             {contactInstagram.title}
           </h3>
           <span className="accent-line" aria-hidden="true" />
         </div>
-        <p className="m-0 font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-neutral-300">
+        <p className="m-0 font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-black">
           {contactInstagram.intro}
         </p>
         <QuickActions />

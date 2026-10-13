@@ -60,3 +60,8 @@ function buildHardwareGalleriesByBrand(): Record<HardwareBrandId, string[]> {
 
 /** Gallery image URLs per hardware brand (Blum, PEKA, Hettich). */
 export const hardwareGalleriesByBrand = buildHardwareGalleriesByBrand();
+
+/** Per-brand galleries from `src/assets/TECHNOLOGIA/{Blum|Peka|Hettich}/`. */
+export const blumGalleryImages = hardwareGalleriesByBrand.Blum;
+export const pekaGalleryImages = hardwareGalleriesByBrand.PEKA;
+export const hettichGalleryImages = hardwareGalleriesByBrand.Hettich;
