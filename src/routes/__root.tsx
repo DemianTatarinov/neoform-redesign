@@ -14,6 +14,7 @@ import { useEffect, useLayoutEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reloadScrollGuardScript } from "../lib/reload-scroll-guard";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Analytics } from '@vercel/analytics/react';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { BackToTop } from '@/components/back-to-top';
@@ -151,6 +152,7 @@ function RootComponent() {
       </div>
       <SiteFooter />
       <BackToTop />
+      <Analytics />
     </QueryClientProvider>
   );
 }
