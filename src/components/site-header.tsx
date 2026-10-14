@@ -8,6 +8,10 @@ import { navigateToHomeHash } from '@/lib/navigate-to-home-hash';
 import { CONTACT_HASH, scrollToHashTarget } from '@/lib/scroll-to-section';
 
 const sections = [['CREDO', 'credo'], ['NEO STANDARD', 'zespol'], ['BESPOKE', 'bespoke'], ['REALIZACJE', 'realizacje']] as const;
+const headerRouteLinks = [
+  { label: 'NEO LAB', to: '/neo-lab' as const },
+  { label: 'EWOLUCJA MARKI', to: '/ewolucja-marki' as const },
+] as const;
 const MOBILE_MENU_CLOSE_MS = 300;
 
 const mobileNavLinkClass =
@@ -53,8 +57,7 @@ type MobileNavItem =
 
 const mobileNavItems: MobileNavItem[] = [
   ...sections.map(([label, hash]) => ({ label, kind: 'home-hash' as const, hash })),
-  { label: 'NEO LAB', kind: 'route', to: '/neo-lab' },
-  { label: 'EWOLUCJA MARKI', kind: 'route', to: '/ewolucja-marki' },
+  ...headerRouteLinks.map(({ label, to }) => ({ label, kind: 'route' as const, to })),
   { label: 'KONTAKT', kind: 'contact' },
 ];
 
@@ -149,8 +152,8 @@ export function SiteHeader() {
     });
   };
 
-  const labLinkClass = `hover:opacity-70 transition-opacity${pathname === '/neo-lab' ? ' nav-active' : ''}`;
-  const evolutionLinkClass = `hover:opacity-70 transition-opacity${pathname === '/ewolucja-marki' ? ' nav-active' : ''}`;
+  const routeLinkClass = (to: '/neo-lab' | '/ewolucja-marki') =>
+    `hover:opacity-70 transition-opacity${pathname === to ? ' nav-active' : ''}`;
 
   const renderMobileNavItem = (item: MobileNavItem) => {
     const activeClass =
@@ -231,15 +234,18 @@ export function SiteHeader() {
             {text}
           </Link>
         ))}
-        <Link
-          to="/neo-lab"
-          className={labLinkClass}
-          preload="intent"
-          activeOptions={routeActiveOptions}
-          onClick={event => handleNavClick(event, '/neo-lab')}
-        >
-          NEO LAB
-        </Link>
+        {headerRouteLinks.map(({ label, to }) => (
+          <Link
+            key={to}
+            to={to}
+            className={routeLinkClass(to)}
+            preload="intent"
+            activeOptions={routeActiveOptions}
+            onClick={event => handleNavClick(event, to)}
+          >
+            {label}
+          </Link>
+        ))}
       </nav>
       <Link
         className="contact-link"

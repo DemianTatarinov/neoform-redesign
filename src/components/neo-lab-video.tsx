@@ -52,7 +52,7 @@ export function NeoLabVideo() {
           </div>
           <h1
             id="neo-lab-title"
-            className="max-w-3xl text-3xl font-light uppercase leading-tight tracking-tight text-white md:text-6xl"
+            className="max-w-3xl text-3xl font-light uppercase leading-tight tracking-tight text-white md:text-6xl lg:w-full lg:max-w-5xl lg:text-balance xl:max-w-6xl"
           >
             WIEDZA, KTÓRA POWSTAJE W PRAKTYCE
           </h1>

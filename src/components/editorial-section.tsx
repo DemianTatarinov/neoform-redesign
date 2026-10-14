@@ -2,21 +2,21 @@ import type { ReactNode } from 'react';
 
 /** Etalonowy blok akapitu (19px / 1.6, anty-ściskanie, bez kropek w treści — copy w neo-content). */
 const editorialBodyCopyBaseClassName =
-  'paragraphs editorial-copy editorial-body-copy flex flex-col space-y-5 [&>p+p]:mt-5 text-left font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6]';
+  'paragraphs editorial-copy editorial-body-copy flex flex-col space-y-5 [&>p+p]:mt-5 text-left font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] lg:w-full lg:max-w-none lg:text-[19px] lg:leading-[1.65] lg:antialiased lg:[&>p]:w-full lg:[&>p]:max-w-none lg:[&>p]:text-pretty lg:[&_p]:text-pretty';
 
 /** Body copy on light surfaces — paragraphs only, max contrast (WCAG). */
 export const editorialBodyCopyClassName =
-  `${editorialBodyCopyBaseClassName} [&>p]:text-black [&_p]:text-black`;
+  `${editorialBodyCopyBaseClassName} [&>p]:text-black [&_p]:text-black lg:[&>p]:text-neutral-900 lg:[&_p]:text-neutral-900`;
 
 /** Body copy on dark / photo sections — paragraphs only. */
 export const editorialBodyCopyDarkClassName =
-  `${editorialBodyCopyBaseClassName} [&>p]:!text-white [&_p]:!text-white`;
+  `${editorialBodyCopyBaseClassName} [&>p]:!text-white [&_p]:!text-white lg:[&>p]:!text-white/95 lg:[&_p]:!text-white/95`;
 
 export const editorialH2LightClassName =
-  'editorial-section-title text-left font-[family-name:var(--font-editorial)] text-[#121315] font-normal leading-[1.15] uppercase';
+  'editorial-section-title text-left font-[family-name:var(--font-editorial)] text-[#121315] font-normal leading-[1.15] uppercase lg:w-full lg:max-w-none lg:text-balance lg:text-[length:var(--type-heading)] lg:tracking-[0.02em] lg:leading-[1.12]';
 
 export const editorialH2DarkClassName =
-  'text-left font-[family-name:var(--font-editorial)] text-white font-normal leading-[1.15] uppercase';
+  'text-left font-[family-name:var(--font-editorial)] text-white font-normal leading-[1.15] uppercase lg:w-full lg:max-w-none lg:text-balance lg:text-[length:var(--type-heading)] lg:tracking-[0.02em] lg:leading-[1.12] lg:text-white';
 
 export const copyAfterTitleClassName = 'mt-6 sm:mt-8';
 

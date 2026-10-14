@@ -1,7 +1,7 @@
 import { Odometer } from "@/components/odometer";
 import { createFileRoute, Link, useNavigate, useRouterState } from '@tanstack/react-router';
 import { useCallback, useEffect, useRef, useState, type MouseEvent, type PointerEvent, type ReactNode } from 'react';
-import { ArrowDown, ArrowUpRight, ChevronRight } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { copy, categories } from '@/lib/neo-content';
 import materials from '@/assets/neo-materials.jpg';
@@ -16,7 +16,8 @@ const materialCardImages: Record<string, string> = {
   'FENIX / ARPA / HPL': fenixArpaHplImg,
   Stal: materialStal,
 };
-const materialCardPhotoClass = '!relative !left-0 !w-full !max-w-full !h-full object-cover';
+const materialCardPhotoClass =
+  '!relative !left-0 !w-full !max-w-full !h-full object-cover lg:object-center lg:transition-transform lg:duration-700 lg:ease-out lg:group-hover:scale-[1.03]';
 const materialGalleryNames = ['Drewno / Fornir', 'Kamień / Spieki', 'FENIX / ARPA / HPL', 'Stal'] as const;
 const materialGalleryPhotos = materialGalleryNames.map(name => materialCardImages[name]);
 
@@ -106,31 +107,39 @@ import {
   editorialBodyCopyClassName,
   editorialBodyCopyDarkClassName,
   editorialH2DarkClassName,
+  editorialH2LightClassName,
   copyAfterTitleClassName,
 } from '@/components/editorial-section';
-import { primaryBrandCtaMinimalClassName } from '@/lib/primary-brand-cta';
+import { primaryBrandCtaArrowClassName, primaryBrandCtaMinimalClassName } from '@/lib/primary-brand-cta';
 import { scrollToContactSection, scrollToHashTarget } from '@/lib/scroll-to-section';
 import { useHomeHashScroll } from '@/lib/use-home-hash-scroll';
 
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [
-      { title: 'NEO FORM — Nowa forma. Nieograniczone możliwości.' },
-      { name: 'title', content: 'NEO FORM — Nowa forma. Nieograniczone możliwości.' },
-      { name: 'description', content: 'Indywidualne meble i zabudowy dla całych wnętrz. Projekt, materiał, detal, jakość.' },
+      { title: 'NEO FORM — Meble i zabudowy dla całych wnętrz' },
+      { name: 'title', content: 'NEO FORM — Meble i zabudowy dla całych wnętrz' },
+      { name: 'description', content: 'Projekt, materiał, detal, jakość. Tworzymy autorskie kuchnie oraz meble i zabudowy dla całych wnętrz.' },
+      { name: 'robots', content: 'index, follow' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: 'https://neoform-redesign.vercel.app/' },
-      { property: 'og:title', content: 'NEO FORM — Nowa forma. Nieograniczone możliwości.' },
-      { property: 'og:description', content: 'Indywidualne meble i zabudowy dla całych wnętrz. Projekt, materiał, detal, jakość.' },
-      { property: 'og:image', content: 'https://neoform-redesign.vercel.app/og-image.jpg' },
+      { property: 'og:locale', content: 'pl_PL' },
+      { property: 'og:site_name', content: 'NEO FORM' },
+      { property: 'og:url', content: 'https://neoform.com.pl/' },
+      { property: 'og:title', content: 'NEO FORM — Meble i zabudowy dla całych wnętrz' },
+      { property: 'og:description', content: 'Projekt, materiał, detal, jakość. Tworzymy autorskie kuchnie oraz meble i zabudowy dla całych wnętrz.' },
+      { property: 'og:image', content: 'https://neoform.com.pl/og-image.jpg' },
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '630' },
+      { property: 'og:image:alt', content: 'NEO FORM — Meble i zabudowy dla całych wnętrz' },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:url', content: 'https://neoform-redesign.vercel.app/' },
-      { name: 'twitter:title', content: 'NEO FORM — Nowa forma. Nieograniczone możliwości.' },
-      { name: 'twitter:description', content: 'Indywidualne meble i zabudowy dla całych wnętrz. Projekt, materiał, detal, jakość.' },
-      { name: 'twitter:image', content: 'https://neoform-redesign.vercel.app/og-image.jpg' },
-    ]
+      { name: 'twitter:url', content: 'https://neoform.com.pl/' },
+      { name: 'twitter:title', content: 'NEO FORM — Meble i zabudowy dla całych wnętrz' },
+      { name: 'twitter:description', content: 'Projekt, materiał, detal, jakość. Tworzymy autorskie kuchnie oraz meble i zabudowy dla całych wnętrz.' },
+      { name: 'twitter:image', content: 'https://neoform.com.pl/og-image.jpg' },
+    ],
+    links: [
+      { rel: 'canonical', href: 'https://neoform.com.pl/' },
+    ],
   }),
   component: Index,
 });
@@ -157,11 +166,13 @@ function Paragraphs({
   const base = variant === 'dark' ? editorialBodyCopyDarkClassName : editorialBodyCopyClassName;
   const paragraphColorClass = variant === 'dark' ? 'text-white' : 'text-black';
   return (
-    <div className={`${base} ${className}`.trim()}>
+    <div
+      className={`${base} lg:w-full lg:max-w-none lg:antialiased lg:[&>p]:w-full lg:[&>p]:max-w-none ${className}`.trim()}
+    >
       {texts.map((text, i) => (
         <p
           key={text}
-          className={`m-0 ${paragraphColorClass}${i === texts.length - 1 ? ' last-paragraph' : ''}`}
+          className={`m-0 ${paragraphColorClass} lg:font-normal lg:w-full lg:max-w-none${i === texts.length - 1 ? ' last-paragraph' : ''}`}
         >
           {text}
         </p>
@@ -171,16 +182,28 @@ function Paragraphs({
 }
 
 const credoTextColumnClass =
-  'credo-text-column paragraphs editorial-copy editorial-body-copy flex flex-col space-y-5 [&>p+p]:mt-5 text-left font-[family-name:var(--font-editorial)] text-[17px] leading-[1.6] [&>p]:!text-black';
+  'credo-text-column paragraphs editorial-copy editorial-body-copy flex flex-col space-y-5 [&>p+p]:mt-5 text-left font-[family-name:var(--font-editorial)] text-[17px] leading-[1.6] lg:w-full lg:max-w-3xl lg:space-y-6 lg:[&>p+p]:mt-6 lg:text-[19px] lg:leading-[1.65] lg:antialiased lg:[&>p]:w-full lg:[&>p]:max-w-none lg:[&>p]:text-pretty [&>p]:!text-black lg:[&>p]:!text-neutral-900 xl:max-w-4xl';
 const contentPhotoImgClass =
-  'w-full max-lg:aspect-[4/3] lg:h-auto object-cover max-lg:rounded-none lg:rounded-sm';
+  'w-full max-lg:aspect-[4/3] lg:h-auto lg:aspect-[16/10] lg:max-h-[min(72vh,880px)] lg:w-full lg:object-cover lg:object-center object-cover max-lg:rounded-none lg:rounded-sm lg:overflow-hidden lg:ring-1 lg:ring-black/10 lg:transition-[box-shadow] lg:duration-300 lg:hover:ring-black/15';
+const contentPhotoImgDarkClass =
+  `${contentPhotoImgClass} lg:ring-white/10 lg:hover:ring-white/20`;
 
 function ContentPhotoShell({ children, className = '' }: { children: ReactNode; className?: string }) {
   return <div className={`w-full max-lg:px-0 lg:container lg:mx-auto ${className}`.trim()}>{children}</div>;
 }
 
 function Photo({ src, alt, className = '' }: { src: string; alt: string; className?: string }) {
-  return <img src={src} alt={alt} className={`editorial-photo ${className}`} loading="lazy" width={1536} height={1024} />;
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={`editorial-photo ${className}`}
+      loading="lazy"
+      decoding="async"
+      width={1536}
+      height={1024}
+    />
+  );
 }
 
 function Index() {
@@ -242,6 +265,29 @@ function Index() {
     if (document.getElementById(locationHash)) return;
     void navigate({ to: '/neo-lab', hash: locationHash });
   }, [locationHash, navigate]);
+  const thesisSliderRef = useRef<HTMLUListElement>(null);
+  const scrollThesisSlide = useCallback((direction: -1 | 1) => {
+    const track = thesisSliderRef.current;
+    if (!track || track.children.length === 0) return;
+
+    const slides = Array.from(track.children) as HTMLElement[];
+    const trackCenter = track.scrollLeft + track.clientWidth / 2;
+
+    let activeIndex = 0;
+    let bestDistance = Number.POSITIVE_INFINITY;
+    slides.forEach((slide, index) => {
+      const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+      const distance = Math.abs(slideCenter - trackCenter);
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        activeIndex = index;
+      }
+    });
+
+    const nextIndex = Math.min(slides.length - 1, Math.max(0, activeIndex + direction));
+    slides[nextIndex]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }, []);
+
   const thesisPointer = useRef<{ x: number; y: number; moved: boolean } | null>(null);
   const onThesisPointerDown = (event: PointerEvent<HTMLLIElement>) => {
     thesisPointer.current = { x: event.clientX, y: event.clientY, moved: false };
@@ -279,17 +325,30 @@ function Index() {
         <HeroVideo />
         <div className="hero-shade" />
         <div className="hero-foreground">
-          <div className="hero-copy"><div className="hero-kicker">NEO FORM</div><h1>NOWA FORMA<br />NIEOGRANICZONE<br />MOŻLIWOŚCI</h1><p>{copy.hero}</p></div>
+          <div className="hero-copy"><div className="hero-kicker">NEO FORM</div><h1 className="lg:whitespace-normal lg:break-normal">
+              NOWA FORMA
+              <br className="lg:hidden" />
+              {' '}
+              NIEOGRANICZONE
+              <br className="lg:hidden" />
+              {' '}
+              MOŻLIWOŚCI
+            </h1><p>{copy.hero}</p></div>
           <div className="hero-bottom"><span>PROJEKT · MATERIAŁ · DETAL · JAKOŚĆ</span><a href="/" aria-label="Przejdź do kontaktu" onClick={onScrollToKontakt}><ArrowDown size={22} /></a></div>
         </div>
       </section>
 
       <section className="section credo" id="credo">
         <div className="container"><Label number="01">CREDO</Label>
-          <div className="credo-intro text-left">
-            <div className="min-w-0 text-left">
-              <EditorialSectionTitle>
-                INDYWIDUALNOŚĆ<br />BEZ KOMPROMISÓW
+          <div className="credo-intro text-left lg:items-start lg:gap-8 xl:gap-10">
+            <div className="min-w-0 text-left lg:max-w-none">
+              <EditorialSectionTitle
+                titleClassName={`${editorialH2LightClassName} lg:whitespace-normal lg:break-normal`}
+              >
+                INDYWIDUALNOŚĆ
+                <br className="lg:hidden" />
+                {' '}
+                BEZ KOMPROMISÓW
               </EditorialSectionTitle>
             </div>
             <div className={credoTextColumnClass}>
@@ -300,30 +359,54 @@ function Index() {
               ))}
             </div>
           </div>
-          <ul className="individuality-slider" aria-label="Każde wnętrze jest inne">{copy.individuality.map((t, i) => (
-            <li
-              key={t}
-              className="individuality-card relative isolate aspect-square cursor-pointer overflow-hidden"
-              role="button"
-              tabIndex={0}
-              aria-label={`Powiększ zdjęcie: ${t}`}
-              onPointerDown={onThesisPointerDown}
-              onPointerMove={onThesisPointerMove}
-              onPointerUp={() => onThesisPointerUp(i, t)}
-              onPointerCancel={clearThesisPointer}
-              onKeyDown={event => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                  event.preventDefault();
-                  openThesisLightbox(i, t);
-                }
-              }}
-            >
-              <img src={credoThesisPhotos[i]} alt="" className="pointer-events-none absolute inset-0 size-full object-cover" loading="lazy" decoding="async" aria-hidden />
-              <span className="pointer-events-none absolute inset-0 bg-black/50" aria-hidden />
-              <span className="relative z-[1]">0{i + 1}</span>
-              <p className="relative z-[1] text-white">{t}</p>
-            </li>
-          ))}</ul>
+        </div>
+        <div className="relative max-lg:contents">
+          <button
+            type="button"
+            className="thesis-slider-nav thesis-slider-nav--prev hidden lg:absolute lg:left-[max(0.5rem,env(safe-area-inset-left))] lg:top-1/2 lg:z-20 lg:flex lg:size-12 lg:-translate-y-1/2 lg:items-center lg:justify-center lg:rounded-full lg:border lg:border-neutral-300/80 lg:bg-[#F9F9F9]/95 lg:text-[#121315] lg:shadow-md lg:backdrop-blur-sm lg:transition-[background-color,border-color,box-shadow,transform] lg:duration-300 lg:ease-out lg:hover:border-[color:var(--brand)] lg:hover:bg-white lg:hover:shadow-lg lg:focus-visible:outline lg:focus-visible:outline-2 lg:focus-visible:outline-offset-2 lg:focus-visible:outline-[color:var(--brand)]"
+            aria-label="Poprzedni slajd"
+            onClick={() => scrollThesisSlide(-1)}
+          >
+            <ChevronLeft size={24} aria-hidden="true" />
+          </button>
+          <ul
+            ref={thesisSliderRef}
+            className="individuality-slider lg:flex lg:flex-row lg:flex-nowrap lg:overflow-x-auto lg:snap-x lg:snap-mandatory lg:scroll-smooth lg:gap-8 lg:pb-6 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden"
+            aria-label="Każde wnętrze jest inne"
+          >
+            {copy.individuality.map((t, i) => (
+          <li
+            key={t}
+            className="individuality-card relative isolate aspect-square cursor-pointer overflow-hidden lg:aspect-[4/3] lg:h-auto lg:max-h-[min(56vh,540px)] lg:shrink-0 lg:snap-center lg:w-[75vw] lg:max-w-3xl lg:transition-all lg:duration-500 lg:ease-out xl:max-w-4xl xl:max-h-[min(60vh,600px)]"
+            role="button"
+            tabIndex={0}
+            aria-label={`Powiększ zdjęcie: ${t}`}
+            onPointerDown={onThesisPointerDown}
+            onPointerMove={onThesisPointerMove}
+            onPointerUp={() => onThesisPointerUp(i, t)}
+            onPointerCancel={clearThesisPointer}
+            onKeyDown={event => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openThesisLightbox(i, t);
+              }
+            }}
+          >
+            <img src={credoThesisPhotos[i]} alt="" className="pointer-events-none absolute inset-0 size-full object-cover" loading="lazy" decoding="async" aria-hidden />
+            <span className="pointer-events-none absolute inset-0 bg-black/50" aria-hidden />
+            <span className="relative z-[1]">0{i + 1}</span>
+            <p className="relative z-[1] text-white">{t}</p>
+          </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            className="thesis-slider-nav thesis-slider-nav--next hidden lg:absolute lg:right-[max(0.5rem,env(safe-area-inset-right))] lg:top-1/2 lg:z-20 lg:flex lg:size-12 lg:-translate-y-1/2 lg:items-center lg:justify-center lg:rounded-full lg:border lg:border-neutral-300/80 lg:bg-[#F9F9F9]/95 lg:text-[#121315] lg:shadow-md lg:backdrop-blur-sm lg:transition-[background-color,border-color,box-shadow,transform] lg:duration-300 lg:ease-out lg:hover:border-[color:var(--brand)] lg:hover:bg-white lg:hover:shadow-lg lg:focus-visible:outline lg:focus-visible:outline-2 lg:focus-visible:outline-offset-2 lg:focus-visible:outline-[color:var(--brand)]"
+            aria-label="Następny slajd"
+            onClick={() => scrollThesisSlide(1)}
+          >
+            <ChevronRight size={24} aria-hidden="true" />
+          </button>
         </div>
         <div className="w-full max-lg:px-0 lg:container lg:mx-auto">
           <div className="principles-split">
@@ -331,15 +414,16 @@ function Index() {
               <p className="principles-title">Cztery elementy. Jedna forma</p>
               <div role="tablist" aria-label="Cztery zasady NEO FORM">{principles.map((p, i) => <button key={p.title} type="button" role="tab" id={`principle-tab-${i}`} aria-selected={principle === i} aria-controls="principle-panel" className={principle === i ? 'principle-tab active' : 'principle-tab'} onClick={() => setPrinciple(i)}><span>0{i + 1}</span>{p.title}</button>)}</div>
             </div>
-            <div className="principles-photo aspect-[4/3] w-full max-lg:px-0" role="tabpanel" id="principle-panel" aria-labelledby={`principle-tab-${principle}`}>{principles.map((p, i) => (
+            <div className="principles-photo aspect-[4/3] w-full max-lg:px-0 lg:overflow-hidden lg:ring-1 lg:ring-black/10" role="tabpanel" id="principle-panel" aria-labelledby={`principle-tab-${principle}`}>{principles.map((p, i) => (
               <img
                 key={p.title}
                 src={p.image}
                 alt={p.title}
                 loading="lazy"
+                decoding="async"
                 width={1536}
                 height={1024}
-                className={`${contentPhotoImgClass} transition-opacity ${p.title === 'DETAL' ? '' : 'object-center'} ${principle === i ? 'active' : ''}`}
+                className={`${contentPhotoImgClass} transition-opacity lg:transition-[opacity,transform] lg:duration-700 lg:ease-out ${p.title === 'DETAL' ? '' : 'object-center'} ${principle === i ? 'active' : ''}`}
                 style={p.title === 'DETAL' ? { objectPosition: '15% 50%' } : undefined}
                 aria-hidden={principle !== i}
               />
@@ -352,10 +436,13 @@ function Index() {
         <div className="container">
           <Label number="02">NEO STANDARD</Label>
           <div className="section-heading">
-            <EditorialSectionTitle>
-              FORMA TWORZONA<br />PRZEZ LUDZI
+            <EditorialSectionTitle titleClassName={`${editorialH2LightClassName} lg:whitespace-normal lg:break-normal`}>
+              FORMA TWORZONA
+              <br className="lg:hidden" />
+              {' '}
+              PRZEZ LUDZI
             </EditorialSectionTitle>
-            <p className="lead m-0 font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-black">
+            <p className="lead m-0 font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] lg:w-full lg:max-w-none lg:leading-[1.65] lg:text-pretty text-black">
               {copy.team[0]}
             </p>
           </div>
@@ -380,8 +467,11 @@ function Index() {
         <div className="photo-shade bg-black/65" aria-hidden="true" />
         <div className="container">
           <Label number="03">BESPOKE</Label>
-          <EditorialSectionTitle titleClassName={editorialH2DarkClassName}>
-            FORMA W GOTOWEJ<br />PRZESTRZENI
+          <EditorialSectionTitle titleClassName={`${editorialH2DarkClassName} lg:whitespace-normal lg:break-normal`}>
+            FORMA W GOTOWEJ
+            <br className="lg:hidden" />
+            {' '}
+            PRZESTRZENI
           </EditorialSectionTitle>
           <div className={`bespoke-copy ${editorialBodyCopyDarkClassName}`}>
             <p className="m-0 text-white">{copy.bespoke[0]}</p>
@@ -395,9 +485,9 @@ function Index() {
                   type="button"
                   onClick={() => setActiveCategory(category.id)}
                   aria-pressed={activeCategory === category.id}
-                  className={`bespoke-chip w-full border backdrop-blur-sm text-center text-[18px] leading-[1.35] tracking-wide py-3 px-4 ${category.layout === 'half' ? 'bespoke-chip--half' : 'bespoke-chip--full'} ${
+                  className={`bespoke-chip cta-outline-beat cta-outline-beat--dark w-full border backdrop-blur-sm text-center text-[18px] leading-[1.35] tracking-wide py-3 px-4 ${category.layout === 'half' ? 'bespoke-chip--half' : 'bespoke-chip--full'} ${
                     activeCategory === category.id
-                      ? 'border-[var(--brand,#F48024)] bg-white/10 text-white'
+                      ? 'border-[var(--brand,#EB7C20)] bg-white/10 text-white'
                       : 'border-white/20 bg-white/5 text-neutral-300'
                   }`}
                 >
@@ -434,20 +524,25 @@ function Index() {
             <p className="m-0 text-white">
               Te elementy nie są dla nas komplikacją. Są naturalną częścią projektu, którego nie ograniczają żadne szablony
             </p>
-            <strong className="strong-statement m-0 font-[family-name:var(--font-editorial)] text-[19px] font-normal leading-[1.6] text-white">
+            <strong className="strong-statement m-0 font-[family-name:var(--font-editorial)] text-[19px] font-normal leading-[1.6] text-white lg:text-[19px] lg:leading-[1.65] lg:text-white/95">
               {copy.bespoke[2]}
             </strong>
           </div>
         </div>
       </section>
 
-      <section className="section" id="material"><div className="container"><Label number="04">MATERIAŁ</Label><div className="credo-intro text-left"><div className="min-w-0 text-left"><EditorialSectionTitle>MATERIAŁ<br />MA ZNACZENIE</EditorialSectionTitle></div><Paragraphs
+      <section className="section" id="material"><div className="container"><Label number="04">MATERIAŁ</Label><div className="credo-intro text-left"><div className="min-w-0 text-left"><EditorialSectionTitle titleClassName={`${editorialH2LightClassName} lg:whitespace-normal lg:break-normal`}>
+              MATERIAŁ
+              <br className="lg:hidden" />
+              {' '}
+              MA ZNACZENIE
+            </EditorialSectionTitle></div><Paragraphs
             texts={copy.materials}
             className="normal-case"
-          /></div><div className="material-grid gap-4 sm:gap-6">{materialGalleryNames.map((name, i) => (
-        <figure key={name}>
+          /></div><div className="material-grid gap-4 sm:gap-6 lg:gap-8 lg:items-stretch">{materialGalleryNames.map((name, i) => (
+        <figure key={name} className="lg:flex lg:h-full lg:min-w-0 lg:flex-col">
           <div
-            className={`material-crop material-${i} cursor-pointer overflow-hidden rounded-sm border border-neutral-800/15 transition-colors duration-300 hover:border-neutral-800/35`}
+            className={`material-crop material-${i} group cursor-pointer overflow-hidden rounded-sm border border-neutral-800/15 transition-colors duration-300 hover:border-neutral-800/35 lg:ring-1 lg:ring-black/10 lg:transition-[border-color,box-shadow] lg:duration-300 lg:hover:ring-black/15`}
             role="button"
             tabIndex={0}
             aria-label={`Powiększ: ${name}`}
@@ -465,7 +560,7 @@ function Index() {
           >
             <Photo src={materialCardImages[name]} alt={name} className={`${materialCardPhotoClass} pointer-events-none`} />
           </div>
-          <figcaption className="mt-3"><span>{name}</span><span>0{i + 1}</span></figcaption>
+          <figcaption className="mt-3 lg:mt-4 lg:flex lg:flex-1 lg:flex-col lg:justify-end"><span>{name}</span><span>0{i + 1}</span></figcaption>
         </figure>
       ))}</div></div></section>
 
@@ -477,26 +572,31 @@ function Index() {
           <Photo
             src={technologiaMainImg}
             alt="Precyzyjnie spasowane fronty i ukryty zawias"
-            className={contentPhotoImgClass}
+            className={contentPhotoImgDarkClass}
           />
         </ContentPhotoShell>
         <div className="container">
-          <div className="image-text">
-            <div>
-              <div className="credo-intro text-left">
-                <div className="min-w-0 text-left">
-                  <EditorialSectionTitle titleClassName={editorialH2DarkClassName}>
-                    INŻYNIERIA<br />UKRYTA W FORMIE
+          <div className="image-text lg:grid-cols-1 lg:w-full">
+            <div className="lg:w-full lg:min-w-0">
+              <div className="credo-intro text-left lg:grid-cols-1 lg:w-full lg:max-w-none">
+                <div className="min-w-0 text-left lg:w-full">
+                  <EditorialSectionTitle
+                    titleClassName={`${editorialH2DarkClassName} lg:whitespace-normal lg:break-normal`}
+                  >
+                    INŻYNIERIA
+                    <br className="lg:hidden" />
+                    {' '}
+                    UKRYTA W FORMIE
                   </EditorialSectionTitle>
                 </div>
                 <Paragraphs texts={copy.technology} variant="dark" />
               </div>
-              <div className="system-names flex flex-nowrap w-full max-w-[100vw] overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth touch-pan-x gap-4 [&::-webkit-scrollbar]:hidden">
+              <div className="system-names flex w-fit max-w-full flex-wrap items-start gap-2 overflow-visible sm:gap-4">
                 {hardwareBrandIds.map(name => (
                   <button
                     key={name}
                     type="button"
-                    className="system-name flex-none snap-start whitespace-nowrap"
+                    className="system-name cta-outline-beat cta-outline-beat--dark w-fit max-w-full shrink-0 whitespace-nowrap"
                     onClick={() => setActiveBrand(name)}
                   >
                     <span className="system-name-pulse" aria-hidden="true">
@@ -516,12 +616,20 @@ function Index() {
       <section className="section graphite" id="blat">
         <div className="container">
           <Label number="06">BLAT</Label>
-          <div className="image-text reversed">
-            <div>
-              <div className="credo-intro text-left">
-                <div className="min-w-0 text-left">
-                  <EditorialSectionTitle titleClassName={editorialH2DarkClassName}>
-                    OSTATNI ELEMENT<br />KTÓRY POTRAFI<br />ZMIENIĆ CAŁOŚĆ
+          <div className="image-text reversed lg:grid-cols-1 lg:w-full">
+            <div className="lg:w-full lg:min-w-0">
+              <div className="credo-intro text-left lg:grid-cols-1 lg:w-full lg:max-w-none">
+                <div className="min-w-0 text-left lg:w-full">
+                  <EditorialSectionTitle
+                    titleClassName={`${editorialH2DarkClassName} lg:whitespace-normal lg:break-normal`}
+                  >
+                    OSTATNI ELEMENT
+                    <br className="lg:hidden" />
+                    {' '}
+                    KTÓRY POTRAFI
+                    <br className="lg:hidden" />
+                    {' '}
+                    ZMIENIĆ CAŁOŚĆ
                   </EditorialSectionTitle>
                 </div>
                 <Paragraphs texts={copy.countertop} variant="dark" />
@@ -533,7 +641,7 @@ function Index() {
           <Photo
             src={blatWebImg}
             alt="Połączenie naturalnego kamienia z matowym frontem"
-            className={`countertop-photo ${contentPhotoImgClass}`}
+            className={`countertop-photo ${contentPhotoImgDarkClass}`}
           />
         </ContentPhotoShell>
       </section>
@@ -541,12 +649,20 @@ function Index() {
       <section className="section paper" id="architekci">
         <div className="container">
           <Label number="07">WSPÓŁPRACA Z ARCHITEKTAMI</Label>
-          <div className="image-text reversed">
-            <div>
-              <div className="credo-intro text-left">
-                <div className="min-w-0 text-left">
-                  <EditorialSectionTitle>
-                    DOBRY PROJEKT<br />POTRZEBUJE DOBREGO<br />WYKONAWCY
+          <div className="image-text reversed lg:grid-cols-1 lg:w-full">
+            <div className="lg:w-full lg:min-w-0">
+              <div className="credo-intro text-left lg:grid-cols-1 lg:w-full lg:max-w-none">
+                <div className="min-w-0 text-left lg:w-full">
+                  <EditorialSectionTitle
+                    titleClassName={`${editorialH2LightClassName} lg:whitespace-normal lg:break-normal`}
+                  >
+                    DOBRY PROJEKT
+                    <br className="lg:hidden" />
+                    {' '}
+                    POTRZEBUJE DOBREGO
+                    <br className="lg:hidden" />
+                    {' '}
+                    WYKONAWCY
                   </EditorialSectionTitle>
                 </div>
                 <Paragraphs texts={copy.architects} />
@@ -556,7 +672,7 @@ function Index() {
                 onClick={onScrollToKontakt}
                 className={`${primaryBrandCtaMinimalClassName} mt-6 sm:mt-8`}
               >
-                ZAMÓW PROJEKT ↗
+                ZAMÓW PROJEKT<span className={primaryBrandCtaArrowClassName} aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
@@ -573,8 +689,11 @@ function Index() {
       <section className="section ink" id="proces">
         <div className="container">
           <Label number="08">PROCES</Label>
-          <EditorialSectionTitle titleClassName={editorialH2DarkClassName}>
-            OD POMYSŁU<br />DO GOTOWEGO WNĘTRZA
+          <EditorialSectionTitle titleClassName={`${editorialH2DarkClassName} lg:whitespace-normal lg:break-normal`}>
+            OD POMYSŁU
+            <br className="lg:hidden" />
+            {' '}
+            DO GOTOWEGO WNĘTRZA
           </EditorialSectionTitle>
           <ol className="process-timeline">
             {copy.process.map(([title, text], i) => (
@@ -592,8 +711,11 @@ function Index() {
         <div className="w-full px-[max(var(--page-gutter),env(safe-area-inset-left))] pr-[max(var(--page-gutter),env(safe-area-inset-right))] lg:container lg:mx-auto lg:max-w-[1440px] lg:px-8">
           <Label number="09">REALIZACJE</Label>
           <div className="section-heading">
-            <EditorialSectionTitle>
-              PRZESTRZENIE,<br />KTÓRE NABRAŁY FORMY
+            <EditorialSectionTitle titleClassName={`${editorialH2LightClassName} lg:whitespace-normal lg:break-normal`}>
+              PRZESTRZENIE,
+              <br className="lg:hidden" />
+              {' '}
+              KTÓRE NABRAŁY FORMY
             </EditorialSectionTitle>
             <Paragraphs
               texts={copy.portfolio}
@@ -601,19 +723,27 @@ function Index() {
             />
           </div>
         </div>
-        <ul className="portfolio-grid portfolio-grid--realizacje w-full max-lg:mx-0 max-lg:gap-0 max-lg:px-0 lg:container lg:mx-auto lg:max-w-[1440px] lg:gap-[var(--space-inline)] lg:px-8">
+        <ul className="portfolio-grid portfolio-grid--realizacje w-full max-lg:mx-0 max-lg:gap-0 max-lg:px-0 lg:container lg:mx-auto lg:max-w-[1440px] lg:gap-[var(--space-inline)] lg:items-stretch lg:px-8">
           {categories.map((c, i) => (
-            <li key={c} className="max-lg:w-full">
+            <li key={c} className="max-lg:w-full lg:flex lg:h-full">
               <button
                 type="button"
-                className="portfolio-tile max-lg:w-full max-lg:rounded-none"
+                className="portfolio-tile group max-lg:w-full max-lg:rounded-none lg:h-full lg:flex-1 lg:overflow-hidden lg:ring-1 lg:ring-black/10 lg:transition-[box-shadow] lg:duration-300 lg:hover:ring-black/15"
                 onClick={() => {
                   setGalleryCategory(i);
                   setGalleryOpen(true);
                 }}
                 aria-label={`Powiększ zdjęcie: ${c}`}
               >
-                <img src={portfolioCoverImages[i]} alt={c} loading="lazy" width={1536} height={1024} />
+                <img
+                  src={portfolioCoverImages[i]}
+                  alt={c}
+                  loading="lazy"
+                  decoding="async"
+                  width={1536}
+                  height={1024}
+                  className="lg:object-cover lg:object-center lg:transition-transform lg:duration-700 lg:ease-out lg:group-hover:scale-[1.03]"
+                />
                 <span className="portfolio-caption gap-0 text-white bg-gradient-to-t from-black/70 via-black/30 to-transparent">
                   <strong>{c}</strong>
                 </span>
@@ -631,7 +761,8 @@ function Index() {
             titleClassName={`realizacje-neo-lab-teaser__heading ${editorialH2DarkClassName} text-neutral-100`}
           >
             NEO FORM — WIĘCEJ
-            <br />
+            <br className="lg:hidden" />
+            {' '}
             NIŻ TYLKO MEBLE
           </EditorialSectionTitle>
           <div

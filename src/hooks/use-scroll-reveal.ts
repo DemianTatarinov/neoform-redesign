@@ -17,7 +17,9 @@ export function useScrollReveal(rootRef: RefObject<HTMLElement | null>) {
     if (!root || typeof IntersectionObserver === 'undefined') return;
 
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mobilePreference = window.matchMedia('(max-width: 639px)');
     let observer: IntersectionObserver | undefined;
+    let outlineBeatObserver: IntersectionObserver | undefined;
     const candidates = Array.from(root.querySelectorAll<HTMLElement>(revealTargets))
       .filter(element => !element.closest('.hero, .site-header, .mobile-nav, .site-footer, .site-footer-signature'));
     const candidateSet = new Set(candidates);
@@ -31,12 +33,23 @@ export function useScrollReveal(rootRef: RefObject<HTMLElement | null>) {
       return true;
     });
 
+    const outlineButtons = Array.from(root.querySelectorAll<HTMLElement>('.cta-outline-beat'));
+    const playOutlineBeat = (element: HTMLElement) => {
+      element.removeAttribute('data-outline-beat');
+      void element.offsetWidth;
+      element.dataset['outlineBeat'] = 'run';
+    };
+    const stopOutlineBeat = (element: HTMLElement) => {
+      element.removeAttribute('data-outline-beat');
+    };
     const show = (element: HTMLElement) => {
       element.dataset['reveal'] = 'visible';
       observer?.unobserve(element);
     };
     const setup = () => {
       observer?.disconnect();
+      outlineBeatObserver?.disconnect();
+      outlineButtons.forEach(stopOutlineBeat);
       if (motionPreference.matches) {
         targets.forEach(element => element.removeAttribute('data-reveal'));
         return;
@@ -77,6 +90,18 @@ export function useScrollReveal(rootRef: RefObject<HTMLElement | null>) {
           observer?.observe(element);
         }
       });
+
+      if (mobilePreference.matches) {
+        outlineBeatObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!(entry.target instanceof HTMLElement)) return;
+            if (entry.isIntersecting) playOutlineBeat(entry.target);
+            else stopOutlineBeat(entry.target);
+          });
+        }, { threshold: 0.4, rootMargin: '0px 0px -6% 0px' });
+
+        outlineButtons.forEach(element => outlineBeatObserver?.observe(element));
+      }
     };
     const revealFocusedContent = (event: FocusEvent) => {
       if (!(event.target instanceof HTMLElement)) return;
@@ -86,12 +111,16 @@ export function useScrollReveal(rootRef: RefObject<HTMLElement | null>) {
 
     setup();
     motionPreference.addEventListener('change', setup);
+    mobilePreference.addEventListener('change', setup);
     root.addEventListener('focusin', revealFocusedContent);
     return () => {
       observer?.disconnect();
+      outlineBeatObserver?.disconnect();
       motionPreference.removeEventListener('change', setup);
+      mobilePreference.removeEventListener('change', setup);
       root.removeEventListener('focusin', revealFocusedContent);
       targets.forEach(element => element.removeAttribute('data-reveal'));
+      outlineButtons.forEach(stopOutlineBeat);
     };
   }, [rootRef]);
 }

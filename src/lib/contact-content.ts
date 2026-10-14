@@ -8,12 +8,11 @@ export const companyDetails = {
 export const studioAddress = `${companyDetails.street}, ${companyDetails.locality}, Polska`;
 export const studioMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(studioAddress)}`;
 
-// Test values — replace with the real ones before launch.
 export const contactActions = {
-  email: 'kontakt@neoform.pl',
-  phone: '+48500000000',
-  phoneDisplay: '+48 500 000 000',
-  whatsapp: '48500000000',
+  email: 'ec@neoform.com.pl',
+  phone: '+48662755566',
+  phoneDisplay: '+48 662 755 566',
+  whatsapp: '48662755566',
 };
 
 export const contactInstagram = {

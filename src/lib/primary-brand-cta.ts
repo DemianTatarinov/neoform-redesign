@@ -8,4 +8,10 @@ export const primaryBrandCtaCompactClassName =
 
 /** Light-section outline CTA — minimal, no fill. */
 export const primaryBrandCtaMinimalClassName =
-  'inline-flex w-fit items-center justify-center gap-2 whitespace-nowrap rounded-[4px] border border-[#121315]/25 bg-transparent px-5 py-3 font-mono text-[16px] uppercase tracking-wide text-[#121315] transition-colors duration-300 hover:border-[color:var(--brand)] hover:text-[color:var(--brand)] active:scale-[0.99] sm:text-[18px]';
+  'cta-minimal cta-outline-beat inline-flex w-fit items-center justify-center gap-2 whitespace-nowrap rounded-[4px] border border-[#121315]/25 bg-transparent px-5 py-3 font-mono text-[16px] uppercase tracking-wide text-[#121315] transition-colors duration-300 hover:border-[color:var(--brand)] hover:text-[color:var(--brand)] active:scale-[0.99] sm:text-[18px]';
+
+export const primaryBrandCtaArrowClassName = 'cta-arrow inline-block';
+
+/** Outline CTA on dark / photographic sections. */
+export const primaryBrandCtaMinimalOnDarkClassName =
+  'cta-minimal cta-outline-beat cta-outline-beat--dark inline-flex w-fit items-center justify-center gap-2 whitespace-nowrap rounded-[4px] border border-white/25 bg-transparent px-5 py-3 font-mono text-[16px] uppercase tracking-wide text-white transition-colors duration-300 hover:border-[color:var(--brand)] hover:text-[color:var(--brand)] active:scale-[0.99] sm:text-[18px]';

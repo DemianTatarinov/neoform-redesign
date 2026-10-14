@@ -9,12 +9,10 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, useLayoutEffect, type ReactNode } from "react";
+import { useLayoutEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reloadScrollGuardScript } from "../lib/reload-scroll-guard";
-import { reportLovableError } from "../lib/lovable-error-reporting";
-import { Analytics } from '@vercel/analytics/react';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { BackToTop } from '@/components/back-to-top';
@@ -44,9 +42,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -84,21 +79,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { title: "NEO FORM — Nowa forma. Nieograniczone możliwości." },
-      { name: "title", content: "NEO FORM — Nowa forma. Nieograniczone możliwości." },
-      { name: "description", content: "Indywidualne meble i zabudowy dla całych wnętrz. Projekt, materiał, detal, jakość." },
+      { title: "NEO FORM — Meble i zabudowy dla całych wnętrz" },
+      { name: "title", content: "NEO FORM — Meble i zabudowy dla całych wnętrz" },
+      { name: "description", content: "Projekt, materiał, detal, jakość. Tworzymy autorskie kuchnie oraz meble i zabudowy dla całych wnętrz." },
+      { name: "robots", content: "index, follow" },
+      { name: "theme-color", content: "#000000" },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://neoform-redesign.vercel.app/" },
-      { property: "og:title", content: "NEO FORM — Nowa forma. Nieograniczone możliwości." },
-      { property: "og:description", content: "Indywidualne meble i zabudowy dla całych wnętrz. Projekt, materiał, detal, jakość." },
-      { property: "og:image", content: "https://neoform-redesign.vercel.app/og-image.jpg" },
+      { property: "og:locale", content: "pl_PL" },
+      { property: "og:site_name", content: "NEO FORM" },
+      { property: "og:url", content: "https://neoform.com.pl/" },
+      { property: "og:title", content: "NEO FORM — Meble i zabudowy dla całych wnętrz" },
+      { property: "og:description", content: "Projekt, materiał, detal, jakość. Tworzymy autorskie kuchnie oraz meble i zabudowy dla całych wnętrz." },
+      { property: "og:image", content: "https://neoform.com.pl/og-image.jpg" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "NEO FORM — Meble i zabudowy dla całych wnętrz" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:url", content: "https://neoform-redesign.vercel.app/" },
-      { name: "twitter:title", content: "NEO FORM — Nowa forma. Nieograniczone możliwości." },
-      { name: "twitter:description", content: "Indywidualne meble i zabudowy dla całych wnętrz. Projekt, materiał, detal, jakość." },
-      { name: "twitter:image", content: "https://neoform-redesign.vercel.app/og-image.jpg" },
+      { name: "twitter:url", content: "https://neoform.com.pl/" },
+      { name: "twitter:title", content: "NEO FORM — Meble i zabudowy dla całych wnętrz" },
+      { name: "twitter:description", content: "Projekt, materiał, detal, jakość. Tworzymy autorskie kuchnie oraz meble i zabudowy dla całych wnętrz." },
+      { name: "twitter:image", content: "https://neoform.com.pl/og-image.jpg" },
     ],
     links: [
       {
@@ -107,6 +107,32 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;450;500;600;700&display=swap" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "NEO FORM",
+          url: "https://neoform.com.pl",
+          image: "https://neoform.com.pl/og-image.jpg",
+          email: "ec@neoform.com.pl",
+          telephone: "+48 662 755 566",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "ul. Adama Branickiego 11/197D",
+            postalCode: "02-972",
+            addressLocality: "Warszawa",
+            addressCountry: "PL",
+          },
+        }),
+      },
+      {
+        type: "module",
+        src: "https://static.cloudflareinsights.com/beacon.min.js",
+        "data-cf-beacon": JSON.stringify({ token: "de5eac3737864e7da5c5b38ef2796ada" }),
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -152,7 +178,6 @@ function RootComponent() {
       </div>
       <SiteFooter />
       <BackToTop />
-      <Analytics />
     </QueryClientProvider>
   );
 }

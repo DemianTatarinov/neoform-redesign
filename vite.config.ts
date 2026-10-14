@@ -11,5 +11,23 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+    prerender: {
+      enabled: true,
+      crawlLinks: false,
+    },
+    pages: [
+      { path: "/" },
+      { path: "/neo-lab" },
+      { path: "/ewolucja-marki" },
+    ],
+  },
+  nitro: {
+    output: {
+      publicDir: "dist",
+    },
+    // A root index.html would otherwise replace the SSR document and drop the app bundle.
+    renderer: {
+      handler: "./node_modules/nitro/dist/runtime/internal/vite/ssr-renderer.mjs",
+    },
   },
 });

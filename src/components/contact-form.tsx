@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { contactInstagram } from '@/lib/contact-content';
 import { QuickActions } from '@/components/quick-actions';
+import { primaryBrandCtaMinimalClassName } from '@/lib/primary-brand-cta';
 
 export function ContactForm() {
   const [prepared, setPrepared] = useState('');
@@ -54,7 +55,7 @@ export function ContactForm() {
         </div>
         <div className="contact-actions">
           <p className="contact-note">{contactInstagram.note}</p>
-          <Button type="submit" className="contact-submit">{contactInstagram.submitLabel}<ArrowUpRight size={18} aria-hidden="true" /></Button>
+          <Button type="submit" className={`${primaryBrandCtaMinimalClassName} contact-submit !h-auto shadow-none`}>{contactInstagram.submitLabel}<ArrowUpRight size={16} aria-hidden="true" /></Button>
         </div>
         <p className="contact-status" role="status" aria-live="polite">{copyState === 'copied' ? contactInstagram.copied : copyState === 'manual' ? contactInstagram.fallback : ''}</p>
         {copyState === 'manual' && <div className="contact-field"><label htmlFor="contact-prepared">{contactInstagram.preparedLabel}</label><Textarea id="contact-prepared" readOnly value={prepared} className="contact-input contact-message" onFocus={event => event.currentTarget.select()} /></div>}

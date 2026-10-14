@@ -50,6 +50,7 @@ export function HeroVideo() {
         loop
         autoPlay
         preload="auto"
+        fetchPriority="high"
       />
     </div>
   );

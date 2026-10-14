@@ -1,7 +1,10 @@
 import { NeoLabArchiveGalleryDialog } from '@/components/neo-lab-archive-dialog';
 import { NeoLabVideo } from '@/components/neo-lab-video';
 import { getNeoLabArchiveGallery } from '@/lib/neo-lab-archive-gallery';
-import { primaryBrandCtaClassName } from '@/lib/primary-brand-cta';
+import {
+  primaryBrandCtaArrowClassName,
+  primaryBrandCtaMinimalOnDarkClassName,
+} from '@/lib/primary-brand-cta';
 import { neoLab, neoLabArchive, pekaSchedule } from '@/lib/neo-lab-content';
 import { CONTACT_HASH } from '@/lib/scroll-to-section';
 import { navigateToHomeHash } from '@/lib/navigate-to-home-hash';
@@ -14,7 +17,7 @@ const partnerBrands = ['Blum', 'Häfele', 'Viefe', 'PEKA', 'ARPA', 'FENIX'] as c
 const PARTNER_RETURN_SCROLL_KEY = 'neo-lab-partner-return-scroll';
 
 const partnerBrandButtonClassName =
-  'neo-lab-partner-brand inline-flex w-full items-center justify-center gap-2 rounded-[4px] border border-neutral-300/80 bg-white px-2.5 py-2 text-[18px] font-normal leading-[1.2] whitespace-nowrap text-[color:var(--foreground,#121315)] transition-all duration-300 ease-out hover:border-[color:var(--brand)] hover:shadow-sm';
+  'neo-lab-partner-brand cta-outline-beat inline-flex w-full items-center justify-center gap-2 rounded-[4px] border border-neutral-300/80 bg-white px-2.5 py-2 text-[18px] font-normal leading-[1.2] whitespace-nowrap text-[color:var(--foreground,#121315)] hover:border-[color:var(--brand)] lg:h-full lg:transition-colors lg:duration-300';
 
 function restorePartnerScrollPosition(scrollY: number) {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -135,9 +138,9 @@ export function NeoLab() {
       </div>
 
       <div className="bg-[#0A0A0A] text-white">
-        <div className="container mx-auto max-w-6xl px-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] py-12 sm:px-8 sm:py-16 md:py-20">
+        <div className="container mx-auto max-w-6xl px-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] py-12 sm:px-8 sm:py-16 md:py-20 lg:py-24">
           {/* Element 2: manifest */}
-          <p className="max-w-3xl text-base leading-relaxed text-white sm:text-lg">
+          <p className="max-w-3xl text-base leading-relaxed text-white sm:text-lg lg:w-full lg:max-w-4xl lg:text-[19px] lg:leading-[1.65] lg:text-pretty lg:text-white/90 lg:antialiased xl:max-w-5xl">
             Doświadczenie ma wartość dopiero wtedy, kiedy można się nim podzielić. Neo Lab to przestrzeń wiedzy,
             spotkań i wymiany doświadczeń dla projektantów, architektów, producentów i montażystów. Nie chcemy
             zatrzymywać wiedzy wewnątrz firmy — chcemy ją przekazywać dalej
@@ -145,7 +148,7 @@ export function NeoLab() {
 
           <div className="relative my-12 border border-neutral-800/80 bg-gradient-to-br from-neutral-900/80 via-neutral-950 to-[#050505] p-8 pl-10 shadow-2xl sm:my-16 sm:p-12 sm:pl-14">
             <div className="absolute bottom-0 left-0 top-0 w-[2px] bg-[color:var(--brand)]" aria-hidden="true" />
-            <p className="max-w-4xl font-[family-name:var(--font-editorial)] text-2xl font-light leading-tight text-white sm:text-3xl md:text-4xl">
+            <p className="max-w-4xl font-[family-name:var(--font-editorial)] text-2xl font-light leading-tight text-white sm:text-3xl md:text-4xl lg:w-full lg:max-w-5xl lg:text-balance lg:font-normal lg:tracking-tight lg:leading-[1.12] lg:text-white/95 xl:max-w-6xl">
               NEO LAB to nie szkoła. To laboratorium. Miejsce, w którym można eksperymentować, sprawdzać, testować i
               szukać nowych rozwiązań
             </p>
@@ -161,18 +164,18 @@ export function NeoLab() {
       </div>
 
       {/* Element 3: partners */}
-      <div className="bg-[var(--bg-paper,#f9f9f9)] px-4 py-12 text-[#121315] sm:px-8 sm:py-16">
-        <div className="mx-auto max-w-2xl">
+      <div className="bg-[var(--bg-paper,#f9f9f9)] px-4 py-12 text-[#121315] sm:px-8 sm:py-16 lg:py-24">
+        <div className="mx-auto max-w-2xl lg:w-full lg:max-w-6xl xl:max-w-7xl">
           <div className="section-heading mb-6 sm:mb-8">
             <div className="section-label">
               <span className="section-label-title">NEO LAB · PARTNERZY</span>
             </div>
             <div className="section-heading-title">
               <h2
-                className="editorial-section-title font-[family-name:var(--font-editorial)] text-[28px] font-normal uppercase leading-[1.15] text-[#121315] sm:text-[36px]"
+                className="editorial-section-title font-[family-name:var(--font-editorial)] text-[28px] font-normal uppercase leading-[1.15] text-[#121315] sm:text-[36px] lg:w-full lg:max-w-none lg:text-balance lg:tracking-tight lg:leading-[1.12]"
               >
                 EKOSYSTEM
-                <br />
+                <br className="lg:hidden" />
                 MAREK
               </h2>
               <span className="accent-line" aria-hidden="true" />
@@ -180,18 +183,17 @@ export function NeoLab() {
           </div>
           <div className="mt-6 flex flex-col gap-8 sm:mt-8 sm:gap-10">
             <p
-              className="max-w-2xl text-left font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-black"
+              className="max-w-2xl text-left font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-black lg:w-full lg:max-w-4xl lg:text-[19px] lg:leading-[1.65] lg:text-pretty lg:text-neutral-900 lg:antialiased xl:max-w-5xl"
             >
               {neoLab.partnerIntro}
             </p>
             <div
               id="neo-lab-partners"
-              className="neo-lab-partners grid w-full grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4"
+              className="neo-lab-partners grid w-full grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:items-stretch lg:gap-5"
             >
             {partnerBrands.map(brand => (
               <button key={brand} type="button" onClick={onPartnerBrandClick} className={partnerBrandButtonClassName}>
                 <span className="system-name-pulse" aria-hidden="true">
-                  <span className="system-name-pulse-ring" />
                   <span className="system-name-pulse-core" />
                 </span>
                 <span className="system-name-label min-w-0 truncate uppercase tracking-wide">{brand}</span>
@@ -209,7 +211,7 @@ export function NeoLab() {
       </div>
 
       <div className="bg-[#0A0A0A] text-white">
-        <div className="container mx-auto max-w-6xl px-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] py-12 sm:px-8 sm:py-16 md:py-20">
+        <div className="container mx-auto max-w-6xl px-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] py-12 sm:px-8 sm:py-16 md:py-20 lg:py-24">
           {/* Element 4: accordion */}
           <div className="mt-14 border-t border-neutral-800/70 md:mt-20">
             {educationPanels.map((panel, index) => {
@@ -219,7 +221,7 @@ export function NeoLab() {
                 <div key={panel.id} className="border-b border-neutral-800/70">
                   <button
                     type="button"
-                    className="group flex w-full items-center justify-between gap-4 py-6 text-left transition-colors sm:py-8"
+                    className="group flex w-full items-center justify-between gap-4 py-6 text-left transition-colors sm:py-8 lg:transition-colors lg:duration-300"
                     aria-expanded={isOpen}
                     onClick={() => setOpenPanel(isOpen ? null : panel.id)}
                   >
@@ -248,7 +250,7 @@ export function NeoLab() {
                     style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
                   >
                     <div className="overflow-hidden">
-                      <p className="max-w-3xl pb-8 pl-8 pt-2 font-[family-name:var(--font-editorial)] text-base font-light leading-relaxed text-white sm:pl-11 sm:text-lg">
+                      <p className="max-w-3xl pb-8 pl-8 pt-2 font-[family-name:var(--font-editorial)] text-base font-light leading-relaxed text-white sm:pl-11 sm:text-lg lg:w-full lg:max-w-4xl lg:text-pretty xl:max-w-5xl">
                         {panel.text}
                       </p>
                     </div>
@@ -283,7 +285,7 @@ export function NeoLab() {
               </div>
             </div>
             <p
-              className="m-0 mt-6 max-w-3xl text-left font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-white sm:mt-8"
+              className="m-0 mt-6 max-w-3xl text-left font-[family-name:var(--font-editorial)] text-[19px] leading-[1.6] text-white sm:mt-8 lg:w-full lg:max-w-4xl lg:text-[19px] lg:leading-[1.65] lg:text-pretty xl:max-w-5xl"
             >
               To nie jest klasyczne szkolenie produktowe. To zmiana sposobu myślenia o przestrzeni: funkcja →
               ergonomia → organizacja → technologia → estetyka. PEKA dostarcza narzędzi, a NEO FORM pokazuje, jak
@@ -303,12 +305,12 @@ export function NeoLab() {
                   </span>
                   <div className="flex min-w-0 flex-1 flex-col gap-1">
                     <span className="font-medium text-white">{entry.module}</span>
-                    <p className="m-0 text-[15px] leading-[1.5] text-white sm:text-[16px]">{entry.description}</p>
+                    <p className="m-0 text-[15px] leading-[1.5] text-white sm:text-[16px] lg:text-[19px] lg:leading-[1.65] lg:text-white/90">{entry.description}</p>
                   </div>
                 </li>
               ))}
             </ul>
-            <div className="mt-10 max-w-2xl border-l-2 border-[color:var(--brand)] py-1 pl-5">
+            <div className="mt-10 max-w-2xl border-l-2 border-[color:var(--brand)] py-1 pl-5 lg:w-full lg:max-w-4xl xl:max-w-5xl">
               <p className="m-0 font-[family-name:var(--font-editorial)] text-[17px] leading-[1.5] text-white sm:text-[18px]">
                 Dla architektów i projektantów wnętrz, którzy chcą łączyć bezkompromisowy design z idealną inżynierią
               </p>
@@ -316,9 +318,9 @@ export function NeoLab() {
             <a
               href="/#kontakt"
               onClick={scrollToContact}
-              className={`mt-8 ${primaryBrandCtaClassName}`}
+              className={`mt-8 ${primaryBrandCtaMinimalOnDarkClassName}`}
             >
-              ZAPISZ SIĘ NA WYDARZENIE ↗
+              ZAPISZ SIĘ NA WYDARZENIE<span className={primaryBrandCtaArrowClassName} aria-hidden="true">↗</span>
             </a>
           </article>
         </div>
@@ -328,26 +330,26 @@ export function NeoLab() {
       <div
         className="border-t border-neutral-200/80 bg-[var(--bg-paper,#F4F3EF)] px-4 pt-8 pb-10 text-[#121315] sm:px-8 sm:pt-10 sm:pb-12"
       >
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 sm:gap-8">
-          <div className="max-w-2xl">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 sm:gap-8 xl:max-w-7xl">
+          <div className="max-w-2xl lg:w-full lg:max-w-4xl xl:max-w-5xl">
             <div className="section-label">
               <span className="section-label-title">POPRZEDNIE SPOTKANIA</span>
             </div>
             <p
-              className="m-0 text-left font-[family-name:var(--font-editorial)] text-[15px] leading-[1.55] text-black sm:text-[16px] md:text-[17px]"
+              className="m-0 text-left font-[family-name:var(--font-editorial)] text-[15px] leading-[1.55] text-black sm:text-[16px] md:text-[17px] lg:text-[19px] lg:leading-[1.65] lg:text-neutral-700"
             >
               Te spotkania już się odbyły, ale energia i wiedza, które nam dały, wciąż pracują w kolejnych
               projektach. Zobacz, jak wyglądają nasze warsztaty od środka
             </p>
           </div>
           <div
-            className="mt-4 flex min-w-0 max-w-4xl flex-col divide-y divide-neutral-200 border-y border-neutral-200 sm:mt-6"
+            className="mt-4 flex min-w-0 max-w-4xl flex-col gap-2 sm:mt-6 lg:w-full lg:max-w-5xl xl:max-w-6xl"
           >
             {neoLabArchive.map(item => (
               <button
                 key={item.title}
                 type="button"
-                className="group flex w-full min-w-0 items-center justify-between gap-2 rounded-sm px-3 py-3.5 text-left transition-all duration-200 hover:bg-neutral-100/70 active:scale-[0.99] sm:gap-3 sm:px-4 sm:py-4"
+                className="cta-outline-beat group flex w-full min-w-0 items-center justify-between gap-2 rounded-[4px] border border-[#121315]/25 bg-transparent px-3 py-3.5 text-left hover:border-[color:var(--brand)] active:scale-[0.99] sm:gap-3 sm:px-4 sm:py-4"
                 onClick={event => {
                   if (!getNeoLabArchiveGallery(item.title)) return;
                   archiveTriggerRef.current = event.currentTarget;
